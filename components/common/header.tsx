@@ -10,10 +10,7 @@ export async function Header() {
     return (
         <header className="fixed w-full z-100 transition-all duration-500 py-6 bg-off-white dark:bg-dark-umber">
             <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-                <Link
-                    href="/"
-                    className="flex items-center gap-3 hover:opacity-80 transition"
-                >
+                <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition">
                     <Image
                         src="/icon-light.svg"
                         alt=""
@@ -41,25 +38,16 @@ export async function Header() {
                 </Link>
 
                 <nav className="hidden lg:flex items-center gap-8 text-[11px] font-bold uppercase tracking-widest text-dark-umber dark:text-off-white">
-                    <a
-                        href="#services"
-                        className="hover:text-warm-gold transition"
-                    >
+                    <a href="#services" className="hover:text-warm-gold transition">
                         {t('services')}
                     </a>
-                    <a
-                        href="#portfolio"
-                        className="hover:text-warm-gold transition"
-                    >
+                    <a href="#portfolio" className="hover:text-warm-gold transition">
                         {t('portfolio')}
                     </a>
                     <a href="#gear" className="hover:text-warm-gold transition">
                         {t('gear')}
                     </a>
-                    <a
-                        href="#pricing"
-                        className="hover:text-warm-gold transition"
-                    >
+                    <a href="#pricing" className="hover:text-warm-gold transition">
                         {t('pricing')}
                     </a>
                     <a

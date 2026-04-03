@@ -60,11 +60,7 @@ export default function RootLayout({
             className={`${sansFont.variable} ${monoFont.variable}`}
         >
             <body className="font-sans antialiased">
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                >
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                     {children}
                     <Analytics />
                 </ThemeProvider>

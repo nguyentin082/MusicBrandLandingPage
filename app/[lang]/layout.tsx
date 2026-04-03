@@ -1,10 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import {
-    getTranslations,
-    getMessages,
-    setRequestLocale,
-} from 'next-intl/server';
+import { getTranslations, getMessages, setRequestLocale } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import { ReactNode } from 'react';
 

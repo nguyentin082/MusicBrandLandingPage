@@ -1,219 +1,214 @@
 {
-  "metadata": {
-    "title": "WAV Vietnam | Premium Sound Studio - Recording, Production & Mix Master",
-    "description": "Professional recording studio in Vietnam. Expert mix & master services with analog gear. Trusted by 150+ indie artists. Book your session today."
-  },
-  "navigation": {
-    "logo": "WAV VIETNAM",
-    "tagline": "Sound Studio",
-    "services": "Services",
-    "portfolio": "Portfolio",
-    "gear": "Equipment",
-    "pricing": "Pricing",
-    "contact": "Contact Now"
-  },
-  "hero": {
-    "badge": "Artisan Sound Studio",
-    "heading": "Authentic Sound",
-    "highlighted": "True to Life",
-    "description": "Where raw ideas are refined into sonic masterpieces using cutting-edge analog high-end equipment.",
-    "cta_primary": "Start Recording",
-    "cta_secondary": "Hear Our Work"
-  },
-  "philosophy": {
-    "label": "The Soul",
-    "quote": "We don't just record machines, we capture the authenticity in every note.",
-    "description": "Every song is a story. At WAV Vietnam, we ensure your story is told through the most honest and emotional sound possible."
-  },
-  "stats": {
-    "projects": {
-      "number": "500+",
-      "label": "Projects Completed"
+    "metadata": {
+        "title": "WAV Vietnam | Premium Sound Studio - Recording, Production & Mix Master",
+        "description": "Professional recording studio in Vietnam. Expert mix & master services with analog gear. Trusted by 150+ indie artists. Book your session today."
     },
-    "artists": {
-      "number": "150+",
-      "label": "Indie Artists Trust Us"
+    "navigation": {
+        "logo": "WAV VIETNAM",
+        "tagline": "Sound Studio",
+        "services": "Services",
+        "portfolio": "Portfolio",
+        "gear": "Equipment",
+        "pricing": "Pricing",
+        "contact": "Contact Now"
     },
-    "streams": {
-      "number": "50M+",
-      "label": "Total Project Streams"
+    "hero": {
+        "badge": "Artisan Sound Studio",
+        "heading": "Authentic Sound",
+        "highlighted": "True to Life",
+        "description": "Where raw ideas are refined into sonic masterpieces using cutting-edge analog high-end equipment.",
+        "cta_primary": "Start Recording",
+        "cta_secondary": "Hear Our Work"
     },
-    "experience": {
-      "number": "10+",
-      "label": "Years of Experience"
+    "philosophy": {
+        "label": "The Soul",
+        "quote": "We don't just record machines, we capture the authenticity in every note.",
+        "description": "Every song is a story. At WAV Vietnam, we ensure your story is told through the most honest and emotional sound possible."
+    },
+    "stats": {
+        "projects": {
+            "number": "500+",
+            "label": "Projects Completed"
+        },
+        "artists": {
+            "number": "150+",
+            "label": "Indie Artists Trust Us"
+        },
+        "streams": {
+            "number": "50M+",
+            "label": "Total Project Streams"
+        },
+        "experience": {
+            "number": "10+",
+            "label": "Years of Experience"
+        }
+    },
+    "services": {
+        "heading": "Core Services",
+        "recording": {
+            "title": "Acoustic Recording",
+            "description": "International standard acoustic processing, delivering absolute clarity and authenticity for vocals."
+        },
+        "production": {
+            "title": "Music Production",
+            "description": "Professional arrangement and composition, creating a distinct sonic identity for artists."
+        },
+        "mixing": {
+            "title": "Pro Mix & Master",
+            "description": "Analog gear processing for signature warmth and depth in every track."
+        }
+    },
+    "partners": {
+        "label": "Available on All Platforms",
+        "platforms": ["SPOTIFY", "APPLE MUSIC", "YOUTUBE", "ZING MP3", "TIKTOK"]
+    },
+    "audioComparison": {
+        "label": "Before & After",
+        "heading": "The Power of Mix Master.",
+        "trackTitle": "\"Authentic\" - Pop Ballad",
+        "rawButton": "Raw Recording",
+        "masterButton": "Final Master"
+    },
+    "portfolio": {
+        "heading": "Featured Projects.",
+        "projects": [
+            {
+                "genre": "Lo-fi Pop",
+                "title": "Sunset Over the City"
+            },
+            {
+                "genre": "Hip-hop",
+                "title": "Urban Vortex"
+            },
+            {
+                "genre": "Soul / Jazz",
+                "title": "Strange Dreams"
+            }
+        ]
+    },
+    "studio": {
+        "label": "Vibe & Comfort",
+        "heading": "Comfort for Creativity.",
+        "description": "We believe the best inspiration comes from comfort. At WAV, you don't just work in a professional studio—you enjoy a rustic space with artisanal coffee.",
+        "amenities": ["Specialty Coffee", "Chill Zone", "Air Purification", "Hi-Fi Monitoring"]
+    },
+    "gear": {
+        "label": "The Armory",
+        "heading": "Technical Weaponry.",
+        "description": "We use legendary equipment sought after worldwide to ensure every recording meets commercial quality standards.",
+        "microphones": "Microphones",
+        "processing": "Processing & Conversion",
+        "equipment": [
+            { "name": "Neumann U87 Ai", "type": "Reference" },
+            { "name": "AKG C414 XLII", "type": "Multi-pattern" },
+            { "name": "Shure SM7B", "type": "Radio Classic" },
+            { "name": "Avalon VT-737sp", "type": "Tube Pre" },
+            { "name": "UA 1176LN", "type": "Compressor" },
+            { "name": "Prism Sound Titan", "type": "AD/DA" }
+        ]
+    },
+    "team": {
+        "heading": "Our Sound Engineers.",
+        "members": [
+            {
+                "name": "Hoàng WAV",
+                "role": "Chief Engineer",
+                "bio": "8 years of experience, the soul of WAV Vietnam's mix & master excellence."
+            },
+            {
+                "name": "Minh Arranger",
+                "role": "Music Producer",
+                "bio": "Arrangement expert who transforms raw ideas into sonic masterpieces."
+            },
+            {
+                "name": "Thanh Audio",
+                "role": "Recording Specialist",
+                "bio": "Studio wizard who captures the artist's best performance and emotion."
+            }
+        ]
+    },
+    "pricing": {
+        "heading": "Service Pricing.",
+        "plans": [
+            {
+                "title": "Indie Single",
+                "subtitle": "For New Artists",
+                "price": "Contact",
+                "features": [
+                    "2 hours high-quality recording",
+                    "Standard Mix & Master",
+                    "2 free revisions"
+                ],
+                "cta": "Choose Plan"
+            },
+            {
+                "title": "Production Full",
+                "subtitle": "Complete Production",
+                "price": "Special",
+                "badge": "Most Popular",
+                "features": [
+                    "New song arrangement",
+                    "Unlimited recording sessions",
+                    "Analog-standard Mix Master"
+                ],
+                "cta": "Start Now"
+            },
+            {
+                "title": "Online Mixing",
+                "subtitle": "Nationwide & International",
+                "price": "Affordable",
+                "features": [
+                    "Receive stems via cloud",
+                    "Delivery within 48 hours",
+                    "Spotify loudness standard"
+                ],
+                "cta": "Send Files"
+            }
+        ]
+    },
+    "newsletter": {
+        "label": "Join The Community",
+        "heading": "Get Free Music Production Guide.",
+        "description": "Subscribe to get tips on home recording, vocal stem prep, and latest music trends from WAV Vietnam experts.",
+        "placeholder": "Your Email",
+        "cta": "Get Guide"
+    },
+    "faq": {
+        "heading": "Frequently Asked Questions",
+        "questions": [
+            {
+                "question": "What should I prepare before recording?",
+                "answer": "You should memorize the lyrics, prepare beats (high-quality WAV file), and send a demo to the engineer beforehand. Good sleep and proper hydration also help your voice reach peak performance."
+            },
+            {
+                "question": "How long does Mix & Master take?",
+                "answer": "Typically, the mix & master process takes 3-5 business days depending on the song's complexity. We always prioritize product quality above all else."
+            },
+            {
+                "question": "Can you do online mixing services?",
+                "answer": "Yes, we offer professional online mixing services nationwide and internationally. Simply send your stems through our cloud system and we'll deliver the final master within 48 hours."
+            },
+            {
+                "question": "What formats do you accept?",
+                "answer": "We accept all standard audio formats including WAV, MP3, FLAC, and more. We recommend WAV for best quality. Contact us for specific requirements."
+            }
+        ]
+    },
+    "footer": {
+        "companyName": "WAV VIETNAM",
+        "tagline": "Authentic Sound, Expert Craft",
+        "contact": {
+            "label": "Get in Touch",
+            "phone": "+84 987 654 321",
+            "email": "hello@wavvietnam.studio",
+            "address": "District 1, Ho Chi Minh City, Vietnam"
+        },
+        "links": {
+            "about": "About Us",
+            "services": "Services",
+            "portfolio": "Portfolio",
+            "contact": "Contact"
+        },
+        "copyright": "© 2024 WAV Vietnam. All rights reserved."
     }
-  },
-  "services": {
-    "heading": "Core Services",
-    "recording": {
-      "title": "Acoustic Recording",
-      "description": "International standard acoustic processing, delivering absolute clarity and authenticity for vocals."
-    },
-    "production": {
-      "title": "Music Production",
-      "description": "Professional arrangement and composition, creating a distinct sonic identity for artists."
-    },
-    "mixing": {
-      "title": "Pro Mix & Master",
-      "description": "Analog gear processing for signature warmth and depth in every track."
-    }
-  },
-  "partners": {
-    "label": "Available on All Platforms",
-    "platforms": ["SPOTIFY", "APPLE MUSIC", "YOUTUBE", "ZING MP3", "TIKTOK"]
-  },
-  "audioComparison": {
-    "label": "Before & After",
-    "heading": "The Power of Mix Master.",
-    "trackTitle": "\"Authentic\" - Pop Ballad",
-    "rawButton": "Raw Recording",
-    "masterButton": "Final Master"
-  },
-  "portfolio": {
-    "heading": "Featured Projects.",
-    "projects": [
-      {
-        "genre": "Lo-fi Pop",
-        "title": "Sunset Over the City"
-      },
-      {
-        "genre": "Hip-hop",
-        "title": "Urban Vortex"
-      },
-      {
-        "genre": "Soul / Jazz",
-        "title": "Strange Dreams"
-      }
-    ]
-  },
-  "studio": {
-    "label": "Vibe & Comfort",
-    "heading": "Comfort for Creativity.",
-    "description": "We believe the best inspiration comes from comfort. At WAV, you don't just work in a professional studio—you enjoy a rustic space with artisanal coffee.",
-    "amenities": [
-      "Specialty Coffee",
-      "Chill Zone",
-      "Air Purification",
-      "Hi-Fi Monitoring"
-    ]
-  },
-  "gear": {
-    "label": "The Armory",
-    "heading": "Technical Weaponry.",
-    "description": "We use legendary equipment sought after worldwide to ensure every recording meets commercial quality standards.",
-    "microphones": "Microphones",
-    "processing": "Processing & Conversion",
-    "equipment": [
-      { "name": "Neumann U87 Ai", "type": "Reference" },
-      { "name": "AKG C414 XLII", "type": "Multi-pattern" },
-      { "name": "Shure SM7B", "type": "Radio Classic" },
-      { "name": "Avalon VT-737sp", "type": "Tube Pre" },
-      { "name": "UA 1176LN", "type": "Compressor" },
-      { "name": "Prism Sound Titan", "type": "AD/DA" }
-    ]
-  },
-  "team": {
-    "heading": "Our Sound Engineers.",
-    "members": [
-      {
-        "name": "Hoàng WAV",
-        "role": "Chief Engineer",
-        "bio": "8 years of experience, the soul of WAV Vietnam's mix & master excellence."
-      },
-      {
-        "name": "Minh Arranger",
-        "role": "Music Producer",
-        "bio": "Arrangement expert who transforms raw ideas into sonic masterpieces."
-      },
-      {
-        "name": "Thanh Audio",
-        "role": "Recording Specialist",
-        "bio": "Studio wizard who captures the artist's best performance and emotion."
-      }
-    ]
-  },
-  "pricing": {
-    "heading": "Service Pricing.",
-    "plans": [
-      {
-        "title": "Indie Single",
-        "subtitle": "For New Artists",
-        "price": "Contact",
-        "features": [
-          "2 hours high-quality recording",
-          "Standard Mix & Master",
-          "2 free revisions"
-        ],
-        "cta": "Choose Plan"
-      },
-      {
-        "title": "Production Full",
-        "subtitle": "Complete Production",
-        "price": "Special",
-        "badge": "Most Popular",
-        "features": [
-          "New song arrangement",
-          "Unlimited recording sessions",
-          "Analog-standard Mix Master"
-        ],
-        "cta": "Start Now"
-      },
-      {
-        "title": "Online Mixing",
-        "subtitle": "Nationwide & International",
-        "price": "Affordable",
-        "features": [
-          "Receive stems via cloud",
-          "Delivery within 48 hours",
-          "Spotify loudness standard"
-        ],
-        "cta": "Send Files"
-      }
-    ]
-  },
-  "newsletter": {
-    "label": "Join The Community",
-    "heading": "Get Free Music Production Guide.",
-    "description": "Subscribe to get tips on home recording, vocal stem prep, and latest music trends from WAV Vietnam experts.",
-    "placeholder": "Your Email",
-    "cta": "Get Guide"
-  },
-  "faq": {
-    "heading": "Frequently Asked Questions",
-    "questions": [
-      {
-        "question": "What should I prepare before recording?",
-        "answer": "You should memorize the lyrics, prepare beats (high-quality WAV file), and send a demo to the engineer beforehand. Good sleep and proper hydration also help your voice reach peak performance."
-      },
-      {
-        "question": "How long does Mix & Master take?",
-        "answer": "Typically, the mix & master process takes 3-5 business days depending on the song's complexity. We always prioritize product quality above all else."
-      },
-      {
-        "question": "Can you do online mixing services?",
-        "answer": "Yes, we offer professional online mixing services nationwide and internationally. Simply send your stems through our cloud system and we'll deliver the final master within 48 hours."
-      },
-      {
-        "question": "What formats do you accept?",
-        "answer": "We accept all standard audio formats including WAV, MP3, FLAC, and more. We recommend WAV for best quality. Contact us for specific requirements."
-      }
-    ]
-  },
-  "footer": {
-    "companyName": "WAV VIETNAM",
-    "tagline": "Authentic Sound, Expert Craft",
-    "contact": {
-      "label": "Get in Touch",
-      "phone": "+84 987 654 321",
-      "email": "hello@wavvietnam.studio",
-      "address": "District 1, Ho Chi Minh City, Vietnam"
-    },
-    "links": {
-      "about": "About Us",
-      "services": "Services",
-      "portfolio": "Portfolio",
-      "contact": "Contact"
-    },
-    "copyright": "© 2024 WAV Vietnam. All rights reserved."
-  }
 }

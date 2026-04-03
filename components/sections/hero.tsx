@@ -18,9 +18,7 @@ export async function HeroSection() {
                     </div>
                     <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter italic">
                         {t('heading')} <br />
-                        <span className="text-warm-gold">
-                            {t('highlighted')}
-                        </span>
+                        <span className="text-warm-gold">{t('highlighted')}</span>
                     </h1>
                     <p className="text-off-white/50 text-lg md:text-xl max-w-lg mb-12 font-light leading-relaxed italic">
                         {t('description')}

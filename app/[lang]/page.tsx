@@ -15,11 +15,7 @@ import { PricingSection } from '@/components/sections/pricing';
 import { CTASection } from '@/components/sections/cta';
 import { FAQSection } from '@/components/sections/faq';
 
-export default async function HomePage({
-    params,
-}: {
-    params: Promise<{ lang: string }>;
-}) {
+export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
     setRequestLocale(lang);
 
