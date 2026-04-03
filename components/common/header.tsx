@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ThemeToggle } from './theme-toggle';
 import { LanguageSwitcher } from './language-switcher';
@@ -7,17 +8,28 @@ export async function Header() {
     const t = await getTranslations('navigation');
 
     return (
-        <header className="fixed w-full z-[100] transition-all duration-500 py-6 bg-off-white dark:bg-dark-umber">
+        <header className="fixed w-full z-100 transition-all duration-500 py-6 bg-off-white dark:bg-dark-umber">
             <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
                 <Link
                     href="/"
                     className="flex items-center gap-3 hover:opacity-80 transition"
                 >
-                    <div className="w-10 h-10 bg-brick-red flex items-center justify-center rounded-lg shadow-lg">
-                        <span className="text-off-white font-black text-lg italic">
-                            W
-                        </span>
-                    </div>
+                    <Image
+                        src="/icon-light.svg"
+                        alt=""
+                        width={120}
+                        height={80}
+                        priority
+                        className="h-10 w-auto drop-shadow-sm dark:hidden"
+                    />
+                    <Image
+                        src="/icon.svg"
+                        alt=""
+                        width={120}
+                        height={80}
+                        priority
+                        className="hidden h-10 w-auto drop-shadow-sm dark:block"
+                    />
                     <div className="flex flex-col">
                         <span className="text-lg font-bold tracking-tighter text-dark-umber dark:text-off-white">
                             {t('logo')}
