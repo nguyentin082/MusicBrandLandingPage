@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
+
+import { HeroCarousel } from './parts/hero-carousel';
 
 export async function HeroSection() {
     const t = await getTranslations('hero');
@@ -39,18 +40,7 @@ export async function HeroSection() {
                     </div>
                 </div>
 
-                <div className="relative hidden lg:block animate-fade-in">
-                    <div className="aspect-[4/5] rounded-[40px] overflow-hidden border-[12px] border-soft-brown shadow-2xl relative">
-                        <Image
-                            src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=800"
-                            fill
-                            sizes="(max-width: 1024px) 0vw, 40vw"
-                            priority
-                            className="object-cover grayscale opacity-80 hover:opacity-100 transition duration-700"
-                            alt="Professional recording studio"
-                        />
-                    </div>
-                </div>
+                <HeroCarousel />
             </div>
         </section>
     );
