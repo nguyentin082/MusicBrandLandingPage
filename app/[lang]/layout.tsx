@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import {
     getTranslations,
     getMessages,
-    unstable_setRequestLocale,
+    setRequestLocale,
 } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import { ReactNode } from 'react';
@@ -49,7 +49,7 @@ export default async function LocaleLayout({
     const { lang } = await params;
     if (!locales.includes(lang)) notFound();
 
-    unstable_setRequestLocale(lang);
+    setRequestLocale(lang);
 
     const messages = await getMessages({ locale: lang });
 

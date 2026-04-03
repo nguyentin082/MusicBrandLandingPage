@@ -1,6 +1,6 @@
 import { Header } from '@/components/common/header';
 import { Footer } from '@/components/common/footer';
-import { unstable_setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { HeroSection } from '@/components/sections/hero';
 import { PhilosophySection } from '@/components/sections/philosophy';
 import { StatsSection } from '@/components/sections/stats';
@@ -21,7 +21,7 @@ export default async function HomePage({
     params: Promise<{ lang: string }>;
 }) {
     const { lang } = await params;
-    unstable_setRequestLocale(lang);
+    setRequestLocale(lang);
 
     return (
         <div className="min-h-screen bg-off-white dark:bg-dark-umber text-dark-umber dark:text-off-white">
