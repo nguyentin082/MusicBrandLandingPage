@@ -1,16 +1,18 @@
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Be_Vietnam_Pro, IBM_Plex_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
-const geist = Geist({
-    subsets: ['latin'],
+const sansFont = Be_Vietnam_Pro({
+    subsets: ['latin', 'vietnamese'],
+    weight: ['400', '500', '600', '700'],
     variable: '--font-geist-sans',
     display: 'swap',
 });
-const geistMono = Geist_Mono({
-    subsets: ['latin'],
+const monoFont = IBM_Plex_Mono({
+    subsets: ['latin', 'latin-ext'],
+    weight: ['400', '500', '600', '700'],
     variable: '--font-geist-mono',
     display: 'swap',
 });
@@ -57,7 +59,7 @@ export default function RootLayout({
         <html
             lang="en"
             suppressHydrationWarning
-            className={`${geist.variable} ${geistMono.variable}`}
+            className={`${sansFont.variable} ${monoFont.variable}`}
         >
             <body className="font-sans antialiased">
                 <ThemeProvider
