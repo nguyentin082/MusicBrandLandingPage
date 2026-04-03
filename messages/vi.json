@@ -1,0 +1,219 @@
+{
+  "metadata": {
+    "title": "WAV Vietnam | Studio Thu Âm Chuyên Nghiệp - Mix Master Hàng Đầu",
+    "description": "Phòng thu âm chuyên nghiệp tại Việt Nam. Dịch vụ Mix & Master với thiết bị Analog cao cấp. Được tin tưởng bởi 150+ nghệ sĩ Indie. Đặt phòng ngay hôm nay."
+  },
+  "navigation": {
+    "logo": "WAV VIETNAM",
+    "tagline": "Sound Studio",
+    "services": "Dịch vụ",
+    "portfolio": "Sản phẩm",
+    "gear": "Thiết bị",
+    "pricing": "Bảng giá",
+    "contact": "Liên hệ ngay"
+  },
+  "hero": {
+    "badge": "Artisan Sound Studio",
+    "heading": "ÂM THANH",
+    "highlighted": "CHÂN THỰC",
+    "description": "Nơi những ý tưởng thô sơ được mài giũa thành những tuyệt tác âm thanh đỉnh cao với hệ thống Analog High-end.",
+    "cta_primary": "Bắt đầu thu âm",
+    "cta_secondary": "Nghe sản phẩm"
+  },
+  "philosophy": {
+    "label": "The Soul",
+    "quote": "Chúng tôi không chỉ thu máy móc, chúng tôi thu lại sự chân thành trong từng nốt nhạc.",
+    "description": "Mỗi bài hát là một câu chuyện. Tại WAV Vietnam, chúng tôi ở đây để đảm bảo câu chuyện của bạn được kể lại bằng âm thanh trung thực và cảm xúc nhất."
+  },
+  "stats": {
+    "projects": {
+      "number": "500+",
+      "label": "Dự án hoàn thiện"
+    },
+    "artists": {
+      "number": "150+",
+      "label": "Nghệ sĩ Indie tin tưởng"
+    },
+    "streams": {
+      "number": "50M+",
+      "label": "Lượt streams dự án"
+    },
+    "experience": {
+      "number": "10+",
+      "label": "Năm kinh nghiệm"
+    }
+  },
+  "services": {
+    "heading": "Dịch Vụ Chính",
+    "recording": {
+      "title": "Thu Âm Acoustic",
+      "description": "Xử lý âm học tiêu chuẩn quốc tế, mang lại độ sạch và trung thực tuyệt đối cho Vocal."
+    },
+    "production": {
+      "title": "Sản Xuất Bài Hát",
+      "description": "Hòa âm phối khí chuyên nghiệp, định hình phong cách âm nhạc riêng biệt cho nghệ sĩ."
+    },
+    "mixing": {
+      "title": "Pro Mix & Master",
+      "description": "Sử dụng hệ thống Analog Gear ngoại nhập để tạo độ dày và độ ấm đặc trưng."
+    }
+  },
+  "partners": {
+    "label": "Sẵn sàng trên mọi nền tảng",
+    "platforms": ["SPOTIFY", "APPLE MUSIC", "YOUTUBE", "ZING MP3", "TIKTOK"]
+  },
+  "audioComparison": {
+    "label": "Before & After",
+    "heading": "Sức Mạnh Của Mix Master.",
+    "trackTitle": "\"Chân Thành\" - Pop Ballad",
+    "rawButton": "Raw Recording",
+    "masterButton": "Final Master"
+  },
+  "portfolio": {
+    "heading": "Dự Án Tiêu Biểu.",
+    "projects": [
+      {
+        "genre": "Lo-fi Pop",
+        "title": "Hoàng Hôn Trên Phố"
+      },
+      {
+        "genre": "Hip-hop",
+        "title": "Vòng Xoáy Đô Thị"
+      },
+      {
+        "genre": "Soul / Jazz",
+        "title": "Giấc Mơ Xa Lạ"
+      }
+    ]
+  },
+  "studio": {
+    "label": "Vibe & Comfort",
+    "heading": "Thư Thái Để Sáng Tạo.",
+    "description": "Chúng tôi tin rằng cảm hứng tuyệt vời nhất đến từ sự thoải mái. Tại WAV, bạn không chỉ làm việc trong một phòng thu chuyên nghiệp mà còn được tận hưởng không gian mộc mạc cùng hương vị cà phê rang xay thủ công.",
+    "amenities": [
+      "Specialty Coffee",
+      "Chill Zone",
+      "Air Purification",
+      "Hi-Fi Monitoring"
+    ]
+  },
+  "gear": {
+    "label": "The Armory",
+    "heading": "Vũ Khí Kỹ Thuật.",
+    "description": "Chúng tôi sử dụng những thiết bị huyền thoại được săn đón trên thế giới để đảm bảo mỗi bản thu đều mang chất lượng thương mại.",
+    "microphones": "Microphones",
+    "processing": "Processing & Conversion",
+    "equipment": [
+      { "name": "Neumann U87 Ai", "type": "Reference" },
+      { "name": "AKG C414 XLII", "type": "Multi-pattern" },
+      { "name": "Shure SM7B", "type": "Radio Classic" },
+      { "name": "Avalon VT-737sp", "type": "Tube Pre" },
+      { "name": "UA 1176LN", "type": "Comp" },
+      { "name": "Prism Sound Titan", "type": "AD/DA" }
+    ]
+  },
+  "team": {
+    "heading": "Đội Ngũ Sound Engineer.",
+    "members": [
+      {
+        "name": "Hoàng WAV",
+        "role": "Chief Engineer",
+        "bio": "8 năm kinh nghiệm, linh hồn của các bản Mix & Master tại WAV Vietnam."
+      },
+      {
+        "name": "Minh Arranger",
+        "role": "Music Producer",
+        "bio": "Chuyên gia hòa âm phối khí, biến mọi ý tưởng sơ khai thành siêu phẩm."
+      },
+      {
+        "name": "Thanh Audio",
+        "role": "Recording Spec",
+        "bio": "Phù thủy phòng thu, hỗ trợ nghệ sĩ lấy hơi và truyền tải cảm xúc tốt nhất."
+      }
+    ]
+  },
+  "pricing": {
+    "heading": "Bảng Giá Dịch Vụ.",
+    "plans": [
+      {
+        "title": "Indie Single",
+        "subtitle": "Dành cho nghệ sĩ mới",
+        "price": "Liên hệ",
+        "features": [
+          "2h thu âm chất lượng cao",
+          "Mix & Master tiêu chuẩn",
+          "2 lần chỉnh sửa miễn phí"
+        ],
+        "cta": "Chọn gói này"
+      },
+      {
+        "title": "Production Full",
+        "subtitle": "Sản xuất trọn gói",
+        "price": "Đặc biệt",
+        "badge": "Phổ biến nhất",
+        "features": [
+          "Hòa âm phối khí bài mới",
+          "Thu âm không giới hạn buổi",
+          "Mix Master chuẩn Analog"
+        ],
+        "cta": "Bắt đầu ngay"
+      },
+      {
+        "title": "Online Mixing",
+        "subtitle": "Toàn quốc & Quốc tế",
+        "price": "Tiết kiệm",
+        "features": [
+          "Nhận Stems qua Cloud",
+          "Trả file trong 48h",
+          "Chuẩn Loudness Spotify"
+        ],
+        "cta": "Gửi file ngay"
+      }
+    ]
+  },
+  "newsletter": {
+    "label": "Join The Community",
+    "heading": "Nhận Cẩm Nang Sản Xuất Âm Nhạc Miễn Phí.",
+    "description": "Đăng ký để nhận những mẹo về thu âm tại nhà, cách chuẩn bị vocal stems và xu hướng âm nhạc mới nhất từ các chuyên gia tại WAV Vietnam.",
+    "placeholder": "Email của bạn",
+    "cta": "Nhận Cẩm Nang"
+  },
+  "faq": {
+    "heading": "Giải Đáp Thắc Mắc",
+    "questions": [
+      {
+        "question": "Tôi cần chuẩn bị gì trước khi đến thu âm?",
+        "answer": "Bạn nên thuộc lời bài hát, chuẩn bị beat (file WAV chất lượng cao) và gửi demo trước cho kỹ thuật viên. Một giấc ngủ ngon và uống đủ nước cũng giúp giọng hát đạt phong độ tốt nhất."
+      },
+      {
+        "question": "Thời gian hoàn thiện bản Mix & Master là bao lâu?",
+        "answer": "Thông thường quá trình Mix & Master sẽ mất từ 3-5 ngày làm việc tùy vào độ phức tạp của bài hát. Chúng tôi luôn ưu tiên chất lượng sản phẩm lên hàng đầu."
+      },
+      {
+        "question": "Bạn có cung cấp dịch vụ mixing online không?",
+        "answer": "Có, chúng tôi cung cấp dịch vụ mixing chuyên nghiệp online trên toàn quốc và quốc tế. Hãy gửi stems của bạn qua hệ thống cloud của chúng tôi và chúng tôi sẽ gửi bản master hoàn chỉnh trong vòng 48 giờ."
+      },
+      {
+        "question": "Bạn chấp nhận những định dạng tệp nào?",
+        "answer": "Chúng tôi chấp nhận tất cả các định dạng âm thanh tiêu chuẩn bao gồm WAV, MP3, FLAC, v.v. Chúng tôi khuyên dùng WAV để có chất lượng tốt nhất. Liên hệ với chúng tôi để biết các yêu cầu cụ thể."
+      }
+    ]
+  },
+  "footer": {
+    "companyName": "WAV VIETNAM",
+    "tagline": "Âm Thanh Chân Thực, Kỹ Nghệ Chuyên Nghiệp",
+    "contact": {
+      "label": "Liên Hệ Với Chúng Tôi",
+      "phone": "+84 987 654 321",
+      "email": "hello@wavvietnam.studio",
+      "address": "Quận 1, TP. Hồ Chí Minh, Việt Nam"
+    },
+    "links": {
+      "about": "Về Chúng Tôi",
+      "services": "Dịch Vụ",
+      "portfolio": "Sản Phẩm",
+      "contact": "Liên Hệ"
+    },
+    "copyright": "© 2024 WAV Vietnam. All rights reserved."
+  }
+}
