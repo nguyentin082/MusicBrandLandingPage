@@ -31,7 +31,7 @@ export async function Header() {
                         <span className="text-lg font-bold tracking-tighter text-dark-umber dark:text-off-white">
                             {t('logo')}
                         </span>
-                        <span className="text-[9px] uppercase tracking-[0.3em] text-warm-gold font-bold">
+                        <span className="text-[9px] uppercase tracking-[0.3em] text-dark-umber dark:text-off-white font-bold">
                             {t('tagline')}
                         </span>
                     </div>
