@@ -59,6 +59,26 @@
             "description": "Xử lý hậu kỳ chuyên nghiệp, mang lại sự kết hợp hoàn hảo giữa độ chi tiết và cảm xúc trong từng bản thu."
         }
     },
+    "contactFab": {
+        "eyebrow": "Liên Hệ Nhanh",
+        "trigger": "Liên Hệ",
+        "title": "Kết nối với studio ngay",
+        "description": "Chọn kênh phù hợp nhất với bạn, chúng mình sẽ phản hồi nhanh nhất có thể.",
+        "labels": {
+            "call": "Gọi điện",
+            "sms": "Nhắn SMS",
+            "zalo": "Zalo",
+            "facebook": "Facebook",
+            "instagram": "Instagram",
+            "telegram": "Telegram"
+        },
+        "handles": {
+            "zalo": "Chat Zalo",
+            "facebook": "Trang Facebook",
+            "instagram": "Nhắn Instagram",
+            "telegram": "Chat Telegram"
+        }
+    },
     "partners": {
         "label": "Sẵn sàng trên mọi nền tảng",
         "platforms": [

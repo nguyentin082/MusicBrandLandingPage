@@ -59,6 +59,26 @@
             "description": "Analog gear processing for signature warmth and depth in every track."
         }
     },
+    "contactFab": {
+        "eyebrow": "Quick Contact",
+        "trigger": "Contact Us",
+        "title": "Reach the studio fast",
+        "description": "Pick the channel that suits you best and we will get back to you quickly.",
+        "labels": {
+            "call": "Call",
+            "sms": "SMS",
+            "zalo": "Zalo",
+            "facebook": "Facebook",
+            "instagram": "Instagram",
+            "telegram": "Telegram"
+        },
+        "handles": {
+            "zalo": "Zalo chat",
+            "facebook": "Facebook Page",
+            "instagram": "Instagram DM",
+            "telegram": "Telegram chat"
+        }
+    },
     "partners": {
         "label": "Available on All Platforms",
         "platforms": [
