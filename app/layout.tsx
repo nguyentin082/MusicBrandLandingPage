@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Be_Vietnam_Pro, IBM_Plex_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from '@/components/theme-provider';
+import { siteConfig } from '@/lib/site';
 import './globals.css';
 
 const sansFont = Be_Vietnam_Pro({
@@ -30,6 +31,21 @@ export const metadata: Metadata = {
     title: 'WAV Vietnam | Premium Sound Studio',
     description:
         'Professional recording studio in Vietnam. Expert mix & master services with analog gear. Trusted by 150+ indie artists.',
+    metadataBase: new URL(siteConfig.url),
+    alternates: {
+        canonical: '/',
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': -1,
+        },
+    },
     generator: 'v0.app',
     icons: {
         icon: [

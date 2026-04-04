@@ -1,6 +1,6 @@
 import { Header } from '@/components/common/header';
 import { Footer } from '@/components/common/footer';
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { HeroSection } from '@/components/sections/hero';
 import { PhilosophySection } from '@/components/sections/philosophy';
 import { StatsSection } from '@/components/sections/stats';
@@ -14,13 +14,54 @@ import { TeamSection } from '@/components/sections/team';
 import { PricingSection } from '@/components/sections/pricing';
 import { CTASection } from '@/components/sections/cta';
 import { FAQSection } from '@/components/sections/faq';
+import { siteConfig } from '@/lib/site';
 
 export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {
     const { lang } = await params;
     setRequestLocale(lang);
+    const t = await getTranslations({ locale: lang, namespace: 'metadata' });
+
+    const schema = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'Organization',
+                '@id': `${siteConfig.url}/#organization`,
+                name: siteConfig.name,
+                url: siteConfig.url,
+                email: siteConfig.email,
+                telephone: siteConfig.phone,
+                sameAs: [
+                    siteConfig.socials.facebook,
+                    siteConfig.socials.instagram,
+                    siteConfig.socials.telegram,
+                    siteConfig.socials.zalo,
+                ],
+            },
+            {
+                '@type': 'MusicRecordingStudio',
+                '@id': `${siteConfig.url}/${lang}#studio`,
+                name: siteConfig.name,
+                url: `${siteConfig.url}/${lang}`,
+                description: t('description'),
+                telephone: siteConfig.phone,
+                email: siteConfig.email,
+                address: {
+                    '@type': 'PostalAddress',
+                    streetAddress: siteConfig.address,
+                    addressCountry: 'VN',
+                },
+                areaServed: 'Vietnam',
+            },
+        ],
+    };
 
     return (
         <div className="min-h-screen bg-off-white dark:bg-dark-umber text-dark-umber dark:text-off-white">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+            />
             <Header />
 
             <main className="pt-24">
