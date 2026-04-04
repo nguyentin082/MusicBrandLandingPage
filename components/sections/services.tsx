@@ -1,5 +1,6 @@
+import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { Mic2, Music, Layers } from 'lucide-react';
+import { ArrowUpRight, Mic2, Music, Layers } from 'lucide-react';
 
 export async function ServicesSection() {
     const t = await getTranslations('services');
@@ -46,6 +47,13 @@ export async function ServicesSection() {
                             <p className="text-soft-brown dark:text-off-white/70 text-sm italic leading-relaxed">
                                 {description}
                             </p>
+                            <Link
+                                href="#contact"
+                                className="mt-8 inline-flex items-center gap-2 rounded-full border border-dark-umber/10 bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.22em] text-dark-umber transition-all duration-300 hover:-translate-y-0.5 hover:border-warm-gold/40 hover:bg-warm-gold hover:text-dark-umber dark:border-off-white/10 dark:bg-dark-umber dark:text-off-white dark:hover:bg-warm-gold dark:hover:text-dark-umber"
+                            >
+                                {t('consultNow')}
+                                <ArrowUpRight className="h-4 w-4" />
+                            </Link>
                         </div>
                     ))}
                 </div>

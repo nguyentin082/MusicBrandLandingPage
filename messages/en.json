@@ -45,6 +45,7 @@
     },
     "services": {
         "heading": "Core Services",
+        "consultNow": "Consult Now",
         "recording": {
             "title": "Acoustic Recording",
             "description": "International standard acoustic processing, delivering absolute clarity and authenticity for vocals."
