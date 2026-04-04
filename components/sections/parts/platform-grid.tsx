@@ -70,17 +70,18 @@ function PlatformItem({ platform }: PlatformItemProps) {
     );
 
     return (
-        <div className="flex flex-col items-center justify-center gap-3 p-4 rounded-lg opacity-60 hover:opacity-100 transition duration-300 hover:bg-warm-gold/5">
+        <div className="flex flex-col items-center justify-center gap-3 p-6 rounded-lg opacity-60 hover:opacity-100 transition duration-300 hover:bg-warm-gold/5 min-w-fit">
             {IconComponent ? (
                 hasCustomIcon ? (
                     <CustomPlatformIcon
                         iconName={platform.icon}
                         label={platform.name}
                         IconComponent={IconComponent}
+                        size={80}
                     />
                 ) : (
                     <IconComponent
-                        size={36}
+                        size={80}
                         style={{ color: iconColor }}
                         aria-label={platform.name}
                     />

@@ -4,18 +4,29 @@ interface CustomPlatformIconProps {
     iconName: string;
     label: string;
     IconComponent?: React.ElementType;
+    size?: number;
 }
 
-export function CustomPlatformIcon({ iconName, label, IconComponent }: CustomPlatformIconProps) {
+export function CustomPlatformIcon({
+    iconName,
+    label,
+    IconComponent,
+    size = 40,
+}: CustomPlatformIconProps) {
     if (!IconComponent) {
         return null;
     }
 
+    const scaleFactor = size / 40;
+
     if (iconName === 'SiInstagram') {
         return (
-            <div className="relative flex h-10 w-10 items-center justify-center rounded-[11px] bg-[radial-gradient(circle_at_30%_107%,#fdf497_0%,#fdf497_5%,#fd5949_45%,#d6249f_60%,#285AEB_90%)] shadow-[0_0_18px_rgba(214,36,159,0.35)]">
+            <div
+                className="relative flex items-center justify-center rounded-[11px] bg-[radial-gradient(circle_at_30%_107%,#fdf497_0%,#fdf497_5%,#fd5949_45%,#d6249f_60%,#285AEB_90%)] shadow-[0_0_18px_rgba(214,36,159,0.35)]"
+                style={{ width: size, height: size }}
+            >
                 <IconComponent
-                    size={24}
+                    size={Math.round(24 * scaleFactor)}
                     style={{ color: '#FFFFFF' }}
                     className="drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
                     aria-label={label}
@@ -30,21 +41,21 @@ export function CustomPlatformIcon({ iconName, label, IconComponent }: CustomPla
 
     if (iconName === 'SiTiktok') {
         return (
-            <div className="relative h-10 w-10">
+            <div style={{ width: size, height: size }} className="relative">
                 <IconComponent
-                    size={36}
+                    size={Math.round(36 * scaleFactor)}
                     style={{ color: '#25F4EE' }}
                     className="absolute left-0.5 top-px"
                     aria-hidden="true"
                 />
                 <IconComponent
-                    size={36}
+                    size={Math.round(36 * scaleFactor)}
                     style={{ color: '#FE2C55' }}
                     className="absolute -left-0.5 -top-px"
                     aria-hidden="true"
                 />
                 <IconComponent
-                    size={36}
+                    size={Math.round(36 * scaleFactor)}
                     style={{ color: '#FFFFFF' }}
                     className="absolute left-0 top-0"
                     aria-label={label}
@@ -55,8 +66,15 @@ export function CustomPlatformIcon({ iconName, label, IconComponent }: CustomPla
 
     if (iconName === 'SiFacebook') {
         return (
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1877F2] shadow-[0_0_14px_rgba(24,119,242,0.35)]">
-                <Fa6Icons.FaFacebookF size={22} style={{ color: '#FFFFFF' }} aria-label={label} />
+            <div
+                className="flex items-center justify-center rounded-full bg-[#1877F2] shadow-[0_0_14px_rgba(24,119,242,0.35)]"
+                style={{ width: size, height: size }}
+            >
+                <Fa6Icons.FaFacebookF
+                    size={Math.round(22 * scaleFactor)}
+                    style={{ color: '#FFFFFF' }}
+                    aria-label={label}
+                />
             </div>
         );
     }
@@ -64,32 +82,33 @@ export function CustomPlatformIcon({ iconName, label, IconComponent }: CustomPla
     if (iconName === 'FaDeezer') {
         return (
             <div
-                className="flex h-10 w-10 items-end justify-center gap-0.5 rounded-md bg-[#111111] px-1.5 py-1"
+                className="flex items-end justify-center gap-0.5 rounded-md bg-[#111111] p-1.5"
+                style={{ width: size, height: size }}
                 aria-label={label}
             >
                 <span
-                    className="w-1 rounded-sm bg-[#8E3CF7]"
-                    style={{ height: '28%' }}
+                    className="rounded-sm bg-[#8E3CF7]"
+                    style={{ width: Math.round(4 * scaleFactor), height: '28%' }}
                     aria-hidden="true"
                 />
                 <span
-                    className="w-1 rounded-sm bg-[#F43B86]"
-                    style={{ height: '45%' }}
+                    className="rounded-sm bg-[#F43B86]"
+                    style={{ width: Math.round(4 * scaleFactor), height: '45%' }}
                     aria-hidden="true"
                 />
                 <span
-                    className="w-1 rounded-sm bg-[#FF6B2D]"
-                    style={{ height: '62%' }}
+                    className="rounded-sm bg-[#FF6B2D]"
+                    style={{ width: Math.round(4 * scaleFactor), height: '62%' }}
                     aria-hidden="true"
                 />
                 <span
-                    className="w-1 rounded-sm bg-[#FFC73A]"
-                    style={{ height: '78%' }}
+                    className="rounded-sm bg-[#FFC73A]"
+                    style={{ width: Math.round(4 * scaleFactor), height: '78%' }}
                     aria-hidden="true"
                 />
                 <span
-                    className="w-1 rounded-sm bg-[#16D16D]"
-                    style={{ height: '92%' }}
+                    className="rounded-sm bg-[#16D16D]"
+                    style={{ width: Math.round(4 * scaleFactor), height: '92%' }}
                     aria-hidden="true"
                 />
             </div>
