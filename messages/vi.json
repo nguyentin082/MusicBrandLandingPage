@@ -60,7 +60,64 @@
     },
     "partners": {
         "label": "Sẵn sàng trên mọi nền tảng",
-        "platforms": ["SPOTIFY", "APPLE MUSIC", "YOUTUBE", "ZING MP3", "TIKTOK"]
+        "platforms": [
+            {
+                "name": "Spotify",
+                "icon": "SiSpotify"
+            },
+            {
+                "name": "Apple Music",
+                "icon": "SiApplemusic"
+            },
+            {
+                "name": "Amazon Music",
+                "icon": "FaAmazon"
+            },
+            {
+                "name": "YouTube Music",
+                "icon": "SiYoutubemusic"
+            },
+            {
+                "name": "TIDAL",
+                "icon": "SiTidal"
+            },
+            {
+                "name": "Deezer",
+                "icon": "FaDeezer"
+            },
+            {
+                "name": "Pandora",
+                "icon": "SiPandora"
+            },
+            {
+                "name": "iHeartRadio",
+                "icon": "SiIheartradio"
+            },
+            {
+                "name": "Napster",
+                "icon": "SiNapster"
+            },
+            {
+                "name": "TikTok Music",
+                "icon": "SiTiktok"
+            },
+            {
+                "name": "Instagram",
+                "icon": "SiInstagram"
+            },
+            {
+                "name": "Facebook",
+                "icon": "SiFacebook"
+            },
+            {
+                "name": "Snapchat",
+                "icon": "SiSnapchat"
+            },
+            {
+                "name": "Peloton",
+                "icon": "SiPeloton"
+            }
+        ]
     },
     "audioComparison": {
         "label": "Before & After",
@@ -99,12 +156,30 @@
         "microphones": "Microphones",
         "processing": "Processing & Conversion",
         "equipment": [
-            { "name": "Neumann U87 Ai", "type": "Reference" },
-            { "name": "AKG C414 XLII", "type": "Multi-pattern" },
-            { "name": "Shure SM7B", "type": "Radio Classic" },
-            { "name": "Avalon VT-737sp", "type": "Tube Pre" },
-            { "name": "UA 1176LN", "type": "Comp" },
-            { "name": "Prism Sound Titan", "type": "AD/DA" }
+            {
+                "name": "Neumann U87 Ai",
+                "type": "Reference"
+            },
+            {
+                "name": "AKG C414 XLII",
+                "type": "Multi-pattern"
+            },
+            {
+                "name": "Shure SM7B",
+                "type": "Radio Classic"
+            },
+            {
+                "name": "Avalon VT-737sp",
+                "type": "Tube Pre"
+            },
+            {
+                "name": "UA 1176LN",
+                "type": "Comp"
+            },
+            {
+                "name": "Prism Sound Titan",
+                "type": "AD/DA"
+            }
         ]
     },
     "team": {

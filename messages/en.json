@@ -60,7 +60,64 @@
     },
     "partners": {
         "label": "Available on All Platforms",
-        "platforms": ["SPOTIFY", "APPLE MUSIC", "YOUTUBE", "ZING MP3", "TIKTOK"]
+        "platforms": [
+            {
+                "name": "Spotify",
+                "icon": "SiSpotify"
+            },
+            {
+                "name": "Apple Music",
+                "icon": "SiApplemusic"
+            },
+            {
+                "name": "Amazon Music",
+                "icon": "FaAmazon"
+            },
+            {
+                "name": "YouTube Music",
+                "icon": "SiYoutubemusic"
+            },
+            {
+                "name": "TIDAL",
+                "icon": "SiTidal"
+            },
+            {
+                "name": "Deezer",
+                "icon": "FaDeezer"
+            },
+            {
+                "name": "Pandora",
+                "icon": "SiPandora"
+            },
+            {
+                "name": "iHeartRadio",
+                "icon": "SiIheartradio"
+            },
+            {
+                "name": "Napster",
+                "icon": "SiNapster"
+            },
+            {
+                "name": "TikTok Music",
+                "icon": "SiTiktok"
+            },
+            {
+                "name": "Instagram",
+                "icon": "SiInstagram"
+            },
+            {
+                "name": "Facebook",
+                "icon": "SiFacebook"
+            },
+            {
+                "name": "Snapchat",
+                "icon": "SiSnapchat"
+            },
+            {
+                "name": "Peloton",
+                "icon": "SiPeloton"
+            }
+        ]
     },
     "audioComparison": {
         "label": "Before & After",
@@ -89,7 +146,7 @@
     "studio": {
         "label": "Vibe & Comfort",
         "heading": "Comfort for Creativity.",
-        "description": "We believe the best inspiration comes from comfort. At WAV, you don't just work in a professional studio—you enjoy a rustic space with artisanal coffee.",
+        "description": "We believe the best inspiration comes from comfort. At WAV, you don't just work in a professional studio\u2014you enjoy a rustic space with artisanal coffee.",
         "amenities": ["Specialty Coffee", "Chill Zone", "Air Purification", "Hi-Fi Monitoring"]
     },
     "gear": {
@@ -99,19 +156,37 @@
         "microphones": "Microphones",
         "processing": "Processing & Conversion",
         "equipment": [
-            { "name": "Neumann U87 Ai", "type": "Reference" },
-            { "name": "AKG C414 XLII", "type": "Multi-pattern" },
-            { "name": "Shure SM7B", "type": "Radio Classic" },
-            { "name": "Avalon VT-737sp", "type": "Tube Pre" },
-            { "name": "UA 1176LN", "type": "Compressor" },
-            { "name": "Prism Sound Titan", "type": "AD/DA" }
+            {
+                "name": "Neumann U87 Ai",
+                "type": "Reference"
+            },
+            {
+                "name": "AKG C414 XLII",
+                "type": "Multi-pattern"
+            },
+            {
+                "name": "Shure SM7B",
+                "type": "Radio Classic"
+            },
+            {
+                "name": "Avalon VT-737sp",
+                "type": "Tube Pre"
+            },
+            {
+                "name": "UA 1176LN",
+                "type": "Compressor"
+            },
+            {
+                "name": "Prism Sound Titan",
+                "type": "AD/DA"
+            }
         ]
     },
     "team": {
         "heading": "Our Sound Engineers.",
         "members": [
             {
-                "name": "Hoàng WAV",
+                "name": "Ho\u00e0ng WAV",
                 "role": "Chief Engineer",
                 "bio": "8 years of experience, the soul of WAV Vietnam's mix & master excellence."
             },
@@ -209,6 +284,6 @@
             "portfolio": "Portfolio",
             "contact": "Contact"
         },
-        "copyright": "© 2024 WAV Vietnam. All rights reserved."
+        "copyright": "\u00a9 2024 WAV Vietnam. All rights reserved."
     }
 }
