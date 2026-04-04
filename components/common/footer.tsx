@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { contactInfo } from '@/lib/contact';
 
 export function Footer() {
     const t = useTranslations('footer');
@@ -30,13 +31,13 @@ export function Footer() {
                             </h4>
                             <div className="space-y-3 text-sm text-off-white/70">
                                 <a
-                                    href="tel:+84987654321"
+                                    href={contactInfo.links.call}
                                     className="block hover:text-warm-gold transition"
                                 >
                                     {t('contact.phone')}
                                 </a>
                                 <a
-                                    href="mailto:hello@wavvietnam.studio"
+                                    href={`mailto:${contactInfo.email}`}
                                     className="block hover:text-warm-gold transition"
                                 >
                                     {t('contact.email')}

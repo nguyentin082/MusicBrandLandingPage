@@ -1,5 +1,6 @@
 import { Facebook, Instagram, MessageSquareText, PhoneCall, Send } from 'lucide-react';
 import { SiZalo } from 'react-icons/si';
+import { contactInfo } from '@/lib/contact';
 
 type ContactFabLabels = {
     call: string;
@@ -10,55 +11,45 @@ type ContactFabLabels = {
     telegram: string;
 };
 
-const contactPhone = '+84837216129';
-const contactLinks = {
-    call: `tel:${contactPhone}`,
-    sms: `sms:${contactPhone}`,
-    zalo: `https://zalo.me/${contactPhone.replace('+', '')}`,
-    facebook: 'https://www.facebook.com/trungtin.h.nguyen.908',
-    instagram: 'https://www.instagram.com/trungtin.h.nguyen.908',
-    telegram: 'https://t.me/nguyenhoangtrungtin',
-} as const;
-
 const contactActions = [
     {
         key: 'call',
-        href: contactLinks.call,
+        href: contactInfo.links.call,
         labelKey: 'call',
         icon: PhoneCall,
         external: false,
     },
     {
         key: 'sms',
-        href: contactLinks.sms,
+        href: contactInfo.links.sms,
         labelKey: 'sms',
         icon: MessageSquareText,
         external: false,
     },
     {
         key: 'zalo',
-        href: contactLinks.zalo,
+        href: contactInfo.links.zalo,
         labelKey: 'zalo',
         icon: SiZalo,
         external: true,
     },
     {
         key: 'facebook',
-        href: contactLinks.facebook,
+        href: contactInfo.links.facebook,
         labelKey: 'facebook',
         icon: Facebook,
         external: true,
     },
     {
         key: 'instagram',
-        href: contactLinks.instagram,
+        href: contactInfo.links.instagram,
         labelKey: 'instagram',
         icon: Instagram,
         external: true,
     },
     {
         key: 'telegram',
-        href: contactLinks.telegram,
+        href: contactInfo.links.telegram,
         labelKey: 'telegram',
         icon: Send,
         external: true,
