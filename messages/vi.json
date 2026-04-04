@@ -78,26 +78,6 @@
                 "icon": "SiYoutubemusic"
             },
             {
-                "name": "TIDAL",
-                "icon": "SiTidal"
-            },
-            {
-                "name": "Deezer",
-                "icon": "FaDeezer"
-            },
-            {
-                "name": "Pandora",
-                "icon": "SiPandora"
-            },
-            {
-                "name": "iHeartRadio",
-                "icon": "SiIheartradio"
-            },
-            {
-                "name": "Napster",
-                "icon": "SiNapster"
-            },
-            {
                 "name": "TikTok Music",
                 "icon": "SiTiktok"
             },
@@ -113,9 +93,10 @@
                 "name": "Snapchat",
                 "icon": "SiSnapchat"
             },
+
             {
-                "name": "Peloton",
-                "icon": "SiPeloton"
+                "name": "Deezer",
+                "icon": "FaDeezer"
             }
         ]
     },

@@ -14,11 +14,31 @@ interface PlatformGridProps {
 }
 
 export function PlatformGrid({ platforms }: PlatformGridProps) {
+    const platformsForScroll = [...platforms, ...platforms];
+
     return (
-        <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-6 md:gap-8">
-            {platforms.map((platform, idx) => (
-                <PlatformItem key={idx} platform={platform} />
-            ))}
+        <div className="relative w-full overflow-hidden">
+            <style>{`
+                @keyframes scroll-left {
+                    0% {
+                        transform: translateX(0);
+                    }
+                    100% {
+                        transform: translateX(-50%);
+                    }
+                }
+                .platform-scroll {
+                    animation: scroll-left 30s linear infinite;
+                }
+                .platform-scroll:hover {
+                    animation-play-state: paused;
+                }
+            `}</style>
+            <div className="platform-scroll flex gap-6 md:gap-8 w-fit">
+                {platformsForScroll.map((platform, idx) => (
+                    <PlatformItem key={idx} platform={platform} />
+                ))}
+            </div>
         </div>
     );
 }
@@ -32,19 +52,11 @@ const BRAND_ICON_COLORS: Record<string, string> = {
     SiApplemusic: '#FC3C44',
     FaAmazon: '#FF9900',
     SiYoutubemusic: '#FF0000',
-    SiTidal: '#FFFFFF',
     FaDeezer: '#A238FF',
-    SiPandora: '#3668FF',
-    SiIheartradio: '#C6002B',
-    SiNapster: '#2E77BC',
     SiTiktok: '#FE2C55',
     SiInstagram: '#E4405F',
     SiFacebook: '#1877F2',
     SiSnapchat: '#FFFC00',
-    SiPeloton: '#ED1C24',
-    SiQqmusic: '#31C27C',
-    SiKugoumusic: '#2A86FF',
-    SiKuwomusicmusic: '#FFCD00',
 };
 
 function PlatformItem({ platform }: PlatformItemProps) {
