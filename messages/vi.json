@@ -1,11 +1,11 @@
 {
     "metadata": {
-        "title": "WAV Vietnam | Studio Thu Âm Chuyên Nghiệp - Mix Master Hàng Đầu",
-        "description": "Phòng thu âm chuyên nghiệp tại Việt Nam. Dịch vụ Mix & Master với thiết bị Analog cao cấp. Được tin tưởng bởi 150+ nghệ sĩ Indie. Đặt phòng ngay hôm nay."
+        "title": "WAV Vietnam | Đồng hành cùng hành trình âm nhạc của bạn",
+        "description": "Phòng thu âm, sản xuất âm nhạc chuyên nghiệp tại Việt Nam. Dịch vụ Mix & Master cao cấp. Được tin tưởng bởi nhiều nghệ sĩ hàng đầu Việt Nam."
     },
     "navigation": {
         "logo": "WAV VIETNAM",
-        "tagline": "Sound Studio",
+        "tagline": "Đồng hành cùng âm nhạc của bạn",
         "services": "Dịch vụ",
         "portfolio": "Sản phẩm",
         "gear": "Thiết bị",
@@ -13,29 +13,29 @@
         "contact": "Liên hệ ngay"
     },
     "hero": {
-        "badge": "Artisan Sound Studio",
-        "heading": "ÂM THANH",
-        "highlighted": "CHÂN THỰC",
-        "description": "Nơi những ý tưởng thô sơ được mài giũa thành những tuyệt tác âm thanh đỉnh cao với hệ thống Analog High-end.",
-        "cta_primary": "Bắt đầu thu âm",
-        "cta_secondary": "Nghe sản phẩm"
+        "badge": "Compose - Arrange - Record - Edit - Mix - Master - Publish",
+        "heading": "TỪ Ý TƯỞNG",
+        "highlighted": "ĐẾN SẢN PHẨM",
+        "description": "Nơi những ý tưởng thô sơ được biến thành những sản phẩm chuẩn chất lượng thương mại. Tại WAV Vietnam, chúng mình tạo ra trải nghiệm âm nhạc đích thực.",
+        "cta_primary": "Liên hệ ngay",
+        "cta_secondary": "Nghe các sản phẩm"
     },
     "philosophy": {
-        "label": "The Soul",
-        "quote": "Chúng tôi không chỉ thu máy móc, chúng tôi thu lại sự chân thành trong từng nốt nhạc.",
-        "description": "Mỗi bài hát là một câu chuyện. Tại WAV Vietnam, chúng tôi ở đây để đảm bảo câu chuyện của bạn được kể lại bằng âm thanh trung thực và cảm xúc nhất."
+        "label": "Triết lý của chúng mình",
+        "quote": "Chúng mình không làm việc máy móc, chúng mình đem lại sự chân thành trong từng nốt nhạc.",
+        "description": "Mỗi bài hát là một câu chuyện. Tại WAV Vietnam, chúng mình ở đây để đảm bảo câu chuyện của bạn được kể lại bằng âm thanh trung thực và cảm xúc nhất."
     },
     "stats": {
         "projects": {
-            "number": "500+",
+            "number": "100+",
             "label": "Dự án hoàn thiện"
         },
         "artists": {
-            "number": "150+",
-            "label": "Nghệ sĩ Indie tin tưởng"
+            "number": "50+",
+            "label": "Nghệ sĩ tin tưởng"
         },
         "streams": {
-            "number": "50M+",
+            "number": "50K+",
             "label": "Lượt streams dự án"
         },
         "experience": {
@@ -46,16 +46,16 @@
     "services": {
         "heading": "Dịch Vụ Chính",
         "recording": {
-            "title": "Thu Âm Acoustic",
-            "description": "Xử lý âm học tiêu chuẩn quốc tế, mang lại độ sạch và trung thực tuyệt đối cho Vocal."
+            "title": "Thu Âm Vocal / Nhac Cụ",
+            "description": "Xử lý âm học tiêu chuẩn quốc tế, mang lại độ sạch và trung thực tuyệt đối."
         },
         "production": {
             "title": "Sản Xuất Bài Hát",
             "description": "Hòa âm phối khí chuyên nghiệp, định hình phong cách âm nhạc riêng biệt cho nghệ sĩ."
         },
         "mixing": {
-            "title": "Pro Mix & Master",
-            "description": "Sử dụng hệ thống Analog Gear ngoại nhập để tạo độ dày và độ ấm đặc trưng."
+            "title": "Edit & Mixing & Mastering",
+            "description": "Xử lý hậu kỳ chuyên nghiệp, mang lại sự kết hợp hoàn hảo giữa độ chi tiết và cảm xúc trong từng bản thu."
         }
     },
     "partners": {
@@ -89,13 +89,13 @@
     "studio": {
         "label": "Vibe & Comfort",
         "heading": "Thư Thái Để Sáng Tạo.",
-        "description": "Chúng tôi tin rằng cảm hứng tuyệt vời nhất đến từ sự thoải mái. Tại WAV, bạn không chỉ làm việc trong một phòng thu chuyên nghiệp mà còn được tận hưởng không gian mộc mạc cùng hương vị cà phê rang xay thủ công.",
+        "description": "Chúng mình tin rằng cảm hứng tuyệt vời nhất đến từ sự thoải mái. Tại WAV, bạn không chỉ làm việc trong một phòng thu chuyên nghiệp mà còn được tận hưởng không gian mộc mạc cùng hương vị cà phê rang xay thủ công.",
         "amenities": ["Specialty Coffee", "Chill Zone", "Air Purification", "Hi-Fi Monitoring"]
     },
     "gear": {
         "label": "The Armory",
         "heading": "Vũ Khí Kỹ Thuật.",
-        "description": "Chúng tôi sử dụng những thiết bị huyền thoại được săn đón trên thế giới để đảm bảo mỗi bản thu đều mang chất lượng thương mại.",
+        "description": "Chúng mình sử dụng những thiết bị huyền thoại được săn đón trên thế giới để đảm bảo mỗi bản thu đều mang chất lượng thương mại.",
         "microphones": "Microphones",
         "processing": "Processing & Conversion",
         "equipment": [
@@ -182,15 +182,15 @@
             },
             {
                 "question": "Thời gian hoàn thiện bản Mix & Master là bao lâu?",
-                "answer": "Thông thường quá trình Mix & Master sẽ mất từ 3-5 ngày làm việc tùy vào độ phức tạp của bài hát. Chúng tôi luôn ưu tiên chất lượng sản phẩm lên hàng đầu."
+                "answer": "Thông thường quá trình Mix & Master sẽ mất từ 3-5 ngày làm việc tùy vào độ phức tạp của bài hát. Chúng mình luôn ưu tiên chất lượng sản phẩm lên hàng đầu."
             },
             {
                 "question": "Bạn có cung cấp dịch vụ mixing online không?",
-                "answer": "Có, chúng tôi cung cấp dịch vụ mixing chuyên nghiệp online trên toàn quốc và quốc tế. Hãy gửi stems của bạn qua hệ thống cloud của chúng tôi và chúng tôi sẽ gửi bản master hoàn chỉnh trong vòng 48 giờ."
+                "answer": "Có, chúng mình cung cấp dịch vụ mixing chuyên nghiệp online trên toàn quốc và quốc tế. Hãy gửi stems của bạn qua hệ thống cloud của chúng mình và chúng mình sẽ gửi bản master hoàn chỉnh trong vòng 48 giờ."
             },
             {
                 "question": "Bạn chấp nhận những định dạng tệp nào?",
-                "answer": "Chúng tôi chấp nhận tất cả các định dạng âm thanh tiêu chuẩn bao gồm WAV, MP3, FLAC, v.v. Chúng tôi khuyên dùng WAV để có chất lượng tốt nhất. Liên hệ với chúng tôi để biết các yêu cầu cụ thể."
+                "answer": "Chúng mình chấp nhận tất cả các định dạng âm thanh tiêu chuẩn bao gồm WAV, MP3, FLAC, v.v. Chúng mình khuyên dùng WAV để có chất lượng tốt nhất. Liên hệ với chúng mình để biết các yêu cầu cụ thể."
             }
         ]
     },
@@ -198,13 +198,13 @@
         "companyName": "WAV VIETNAM",
         "tagline": "Âm Thanh Chân Thực, Kỹ Nghệ Chuyên Nghiệp",
         "contact": {
-            "label": "Liên Hệ Với Chúng Tôi",
+            "label": "Liên Hệ Với Chúng Mình",
             "phone": "+84 987 654 321",
             "email": "hello@wavvietnam.studio",
             "address": "Quận 1, TP. Hồ Chí Minh, Việt Nam"
         },
         "links": {
-            "about": "Về Chúng Tôi",
+            "about": "Về Chúng Mình",
             "services": "Dịch Vụ",
             "portfolio": "Sản Phẩm",
             "contact": "Liên Hệ"
