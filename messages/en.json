@@ -124,9 +124,13 @@
     "audioComparison": {
         "label": "Before & After",
         "heading": "The Power of Mix Master.",
-        "trackTitle": "\"Authentic\" - Pop Ballad",
+        "trackTitleDieOnThisHill": "\"Die On This Hill\" - Pop Ballad",
+        "trackTitleCloseToYou": "\"Close To You\" - Pop Ballad",
         "rawButton": "Raw Recording",
-        "masterButton": "Final Master"
+        "vocalButton": "Only Vocal",
+        "masterButton": "Final Master",
+        "playButton": "Play",
+        "pauseButton": "Pause"
     },
     "portfolio": {
         "heading": "Featured Projects.",

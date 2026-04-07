@@ -124,9 +124,13 @@
     "audioComparison": {
         "label": "Before & After",
         "heading": "Sức Mạnh Của Mix Master.",
-        "trackTitle": "\"Chân Thành\" - Pop Ballad",
+        "trackTitleDieOnThisHill": "\"Die On This Hill\" - Pop Ballad",
+        "trackTitleCloseToYou": "\"Close To You\" - Pop Ballad",
         "rawButton": "Raw Recording",
-        "masterButton": "Final Master"
+        "vocalButton": "Only Vocal",
+        "masterButton": "Final Master",
+        "playButton": "Phát",
+        "pauseButton": "Tạm dừng"
     },
     "portfolio": {
         "heading": "Dự Án Tiêu Biểu.",

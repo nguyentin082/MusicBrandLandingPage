@@ -1,59 +1,101 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useCallback, useMemo, useRef } from 'react';
 
-interface AudioToggleProps {
-    trackTitle: string;
-    rawButton: string;
-    masterButton: string;
-}
+import { PlaybackControls } from './audio-player/playback-controls';
+import { AudioTrackTabs } from './audio-player/track-tabs';
+import type { AudioToggleProps } from './audio-player/types';
+import { getTrackColor } from './audio-player/utils';
+import { useAudioVisualizer } from './audio-player/use-audio-visualizer';
+import { useMultiTrackAudio } from './audio-player/use-multi-track-audio';
 
-export function AudioToggle({ trackTitle, rawButton, masterButton }: AudioToggleProps) {
-    const [mode, setMode] = useState<'raw' | 'master'>('master');
+export function AudioToggle({ trackTitle, playButton, pauseButton, tracks }: AudioToggleProps) {
+    const {
+        activeTrackId,
+        activeTrack,
+        analyserNodesRef,
+        audioRefs,
+        currentTime,
+        duration,
+        isPlaying,
+        seek,
+        setCurrentTime,
+        switchTrack,
+        togglePlay,
+        handleTrackEnded,
+        handleTrackMetadataLoaded,
+    } = useMultiTrackAudio(tracks);
+
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const lastTimelineSyncRef = useRef(0);
+
+    const activeColor = useMemo(() => getTrackColor(activeTrack?.id), [activeTrack?.id]);
+
+    const handleTimelineTick = useCallback(() => {
+        const activeAudio = audioRefs.current[activeTrackId];
+        if (!activeAudio) {
+            return;
+        }
+
+        const now = performance.now();
+        if (now - lastTimelineSyncRef.current >= 120) {
+            setCurrentTime(activeAudio.currentTime);
+            lastTimelineSyncRef.current = now;
+        }
+    }, [activeTrackId, audioRefs, setCurrentTime]);
+
+    useAudioVisualizer({
+        canvasRef,
+        analyser: analyserNodesRef.current[activeTrackId],
+        activeColor,
+        isPlaying,
+        activeTrackId,
+        onTimelineTick: handleTimelineTick,
+    });
 
     return (
-        <div className="bg-white dark:bg-dark-umber p-12 rounded-[48px] border border-dark-umber/5 dark:border-off-white/10 shadow-xl flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1">
+        <div className="bg-white dark:bg-dark-umber p-8 md:p-12 rounded-[48px] border border-dark-umber/5 dark:border-off-white/10 shadow-xl flex flex-col gap-8">
+            <div>
                 <h4 className="text-xl font-bold italic mb-6 text-dark-umber dark:text-off-white">
                     {trackTitle}
                 </h4>
-                <div className="flex gap-4">
-                    <button
-                        onClick={() => setMode('raw')}
-                        className={`px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition ${
-                            mode === 'raw'
-                                ? 'bg-dark-umber text-white dark:bg-off-white dark:text-dark-umber'
-                                : 'border border-dark-umber dark:border-off-white text-dark-umber dark:text-off-white hover:bg-dark-umber/5 dark:hover:bg-off-white/5'
-                        }`}
-                    >
-                        {rawButton}
-                    </button>
-                    <button
-                        onClick={() => setMode('master')}
-                        className={`px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition ${
-                            mode === 'master'
-                                ? 'bg-brick-red text-white shadow-lg'
-                                : 'border border-dark-umber dark:border-off-white text-dark-umber dark:text-off-white hover:bg-dark-umber/5 dark:hover:bg-off-white/5'
-                        }`}
-                    >
-                        {masterButton}
-                    </button>
-                </div>
+                <AudioTrackTabs
+                    tracks={tracks}
+                    activeTrackId={activeTrackId}
+                    onSwitchTrack={switchTrack}
+                />
             </div>
 
-            <div className="flex-1 w-full h-16 flex items-end gap-1">
-                {[0.4, 0.8, 1, 0.7, 0.5].map((height, idx) => (
-                    <motion.div
-                        key={idx}
-                        className={`flex-1 rounded-full ${
-                            mode === 'master' ? 'bg-brick-red' : 'bg-warm-gold/30'
-                        }`}
-                        animate={{ height: `${height * 100}%` }}
-                        transition={{ duration: 0.5 }}
-                    />
-                ))}
+            <div className="bg-off-white/70 dark:bg-soft-brown/40 rounded-3xl p-5 border border-dark-umber/10 dark:border-off-white/10">
+                <canvas ref={canvasRef} className="h-24 md:h-28 w-full" />
             </div>
+
+            <PlaybackControls
+                isPlaying={isPlaying}
+                playButton={playButton}
+                pauseButton={pauseButton}
+                currentTime={currentTime}
+                duration={duration}
+                onTogglePlay={togglePlay}
+                onSeek={seek}
+            />
+
+            {tracks.map((track) => (
+                <audio
+                    key={track.id}
+                    ref={(node) => {
+                        audioRefs.current[track.id] = node;
+                    }}
+                    src={track.src}
+                    preload="auto"
+                    onLoadedMetadata={() => {
+                        handleTrackMetadataLoaded(track.id);
+                    }}
+                    onEnded={() => {
+                        handleTrackEnded(track.id);
+                    }}
+                />
+            ))}
         </div>
     );
 }
