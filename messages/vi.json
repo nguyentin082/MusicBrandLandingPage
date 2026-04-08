@@ -123,7 +123,7 @@
     },
     "audioComparison": {
         "label": "Before & After",
-        "heading": "Sức Mạnh Của Mix Master.",
+        "heading": "Sức Mạnh Của Mix Master",
         "trackTitleDieOnThisHill": "\"Die On This Hill\" - Pop Ballad",
         "trackTitleCloseToYou": "\"Close To You\" - Pop Ballad",
         "rawButton": "Raw Recording",
@@ -133,19 +133,44 @@
         "pauseButton": "Tạm dừng"
     },
     "portfolio": {
-        "heading": "Dự Án Tiêu Biểu.",
+        "heading": "Dự Án Tiêu Biểu",
         "projects": [
             {
-                "genre": "Lo-fi Pop",
-                "title": "Hoàng Hôn Trên Phố"
+                "genre": "Pop Ballad",
+                "artist": "Rose Prudente",
+                "title": "Cảm Ơn Em Vì Đã Không Từ Bỏ",
+                "spotifyUrl": "https://open.spotify.com/track/2pVxdfR331XVjLUoP8StvO?si=394ec190931d4023",
+                "spotifyEmbedUrlLarge": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2pVxdfR331XVjLUoP8StvO?utm_source=generator&theme=0' width='100%' height='352' frameBorder='0' allowFullScreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "spotifyEmbedUrlSmall": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2pVxdfR331XVjLUoP8StvO?utm_source=generator&theme=0' width='100%' height='152' frameBorder='0' allowFullScreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "youtubeUrl": "https://youtu.be/dqquAJCSxGI?si=aG4zVmCUBYp9z82J",
+                "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/dqquAJCSxGI?si=IrdMpTlURvYUfTm0' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>",
+                "zingMp3Url": "https://zingmp3.vn/album/Cam-On-Em-Vi-Da-Khong-Tu-Bo-Single-Rose-Prudente/6CF6Z67A.html"
             },
             {
-                "genre": "Hip-hop",
-                "title": "Vòng Xoáy Đô Thị"
+                "genre": "Pop Ballad",
+                "artist": "Hà An Huy & Đạt Nguyễn",
+                "title": "Tết Là Nhà",
+                "youtubeUrl": "https://youtu.be/qobeDYSaky0?si=C6P3XZIweO_DLx3U",
+                "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/qobeDYSaky0?si=C6P3XZIweO_DLx3U' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>",
+                "spotifyUrl": "https://open.spotify.com/track/1sBeV0rghp6jIQDRR2bWhm?si=eb5df9980b754d94",
+                "spotifyEmbedUrlLarge": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/1sBeV0rghp6jIQDRR2bWhm?utm_source=generator&theme=0' width='100%' height='352' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "spotifyEmbedUrlSmall": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/1sBeV0rghp6jIQDRR2bWhm?utm_source=generator&theme=0' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "appleMusicUrl": "https://music.apple.com/vn/album/t%C3%AA-t-la-nha-feat-dat-nguyen-single/1875860509?l=vi",
+                "deezerUrl": "https://link.deezer.com/s/32W98mLjA8woTTCSGMXCC",
+                "tidalUrl": "https://tidal.com/album/497419939/u"
             },
             {
-                "genre": "Soul / Jazz",
-                "title": "Giấc Mơ Xa Lạ"
+                "genre": "Pop Ballad",
+                "artist": "Vĩnh Lộc",
+                "title": "Hình Như",
+                "youtubeUrl": "https://youtu.be/jwWTlxYISag?si=hTWmUkCQpCJhPdR4",
+                "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/jwWTlxYISag?si=hTWmUkCQpCJhPdR4' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>",
+                "spotifyUrl": "https://open.spotify.com/track/2s4hKbi4NedtTEJW9PBDCl?si=2fec5c113e0a4176",
+                "spotifyEmbedUrlLarge": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2s4hKbi4NedtTEJW9PBDCl?utm_source=generator&theme=0' width='100%' height='352' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "spotifyEmbedUrlSmall": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2s4hKbi4NedtTEJW9PBDCl?utm_source=generator&theme=0' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "appleMusicUrl": "https://music.apple.com/us/album/h%C3%ACnh-nh%C6%B0-single/1849584499",
+                "zingMp3Url": "https://zingmp3.vn/album/Hinh-Nhu-Single-Vinh-Loc/6CEDUCZZ.html",
+                "nhacCuaTuiUrl": "https://www.nhaccuatui.com/song/Pkl8X8hqehTI?source=app"
             }
         ]
     },
