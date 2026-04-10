@@ -26,7 +26,7 @@ export function useAudioVisualizer({
         const draw = (timestamp: number) => {
             const canvas = canvasRef.current;
 
-            if (!canvas || !analyser) {
+            if (!canvas) {
                 rafRef.current = requestAnimationFrame(draw);
                 return;
             }
@@ -58,13 +58,6 @@ export function useAudioVisualizer({
             context.setTransform(1, 0, 0, 1, 0, 0);
             context.scale(dpr, dpr);
 
-            const bufferLength = analyser.frequencyBinCount;
-            if (!dataArrayRef.current || dataArrayRef.current.length !== bufferLength) {
-                dataArrayRef.current = new Uint8Array(new ArrayBuffer(bufferLength));
-            }
-            const dataArray = dataArrayRef.current;
-            analyser.getByteFrequencyData(dataArray);
-
             context.clearRect(0, 0, cssWidth, cssHeight);
 
             const isMobile = cssWidth < 640;
@@ -73,8 +66,23 @@ export function useAudioVisualizer({
                 : Math.min(52, Math.max(28, Math.floor(cssWidth / 12)));
             const gap = Math.max(2, Math.floor(cssWidth / 180));
             const barWidth = (cssWidth - gap * (bars - 1)) / bars;
-            const nyquist = ((analyser.context as AudioContext).sampleRate || 44100) / 2;
+            const hasSignalData = Boolean(analyser);
+            const shouldRenderIdle = !hasSignalData || !isPlaying;
+            const nyquist = hasSignalData
+                ? ((analyser.context as AudioContext).sampleRate || 44100) / 2
+                : 22050;
             const minFreq = 20;
+
+            let bufferLength = 0;
+            let dataArray: Uint8Array<ArrayBuffer> | null = null;
+            if (hasSignalData) {
+                bufferLength = analyser.frequencyBinCount;
+                if (!dataArrayRef.current || dataArrayRef.current.length !== bufferLength) {
+                    dataArrayRef.current = new Uint8Array(new ArrayBuffer(bufferLength));
+                }
+                dataArray = dataArrayRef.current;
+                analyser.getByteFrequencyData(dataArray);
+            }
 
             const isDarkMode = document.documentElement.classList.contains('dark');
 
@@ -94,28 +102,38 @@ export function useAudioVisualizer({
             context.fillStyle = gradient;
 
             for (let i = 0; i < bars; i += 1) {
-                const startFreq = minFreq * Math.pow(nyquist / minFreq, i / bars);
-                const endFreq = minFreq * Math.pow(nyquist / minFreq, (i + 1) / bars);
-                const startIndex = Math.max(
-                    0,
-                    Math.min(
-                        bufferLength - 1,
-                        Math.floor((startFreq / nyquist) * (bufferLength - 1)),
-                    ),
-                );
-                const endIndex = Math.max(
-                    startIndex,
-                    Math.min(bufferLength - 1, Math.ceil((endFreq / nyquist) * (bufferLength - 1))),
-                );
+                let normalized = 0;
 
-                let sum = 0;
-                let count = 0;
-                for (let index = startIndex; index <= endIndex; index += 1) {
-                    sum += dataArray[index];
-                    count += 1;
+                if (shouldRenderIdle) {
+                    continue;
+                } else if (dataArray && bufferLength > 0) {
+                    const startFreq = minFreq * Math.pow(nyquist / minFreq, i / bars);
+                    const endFreq = minFreq * Math.pow(nyquist / minFreq, (i + 1) / bars);
+                    const startIndex = Math.max(
+                        0,
+                        Math.min(
+                            bufferLength - 1,
+                            Math.floor((startFreq / nyquist) * (bufferLength - 1)),
+                        ),
+                    );
+                    const endIndex = Math.max(
+                        startIndex,
+                        Math.min(
+                            bufferLength - 1,
+                            Math.ceil((endFreq / nyquist) * (bufferLength - 1)),
+                        ),
+                    );
+
+                    let sum = 0;
+                    let count = 0;
+                    for (let index = startIndex; index <= endIndex; index += 1) {
+                        sum += dataArray[index];
+                        count += 1;
+                    }
+
+                    normalized = count > 0 ? sum / count / 255 : 0;
                 }
 
-                const normalized = count > 0 ? sum / count / 255 : 0;
                 const barHeight = Math.max(6, Math.pow(normalized, 0.82) * cssHeight);
                 const x = i * (barWidth + gap);
                 const y = cssHeight - barHeight;
