@@ -7,7 +7,7 @@ import { StatsSection } from '@/components/sections/stats';
 import { ServicesSection } from '@/components/sections/services';
 import { PartnersSection } from '@/components/sections/partners';
 import { AudioComparisonSection } from '@/components/sections/audio-comparison';
-import { PortfolioSection } from '@/components/sections/portfolio';
+import { PortfolioSection } from '@/components/sections/portfolio/page';
 import { StudioSection } from '@/components/sections/studio';
 import { GearSection } from '@/components/sections/gear';
 import { TeamSection } from '@/components/sections/team';

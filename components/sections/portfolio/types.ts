@@ -1,6 +1,7 @@
 export type PortfolioProject = {
     genre: string;
     title: string;
+    coverImage?: string;
     artist?: string;
     spotifyUrl?: string;
     spotifyEmbedUrlLarge?: string;
@@ -17,8 +18,4 @@ export type PortfolioProject = {
     tidalUrl?: string;
     tidalEmbedUrl?: string;
     nhacCuaTuiUrl?: string;
-};
-
-export type PortfolioProjectWithCover = PortfolioProject & {
-    coverImage: string;
 };

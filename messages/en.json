@@ -137,15 +137,18 @@
         "projects": [
             {
                 "genre": "Lo-fi Pop",
-                "title": "Sunset Over the City"
+                "title": "Sunset Over the City",
+                "coverImage": "/image/cam-on-em-vi-da-khong-tu-bo.jpg"
             },
             {
                 "genre": "Hip-hop",
-                "title": "Urban Vortex"
+                "title": "Urban Vortex",
+                "coverImage": "/image/tet-la-nha-project.jpg"
             },
             {
                 "genre": "Soul / Jazz",
-                "title": "Strange Dreams"
+                "title": "Strange Dreams",
+                "coverImage": "/image/hinh-nhu-project.jpg"
             }
         ]
     },

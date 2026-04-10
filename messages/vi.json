@@ -139,6 +139,7 @@
                 "genre": "Pop Ballad",
                 "artist": "Rose Prudente",
                 "title": "Cảm Ơn Em Vì Đã Không Từ Bỏ",
+                "coverImage": "/image/cam-on-em-vi-da-khong-tu-bo.jpg",
                 "spotifyUrl": "https://open.spotify.com/track/2pVxdfR331XVjLUoP8StvO?si=394ec190931d4023",
                 "spotifyEmbedUrlLarge": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2pVxdfR331XVjLUoP8StvO?utm_source=generator&theme=0' width='100%' height='352' frameBorder='0' allowFullScreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
                 "spotifyEmbedUrlSmall": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2pVxdfR331XVjLUoP8StvO?utm_source=generator&theme=0' width='100%' height='152' frameBorder='0' allowFullScreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
@@ -150,6 +151,7 @@
                 "genre": "Pop Ballad",
                 "artist": "Hà An Huy & Đạt Nguyễn",
                 "title": "Tết Là Nhà",
+                "coverImage": "/image/tet-la-nha-project.jpg",
                 "youtubeUrl": "https://youtu.be/qobeDYSaky0?si=C6P3XZIweO_DLx3U",
                 "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/qobeDYSaky0?si=C6P3XZIweO_DLx3U' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>",
                 "spotifyUrl": "https://open.spotify.com/track/1sBeV0rghp6jIQDRR2bWhm?si=eb5df9980b754d94",
@@ -161,8 +163,9 @@
             },
             {
                 "genre": "Pop Ballad",
-                "artist": "Vĩnh Lộc",
+                "artist": "Vĩnh Lộc & Văn Quân",
                 "title": "Hình Như",
+                "coverImage": "/image/hinh-nhu-project.jpg",
                 "youtubeUrl": "https://youtu.be/jwWTlxYISag?si=hTWmUkCQpCJhPdR4",
                 "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/jwWTlxYISag?si=hTWmUkCQpCJhPdR4' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>",
                 "spotifyUrl": "https://open.spotify.com/track/2s4hKbi4NedtTEJW9PBDCl?si=2fec5c113e0a4176",
@@ -171,6 +174,14 @@
                 "appleMusicUrl": "https://music.apple.com/us/album/h%C3%ACnh-nh%C6%B0-single/1849584499",
                 "zingMp3Url": "https://zingmp3.vn/album/Hinh-Nhu-Single-Vinh-Loc/6CEDUCZZ.html",
                 "nhacCuaTuiUrl": "https://www.nhaccuatui.com/song/Pkl8X8hqehTI?source=app"
+            },
+            {
+                "genre": "Rock",
+                "artist": "Kaito",
+                "title": "Chữ",
+                "coverImage": "/image/chu-project.jpg",
+                "youtubeUrl": "https://youtu.be/QnJn6Epiqvg?si=zCctfHw8GivG11Q3",
+                "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/QnJn6Epiqvg?si=zCctfHw8GivG11Q3' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"
             }
         ]
     },

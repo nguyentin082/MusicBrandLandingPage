@@ -15,10 +15,10 @@ export async function StudioSection() {
     };
 
     const studioImages = [
-        'https://images.unsplash.com/photo-1559732277-7456b14543d8?auto=format&fit=crop&q=80&w=400',
-        'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=400',
-        'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&q=80&w=400',
-        'https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&q=80&w=400',
+        'https://picsum.photos/seed/studio-1/800/600',
+        'https://picsum.photos/seed/studio-2/800/600',
+        'https://picsum.photos/seed/studio-3/800/600',
+        'https://picsum.photos/seed/studio-4/800/600',
     ];
 
     return (
