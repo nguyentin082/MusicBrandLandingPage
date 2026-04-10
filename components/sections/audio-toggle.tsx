@@ -2,12 +2,12 @@
 
 import { useCallback, useMemo, useRef } from 'react';
 
-import { PlaybackControls } from './audio-player/playback-controls';
-import { AudioTrackTabs } from './audio-player/track-tabs';
-import type { AudioToggleProps } from './audio-player/types';
-import { getTrackColor } from './audio-player/utils';
-import { useAudioVisualizer } from './audio-player/use-audio-visualizer';
-import { useMultiTrackAudio } from './audio-player/use-multi-track-audio';
+import { PlaybackControls } from './audio-comparison/playback-controls';
+import { AudioTrackTabs } from './audio-comparison/track-tabs';
+import type { AudioToggleProps } from './audio-comparison/types';
+import { getTrackColor } from './audio-comparison/utils';
+import { useAudioVisualizer } from './audio-comparison/use-audio-visualizer';
+import { useMultiTrackAudio } from './audio-comparison/use-multi-track-audio';
 
 export function AudioToggle({ trackTitle, playButton, pauseButton, tracks }: AudioToggleProps) {
     const {

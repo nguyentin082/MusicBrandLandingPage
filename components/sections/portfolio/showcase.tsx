@@ -235,7 +235,7 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                             <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/85 to-transparent p-6">
                                 {isFeatured && (
                                     <span className="mb-3 inline-flex w-fit rounded-full bg-warm-gold/90 px-3 py-1 text-[10px] font-black tracking-wider text-dark-umber uppercase">
-                                        Tet Spotlight
+                                        Spotlight
                                     </span>
                                 )}
                                 <p className="mb-2 text-xs font-bold tracking-widest text-warm-gold uppercase">
@@ -318,7 +318,7 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                                     <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/85 to-transparent p-6">
                                         {isTetSpotlight && (
                                             <span className="mb-3 inline-flex w-fit rounded-full bg-warm-gold/90 px-3 py-1 text-[10px] font-black tracking-wider text-dark-umber uppercase">
-                                                Tet Spotlight
+                                                Spotlight
                                             </span>
                                         )}
                                         {isCamOnProject && (

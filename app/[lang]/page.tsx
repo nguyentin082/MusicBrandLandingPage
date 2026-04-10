@@ -1,12 +1,12 @@
 import { Header } from '@/components/common/header';
 import { Footer } from '@/components/common/footer';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { HeroSection } from '@/components/sections/hero';
-import { PhilosophySection } from '@/components/sections/philosophy';
-import { StatsSection } from '@/components/sections/stats';
-import { ServicesSection } from '@/components/sections/services';
-import { PartnersSection } from '@/components/sections/partners';
-import { AudioComparisonSection } from '@/components/sections/audio-comparison';
+import { HeroSection } from '@/components/sections/hero/page';
+import { PhilosophySection } from '@/components/sections/philosophy/page';
+import { StatsSection } from '@/components/sections/stats/page';
+import { ServicesSection } from '@/components/sections/services/page';
+import { PartnersSection } from '@/components/sections/partners/page';
+import { AudioComparisonSection } from '@/components/sections/audio-comparison/page';
 import { PortfolioSection } from '@/components/sections/portfolio/page';
 import { StudioSection } from '@/components/sections/studio';
 import { GearSection } from '@/components/sections/gear';

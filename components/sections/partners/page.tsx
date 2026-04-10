@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { PlatformGrid } from './parts/platform-grid';
+import { PlatformGrid } from './platform-grid';
 
 interface Platform {
     name: string;

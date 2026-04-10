@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 
-import { HeroCarousel } from './parts/hero-carousel';
+import { HeroCarousel } from './hero-carousel';
 
 export async function HeroSection() {
     const t = await getTranslations('hero');
