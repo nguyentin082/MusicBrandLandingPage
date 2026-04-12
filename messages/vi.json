@@ -369,7 +369,7 @@
     },
     "footer": {
         "companyName": "WAV VIETNAM",
-        "tagline": "Âm Thanh Chân Thực, Kỹ Nghệ Chuyên Nghiệp",
+        "tagline": "Đồng hành cùng âm nhạc của bạn",
         "contact": {
             "label": "Liên Hệ Với Chúng Mình",
             "phone": "+84 987 654 321",
@@ -377,11 +377,12 @@
             "address": "Quận 1, TP. Hồ Chí Minh, Việt Nam"
         },
         "links": {
+            "label": "Khám Phá",
             "about": "Về Chúng Mình",
             "services": "Dịch Vụ",
             "portfolio": "Sản Phẩm",
             "contact": "Liên Hệ"
         },
-        "copyright": "© 2024 WAV Vietnam. All rights reserved."
+        "copyright": "© {year} WAV Vietnam. All rights reserved."
     }
 }

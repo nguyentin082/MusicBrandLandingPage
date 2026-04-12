@@ -377,11 +377,12 @@
             "address": "District 1, Ho Chi Minh City, Vietnam"
         },
         "links": {
+            "label": "Explore",
             "about": "About Us",
             "services": "Services",
             "portfolio": "Portfolio",
             "contact": "Contact"
         },
-        "copyright": "\u00a9 2024 WAV Vietnam. All rights reserved."
+        "copyright": "\u00a9 {year} WAV Vietnam. All rights reserved."
     }
 }
