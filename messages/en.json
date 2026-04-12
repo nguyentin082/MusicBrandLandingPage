@@ -136,27 +136,65 @@
         "heading": "Featured Projects.",
         "projects": [
             {
-                "genre": "Lo-fi Pop",
-                "title": "Sunset Over the City",
-                "coverImage": "/image/cam-on-em-vi-da-khong-tu-bo.jpg"
+                "genre": "Pop Ballad",
+                "artist": "Rose Prudente",
+                "title": "Thank You for Not Giving Up on Me",
+                "coverImage": "/image/project/cam-on-em-vi-da-khong-tu-bo.jpg",
+                "spotifyUrl": "https://open.spotify.com/track/2pVxdfR331XVjLUoP8StvO?si=394ec190931d4023",
+                "spotifyEmbedUrlLarge": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2pVxdfR331XVjLUoP8StvO?utm_source=generator&theme=0' width='100%' height='352' frameBorder='0' allowFullScreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "spotifyEmbedUrlSmall": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2pVxdfR331XVjLUoP8StvO?utm_source=generator&theme=0' width='100%' height='152' frameBorder='0' allowFullScreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "youtubeUrl": "https://youtu.be/dqquAJCSxGI?si=aG4zVmCUBYp9z82J",
+                "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/dqquAJCSxGI?si=IrdMpTlURvYUfTm0' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>",
+                "zingMp3Url": "https://zingmp3.vn/album/Cam-On-Em-Vi-Da-Khong-Tu-Bo-Single-Rose-Prudente/6CF6Z67A.html"
             },
             {
-                "genre": "Hip-hop",
-                "title": "Urban Vortex",
-                "coverImage": "/image/tet-la-nha-project.jpg"
+                "genre": "Pop Ballad",
+                "artist": "Ha An Huy & Dat Nguyen",
+                "title": "Tet Is Home",
+                "coverImage": "/image/project/tet-la-nha-project.jpg",
+                "youtubeUrl": "https://youtu.be/qobeDYSaky0?si=C6P3XZIweO_DLx3U",
+                "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/qobeDYSaky0?si=C6P3XZIweO_DLx3U' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>",
+                "spotifyUrl": "https://open.spotify.com/track/1sBeV0rghp6jIQDRR2bWhm?si=eb5df9980b754d94",
+                "spotifyEmbedUrlLarge": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/1sBeV0rghp6jIQDRR2bWhm?utm_source=generator&theme=0' width='100%' height='352' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "spotifyEmbedUrlSmall": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/1sBeV0rghp6jIQDRR2bWhm?utm_source=generator&theme=0' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "appleMusicUrl": "https://music.apple.com/vn/album/t%C3%AA-t-la-nha-feat-dat-nguyen-single/1875860509?l=vi",
+                "deezerUrl": "https://link.deezer.com/s/32W98mLjA8woTTCSGMXCC",
+                "tidalUrl": "https://tidal.com/album/497419939/u"
             },
             {
-                "genre": "Soul / Jazz",
-                "title": "Strange Dreams",
-                "coverImage": "/image/hinh-nhu-project.jpg"
+                "genre": "Pop Ballad",
+                "artist": "Vinh Loc & Van Quan",
+                "title": "It Seems Like",
+                "coverImage": "/image/project/hinh-nhu-project.jpg",
+                "youtubeUrl": "https://youtu.be/jwWTlxYISag?si=hTWmUkCQpCJhPdR4",
+                "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/jwWTlxYISag?si=hTWmUkCQpCJhPdR4' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>",
+                "spotifyUrl": "https://open.spotify.com/track/2s4hKbi4NedtTEJW9PBDCl?si=2fec5c113e0a4176",
+                "spotifyEmbedUrlLarge": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2s4hKbi4NedtTEJW9PBDCl?utm_source=generator&theme=0' width='100%' height='352' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "spotifyEmbedUrlSmall": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2s4hKbi4NedtTEJW9PBDCl?utm_source=generator&theme=0' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+                "appleMusicUrl": "https://music.apple.com/us/album/h%C3%ACnh-nh%C6%B0-single/1849584499",
+                "zingMp3Url": "https://zingmp3.vn/album/Hinh-Nhu-Single-Vinh-Loc/6CEDUCZZ.html",
+                "nhacCuaTuiUrl": "https://www.nhaccuatui.com/song/Pkl8X8hqehTI?source=app"
+            },
+            {
+                "genre": "Rock",
+                "artist": "Kaito",
+                "title": "The Letter",
+                "coverImage": "/image/project/chu-project.jpg",
+                "youtubeUrl": "https://youtu.be/QnJn6Epiqvg?si=zCctfHw8GivG11Q3",
+                "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/QnJn6Epiqvg?si=zCctfHw8GivG11Q3' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"
             }
         ]
     },
     "studio": {
         "label": "Vibe & Comfort",
         "heading": "Comfort for Creativity.",
-        "description": "We believe the best inspiration comes from comfort. At WAV, you don't just work in a professional studio\u2014you enjoy a rustic space with artisanal coffee.",
-        "amenities": ["Specialty Coffee", "Chill Zone", "Air Purification", "Hi-Fi Monitoring"]
+        "description": "We believe the best inspiration comes from comfort. At WAV Vietnam, you not only work in a professional environment but are also supported by a dedicated team with deep experience and expertise. This helps create a space where artists can fully immerse themselves in music without being interrupted by technical concerns or environmental distractions.",
+        "amenities": [
+            "Specialty Coffee",
+            "Creative Chill Zone",
+            "Air Purification System",
+            "Dedicated Engineer Support"
+        ]
     },
     "gear": {
         "label": "The Armory",
