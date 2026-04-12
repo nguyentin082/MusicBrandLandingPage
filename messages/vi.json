@@ -213,32 +213,64 @@
         "label": "The Armory",
         "heading": "Vũ Khí Kỹ Thuật.",
         "description": "Chúng mình sử dụng những thiết bị huyền thoại được săn đón trên thế giới để đảm bảo mỗi bản thu đều mang chất lượng thương mại.",
-        "microphones": "Microphones",
-        "processing": "Processing & Conversion",
-        "equipment": [
+        "cardLabel": "Bảng thiết bị",
+        "itemNameLabel": "Tên thiết bị",
+        "itemTypeLabel": "Loại thiết bị",
+        "tables": [
             {
-                "name": "Logic Pro",
-                "type": "Digital Audio Workstation"
+                "title": "Hệ thống Xử lý Trung tâm",
+                "items": [
+                    {
+                        "name": "Logic Pro",
+                        "type": "Digital Audio Workstation"
+                    },
+                    {
+                        "name": "Solid State Logic SSL 2+ MKII",
+                        "type": "Audio Interface"
+                    },
+                    {
+                        "name": "Mac mini M4",
+                        "type": "Máy tính phòng thu"
+                    },
+                    {
+                        "name": "Native Instruments Komplete Kontrol A61",
+                        "type": "Bộ điều khiển MIDI"
+                    }
+                ]
             },
             {
-                "name": "Solid State Logic SSL 2+ MKII",
-                "type": "Audio Interface"
+                "title": "Thiết bị Thu âm",
+                "items": [
+                    {
+                        "name": "Rode NT1 5th Generation",
+                        "type": "Condenser Microphone"
+                    },
+                    {
+                        "name": "Sennheiser E 835-S",
+                        "type": "Dynamic Microphone"
+                    }
+                ]
             },
             {
-                "name": "Rode NT1 5th Generation",
-                "type": "Condenser Microphone"
-            },
-            {
-                "name": "Sennheiser E 835-S",
-                "type": "Dynamic Microphone"
-            },
-            {
-                "name": "Audio Technica ATH-M50x",
-                "type": "Closed-back Headphones"
-            },
-            {
-                "name": "Beyerdynamic DT 900 Pro X",
-                "type": "Open-back Headphones"
+                "title": "Hệ thống Kiểm âm",
+                "items": [
+                    {
+                        "name": "Audio Technica ATH-M50x",
+                        "type": "Closed-back Headphones"
+                    },
+                    {
+                        "name": "Beyerdynamic DT 900 Pro X",
+                        "type": "Open-back Headphones"
+                    },
+                    {
+                        "name": "Behringer HA400",
+                        "type": "Bộ chia tai nghe phòng thu"
+                    },
+                    {
+                        "name": "Kali Audio LP-6 Gen 2",
+                        "type": "Loa kiểm âm cận trường"
+                    }
+                ]
             }
         ]
     },

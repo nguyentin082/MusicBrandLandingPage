@@ -213,32 +213,64 @@
         "label": "The Armory",
         "heading": "Technical Weaponry.",
         "description": "We use legendary equipment sought after worldwide to ensure every recording meets commercial quality standards.",
-        "microphones": "Microphones",
-        "processing": "Processing & Conversion",
-        "equipment": [
+        "cardLabel": "Gear Table",
+        "itemNameLabel": "Item name",
+        "itemTypeLabel": "Item type",
+        "tables": [
             {
-                "name": "Neumann U87 Ai",
-                "type": "Reference"
+                "title": "The Hub",
+                "items": [
+                    {
+                        "name": "Logic Pro",
+                        "type": "Digital Audio Workstation"
+                    },
+                    {
+                        "name": "Solid State Logic SSL 2+ MKII",
+                        "type": "Audio Interface"
+                    },
+                    {
+                        "name": "Mac mini M4",
+                        "type": "Studio Computer"
+                    },
+                    {
+                        "name": "Native Instruments Komplete Kontrol A61",
+                        "type": "MIDI Controller"
+                    }
+                ]
             },
             {
-                "name": "AKG C414 XLII",
-                "type": "Multi-pattern"
+                "title": "Input Sources",
+                "items": [
+                    {
+                        "name": "Rode NT1 5th Generation",
+                        "type": "Condenser Microphone"
+                    },
+                    {
+                        "name": "Sennheiser E 835-S",
+                        "type": "Dynamic Microphone"
+                    }
+                ]
             },
             {
-                "name": "Shure SM7B",
-                "type": "Radio Classic"
-            },
-            {
-                "name": "Avalon VT-737sp",
-                "type": "Tube Pre"
-            },
-            {
-                "name": "UA 1176LN",
-                "type": "Compressor"
-            },
-            {
-                "name": "Prism Sound Titan",
-                "type": "AD/DA"
+                "title": "Monitoring",
+                "items": [
+                    {
+                        "name": "Audio Technica ATH-M50x",
+                        "type": "Closed-back Headphones"
+                    },
+                    {
+                        "name": "Beyerdynamic DT 900 Pro X",
+                        "type": "Open-back Headphones"
+                    },
+                    {
+                        "name": "Behringer HA400",
+                        "type": "Studio Headphone Splitter"
+                    },
+                    {
+                        "name": "Kali Audio LP-6 Gen 2",
+                        "type": "Nearfield Studio Monitor"
+                    }
+                ]
             }
         ]
     },
