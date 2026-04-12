@@ -275,22 +275,22 @@
         ]
     },
     "team": {
-        "heading": "Đội Ngũ Sound Engineer.",
+        "heading": "Đội Ngũ Nhân Sự.",
         "members": [
             {
-                "name": "Hoàng WAV",
-                "role": "Chief Engineer",
-                "bio": "8 năm kinh nghiệm, linh hồn của các bản Mix & Master tại WAV Vietnam."
+                "name": "SniT",
+                "role": "Founder & Music Producer",
+                "bio": "8+ năm kinh nghiệm, linh hồn của các bản Mix & Master tại WAV Vietnam."
             },
             {
-                "name": "Minh Arranger",
-                "role": "Music Producer",
-                "bio": "Chuyên gia hòa âm phối khí, biến mọi ý tưởng sơ khai thành siêu phẩm."
+                "name": "Thúy Quỳnh",
+                "role": "Vocal Producer & Recording Engineer",
+                "bio": "8+ năm kinh nghiệm, chuyên về sản xuất vocal và thu âm."
             },
             {
-                "name": "Thanh Audio",
-                "role": "Recording Spec",
-                "bio": "Phù thủy phòng thu, hỗ trợ nghệ sĩ lấy hơi và truyền tải cảm xúc tốt nhất."
+                "name": "Đạt Nguyễn",
+                "role": "Composer & Vocal Coach",
+                "bio": "8+ năm kinh nghiệm, chuyên về viết nhạc và huấn luyện giọng hát."
             }
         ]
     },

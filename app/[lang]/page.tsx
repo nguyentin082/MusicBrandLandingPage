@@ -10,7 +10,7 @@ import { AudioComparisonSection } from '@/components/sections/audio-comparison/p
 import { PortfolioSection } from '@/components/sections/portfolio/page';
 import { StudioSection } from '@/components/sections/studio';
 import { GearSection } from '@/components/sections/gear/page';
-import { TeamSection } from '@/components/sections/team';
+import { TeamSection } from '@/components/sections/team/page';
 import { PricingSection } from '@/components/sections/pricing';
 import { CTASection } from '@/components/sections/cta';
 import { FAQSection } from '@/components/sections/faq';

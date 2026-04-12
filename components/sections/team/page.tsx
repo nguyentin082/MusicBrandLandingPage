@@ -1,10 +1,16 @@
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 
+type TeamMember = {
+    name: string;
+    role: string;
+    bio: string;
+};
+
 export async function TeamSection() {
     const t = await getTranslations('team');
 
-    const members = t.raw('members') as any[];
+    const members = t.raw('members') as TeamMember[];
 
     return (
         <section className="py-32 bg-dark-umber dark:bg-dark-umber px-6">
