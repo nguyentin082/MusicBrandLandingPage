@@ -372,6 +372,11 @@
         "tagline": "Authentic Sound, Expert Craft",
         "contact": {
             "label": "Get in Touch",
+            "mapLabel": "Interactive Map",
+            "openInMaps": "Open Google Maps",
+            "directions": "Directions",
+            "copyAddress": "Copy Address",
+            "copied": "Address Copied",
             "phone": "+84 987 654 321",
             "email": "hello@wavvietnam.studio",
             "address": "District 1, Ho Chi Minh City, Vietnam"

@@ -372,6 +372,11 @@
         "tagline": "Đồng hành cùng âm nhạc của bạn",
         "contact": {
             "label": "Liên Hệ Với Chúng Mình",
+            "mapLabel": "Bản Đồ Tương Tác",
+            "openInMaps": "Mở Google Maps",
+            "directions": "Chỉ Đường",
+            "copyAddress": "Sao Chép Địa Chỉ",
+            "copied": "Đã Sao Chép",
             "phone": "+84 987 654 321",
             "email": "hello@wavvietnam.studio",
             "address": "Quận 1, TP. Hồ Chí Minh, Việt Nam"

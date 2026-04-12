@@ -1,10 +1,24 @@
-import { Mail, MapPin, PhoneCall } from 'lucide-react';
+'use client';
+
+import { Copy, ExternalLink, MapPin, Navigation } from 'lucide-react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { contactInfo } from '@/lib/contact';
 
 export function Footer() {
     const t = useTranslations('footer');
     const currentYear = new Date().getFullYear();
+    const [isAddressCopied, setIsAddressCopied] = useState(false);
+
+    const handleCopyAddress = async () => {
+        try {
+            await navigator.clipboard.writeText(contactInfo.map.address);
+            setIsAddressCopied(true);
+            window.setTimeout(() => setIsAddressCopied(false), 1600);
+        } catch {
+            setIsAddressCopied(false);
+        }
+    };
 
     return (
         <footer
@@ -27,40 +41,125 @@ export function Footer() {
                     </div>
 
                     <div className="w-full lg:self-start">
-                        <div className="w-full rounded-[1.75rem] border border-white/10 bg-white/5 p-5 backdrop-blur-sm sm:p-6">
-                            <h4 className="mb-4 text-[10px] font-bold uppercase tracking-widest text-warm-gold">
-                                {t('contact.label')}
-                            </h4>
-                            <div className="space-y-2 text-sm text-off-white/75 sm:space-y-3">
-                                <a
-                                    href={contactInfo.links.call}
-                                    className="flex min-h-11 items-center gap-3 rounded-2xl px-3 transition-colors hover:bg-white/5 hover:text-warm-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80"
-                                >
-                                    <PhoneCall
-                                        className="size-4 shrink-0 text-warm-gold"
-                                        aria-hidden="true"
-                                        focusable="false"
-                                    />
-                                    {t('contact.phone')}
-                                </a>
-                                <a
-                                    href={`mailto:${contactInfo.email}`}
-                                    className="flex min-h-11 items-center gap-3 rounded-2xl px-3 transition-colors hover:bg-white/5 hover:text-warm-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80"
-                                >
-                                    <Mail
-                                        className="size-4 shrink-0 text-warm-gold"
-                                        aria-hidden="true"
-                                        focusable="false"
-                                    />
-                                    {t('contact.email')}
-                                </a>
+                        <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/5 backdrop-blur-sm">
+                            <div className="relative aspect-11/10 border-b border-white/10 bg-black/20 sm:aspect-16/10">
+                                <iframe
+                                    title={contactInfo.map.title}
+                                    src={contactInfo.map.embedUrl}
+                                    className="h-full w-full"
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    allowFullScreen
+                                    allow="geolocation; clipboard-write"
+                                />
+
+                                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-dark-umber/70 via-transparent to-dark-umber/10" />
+
+                                <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-3 p-4 sm:p-5">
+                                    <div className="max-w-[70%] rounded-full border border-white/10 bg-dark-umber/75 px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-warm-gold backdrop-blur-md">
+                                        {t('contact.mapLabel')}
+                                    </div>
+                                </div>
+
+                                <div className="absolute inset-x-0 bottom-0 hidden p-4 sm:block sm:p-5">
+                                    <div className="grid grid-cols-3 gap-2 rounded-2xl border border-white/10 bg-dark-umber/70 p-2 backdrop-blur-md">
+                                        <a
+                                            href={contactInfo.map.url}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-3 text-[11px] font-bold uppercase tracking-widest text-off-white transition-colors hover:bg-white/10 hover:text-warm-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80"
+                                        >
+                                            <ExternalLink
+                                                className="size-3.5"
+                                                aria-hidden="true"
+                                                focusable="false"
+                                            />
+                                            {t('contact.openInMaps')}
+                                        </a>
+                                        <a
+                                            href={contactInfo.map.directionsUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-3 text-[11px] font-bold uppercase tracking-widest text-off-white transition-colors hover:bg-white/10 hover:text-warm-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80"
+                                        >
+                                            <Navigation
+                                                className="size-3.5"
+                                                aria-hidden="true"
+                                                focusable="false"
+                                            />
+                                            {t('contact.directions')}
+                                        </a>
+                                        <button
+                                            type="button"
+                                            onClick={handleCopyAddress}
+                                            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-3 text-[11px] font-bold uppercase tracking-widest text-off-white transition-colors hover:bg-white/10 hover:text-warm-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80"
+                                        >
+                                            <Copy
+                                                className="size-3.5"
+                                                aria-hidden="true"
+                                                focusable="false"
+                                            />
+                                            {isAddressCopied
+                                                ? t('contact.copied')
+                                                : t('contact.copyAddress')}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="border-b border-white/10 p-3 sm:hidden">
+                                <div className="grid grid-cols-1 gap-2 rounded-2xl border border-white/10 bg-dark-umber/60 p-2">
+                                    <a
+                                        href={contactInfo.map.url}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-3 text-[11px] font-bold uppercase tracking-widest text-off-white transition-colors hover:bg-white/10 hover:text-warm-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80"
+                                    >
+                                        <ExternalLink
+                                            className="size-3.5"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
+                                        {t('contact.openInMaps')}
+                                    </a>
+                                    <a
+                                        href={contactInfo.map.directionsUrl}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-3 text-[11px] font-bold uppercase tracking-widest text-off-white transition-colors hover:bg-white/10 hover:text-warm-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80"
+                                    >
+                                        <Navigation
+                                            className="size-3.5"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
+                                        {t('contact.directions')}
+                                    </a>
+                                    <button
+                                        type="button"
+                                        onClick={handleCopyAddress}
+                                        className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-3 text-[11px] font-bold uppercase tracking-widest text-off-white transition-colors hover:bg-white/10 hover:text-warm-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80"
+                                    >
+                                        <Copy
+                                            className="size-3.5"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
+                                        {isAddressCopied
+                                            ? t('contact.copied')
+                                            : t('contact.copyAddress')}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="space-y-2 p-5 text-sm text-off-white/75 sm:p-6 sm:space-y-3">
                                 <p className="flex items-start gap-3 px-3 py-2 text-off-white/60">
                                     <MapPin
                                         className="mt-0.5 size-4 shrink-0 text-warm-gold"
                                         aria-hidden="true"
                                         focusable="false"
                                     />
-                                    <span>{t('contact.address')}</span>
+                                    <span>{contactInfo.map.address}</span>
                                 </p>
                             </div>
                         </div>
