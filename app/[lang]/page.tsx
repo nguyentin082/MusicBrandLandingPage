@@ -8,12 +8,12 @@ import { ServicesSection } from '@/components/sections/services/page';
 import { PartnersSection } from '@/components/sections/partners/page';
 import { AudioComparisonSection } from '@/components/sections/audio-comparison/page';
 import { PortfolioSection } from '@/components/sections/portfolio/page';
-import { StudioSection } from '@/components/sections/studio';
+import { StudioSection } from '@/components/sections/studio/page';
 import { GearSection } from '@/components/sections/gear/page';
 import { TeamSection } from '@/components/sections/team/page';
-import { PricingSection } from '@/components/sections/pricing';
-import { CTASection } from '@/components/sections/cta';
-import { FAQSection } from '@/components/sections/faq';
+import { PricingSection } from '@/components/sections/pricing/page';
+import { CTASection } from '@/components/sections/cta/page';
+import { FAQSection } from '@/components/sections/faq/page';
 import { siteConfig } from '@/lib/site';
 
 export default async function HomePage({ params }: { params: Promise<{ lang: string }> }) {

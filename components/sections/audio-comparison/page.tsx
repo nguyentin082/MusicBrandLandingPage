@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { AudioToggle } from '../audio-toggle';
+import { AudioToggle } from './audio-toggle';
 import { AudioTrack } from './types';
 
 type ComparisonItem = {
