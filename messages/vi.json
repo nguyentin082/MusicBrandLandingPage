@@ -301,36 +301,39 @@
         "heading": "Bảng Giá Dịch Vụ.",
         "plans": [
             {
-                "title": "Indie Single",
-                "subtitle": "Dành cho nghệ sĩ mới",
-                "price": "Liên hệ",
+                "title": "Hòa âm phối khí",
+                "subtitle": "Dành cho ca khúc mới hoặc cover",
+                "price": "Gói Khởi Điểm",
                 "features": [
-                    "2h thu âm chất lượng cao",
-                    "Mix & Master tiêu chuẩn",
-                    "2 lần chỉnh sửa miễn phí"
+                    "Tư vấn concept và định hướng thể loại",
+                    "Hòa âm phối khí theo tone giọng nghệ sĩ",
+                    "Bàn giao bản phối hoàn thiện",
+                    "Chỉnh sửa hoàn thiện bản phối theo phản hồi"
                 ],
                 "cta": "Chọn gói này"
             },
             {
-                "title": "Production Full",
-                "subtitle": "Sản xuất trọn gói",
-                "price": "Đặc biệt",
-                "badge": "Phổ biến nhất",
+                "title": "Sản xuất trọn gói",
+                "subtitle": "Sản xuất trọn gói từ ý tưởng đến hoàn thiện",
+                "price": "Gói Đặc biệt",
                 "features": [
-                    "Hòa âm phối khí bài mới",
-                    "Thu âm không giới hạn buổi",
-                    "Mix Master chuẩn Analog"
+                    "Bao gồm tất cả dịch vụ của Gói Khởi Điểm và Gói Phổ Biến",
+                    "Thiết kế artwork cho single/album",
+                    "Hỗ trợ phát hành lên các nền tảng nhạc số"
                 ],
                 "cta": "Bắt đầu ngay"
             },
             {
-                "title": "Online Mixing",
-                "subtitle": "Toàn quốc & Quốc tế",
-                "price": "Tiết kiệm",
+                "title": "Thu âm, Chỉnh sửa & Mix & Master",
+                "subtitle": "Giải pháp hoàn thiện bản thu chuyên nghiệp",
+                "price": "Gói Phổ Biến",
+                "badge": "Best Seller",
                 "features": [
-                    "Nhận Stems qua Cloud",
-                    "Trả file trong 48h",
-                    "Chuẩn Loudness Spotify"
+                    "Thu âm tại studio với kỹ thuật viên đồng hành",
+                    "Hỗ trợ kiệu vocal và chỉnh sửa chi tiết",
+                    "Edit và tune vocal",
+                    "Mix & Master đạt chuẩn phát hành",
+                    "Chỉnh sửa bản final theo phản hồi"
                 ],
                 "cta": "Gửi file ngay"
             }

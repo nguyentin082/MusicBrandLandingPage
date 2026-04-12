@@ -14,7 +14,7 @@ export async function HeroSection() {
 
             <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 items-center gap-16 relative z-10">
                 <div className="animate-fade-in">
-                    <div className="inline-block px-4 py-1 rounded-full border border-warm-gold/30 text-warm-gold text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
+                    <div className="block w-full px-4 py-1 rounded-full border border-warm-gold/30 text-warm-gold text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
                         {t('badge')}
                     </div>
                     <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter italic">
