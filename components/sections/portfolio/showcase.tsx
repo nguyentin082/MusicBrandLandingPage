@@ -25,12 +25,24 @@ function normalizeForSearch(value: string) {
         .trim();
 }
 
-function hasTetLaNhaTitle(normalizedTitle: string) {
-    return normalizedTitle.includes('tet la nha');
+function hasTetLaNhaProject(project: { normalizedTitle: string; coverImage?: string }) {
+    const normalizedCoverImage = normalizeForSearch(project.coverImage ?? '');
+    return (
+        normalizedCoverImage.includes('tet-la-nha') ||
+        project.normalizedTitle.includes('tet la nha') ||
+        project.normalizedTitle.includes('tet is home')
+    );
 }
 
-function hasCamOnKhongTuBoTitle(normalizedTitle: string) {
-    return normalizedTitle.includes('cam on') && normalizedTitle.includes('khong tu bo');
+function hasCamOnKhongTuBoProject(project: { normalizedTitle: string; coverImage?: string }) {
+    const normalizedCoverImage = normalizeForSearch(project.coverImage ?? '');
+    return (
+        normalizedCoverImage.includes('cam-on-em-vi-da-khong-tu-bo') ||
+        (project.normalizedTitle.includes('cam on') &&
+            project.normalizedTitle.includes('khong tu bo')) ||
+        (project.normalizedTitle.includes('thank you') &&
+            project.normalizedTitle.includes('not giving up'))
+    );
 }
 
 function resolveCoverImage(coverImage?: string) {
@@ -94,7 +106,7 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
             };
         });
 
-        const featuredIndex = cards.findIndex((card) => hasTetLaNhaTitle(card.normalizedTitle));
+        const featuredIndex = cards.findIndex((card) => hasTetLaNhaProject(card));
         if (featuredIndex <= 0) {
             return cards;
         }
@@ -132,15 +144,13 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
         const columns: PortfolioCard[][] = [[], [], []];
         const remainingCards = [...projectCards];
 
-        const camOnIndex = remainingCards.findIndex((card) =>
-            hasCamOnKhongTuBoTitle(card.normalizedTitle),
-        );
+        const camOnIndex = remainingCards.findIndex((card) => hasCamOnKhongTuBoProject(card));
         if (camOnIndex >= 0) {
             const [camOnCard] = remainingCards.splice(camOnIndex, 1);
             columns[2].push(camOnCard);
         }
 
-        const tetIndex = remainingCards.findIndex((card) => hasTetLaNhaTitle(card.normalizedTitle));
+        const tetIndex = remainingCards.findIndex((card) => hasTetLaNhaProject(card));
         if (tetIndex >= 0) {
             const [tetCard] = remainingCards.splice(tetIndex, 1);
             columns[0].push(tetCard);
@@ -212,7 +222,7 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                 className="md:hidden -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
                 {projectCards.map((project, idx) => {
-                    const isFeatured = idx === 0 && hasTetLaNhaTitle(project.normalizedTitle);
+                    const isFeatured = idx === 0 && hasTetLaNhaProject(project);
                     const projectCoverImage = resolveCoverImage(project.coverImage);
 
                     return (
@@ -282,8 +292,8 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                 {desktopColumns.map((columnCards, columnIdx) => (
                     <div key={`column-${columnIdx}`} className="grid h-full grid-rows-3 gap-6">
                         {columnCards.map((project, cardIdx) => {
-                            const isTetSpotlight = hasTetLaNhaTitle(project.normalizedTitle);
-                            const isCamOnProject = hasCamOnKhongTuBoTitle(project.normalizedTitle);
+                            const isTetSpotlight = hasTetLaNhaProject(project);
+                            const isCamOnProject = hasCamOnKhongTuBoProject(project);
                             const projectCoverImage = resolveCoverImage(project.coverImage);
                             const rowSpanClass =
                                 columnCards.length === 1
