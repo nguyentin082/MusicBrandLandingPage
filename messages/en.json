@@ -301,38 +301,41 @@
         "heading": "Service Pricing.",
         "plans": [
             {
-                "title": "Indie Single",
-                "subtitle": "For New Artists",
-                "price": "Contact",
+                "title": "Arrangement & Music Production",
+                "subtitle": "For new songs or cover projects",
+                "price": "Starter Package",
                 "features": [
-                    "2 hours high-quality recording",
-                    "Standard Mix & Master",
-                    "2 free revisions"
+                    "Concept consultation and genre direction",
+                    "Arrangement tailored to the artist's vocal range",
+                    "Delivery of the completed instrumental production",
+                    "Final production revisions based on feedback"
                 ],
-                "cta": "Choose Plan"
+                "cta": "Consult Now"
             },
             {
-                "title": "Production Full",
-                "subtitle": "Complete Production",
-                "price": "Special",
-                "badge": "Most Popular",
+                "title": "Full Song Production",
+                "subtitle": "End-to-end production from idea to completion",
+                "price": "Special Package",
                 "features": [
-                    "New song arrangement",
-                    "Unlimited recording sessions",
-                    "Analog-standard Mix Master"
+                    "Includes all services from the Starter and Popular packages",
+                    "Artwork design support for single/album releases",
+                    "Distribution support across digital music platforms"
                 ],
-                "cta": "Start Now"
+                "cta": "Consult Now"
             },
             {
-                "title": "Online Mixing",
-                "subtitle": "Nationwide & International",
-                "price": "Affordable",
+                "title": "Recording, Editing & Mix & Master",
+                "subtitle": "Professional full recording completion solution",
+                "price": "Popular Package",
+                "badge": "Best Seller",
                 "features": [
-                    "Receive stems via cloud",
-                    "Delivery within 48 hours",
-                    "Spotify loudness standard"
+                    "In-studio recording session with engineer assistance",
+                    "Detailed vocal support and corrections",
+                    "Vocal editing and tuning",
+                    "Release-ready Mix & Master",
+                    "Final version revisions based on feedback"
                 ],
-                "cta": "Send Files"
+                "cta": "Consult Now"
             }
         ]
     },
