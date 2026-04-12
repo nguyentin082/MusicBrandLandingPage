@@ -280,17 +280,20 @@
             {
                 "name": "SniT",
                 "role": "Founder & Music Producer",
-                "bio": "8+ năm kinh nghiệm, linh hồn của các bản Mix & Master tại WAV Vietnam."
+                "bio": "8+ năm kinh nghiệm, linh hồn của các bản Mix & Master tại WAV Vietnam.",
+                "avatar": "/image/team/snit.jpeg"
             },
             {
                 "name": "Thúy Quỳnh",
                 "role": "Vocal Producer & Recording Engineer",
-                "bio": "8+ năm kinh nghiệm, chuyên về sản xuất vocal và thu âm."
+                "bio": "8+ năm kinh nghiệm, chuyên về sản xuất vocal và thu âm.",
+                "avatar": "/image/team/snit.jpeg"
             },
             {
                 "name": "Đạt Nguyễn",
                 "role": "Composer & Vocal Coach",
-                "bio": "8+ năm kinh nghiệm, chuyên về viết nhạc và huấn luyện giọng hát."
+                "bio": "8+ năm kinh nghiệm, chuyên về viết nhạc và huấn luyện giọng hát.",
+                "avatar": "/image/team/snit.jpeg"
             }
         ]
     },

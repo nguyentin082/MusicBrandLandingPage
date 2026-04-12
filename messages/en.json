@@ -278,19 +278,22 @@
         "heading": "Our Sound Engineers.",
         "members": [
             {
-                "name": "Ho\u00e0ng WAV",
-                "role": "Chief Engineer",
-                "bio": "8 years of experience, the soul of WAV Vietnam's mix & master excellence."
+                "name": "SniT",
+                "role": "Founder & Music Producer",
+                "bio": "8+ years of experience, the driving force behind WAV Vietnam's Mix & Master quality.",
+                "avatar": "/image/team/snit.jpeg"
             },
             {
-                "name": "Minh Arranger",
-                "role": "Music Producer",
-                "bio": "Arrangement expert who transforms raw ideas into sonic masterpieces."
+                "name": "Thúy Quỳnh",
+                "role": "Vocal Producer & Recording Engineer",
+                "bio": "8+ years of experience specializing in vocal production and recording.",
+                "avatar": "/image/team/snit.jpeg"
             },
             {
-                "name": "Thanh Audio",
-                "role": "Recording Specialist",
-                "bio": "Studio wizard who captures the artist's best performance and emotion."
+                "name": "Đạt Nguyễn",
+                "role": "Composer & Vocal Coach",
+                "bio": "8+ years of experience in songwriting and vocal coaching.",
+                "avatar": "/image/team/snit.jpeg"
             }
         ]
     },

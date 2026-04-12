@@ -5,6 +5,7 @@ type TeamMember = {
     name: string;
     role: string;
     bio: string;
+    avatar: string;
 };
 
 export async function TeamSection() {
@@ -26,7 +27,7 @@ export async function TeamSection() {
                         >
                             <div className="w-32 h-32 mx-auto rounded-full overflow-hidden bg-off-white dark:bg-off-white mb-6 grayscale group-hover:grayscale-0 transition duration-500 border-2 border-warm-gold/20 relative">
                                 <Image
-                                    src={`https://i.pravatar.cc/150?u=${idx}`}
+                                    src={member.avatar}
                                     fill
                                     sizes="128px"
                                     loading="lazy"
