@@ -95,23 +95,11 @@ export function StickyContactFab({ labels }: { labels: ContactFabLabels }) {
 
     return (
         <>
-            <div className="fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom))] left-1/2 z-50 -translate-x-1/2 pointer-events-none sm:hidden">
-                <button
-                    type="button"
-                    aria-label={labels.scrollTop}
-                    title={labels.scrollTop}
-                    onClick={handleScrollToTop}
-                    className={`pointer-events-auto flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-dark-umber/10 bg-off-white text-dark-umber shadow-[0_12px_24px_rgba(26,22,20,0.2)] transition-[transform,opacity,background-color,color] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80 motion-reduce:transition-none touch-manipulation [-webkit-tap-highlight-color:transparent] dark:border-off-white/10 dark:bg-off-white/10 dark:text-off-white ${isScrollTopVisible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-2 opacity-0'}`}
-                >
-                    <ChevronUp className="size-5" aria-hidden="true" focusable="false" />
-                </button>
-            </div>
-
             <div className="fixed inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-50 pointer-events-none sm:hidden">
                 <div className="pointer-events-auto ml-auto flex w-fit flex-col items-end gap-2">
                     <div
                         id="sticky-contact-mobile-menu"
-                        className={`origin-bottom-right overflow-hidden rounded-[1.75rem] border border-white/35 bg-white/85 p-2 shadow-[0_18px_50px_rgba(26,22,20,0.18)] backdrop-blur-2xl transform-gpu will-change-transform transition-[transform,opacity] duration-280 ease-out motion-reduce:transition-none dark:border-white/10 dark:bg-dark-umber/80 dark:shadow-[0_18px_50px_rgba(26,22,20,0.5)] ${isMobileOpen ? 'translate-y-0 scale-100 opacity-100' : 'pointer-events-none translate-y-4 scale-95 opacity-0'}`}
+                        className={`origin-bottom-right overflow-hidden rounded-[1.75rem] border border-white/35 bg-white/85 p-2 shadow-[0_18px_50px_rgba(26,22,20,0.18)] backdrop-blur-2xl transform-gpu will-change-transform transition-[max-height,transform,opacity] duration-280 ease-out motion-reduce:transition-none dark:border-white/10 dark:bg-dark-umber/80 dark:shadow-[0_18px_50px_rgba(26,22,20,0.5)] ${isMobileOpen ? 'max-h-104 translate-y-0 scale-100 opacity-100' : 'pointer-events-none max-h-0 translate-y-2 scale-95 opacity-0 p-0 border-transparent'}`}
                     >
                         <div className="flex flex-col gap-2">
                             {mobileMenuItems.map(
@@ -142,6 +130,16 @@ export function StickyContactFab({ labels }: { labels: ContactFabLabels }) {
                             )}
                         </div>
                     </div>
+
+                    <button
+                        type="button"
+                        aria-label={labels.scrollTop}
+                        title={labels.scrollTop}
+                        onClick={handleScrollToTop}
+                        className={`flex h-14 w-14 cursor-pointer items-center justify-center rounded-full border border-dark-umber/10 bg-off-white text-dark-umber shadow-[0_12px_24px_rgba(26,22,20,0.2)] transition-[transform,opacity,background-color,color] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80 motion-reduce:transition-none touch-manipulation [-webkit-tap-highlight-color:transparent] dark:border-off-white/10 dark:bg-off-white/10 dark:text-off-white ${isScrollTopVisible ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+                    >
+                        <ChevronUp className="size-5" aria-hidden="true" focusable="false" />
+                    </button>
 
                     <button
                         type="button"
