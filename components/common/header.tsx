@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { ThemeToggle } from './theme-toggle';
 import { LanguageSwitcher } from './language-switcher';
 import { MobileNav } from './mobile-nav';
@@ -90,7 +91,13 @@ export async function Header() {
                 {/* Right side - Theme & Language toggles + Mobile Menu */}
                 <div className="flex items-center gap-2 sm:gap-4 ml-auto sm:ml-0 shrink-0">
                     <ThemeToggle />
-                    <LanguageSwitcher />
+                    <Suspense
+                        fallback={
+                            <div className="h-9 w-20 sm:h-10 sm:w-36 rounded-full border border-dark-umber/10 bg-white/70 dark:border-off-white/10 dark:bg-white/5" />
+                        }
+                    >
+                        <LanguageSwitcher />
+                    </Suspense>
                     <MobileNav />
                 </div>
             </div>
