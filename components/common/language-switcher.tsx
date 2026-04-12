@@ -67,9 +67,12 @@ export function LanguageSwitcher() {
             disabled={isPending}
             aria-label={`Chuyển sang ${nextLocaleLabel}`}
             aria-busy={isPending}
-            className="group inline-flex cursor-pointer items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brick-red focus-visible:ring-offset-2 focus-visible:ring-offset-off-white disabled:cursor-not-allowed disabled:opacity-80 dark:focus-visible:ring-offset-dark-umber"
+            className="group inline-flex cursor-pointer items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brick-red focus-visible:ring-offset-2 focus-visible:ring-offset-off-white disabled:cursor-not-allowed disabled:opacity-80 dark:focus-visible:ring-offset-dark-umber transition-opacity"
+            style={{
+                touchAction: 'manipulation',
+            }}
         >
-            <span className="relative grid h-10 w-36 grid-cols-2 overflow-hidden rounded-full border border-dark-umber/10 bg-white/80 shadow-sm transition hover:shadow-md dark:border-off-white/10 dark:bg-white/5">
+            <span className="relative grid h-9 sm:h-10 w-20 sm:w-36 grid-cols-2 overflow-hidden rounded-full border border-dark-umber/10 bg-white/80 shadow-sm transition hover:shadow-md dark:border-off-white/10 dark:bg-white/5">
                 <span
                     className={`absolute inset-0.5 w-[calc(50%-0.125rem)] rounded-full bg-brick-red shadow-lg shadow-brick-red/20 transition-transform duration-300 ease-out ${
                         currentLang === 'vi' ? 'translate-x-full' : 'translate-x-0'
@@ -77,7 +80,7 @@ export function LanguageSwitcher() {
                 />
 
                 <span
-                    className={`relative z-10 flex h-full items-center justify-center gap-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] transition-colors ${
+                    className={`relative z-10 flex h-full items-center justify-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase leading-none tracking-[0.15em] sm:tracking-[0.22em] transition-colors ${
                         currentLang === 'en'
                             ? 'text-off-white'
                             : 'text-dark-umber dark:text-off-white/80'
@@ -86,14 +89,14 @@ export function LanguageSwitcher() {
                     <CountryFlag
                         countryCode="GB"
                         svg
-                        style={{ width: '1.1em', height: '1.1em' }}
-                        aria-label="Cờ nước Anh"
+                        style={{ width: '1.8em', height: '1.8em' }}
+                        aria-label="English flag"
                     />
-                    <span>EN</span>
+                    <span className="hidden sm:inline">EN</span>
                 </span>
 
                 <span
-                    className={`relative z-10 flex h-full items-center justify-center gap-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] transition-colors ${
+                    className={`relative z-10 flex h-full items-center justify-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] font-bold uppercase leading-none tracking-[0.15em] sm:tracking-[0.22em] transition-colors ${
                         currentLang === 'vi'
                             ? 'text-off-white'
                             : 'text-dark-umber dark:text-off-white/80'
@@ -102,10 +105,10 @@ export function LanguageSwitcher() {
                     <CountryFlag
                         countryCode="VN"
                         svg
-                        style={{ width: '1.1em', height: '1.1em' }}
-                        aria-label="Cờ Việt Nam"
+                        style={{ width: '1.8em', height: '1.8em' }}
+                        aria-label="Vietnamese flag"
                     />
-                    <span>VI</span>
+                    <span className="hidden sm:inline">VI</span>
                 </span>
             </span>
             <span className="sr-only">

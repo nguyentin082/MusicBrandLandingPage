@@ -75,7 +75,7 @@ export default function RootLayout({
             suppressHydrationWarning
             className={`${sansFont.variable} ${monoFont.variable}`}
         >
-            <body className="font-sans antialiased">
+            <body suppressHydrationWarning className="font-sans antialiased">
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                     {children}
                     <Analytics />

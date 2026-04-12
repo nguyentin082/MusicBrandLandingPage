@@ -3,6 +3,23 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Smooth scrolling for anchor links - optimized for fixed header */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Ensure anchors have proper scroll margin for fixed header */
+[id] {
+    scroll-margin-top: 6rem; /* Same as header height (pt-24 = 6rem) */
+}
+
+/* Responsive scroll margin for mobile */
+@media (max-width: 640px) {
+    [id] {
+        scroll-margin-top: 5rem;
+    }
+}
+
 :root {
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);

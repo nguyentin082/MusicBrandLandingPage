@@ -21,13 +21,17 @@ export function ThemeToggle() {
     return (
         <button
             onClick={() => setTheme(isDark ? 'light' : 'dark')}
-            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors hover:cursor-pointer"
-            aria-label="Toggle theme"
+            className="p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors hover:cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            type="button"
+            style={{
+                touchAction: 'manipulation',
+            }}
         >
             {isDark ? (
-                <Sun className="w-5 h-5 text-warm-gold" />
+                <Sun className="w-5 h-5 sm:w-6 sm:h-6 text-warm-gold" />
             ) : (
-                <Moon className="w-5 h-5 text-brick-red" />
+                <Moon className="w-5 h-5 sm:w-6 sm:h-6 text-brick-red" />
             )}
         </button>
     );
