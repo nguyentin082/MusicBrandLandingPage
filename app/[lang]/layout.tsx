@@ -71,6 +71,7 @@ export default async function LocaleLayout({
         facebook: contactFabT('labels.facebook'),
         instagram: contactFabT('labels.instagram'),
         telegram: contactFabT('labels.telegram'),
+        scrollTop: contactFabT('labels.scrollTop'),
     };
 
     return (

@@ -70,7 +70,8 @@
             "zalo": "Zalo",
             "facebook": "Facebook",
             "instagram": "Instagram",
-            "telegram": "Telegram"
+            "telegram": "Telegram",
+            "scrollTop": "Lên Đầu Trang"
         },
         "handles": {
             "zalo": "Chat Zalo",
