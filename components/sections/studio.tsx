@@ -15,10 +15,10 @@ export async function StudioSection() {
     };
 
     const studioImages = [
-        'https://picsum.photos/seed/studio-1/800/600',
-        'https://picsum.photos/seed/studio-2/800/600',
-        'https://picsum.photos/seed/studio-3/800/600',
-        'https://picsum.photos/seed/studio-4/800/600',
+        '/image/studio/studio-1.jpg',
+        '/image/studio/studio-2.jpg',
+        '/image/studio/studio-3.jpg',
+        '/image/studio/studio-4.jpg',
     ];
 
     return (
