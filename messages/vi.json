@@ -217,28 +217,28 @@
         "processing": "Processing & Conversion",
         "equipment": [
             {
-                "name": "Neumann U87 Ai",
-                "type": "Reference"
+                "name": "Logic Pro",
+                "type": "Digital Audio Workstation"
             },
             {
-                "name": "AKG C414 XLII",
-                "type": "Multi-pattern"
+                "name": "Solid State Logic SSL 2+ MKII",
+                "type": "Audio Interface"
             },
             {
-                "name": "Shure SM7B",
-                "type": "Radio Classic"
+                "name": "Rode NT1 5th Generation",
+                "type": "Condenser Microphone"
             },
             {
-                "name": "Avalon VT-737sp",
-                "type": "Tube Pre"
+                "name": "Sennheiser E 835-S",
+                "type": "Dynamic Microphone"
             },
             {
-                "name": "UA 1176LN",
-                "type": "Comp"
+                "name": "Audio Technica ATH-M50x",
+                "type": "Closed-back Headphones"
             },
             {
-                "name": "Prism Sound Titan",
-                "type": "AD/DA"
+                "name": "Beyerdynamic DT 900 Pro X",
+                "type": "Open-back Headphones"
             }
         ]
     },

@@ -9,7 +9,7 @@ import { PartnersSection } from '@/components/sections/partners/page';
 import { AudioComparisonSection } from '@/components/sections/audio-comparison/page';
 import { PortfolioSection } from '@/components/sections/portfolio/page';
 import { StudioSection } from '@/components/sections/studio';
-import { GearSection } from '@/components/sections/gear';
+import { GearSection } from '@/components/sections/gear/page';
 import { TeamSection } from '@/components/sections/team';
 import { PricingSection } from '@/components/sections/pricing';
 import { CTASection } from '@/components/sections/cta';
