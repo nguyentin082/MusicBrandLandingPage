@@ -134,6 +134,19 @@
     },
     "portfolio": {
         "heading": "Dự Án Tiêu Biểu",
+        "showcase": {
+            "spotlight": "Tiêu điểm",
+            "signatureRelease": "Phát hành nổi bật",
+            "availablePlatforms": "{count} nền tảng khả dụng",
+            "slideIndicators": "Chỉ báo trượt danh sách dự án",
+            "goToProject": "Đi tới dự án {index}"
+        },
+        "dialog": {
+            "artistUpdateSoon": "Thông tin nghệ sĩ sẽ được cập nhật sớm",
+            "embedUnavailable": "Nền tảng này hiện chưa hỗ trợ trình phát nhúng.",
+            "externalLinksOnly": "Dự án này hiện chỉ có liên kết ngoài.",
+            "embedPlayerTitle": "Trình phát nhúng {platform}"
+        },
         "projects": [
             {
                 "genre": "Pop Ballad",

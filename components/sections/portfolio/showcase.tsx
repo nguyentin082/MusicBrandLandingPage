@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Play } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { PortfolioProjectDialog } from './project-dialog';
 import type { EmbedPlatform, LinkPlatform } from './project-dialog';
@@ -88,6 +89,7 @@ function getLinkPlatforms(project: PortfolioProject): LinkPlatform[] {
 }
 
 export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }) {
+    const t = useTranslations('portfolio.showcase');
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [activeEmbedKey, setActiveEmbedKey] = useState<string>('');
     const [activeMobileIndex, setActiveMobileIndex] = useState(0);
@@ -245,7 +247,7 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                             <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/85 to-transparent p-6">
                                 {isFeatured && (
                                     <span className="mb-3 inline-flex w-fit rounded-full bg-warm-gold/90 px-3 py-1 text-[10px] font-black tracking-wider text-dark-umber uppercase">
-                                        Spotlight
+                                        {t('spotlight')}
                                     </span>
                                 )}
                                 <p className="mb-2 text-xs font-bold tracking-widest text-warm-gold uppercase">
@@ -261,7 +263,7 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                                 )}
                                 <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-off-white/80">
                                     <Play className="size-3.5" />
-                                    {project.availableLinks} nền tảng khả dụng
+                                    {t('availablePlatforms', { count: project.availableLinks })}
                                 </div>
                             </div>
                         </button>
@@ -271,14 +273,14 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
 
             <div
                 className="md:hidden mt-2 flex items-center justify-center gap-2"
-                aria-label="Portfolio slide indicators"
+                aria-label={t('slideIndicators')}
             >
                 {projectCards.map((project, idx) => (
                     <button
                         key={`${project.title}-dot-${project.sourceIndex}`}
                         type="button"
                         onClick={() => scrollToMobileCard(idx)}
-                        aria-label={`Go to project ${idx + 1}`}
+                        aria-label={t('goToProject', { index: idx + 1 })}
                         className={`h-2.5 rounded-full transition-all duration-300 ${
                             idx === activeMobileIndex
                                 ? 'w-6 bg-warm-gold'
@@ -328,12 +330,12 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                                     <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/85 to-transparent p-6">
                                         {isTetSpotlight && (
                                             <span className="mb-3 inline-flex w-fit rounded-full bg-warm-gold/90 px-3 py-1 text-[10px] font-black tracking-wider text-dark-umber uppercase">
-                                                Spotlight
+                                                {t('spotlight')}
                                             </span>
                                         )}
                                         {isCamOnProject && (
                                             <span className="mb-3 inline-flex w-fit rounded-full bg-off-white/85 px-3 py-1 text-[10px] font-black tracking-wider text-dark-umber uppercase">
-                                                Signature Release
+                                                {t('signatureRelease')}
                                             </span>
                                         )}
                                         <p className="mb-2 text-xs font-bold tracking-widest text-warm-gold uppercase">
@@ -357,7 +359,9 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                                         )}
                                         <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-off-white/80">
                                             <Play className="size-3.5" />
-                                            {project.availableLinks} nền tảng khả dụng
+                                            {t('availablePlatforms', {
+                                                count: project.availableLinks,
+                                            })}
                                         </div>
                                     </div>
                                 </button>

@@ -134,6 +134,19 @@
     },
     "portfolio": {
         "heading": "Featured Projects.",
+        "showcase": {
+            "spotlight": "Spotlight",
+            "signatureRelease": "Signature Release",
+            "availablePlatforms": "{count} platforms available",
+            "slideIndicators": "Portfolio slide indicators",
+            "goToProject": "Go to project {index}"
+        },
+        "dialog": {
+            "artistUpdateSoon": "Artist update soon",
+            "embedUnavailable": "Embed is not available for this platform.",
+            "externalLinksOnly": "This project currently has external links only.",
+            "embedPlayerTitle": "{platform} embed player"
+        },
         "projects": [
             {
                 "genre": "Pop Ballad",

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { ExternalLink } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import type { PortfolioProject } from './types';
 import { Button } from '@/components/ui/button';
@@ -48,13 +49,21 @@ function extractIframeSrc(embedHtml?: string) {
     return match?.[1] ?? null;
 }
 
-function PlatformEmbed({ platform }: { platform: EmbedPlatform }) {
+function PlatformEmbed({
+    platform,
+    embedUnavailableMessage,
+    embedPlayerTitle,
+}: {
+    platform: EmbedPlatform;
+    embedUnavailableMessage: string;
+    embedPlayerTitle: string;
+}) {
     const src = extractIframeSrc(platform.embedHtml);
 
     if (!src) {
         return (
             <div className="rounded-2xl border border-dashed border-dark-umber/30 p-6 text-sm text-dark-umber/70 dark:border-off-white/25 dark:text-off-white/70">
-                Embed is not available for this platform.
+                {embedUnavailableMessage}
             </div>
         );
     }
@@ -63,7 +72,7 @@ function PlatformEmbed({ platform }: { platform: EmbedPlatform }) {
         <div className="overflow-hidden rounded-2xl border border-dark-umber/15 bg-black/5 dark:border-off-white/15 dark:bg-black/20">
             <iframe
                 src={src}
-                title={`${platform.label} embed player`}
+                title={embedPlayerTitle}
                 width="100%"
                 height={platform.height}
                 loading="lazy"
@@ -86,6 +95,8 @@ export function PortfolioProjectDialog({
     onActiveEmbedKeyChange,
     activeEmbedPlatform,
 }: PortfolioProjectDialogProps) {
+    const t = useTranslations('portfolio.dialog');
+
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent className="max-h-[92dvh] w-[calc(100%-1.5rem)] max-w-6xl overflow-x-hidden overflow-y-auto rounded-2xl border-dark-umber/20 bg-off-white p-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] sm:w-[calc(100%-2rem)] sm:rounded-3xl sm:p-8 dark:border-off-white/20 dark:bg-dark-umber">
@@ -108,7 +119,7 @@ export function PortfolioProjectDialog({
                                         {project.title}
                                     </DialogTitle>
                                     <DialogDescription className="text-sm font-medium text-dark-umber/75 dark:text-off-white/75">
-                                        {project.artist ?? 'Artist update soon'} • {project.genre}
+                                        {project.artist ?? t('artistUpdateSoon')} • {project.genre}
                                     </DialogDescription>
                                 </DialogHeader>
 
@@ -183,13 +194,19 @@ export function PortfolioProjectDialog({
                                                 value={activeEmbedPlatform.key}
                                                 className="pt-1"
                                             >
-                                                <PlatformEmbed platform={activeEmbedPlatform} />
+                                                <PlatformEmbed
+                                                    platform={activeEmbedPlatform}
+                                                    embedUnavailableMessage={t('embedUnavailable')}
+                                                    embedPlayerTitle={t('embedPlayerTitle', {
+                                                        platform: activeEmbedPlatform.label,
+                                                    })}
+                                                />
                                             </TabsContent>
                                         )}
                                     </Tabs>
                                 ) : (
                                     <div className="rounded-2xl border border-dashed border-dark-umber/25 p-6 text-sm text-dark-umber/70 dark:border-off-white/25 dark:text-off-white/70">
-                                        Du an nay hien chi co lien ket ngoai.
+                                        {t('externalLinksOnly')}
                                     </div>
                                 )}
                             </div>
