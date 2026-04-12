@@ -123,7 +123,7 @@
     },
     "audioComparison": {
         "label": "Before & After",
-        "heading": "The Power of Mix Master.",
+        "heading": "The Power of Mix Master",
         "trackTitleDieOnThisHill": "\"Die On This Hill\" - Pop Ballad",
         "trackTitleCloseToYou": "\"Close To You\" - Pop Ballad",
         "rawButton": "Raw Recording",
@@ -133,7 +133,7 @@
         "pauseButton": "Pause"
     },
     "portfolio": {
-        "heading": "Featured Projects.",
+        "heading": "Featured Projects",
         "showcase": {
             "spotlight": "Spotlight",
             "signatureRelease": "Signature Release",
@@ -200,7 +200,7 @@
     },
     "studio": {
         "label": "Vibe & Comfort",
-        "heading": "Comfort for Creativity.",
+        "heading": "Comfort for Creativity",
         "description": "We believe the best inspiration comes from comfort. At WAV Vietnam, you not only work in a professional environment but are also supported by a dedicated team with deep experience and expertise. This helps create a space where artists can fully immerse themselves in music without being interrupted by technical concerns or environmental distractions.",
         "amenities": [
             "Specialty Coffee",
@@ -211,7 +211,7 @@
     },
     "gear": {
         "label": "The Armory",
-        "heading": "Technical Weaponry.",
+        "heading": "Technical Weaponry",
         "description": "We use legendary equipment sought after worldwide to ensure every recording meets commercial quality standards.",
         "cardLabel": "Gear Table",
         "itemNameLabel": "Item name",
@@ -275,7 +275,7 @@
         ]
     },
     "team": {
-        "heading": "Our Sound Engineers.",
+        "heading": "Our Sound Engineers",
         "members": [
             {
                 "name": "SniT",
@@ -298,7 +298,7 @@
         ]
     },
     "pricing": {
-        "heading": "Service Pricing.",
+        "heading": "Service Pricing",
         "plans": [
             {
                 "title": "Arrangement & Music Production",
@@ -341,7 +341,7 @@
     },
     "newsletter": {
         "label": "Join The Community",
-        "heading": "Get Free Music Production Guide.",
+        "heading": "Get Free Music Production Guide",
         "description": "Subscribe to get tips on home recording, vocal stem prep, and latest music trends from WAV Vietnam experts.",
         "placeholder": "Your Email",
         "cta": "Get Guide"

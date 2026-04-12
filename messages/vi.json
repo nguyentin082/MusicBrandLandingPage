@@ -200,7 +200,7 @@
     },
     "studio": {
         "label": "Vibe & Comfort",
-        "heading": "Thư Thái Để Sáng Tạo.",
+        "heading": "Thư Thái Để Sáng Tạo",
         "description": "Chúng mình tin rằng cảm hứng tuyệt vời nhất đến từ sự thoải mái. Tại WAV Vietnam, bạn không chỉ làm việc trong một môi trường chuyên nghiệp mà còn được hỗ trợ nhiệt tình bởi các nhân sự có kinh nghiệm và chuyên môn cao. Từ đó, chúng mình tạo ra một không gian nơi nghệ sĩ có thể thả hồn vào âm nhạc của mình mà không bị gián đoạn bởi những lo lắng về kỹ thuật hay môi trường xung quanh.",
         "amenities": [
             "Cà phê đặc sản",
@@ -211,7 +211,7 @@
     },
     "gear": {
         "label": "The Armory",
-        "heading": "Vũ Khí Kỹ Thuật.",
+        "heading": "Vũ Khí Kỹ Thuật",
         "description": "Chúng mình sử dụng những thiết bị huyền thoại được săn đón trên thế giới để đảm bảo mỗi bản thu đều mang chất lượng thương mại.",
         "cardLabel": "Bảng thiết bị",
         "itemNameLabel": "Tên thiết bị",
@@ -275,7 +275,7 @@
         ]
     },
     "team": {
-        "heading": "Đội Ngũ Nhân Sự.",
+        "heading": "Đội Ngũ Nhân Sự",
         "members": [
             {
                 "name": "SniT",
@@ -298,7 +298,7 @@
         ]
     },
     "pricing": {
-        "heading": "Bảng Giá Dịch Vụ.",
+        "heading": "Bảng Giá Dịch Vụ",
         "plans": [
             {
                 "title": "Hòa âm phối khí",
@@ -341,7 +341,7 @@
     },
     "newsletter": {
         "label": "Join The Community",
-        "heading": "Nhận Cẩm Nang Sản Xuất Âm Nhạc Miễn Phí.",
+        "heading": "Nhận Cẩm Nang Sản Xuất Âm Nhạc Miễn Phí",
         "description": "Đăng ký để nhận những mẹo về thu âm tại nhà, cách chuẩn bị vocal stems và xu hướng âm nhạc mới nhất từ các chuyên gia tại WAV Vietnam.",
         "placeholder": "Email của bạn",
         "cta": "Nhận Cẩm Nang"
