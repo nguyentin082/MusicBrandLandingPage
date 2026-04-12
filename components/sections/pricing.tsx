@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { Check, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Check, Sparkles } from 'lucide-react';
 
 export async function PricingSection() {
     const t = await getTranslations('pricing');
@@ -74,13 +74,14 @@ export async function PricingSection() {
                                 </ul>
                                 <a
                                     href="#contact"
-                                    className={`w-full py-4 rounded-2xl text-center font-bold transition hover:scale-105 ${
+                                    className={`w-full py-4 rounded-2xl text-center font-bold transition hover:scale-105 inline-flex items-center justify-center gap-2 ${
                                         idx === 1
                                             ? 'bg-off-white text-dark-umber shadow-lg'
                                             : 'bg-dark-umber dark:bg-off-white text-off-white dark:text-dark-umber'
                                     }`}
                                 >
                                     {plan.cta}
+                                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                                 </a>
                             </div>
                         );
