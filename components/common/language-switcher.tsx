@@ -1,32 +1,73 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useCallback, useEffect, useMemo, useTransition } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import CountryFlag from 'react-country-flag';
 
+const SUPPORTED_LOCALES = ['en', 'vi'] as const;
+type Locale = (typeof SUPPORTED_LOCALES)[number];
+
+const LOCALE_LABEL: Record<Locale, string> = {
+    en: 'English',
+    vi: 'Tiếng Việt',
+};
+
+function buildLocalizedPath(pathname: string, locale: Locale) {
+    const segments = pathname.split('/');
+    const firstSegment = segments[1] as string | undefined;
+
+    if (firstSegment && SUPPORTED_LOCALES.includes(firstSegment as Locale)) {
+        segments[1] = locale;
+    } else {
+        segments.splice(1, 0, locale);
+    }
+
+    return segments.join('/');
+}
+
 export function LanguageSwitcher() {
+    const router = useRouter();
     const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const [isPending, startTransition] = useTransition();
 
-    const getLocalizedPath = (locale: string) => {
-        const segments = pathname.split('/');
-        if (segments[1] === 'en' || segments[1] === 'vi') {
-            segments[1] = locale;
-        } else {
-            segments.splice(1, 0, locale);
-        }
-        return segments.join('/');
-    };
+    const currentLang = useMemo<Locale>(() => {
+        const firstSegment = pathname.split('/')[1];
+        return firstSegment === 'vi' ? 'vi' : 'en';
+    }, [pathname]);
 
-    const currentLang = pathname.split('/')[1] === 'vi' ? 'vi' : 'en';
-    const nextLang = currentLang === 'en' ? 'vi' : 'en';
-    const currentLocaleLabel = currentLang === 'en' ? 'English' : 'Tiếng Việt';
-    const nextLocaleLabel = nextLang === 'en' ? 'English' : 'Tiếng Việt';
+    const nextLang: Locale = currentLang === 'en' ? 'vi' : 'en';
+    const currentLocaleLabel = LOCALE_LABEL[currentLang];
+    const nextLocaleLabel = LOCALE_LABEL[nextLang];
+    const nextPathname = useMemo(
+        () => buildLocalizedPath(pathname, nextLang),
+        [pathname, nextLang],
+    );
+
+    useEffect(() => {
+        router.prefetch(nextPathname);
+    }, [router, nextPathname]);
+
+    const handleSwitchLanguage = useCallback(() => {
+        if (isPending) return;
+
+        const queryString = searchParams.toString();
+        const hash = window.location.hash;
+        const href = `${nextPathname}${queryString ? `?${queryString}` : ''}${hash}`;
+
+        startTransition(() => {
+            router.replace(href, { scroll: false });
+        });
+    }, [isPending, searchParams, nextPathname, startTransition, router]);
 
     return (
-        <Link
-            href={getLocalizedPath(nextLang)}
+        <button
+            type="button"
+            onClick={handleSwitchLanguage}
+            disabled={isPending}
             aria-label={`Chuyển sang ${nextLocaleLabel}`}
-            className="group inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brick-red focus-visible:ring-offset-2 focus-visible:ring-offset-off-white dark:focus-visible:ring-offset-dark-umber"
+            aria-busy={isPending}
+            className="group inline-flex cursor-pointer items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brick-red focus-visible:ring-offset-2 focus-visible:ring-offset-off-white disabled:cursor-not-allowed disabled:opacity-80 dark:focus-visible:ring-offset-dark-umber"
         >
             <span className="relative grid h-10 w-36 grid-cols-2 overflow-hidden rounded-full border border-dark-umber/10 bg-white/80 shadow-sm transition hover:shadow-md dark:border-off-white/10 dark:bg-white/5">
                 <span
@@ -70,6 +111,6 @@ export function LanguageSwitcher() {
             <span className="sr-only">
                 Đang dùng {currentLocaleLabel}. Bấm để chuyển sang {nextLocaleLabel}.
             </span>
-        </Link>
+        </button>
     );
 }
