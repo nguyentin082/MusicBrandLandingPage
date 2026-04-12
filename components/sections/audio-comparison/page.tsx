@@ -68,7 +68,7 @@ export async function AudioComparisonSection() {
                     </h3>
                 </div>
 
-                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 items-stretch">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                     {comparisonItems.map((item) => (
                         <AudioToggle
                             key={item.key}
