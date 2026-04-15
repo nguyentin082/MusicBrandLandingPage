@@ -87,6 +87,7 @@ export function AudioToggle({ trackTitle, playButton, pauseButton, tracks }: Aud
                         audioRefs.current[track.id] = node;
                     }}
                     src={track.src}
+                    crossOrigin="anonymous"
                     preload="auto"
                     onLoadedMetadata={() => {
                         handleTrackMetadataLoaded(track.id);

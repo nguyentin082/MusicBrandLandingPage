@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { AudioToggle } from './audio-toggle';
 import { AudioTrack } from './types';
+import { resolveMediaUrl } from '@/lib/media';
 
 type ComparisonItem = {
     key: string;
@@ -19,17 +20,17 @@ export async function AudioComparisonSection() {
                 {
                     id: 'raw',
                     label: t('rawButton'),
-                    src: '/audio/die-on-this-hill/DieOnThisHillRawVocalWithBeat.wav',
+                    src: resolveMediaUrl('/audio/die-on-this-hill/die-on-this-hill-raw.mp3'),
                 },
                 {
                     id: 'vocal',
                     label: t('vocalButton'),
-                    src: '/audio/die-on-this-hill/DieOnThisHillOnlyVocal.wav',
+                    src: resolveMediaUrl('/audio/die-on-this-hill/die-on-this-hill-vocal.mp3'),
                 },
                 {
                     id: 'master',
                     label: t('masterButton'),
-                    src: '/audio/die-on-this-hill/DieOnThisHillMastered2ndFixed.wav',
+                    src: resolveMediaUrl('/audio/die-on-this-hill/die-on-this-hill-master.mp3'),
                 },
             ],
         },
@@ -40,17 +41,17 @@ export async function AudioComparisonSection() {
                 {
                     id: 'raw',
                     label: t('rawButton'),
-                    src: '/audio/close-to-you/CloseToYouRawVocalWithBeat.wav',
+                    src: resolveMediaUrl('/audio/close-to-you/close-to-you-raw.mp3'),
                 },
                 {
                     id: 'vocal',
                     label: t('vocalButton'),
-                    src: '/audio/close-to-you/CloseToYouOnlyVocal.wav',
+                    src: resolveMediaUrl('/audio/close-to-you/close-to-you-vocal.mp3'),
                 },
                 {
                     id: 'master',
                     label: t('masterButton'),
-                    src: '/audio/close-to-you/CloseToYouMastered1stFixed.wav',
+                    src: resolveMediaUrl('/audio/close-to-you/close-to-you-master.mp3'),
                 },
             ],
         },

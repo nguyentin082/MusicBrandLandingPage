@@ -3,15 +3,16 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { resolveMediaUrl } from '@/lib/media';
 
 const HERO_IMAGES = [
-    '/image/hero/hero-1.jpg',
-    '/image/hero/hero-2.jpg',
-    '/image/hero/hero-3.jpg',
-    '/image/hero/hero-4.jpg',
-    '/image/hero/hero-5.jpg',
-    '/image/hero/hero-6.jpg',
-    '/image/hero/hero-7.jpg',
+    resolveMediaUrl('/image/hero/hero-1.jpg'),
+    resolveMediaUrl('/image/hero/hero-2.jpg'),
+    resolveMediaUrl('/image/hero/hero-3.jpg'),
+    resolveMediaUrl('/image/hero/hero-4.jpg'),
+    resolveMediaUrl('/image/hero/hero-5.jpg'),
+    resolveMediaUrl('/image/hero/hero-6.jpg'),
+    resolveMediaUrl('/image/hero/hero-7.jpg'),
 ];
 
 export function HeroCarousel() {

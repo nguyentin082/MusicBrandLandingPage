@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { PortfolioShowcase } from './showcase';
 import { PortfolioProject } from './types';
 import { siteConfig } from '@/lib/site';
+import { resolveMediaUrl, toAbsoluteUrl } from '@/lib/media';
 
 export async function PortfolioSection() {
     const t = await getTranslations('portfolio');
@@ -14,31 +15,35 @@ export async function PortfolioSection() {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
         name: t('heading'),
-        itemListElement: projects.map((project, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            item: {
-                '@type': 'MusicRecording',
-                name: project.title,
-                genre: project.genre,
-                byArtist: project.artist
-                    ? {
-                          '@type': 'MusicGroup',
-                          name: project.artist,
-                      }
-                    : undefined,
-                image: `${siteConfig.url}${project.coverImage ?? fallbackCoverImage}`,
-                sameAs: [
-                    project.spotifyUrl,
-                    project.youtubeUrl,
-                    project.appleMusicUrl,
-                    project.zingMp3Url,
-                    project.tidalUrl,
-                    project.deezerUrl,
-                    project.nhacCuaTuiUrl,
-                ].filter(Boolean),
-            },
-        })),
+        itemListElement: projects.map((project, index) => {
+            const imageUrl = resolveMediaUrl(project.coverImage, fallbackCoverImage);
+
+            return {
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                    '@type': 'MusicRecording',
+                    name: project.title,
+                    genre: project.genre,
+                    byArtist: project.artist
+                        ? {
+                              '@type': 'MusicGroup',
+                              name: project.artist,
+                          }
+                        : undefined,
+                    image: toAbsoluteUrl(imageUrl, siteConfig.url),
+                    sameAs: [
+                        project.spotifyUrl,
+                        project.youtubeUrl,
+                        project.appleMusicUrl,
+                        project.zingMp3Url,
+                        project.tidalUrl,
+                        project.deezerUrl,
+                        project.nhacCuaTuiUrl,
+                    ].filter(Boolean),
+                },
+            };
+        }),
     };
 
     return (

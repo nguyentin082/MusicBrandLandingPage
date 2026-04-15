@@ -1,6 +1,27 @@
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
+const assetBaseUrl = process.env.NEXT_PUBLIC_ASSET_BASE_URL;
+
+const assetRemotePattern = (() => {
+    if (!assetBaseUrl) {
+        return null;
+    }
+
+    try {
+        const parsed = new URL(assetBaseUrl);
+        const basePath = parsed.pathname === '/' ? '' : parsed.pathname.replace(/\/$/, '');
+
+        return {
+            protocol: parsed.protocol.replace(':', ''),
+            hostname: parsed.hostname,
+            port: parsed.port,
+            pathname: `${basePath}/**`,
+        };
+    } catch {
+        return null;
+    }
+})();
 
 /** @type {import('next').NextConfig} */
 const baseConfig = {
@@ -40,6 +61,7 @@ const baseConfig = {
                 protocol: 'https',
                 hostname: 'dummyimage.com',
             },
+            ...(assetRemotePattern ? [assetRemotePattern] : []),
         ],
     },
     experimental: {

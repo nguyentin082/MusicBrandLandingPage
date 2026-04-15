@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Coffee, Sofa, Wind, Music } from 'lucide-react';
 import Image from 'next/image';
+import { resolveMediaUrl } from '@/lib/media';
 
 export async function StudioSection() {
     const t = await getTranslations('studio');
@@ -10,25 +11,25 @@ export async function StudioSection() {
 
     const studioGallery = [
         {
-            src: '/image/studio/studio-3.jpg',
+            src: resolveMediaUrl('/image/studio/studio-3.jpg'),
             alt: 'Studio control room with monitors',
             className: 'col-span-2 row-span-2 md:col-span-4 md:row-span-4',
             sizes: '(max-width: 768px) 92vw, (max-width: 1024px) 52vw, 32vw',
         },
         {
-            src: '/image/studio/studio-2.jpg',
+            src: resolveMediaUrl('/image/studio/studio-2.jpg'),
             alt: 'Microphone setup in recording booth',
             className: 'col-span-1 row-span-1 md:col-span-2 md:row-span-2',
             sizes: '(max-width: 768px) 44vw, (max-width: 1024px) 26vw, 16vw',
         },
         {
-            src: '/image/studio/studio-1.jpg',
+            src: resolveMediaUrl('/image/studio/studio-1.jpg'),
             alt: 'Acoustic treatment and ambient lights',
             className: 'col-span-1 row-span-1 md:col-span-2 md:row-span-2',
             sizes: '(max-width: 768px) 44vw, (max-width: 1024px) 26vw, 16vw',
         },
         {
-            src: '/image/studio/studio-4.jpg',
+            src: resolveMediaUrl('/image/studio/studio-4.jpg'),
             alt: 'Artist lounge area in the studio',
             className: 'col-span-2 row-span-2 md:col-span-6 md:row-span-2',
             sizes: '(max-width: 768px) 92vw, (max-width: 1024px) 52vw, 44vw',

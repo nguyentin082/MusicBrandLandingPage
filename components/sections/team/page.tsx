@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
+import { resolveMediaUrl } from '@/lib/media';
 
 type TeamMember = {
     name: string;
@@ -30,7 +31,7 @@ export async function TeamSection() {
                             <div className="pointer-events-none absolute inset-0 rounded-2xl border border-warm-gold/0 transition-colors duration-500 group-hover/member:border-warm-gold/35 group-focus-visible/member:border-warm-gold/35" />
                             <div className="w-32 h-32 mx-auto rounded-full overflow-hidden bg-off-white dark:bg-off-white mb-6 grayscale group-hover/member:grayscale-0 group-focus-visible/member:grayscale-0 transition duration-700 border-2 border-warm-gold/20 group-hover/member:border-warm-gold/80 group-focus-visible/member:border-warm-gold/80 relative">
                                 <Image
-                                    src={member.avatar}
+                                    src={resolveMediaUrl(member.avatar)}
                                     fill
                                     sizes="128px"
                                     loading="lazy"

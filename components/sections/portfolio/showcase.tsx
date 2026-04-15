@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import { PortfolioProjectDialog } from './project-dialog';
 import type { EmbedPlatform, LinkPlatform } from './project-dialog';
 import type { PortfolioProject } from './types';
+import { resolveMediaUrl } from '@/lib/media';
 
 type PortfolioCard = PortfolioProject & {
     sourceIndex: number;
@@ -47,7 +48,7 @@ function hasCamOnKhongTuBoProject(project: { normalizedTitle: string; coverImage
 }
 
 function resolveCoverImage(coverImage?: string) {
-    return coverImage ?? PORTFOLIO_FALLBACK_COVER_IMAGE;
+    return resolveMediaUrl(coverImage, PORTFOLIO_FALLBACK_COVER_IMAGE);
 }
 
 function extractIframeSrc(embedHtml?: string) {
