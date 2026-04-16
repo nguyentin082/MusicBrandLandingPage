@@ -98,7 +98,7 @@ export function StatsSection() {
         >
             <style>{STATS_ANIMATION_CSS}</style>
             <div className="relative z-10 max-w-7xl mx-auto px-6">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 text-center">
                     {renderStatItems('text-dark-umber', 'text-dark-umber/70')}
                 </div>
             </div>
@@ -112,7 +112,7 @@ export function StatsSection() {
             >
                 <div className="h-full w-full bg-dark-umber">
                     <div className="max-w-7xl mx-auto px-6 py-20">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 text-center">
                             {renderStatItems('text-warm-gold', 'text-warm-gold/80', 'inverted-')}
                         </div>
                     </div>
