@@ -4,6 +4,7 @@ import { useState } from 'react';
 import {
     ArrowRight,
     BadgeDollarSign,
+    BookOpen,
     Disc3,
     Mail,
     Menu,
@@ -11,15 +12,8 @@ import {
     SlidersHorizontal,
     X,
 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-
-const navigationItems = [
-    { href: '#services', icon: Music2, key: 'services' },
-    { href: '#portfolio', icon: Disc3, key: 'portfolio' },
-    { href: '#gear', icon: SlidersHorizontal, key: 'gear' },
-    { href: '#pricing', icon: BadgeDollarSign, key: 'pricing' },
-] as const;
 
 const drawerPanelClassName =
     'w-[92vw] max-w-sm border-l border-brick-red/10 bg-[linear-gradient(180deg,rgba(251,246,240,0.98)_0%,rgba(245,237,228,0.96)_100%)] px-5 pb-6 pt-[max(1rem,env(safe-area-inset-top))] shadow-2xl shadow-black/10 dark:border-off-white/10 dark:bg-[linear-gradient(180deg,rgba(33,24,18,0.98)_0%,rgba(24,18,14,0.98)_100%)]';
@@ -35,7 +29,16 @@ const drawerCtaClassName =
 
 export function MobileNav() {
     const t = useTranslations('navigation');
+    const locale = useLocale();
     const [open, setOpen] = useState(false);
+
+    const navigationItems = [
+        { href: '#services', icon: Music2, key: 'services' },
+        { href: '#portfolio', icon: Disc3, key: 'portfolio' },
+        { href: '#gear', icon: SlidersHorizontal, key: 'gear' },
+        { href: '#pricing', icon: BadgeDollarSign, key: 'pricing' },
+        { href: `/${locale}/blog`, icon: BookOpen, key: 'blog' },
+    ] as const;
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>

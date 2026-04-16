@@ -1,4 +1,4 @@
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -7,7 +7,7 @@ import { LanguageSwitcher } from './language-switcher';
 import { MobileNav } from './mobile-nav';
 
 export async function Header() {
-    const t = await getTranslations('navigation');
+    const [t, locale] = await Promise.all([getTranslations('navigation'), getLocale()]);
 
     return (
         <header
@@ -80,6 +80,12 @@ export async function Header() {
                     >
                         {t('pricing')}
                     </a>
+                    <Link
+                        href={`/${locale}/blog`}
+                        className="hover:text-warm-gold transition focus-visible:ring-2 focus-visible:ring-offset-2 rounded px-2 py-2"
+                    >
+                        {t('blog')}
+                    </Link>
                     <a
                         href="#contact"
                         className="bg-brick-red text-off-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full hover:scale-105 transition shadow-lg shadow-brick-red/20 focus-visible:ring-2 focus-visible:ring-offset-2"
