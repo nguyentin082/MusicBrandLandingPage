@@ -7,6 +7,7 @@ WAV Vietnam is a modern landing page for a music studio, built with Next.js and 
 - Modern landing page experience optimized for both desktop and mobile.
 - Bilingual support for `en` and `vi` using `next-intl`.
 - Automatic locale detection based on language and visitor country.
+- MDX blog with localized routes (`/en/blog`, `/vi/blog`) and SEO-ready metadata.
 - Light/dark theme switching and language selection in the header.
 - Dedicated sections for studio overview, services, projects, equipment, team, pricing, and FAQ.
 
@@ -63,10 +64,41 @@ npm run start
 ## Project Structure
 
 - `app/`: routing, layouts, and locale-based pages.
+- `content/blog/`: localized MDX posts grouped by locale (`en`, `vi`).
 - `components/`: shared components and landing page sections.
 - `messages/`: localized content.
 - `i18n/`: `next-intl` configuration.
 - `public/`: static assets.
+
+## Write Blog Posts (MDX)
+
+Create files in:
+
+- `content/blog/en/*.mdx`
+- `content/blog/vi/*.mdx`
+
+Required frontmatter:
+
+```mdx
+---
+title: Your post title
+description: Short SEO description
+publishedAt: 2026-04-16
+updatedAt: 2026-04-17 # optional
+tags:
+	- mix-master
+	- recording
+coverImage: /image/blog/cover.jpg # optional
+draft: false # optional
+---
+```
+
+SEO implementation included:
+
+- Static generation for blog index and post pages.
+- Canonical + hreflang alternates for `en`/`vi`.
+- JSON-LD (`ItemList` for index, `BlogPosting` for post detail).
+- Sitemap includes blog pages and blog posts.
 
 ## Notes
 
