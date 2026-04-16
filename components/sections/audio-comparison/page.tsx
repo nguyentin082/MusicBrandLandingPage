@@ -20,17 +20,21 @@ export async function AudioComparisonSection() {
                 {
                     id: 'raw',
                     label: t('rawButton'),
-                    src: resolveMediaUrl('/audio/die-on-this-hill/die-on-this-hill-raw.mp3'),
+                    src: resolveMediaUrl(
+                        '/audio/die-on-this-hill/DieOnThisHillRawVocalWithBeat.mp3',
+                    ),
                 },
                 {
                     id: 'vocal',
                     label: t('vocalButton'),
-                    src: resolveMediaUrl('/audio/die-on-this-hill/die-on-this-hill-vocal.mp3'),
+                    src: resolveMediaUrl('/audio/die-on-this-hill/DieOnThisHillOnlyVocal.mp3'),
                 },
                 {
                     id: 'master',
                     label: t('masterButton'),
-                    src: resolveMediaUrl('/audio/die-on-this-hill/die-on-this-hill-master.mp3'),
+                    src: resolveMediaUrl(
+                        '/audio/die-on-this-hill/DieOnThisHillMastered2ndFixed.mp3',
+                    ),
                 },
             ],
         },
@@ -41,17 +45,17 @@ export async function AudioComparisonSection() {
                 {
                     id: 'raw',
                     label: t('rawButton'),
-                    src: resolveMediaUrl('/audio/close-to-you/close-to-you-raw.mp3'),
+                    src: resolveMediaUrl('/audio/close-to-you/CloseToYouRawVocalWithBeat.mp3'),
                 },
                 {
                     id: 'vocal',
                     label: t('vocalButton'),
-                    src: resolveMediaUrl('/audio/close-to-you/close-to-you-vocal.mp3'),
+                    src: resolveMediaUrl('/audio/close-to-you/CloseToYouOnlyVocal.mp3'),
                 },
                 {
                     id: 'master',
                     label: t('masterButton'),
-                    src: resolveMediaUrl('/audio/close-to-you/close-to-you-master.mp3'),
+                    src: resolveMediaUrl('/audio/close-to-you/CloseToYouMastered1stFixed.mp3'),
                 },
             ],
         },
