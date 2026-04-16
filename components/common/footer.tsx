@@ -40,9 +40,9 @@ export function Footer() {
                         </p>
                     </div>
 
-                    <div className="w-full lg:self-start">
-                        <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/5 backdrop-blur-sm">
-                            <div className="relative aspect-11/10 border-b border-white/10 bg-black/20 sm:aspect-16/10">
+                    <div className="w-full lg:self-start lg:justify-self-end">
+                        <div className="w-full max-w-none overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/5 backdrop-blur-sm lg:ml-auto lg:max-w-md">
+                            <div className="relative aspect-5/4 border-b border-white/10 bg-black/20 sm:aspect-4/3 lg:aspect-3/2">
                                 <iframe
                                     title={contactInfo.map.title}
                                     src={contactInfo.map.embedUrl}
@@ -61,7 +61,7 @@ export function Footer() {
                                     </div>
                                 </div>
 
-                                <div className="absolute inset-x-0 bottom-0 hidden p-4 sm:block sm:p-5">
+                                <div className="absolute inset-x-0 bottom-0 hidden p-3 sm:block sm:p-4">
                                     <div className="grid grid-cols-3 gap-2 rounded-2xl border border-white/10 bg-dark-umber/70 p-2 backdrop-blur-md">
                                         <a
                                             href={contactInfo.map.url}
