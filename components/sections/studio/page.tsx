@@ -37,8 +37,8 @@ export async function StudioSection() {
     ];
 
     return (
-        <section className="py-32 bg-dark-umber dark:bg-dark-umber text-off-white dark:text-off-white px-6 overflow-hidden">
-            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+        <section className="py-16 sm:py-24 md:py-32 bg-dark-umber dark:bg-dark-umber text-off-white dark:text-off-white px-4 sm:px-6 overflow-hidden">
+            <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 sm:gap-16 md:gap-20 items-center">
                 <div className="relative">
                     <div className="pointer-events-none absolute -inset-6 rounded-[3rem] bg-warm-gold/10 blur-3xl" />
                     <div className="relative grid grid-cols-2 md:grid-cols-6 auto-rows-[120px] md:auto-rows-[88px] gap-4 md:gap-5">
@@ -62,14 +62,16 @@ export async function StudioSection() {
                 </div>
 
                 <div>
-                    <h2 className="text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-4 italic">
+                    <h2 className="text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-3 sm:mb-4 italic">
                         {t('label')}
                     </h2>
-                    <h3 className="text-4xl font-extrabold mb-8 italic">{t('heading')}</h3>
-                    <p className="text-off-white/50 mb-10 leading-relaxed italic">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-6 sm:mb-8 italic">
+                        {t('heading')}
+                    </h3>
+                    <p className="text-off-white/50 mb-8 sm:mb-10 leading-relaxed italic text-sm sm:text-base">
                         {t('description')}
                     </p>
-                    <div className="grid grid-cols-2 gap-6 text-xs font-bold uppercase tracking-widest text-warm-gold italic">
+                    <div className="grid grid-cols-2 gap-4 sm:gap-6 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-warm-gold italic">
                         {amenities.map((amenity, idx) => {
                             const IconComponent = amenityIcons[idx % amenityIcons.length];
                             return (

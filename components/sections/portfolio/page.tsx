@@ -47,9 +47,12 @@ export async function PortfolioSection() {
     };
 
     return (
-        <section id="portfolio" className="py-32 px-6 bg-off-white dark:bg-dark-umber">
+        <section
+            id="portfolio"
+            className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-off-white dark:bg-dark-umber"
+        >
             <div className="max-w-7xl mx-auto">
-                <h2 className="text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-16 italic text-center">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-12 sm:mb-16 italic text-center">
                     {t('heading')}
                 </h2>
 

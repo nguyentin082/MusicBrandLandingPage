@@ -7,12 +7,15 @@ export async function PricingSection() {
     const plans = t.raw('plans') as any[];
 
     return (
-        <section id="pricing" className="py-32 px-6 bg-off-white dark:bg-dark-umber">
+        <section
+            id="pricing"
+            className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-off-white dark:bg-dark-umber"
+        >
             <div className="max-w-7xl mx-auto">
-                <h3 className="text-center text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-20 italic">
+                <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-12 sm:mb-16 md:mb-20 italic">
                     {t('heading')}
                 </h3>
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                     {plans.map((plan, idx) => {
                         const isBestSeller =
                             typeof plan.badge === 'string' &&
@@ -46,18 +49,22 @@ export async function PricingSection() {
                                     </span>
                                 )}
                                 <div className="mb-2">
-                                    <h4 className="text-xl font-bold italic">{plan.title}</h4>
+                                    <h4 className="text-lg sm:text-xl font-bold italic">
+                                        {plan.title}
+                                    </h4>
                                 </div>
                                 <p
-                                    className={`text-[10px] font-bold uppercase mb-8 ${
+                                    className={`text-[9px] sm:text-[10px] font-bold uppercase mb-6 sm:mb-8 ${
                                         idx === 1 ? 'text-warm-gold' : 'text-warm-gold'
                                     }`}
                                 >
                                     {plan.subtitle}
                                 </p>
-                                <div className="text-3xl font-black mb-8 italic">{plan.price}</div>
+                                <div className="text-2xl sm:text-3xl font-black mb-6 sm:mb-8 italic">
+                                    {plan.price}
+                                </div>
                                 <ul
-                                    className={`text-xs space-y-4 grow italic mb-10 ${
+                                    className={`text-[11px] sm:text-xs space-y-3 sm:space-y-4 grow italic mb-8 sm:mb-10 ${
                                         idx === 1
                                             ? 'text-off-white/60'
                                             : 'text-soft-brown dark:text-off-white/70'
@@ -74,7 +81,7 @@ export async function PricingSection() {
                                 </ul>
                                 <a
                                     href="#contact"
-                                    className={`w-full py-4 rounded-2xl text-center font-bold transition hover:scale-105 inline-flex items-center justify-center gap-2 ${
+                                    className={`w-full py-3 sm:py-4 rounded-2xl text-center text-sm sm:text-base font-bold transition hover:scale-105 inline-flex items-center justify-center gap-2 ${
                                         idx === 1
                                             ? 'bg-off-white text-dark-umber shadow-lg'
                                             : 'bg-dark-umber dark:bg-off-white text-off-white dark:text-dark-umber'

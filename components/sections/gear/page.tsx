@@ -16,21 +16,24 @@ export async function GearSection() {
     const itemTypeLabel = t('itemTypeLabel');
 
     return (
-        <section id="gear" className="py-32 px-6 bg-white dark:bg-dark-umber">
+        <section
+            id="gear"
+            className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-white dark:bg-dark-umber"
+        >
             <div className="max-w-7xl mx-auto">
                 <div className="mx-auto max-w-2xl text-center">
-                    <h2 className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-4 italic">
+                    <h2 className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-3 sm:mb-4 italic">
                         {t('label')}
                     </h2>
-                    <h3 className="text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-8 italic">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-6 sm:mb-8 italic">
                         {t('heading')}
                     </h3>
-                    <p className="text-soft-brown dark:text-off-white/60 italic leading-relaxed">
+                    <p className="text-soft-brown dark:text-off-white/60 italic leading-relaxed text-sm sm:text-base">
                         {t('description')}
                     </p>
                 </div>
 
-                <div className="mt-14 grid gap-10 md:grid-cols-2 xl:grid-cols-3">
+                <div className="mt-10 sm:mt-12 md:mt-14 grid gap-6 sm:gap-8 md:gap-10 md:grid-cols-2 xl:grid-cols-3">
                     {tables.map((table) => (
                         <div
                             key={table.title}
