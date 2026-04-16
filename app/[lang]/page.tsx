@@ -64,7 +64,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             />
             <Header />
 
-            <main className="pt-24">
+            <main className="pt-0">
                 <HeroSection />
                 <PhilosophySection />
                 <StatsSection />

@@ -6,10 +6,10 @@ export async function HeroSection() {
     const t = await getTranslations('hero');
 
     return (
-        <section className="relative min-h-screen flex items-center bg-dark-umber dark:bg-dark-umber text-off-white dark:text-off-white overflow-hidden pt-20">
+        <section className="relative min-h-screen flex items-center bg-dark-umber dark:bg-dark-umber text-off-white dark:text-off-white overflow-hidden py-20 sm:py-24 md:py-28">
             <div className="absolute inset-0 opacity-10 pointer-events-none">
-                <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-brick-red rounded-full blur-[120px]"></div>
-                <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-warm-gold rounded-full blur-[100px]"></div>
+                <div className="absolute top-[-10%] right-[-10%] w-150 h-150 bg-brick-red rounded-full blur-[120px]"></div>
+                <div className="absolute bottom-[-10%] left-[-10%] w-100 h-100 bg-warm-gold rounded-full blur-[100px]"></div>
             </div>
 
             <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 items-center gap-16 relative z-10">
