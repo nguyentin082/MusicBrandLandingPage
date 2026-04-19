@@ -3,33 +3,10 @@ import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import { Header } from '@/components/common/header';
 import { Footer } from '@/components/common/footer';
+import { getBlogListCopy } from '@/lib/blog-i18n';
+import { createBlogListSchema } from '@/lib/blog-schema';
 import { siteConfig } from '@/lib/site';
 import { getAllPosts, toBlogLocale } from '@/lib/blog';
-
-const copy = {
-    en: {
-        title: 'Music Production Blog',
-        description:
-            'Guides and insights about recording, vocal production, and mix/master workflows from WAV Vietnam.',
-        badge: 'Studio Journal',
-        heading: 'Blog for Indie Artists and Producers',
-        back: 'Back to home',
-        read: 'Read article',
-        minutes: 'min read',
-        published: 'Published',
-    },
-    vi: {
-        title: 'Blog Sản Xuất Âm Nhạc',
-        description:
-            'Kiến thức thực chiến về thu âm, vocal production, mix/master workflow từ đội ngũ WAV Vietnam.',
-        badge: 'Studio Journal',
-        heading: 'Blog Cho Nghệ Sĩ và Producer',
-        back: 'Về trang chủ',
-        read: 'Đọc bài viết',
-        minutes: 'phút đọc',
-        published: 'Ngày đăng',
-    },
-} as const;
 
 export async function generateMetadata({
     params,
@@ -38,7 +15,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const { lang } = await params;
     const locale = toBlogLocale(lang) ?? 'en';
-    const i18n = copy[locale];
+    const i18n = getBlogListCopy(locale);
 
     return {
         title: i18n.title,
@@ -72,24 +49,15 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
     const locale = toBlogLocale(lang) ?? 'en';
     setRequestLocale(locale);
 
-    const [posts] = await Promise.all([getAllPosts(locale)]);
-    const i18n = copy[locale];
+    const posts = await getAllPosts(locale);
+    const i18n = getBlogListCopy(locale);
     const dateFormatter = new Intl.DateTimeFormat(locale === 'vi' ? 'vi-VN' : 'en-US', {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
     });
 
-    const listSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        itemListElement: posts.map((post, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            url: `${siteConfig.url}/${locale}/blog/${post.slug}`,
-            name: post.title,
-        })),
-    };
+    const listSchema = createBlogListSchema(locale, posts);
 
     return (
         <div className="min-h-screen bg-off-white dark:bg-dark-umber text-dark-umber dark:text-off-white">

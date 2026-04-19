@@ -1,38 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeStringify from 'rehype-stringify';
-import rehypeSlug from 'rehype-slug';
-import remarkGfm from 'remark-gfm';
-import remarkMdx from 'remark-mdx';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import { unified } from 'unified';
 import { setRequestLocale } from 'next-intl/server';
+import { BlogPostHeader } from '@/components/blog/blog-post-header';
 import { Header } from '@/components/common/header';
 import { Footer } from '@/components/common/footer';
 import { BlogToc } from '@/components/blog/blog-toc';
 import { getAllPostParams, getPost, hasPost, toBlogLocale } from '@/lib/blog';
-import { rehypeCollectHeadings, rehypeOptimizeImages, type TocItem } from '@/lib/blog-content';
+import { getBlogPostCopy } from '@/lib/blog-i18n';
+import { renderBlogPostContent } from '@/lib/blog-renderer';
+import { createBlogPostSchema } from '@/lib/blog-schema';
 import { siteConfig } from '@/lib/site';
-
-const localeText = {
-    en: {
-        back: 'Back to blog',
-        published: 'Published',
-        updated: 'Updated',
-        minutes: 'min read',
-        toc: 'On this page',
-    },
-    vi: {
-        back: 'Quay lại blog',
-        published: 'Ngày đăng',
-        updated: 'Cập nhật',
-        minutes: 'phút đọc',
-        toc: 'Mục lục',
-    },
-} as const;
 
 export async function generateStaticParams() {
     return getAllPostParams();
@@ -101,44 +79,9 @@ export default async function BlogPostPage({
     const post = await getPost(locale, slug);
     if (!post) notFound();
 
-    const tocItems: TocItem[] = [];
-
-    const renderedPost = await unified()
-        .use(remarkParse)
-        .use(remarkMdx)
-        .use(remarkGfm)
-        .use(remarkRehype)
-        .use(rehypeSlug)
-        .use(rehypeCollectHeadings(tocItems))
-        .use(rehypeAutolinkHeadings, { behavior: 'append' })
-        .use(rehypeOptimizeImages)
-        .use(rehypeStringify)
-        .process(post.content);
-
-    const contentHtml = String(renderedPost);
-
-    const t = localeText[locale];
-    const dateFormatter = new Intl.DateTimeFormat(locale === 'vi' ? 'vi-VN' : 'en-US', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-    });
-
-    const blogSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: post.title,
-        description: post.description,
-        datePublished: post.publishedAt,
-        dateModified: post.updatedAt ?? post.publishedAt,
-        mainEntityOfPage: `${siteConfig.url}/${locale}/blog/${post.slug}`,
-        publisher: {
-            '@type': 'Organization',
-            name: siteConfig.name,
-            url: siteConfig.url,
-        },
-        inLanguage: locale,
-    };
+    const { contentHtml, tocItems } = await renderBlogPostContent(post.content);
+    const t = getBlogPostCopy(locale);
+    const blogSchema = createBlogPostSchema(locale, post);
 
     return (
         <div className="min-h-screen bg-off-white dark:bg-dark-umber text-dark-umber dark:text-off-white">
@@ -152,42 +95,15 @@ export default async function BlogPostPage({
             <main className="pt-28 pb-16 px-6 sm:px-10 lg:px-16">
                 <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_17.5rem] lg:items-start">
                     <article className="min-w-0 max-w-3xl">
-                        <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.2em] text-soft-brown/80 dark:text-off-white/60">
-                            <span>
-                                {t.published}: {dateFormatter.format(new Date(post.publishedAt))}
-                            </span>
-                            <span>•</span>
-                            <span>
-                                {post.readingTimeMinutes} {t.minutes}
-                            </span>
-                            {post.updatedAt ? (
-                                <>
-                                    <span>•</span>
-                                    <span>
-                                        {t.updated}:{' '}
-                                        {dateFormatter.format(new Date(post.updatedAt))}
-                                    </span>
-                                </>
-                            ) : null}
-                        </div>
-
-                        <h1 className="mt-4 text-4xl sm:text-5xl font-black tracking-tight">
-                            {post.title}
-                        </h1>
-                        <p className="mt-4 text-lg leading-relaxed text-soft-brown dark:text-off-white/80">
-                            {post.description}
-                        </p>
-
-                        <div className="mt-6 flex flex-wrap gap-2">
-                            {post.tags.map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="rounded-full border border-brick-red/20 bg-brick-red/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brick-red"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
+                        <BlogPostHeader
+                            post={post}
+                            labels={{
+                                published: t.published,
+                                updated: t.updated,
+                                minutes: t.minutes,
+                            }}
+                            locale={locale}
+                        />
 
                         <div
                             className="mt-10 mdx-content mdx-html"

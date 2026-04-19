@@ -8,6 +8,30 @@ type IndicatorStyle = {
     height: number;
 };
 
+function getSectionsByIds(ids: string[]) {
+    return ids
+        .map((id) => document.getElementById(id))
+        .filter((section): section is HTMLElement => Boolean(section));
+}
+
+function getCurrentSectionByOffset(sections: HTMLElement[], offsetTop: number) {
+    let current = sections[0]?.id ?? '';
+
+    for (const section of sections) {
+        if (section.getBoundingClientRect().top <= offsetTop) {
+            current = section.id;
+        }
+    }
+
+    return current;
+}
+
+function pickClosestVisibleSection(visible: Map<string, number>) {
+    const [closestId] =
+        [...visible.entries()].sort((a, b) => Math.abs(a[1]) - Math.abs(b[1]))[0] ?? [];
+    return closestId ?? '';
+}
+
 export function useBlogToc(items: TocItem[]) {
     const [activeId, setActiveId] = useState<string>(items[0]?.id ?? '');
     const [indicatorStyle, setIndicatorStyle] = useState<IndicatorStyle | null>(null);
@@ -21,18 +45,8 @@ export function useBlogToc(items: TocItem[]) {
         }
 
         const findActiveByScroll = () => {
-            const offsetTop = 140;
-            const sections = headingIds
-                .map((id) => document.getElementById(id))
-                .filter((section): section is HTMLElement => Boolean(section));
-
-            let current = sections[0]?.id ?? '';
-
-            for (const section of sections) {
-                if (section.getBoundingClientRect().top <= offsetTop) {
-                    current = section.id;
-                }
-            }
+            const sections = getSectionsByIds(headingIds);
+            const current = getCurrentSectionByOffset(sections, 140);
 
             if (current) {
                 setActiveId(current);
@@ -54,9 +68,7 @@ export function useBlogToc(items: TocItem[]) {
                 }
 
                 if (visible.size) {
-                    const [nextId] = [...visible.entries()].sort(
-                        (a, b) => Math.abs(a[1]) - Math.abs(b[1]),
-                    )[0];
+                    const nextId = pickClosestVisibleSection(visible);
                     setActiveId(nextId);
                     return;
                 }

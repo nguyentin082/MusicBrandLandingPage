@@ -44,15 +44,6 @@ function getLocaleDir(locale: BlogLocale) {
     return path.join(CONTENT_DIR, locale);
 }
 
-async function fileExists(filePath: string) {
-    try {
-        await fs.access(filePath);
-        return true;
-    } catch {
-        return false;
-    }
-}
-
 function normalizeSlug(fileName: string) {
     return fileName.replace(/\.mdx?$/, '');
 }
@@ -85,11 +76,13 @@ async function getLocaleFileNames(locale: BlogLocale) {
 
 async function readPostFile(locale: BlogLocale, slug: string) {
     const filePath = path.join(getLocaleDir(locale), `${slug}.mdx`);
-    if (!(await fileExists(filePath))) {
+    let source: string;
+    try {
+        source = await fs.readFile(filePath, 'utf-8');
+    } catch {
         return null;
     }
 
-    const source = await fs.readFile(filePath, 'utf-8');
     const { data, content } = matter(source);
     const frontmatter = data as Frontmatter;
 
@@ -135,11 +128,12 @@ export async function getAllPosts(locale: BlogLocale): Promise<BlogPostMeta[]> {
         }),
     );
 
-    return posts
-        .filter(Boolean)
-        .sort(
-            (a, b) => new Date(b!.publishedAt).getTime() - new Date(a!.publishedAt).getTime(),
-        ) as BlogPostMeta[];
+    const validPosts = posts.filter((post): post is Exclude<typeof post, null> => post !== null);
+    validPosts.sort(
+        (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    );
+
+    return validPosts;
 }
 
 export async function getPost(locale: BlogLocale, slug: string): Promise<BlogPost | null> {
