@@ -15,6 +15,48 @@ import { Footer } from '@/components/common/footer';
 import { getAllPostParams, getPost, hasPost, toBlogLocale } from '@/lib/blog';
 import { siteConfig } from '@/lib/site';
 
+function rehypeOptimizeImages() {
+    return (tree: unknown) => {
+        const visitNode = (node: unknown) => {
+            if (!node || typeof node !== 'object') {
+                return;
+            }
+
+            const elementNode = node as {
+                type?: string;
+                tagName?: string;
+                properties?: Record<string, unknown>;
+                children?: unknown[];
+            };
+
+            if (elementNode.type === 'element' && elementNode.tagName === 'img') {
+                elementNode.properties ??= {};
+
+                if (!('loading' in elementNode.properties)) {
+                    elementNode.properties.loading = 'lazy';
+                }
+
+                if (!('decoding' in elementNode.properties)) {
+                    elementNode.properties.decoding = 'async';
+                }
+
+                if (!('fetchpriority' in elementNode.properties)) {
+                    elementNode.properties.fetchpriority = 'low';
+                }
+            }
+
+            const children = elementNode.children;
+            if (Array.isArray(children)) {
+                for (const child of children) {
+                    visitNode(child);
+                }
+            }
+        };
+
+        visitNode(tree);
+    };
+}
+
 const localeText = {
     en: {
         back: 'Back to blog',
@@ -74,11 +116,13 @@ export async function generateMetadata({
             modifiedTime: post.updatedAt,
             siteName: siteConfig.name,
             locale: locale === 'vi' ? 'vi_VN' : 'en_US',
+            images: post.coverImage ? [{ url: post.coverImage, alt: post.title }] : undefined,
         },
         twitter: {
             card: 'summary_large_image',
             title: post.title,
             description: post.description,
+            images: post.coverImage ? [post.coverImage] : undefined,
         },
     };
 }
@@ -95,18 +139,16 @@ export default async function BlogPostPage({
     const post = await getPost(locale, slug);
     if (!post) notFound();
 
-    const [renderedPost, hasTranslatedVersion] = await Promise.all([
-        unified()
-            .use(remarkParse)
-            .use(remarkMdx)
-            .use(remarkGfm)
-            .use(remarkRehype)
-            .use(rehypeSlug)
-            .use(rehypeAutolinkHeadings, { behavior: 'append' })
-            .use(rehypeStringify)
-            .process(post.content),
-        hasPost(locale === 'en' ? 'vi' : 'en', slug),
-    ]);
+    const renderedPost = await unified()
+        .use(remarkParse)
+        .use(remarkMdx)
+        .use(remarkGfm)
+        .use(remarkRehype)
+        .use(rehypeSlug)
+        .use(rehypeAutolinkHeadings, { behavior: 'append' })
+        .use(rehypeOptimizeImages)
+        .use(rehypeStringify)
+        .process(post.content);
 
     const contentHtml = String(renderedPost);
 
@@ -179,19 +221,6 @@ export default async function BlogPostPage({
                             </span>
                         ))}
                     </div>
-
-                    {hasTranslatedVersion ? (
-                        <div className="mt-5 text-sm text-soft-brown dark:text-off-white/70">
-                            <Link
-                                href={`/${locale === 'en' ? 'vi' : 'en'}/blog/${post.slug}`}
-                                className="underline decoration-brick-red/60 underline-offset-4 hover:text-brick-red"
-                            >
-                                {locale === 'en'
-                                    ? 'Read Vietnamese version'
-                                    : 'Xem phiên bản tiếng Anh'}
-                            </Link>
-                        </div>
-                    ) : null}
 
                     <div
                         className="mt-10 mdx-content mdx-html"
