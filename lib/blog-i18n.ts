@@ -11,6 +11,12 @@ const blogListCopy = {
         read: 'Read article',
         minutes: 'min read',
         published: 'Published',
+        previous: 'Previous',
+        next: 'Next',
+        page: 'Page',
+        showing: 'Showing',
+        of: 'of',
+        articles: 'articles',
     },
     vi: {
         title: 'Blog Sản Xuất Âm Nhạc',
@@ -22,6 +28,12 @@ const blogListCopy = {
         read: 'Đọc bài viết',
         minutes: 'phút đọc',
         published: 'Ngày đăng',
+        previous: 'Trước',
+        next: 'Sau',
+        page: 'Trang',
+        showing: 'Hiển thị',
+        of: 'trên',
+        articles: 'bài viết',
     },
 } as const;
 
