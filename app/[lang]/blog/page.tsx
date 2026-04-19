@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { setRequestLocale } from 'next-intl/server';
 import { Header } from '@/components/common/header';
@@ -7,6 +8,13 @@ import { getBlogListCopy } from '@/lib/blog-i18n';
 import { createBlogListSchema } from '@/lib/blog-schema';
 import { siteConfig } from '@/lib/site';
 import { getAllPosts, toBlogLocale } from '@/lib/blog';
+
+const unsplashFallbackCovers = [
+    'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1461783436728-0a9217714694?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80',
+];
 
 export async function generateMetadata({
     params,
@@ -87,32 +95,53 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                     </div>
 
                     <div className="mt-10 grid gap-5">
-                        {posts.map((post) => (
-                            <article
-                                key={post.slug}
-                                className="rounded-3xl border border-dark-umber/10 bg-white/70 px-6 py-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-off-white/10 dark:bg-white/5"
-                            >
-                                <p className="text-xs uppercase tracking-[0.2em] text-soft-brown/80 dark:text-off-white/60">
-                                    {i18n.published}:{' '}
-                                    {dateFormatter.format(new Date(post.publishedAt))} ·{' '}
-                                    {post.readingTimeMinutes} {i18n.minutes}
-                                </p>
+                        {posts.map((post, index) => {
+                            const hasRemoteCover = post.coverImage?.startsWith('http');
+                            const thumbnailSrc = hasRemoteCover
+                                ? post.coverImage
+                                : unsplashFallbackCovers[index % unsplashFallbackCovers.length];
 
-                                <h2 className="mt-3 text-2xl font-extrabold tracking-tight">
-                                    {post.title}
-                                </h2>
-                                <p className="mt-2 text-soft-brown dark:text-off-white/75">
-                                    {post.description}
-                                </p>
-
-                                <Link
-                                    href={`/${locale}/blog/${post.slug}`}
-                                    className="mt-4 inline-flex text-sm font-bold uppercase tracking-[0.18em] text-brick-red"
+                            return (
+                                <article
+                                    key={post.slug}
+                                    className="overflow-hidden rounded-3xl border border-dark-umber/10 bg-white/70 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-off-white/10 dark:bg-white/5"
                                 >
-                                    {i18n.read}
-                                </Link>
-                            </article>
-                        ))}
+                                    <div className="grid md:grid-cols-[15rem_minmax(0,1fr)] md:items-stretch">
+                                        <div className="relative aspect-video md:aspect-auto md:h-full">
+                                            <Image
+                                                src={thumbnailSrc}
+                                                alt={post.title}
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, 240px"
+                                                className="object-cover"
+                                            />
+                                        </div>
+
+                                        <div className="px-6 py-5">
+                                            <p className="text-xs uppercase tracking-[0.2em] text-soft-brown/80 dark:text-off-white/60">
+                                                {i18n.published}:{' '}
+                                                {dateFormatter.format(new Date(post.publishedAt))} ·{' '}
+                                                {post.readingTimeMinutes} {i18n.minutes}
+                                            </p>
+
+                                            <h2 className="mt-3 text-2xl font-extrabold tracking-tight">
+                                                {post.title}
+                                            </h2>
+                                            <p className="mt-2 text-soft-brown dark:text-off-white/75">
+                                                {post.description}
+                                            </p>
+
+                                            <Link
+                                                href={`/${locale}/blog/${post.slug}`}
+                                                className="mt-4 inline-flex text-sm font-bold uppercase tracking-[0.18em] text-brick-red"
+                                            >
+                                                {i18n.read}
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </article>
+                            );
+                        })}
                     </div>
                 </div>
             </main>
