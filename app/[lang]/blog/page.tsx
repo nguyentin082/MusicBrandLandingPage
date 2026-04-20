@@ -43,7 +43,7 @@ export async function generateMetadata({
             languages: {
                 en: page > 1 ? `/en/blog?page=${page}` : '/en/blog',
                 vi: page > 1 ? `/vi/blog?page=${page}` : '/vi/blog',
-                'x-default': '/en/blog',
+                'x-default': page > 1 ? `/en/blog?page=${page}` : '/en/blog',
             },
         },
         openGraph: {
@@ -146,6 +146,7 @@ export default async function BlogPage({
                                 alt="Blog Cover"
                                 fill
                                 priority
+                                fetchPriority="high"
                                 className="object-cover opacity-60 dark:opacity-50 transition-transform duration-1000 ease-out group-hover:scale-105"
                                 sizes="(max-width: 1024px) 100vw, 1024px"
                             />

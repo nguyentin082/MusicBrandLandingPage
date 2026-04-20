@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { cache } from 'react';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
@@ -115,7 +116,13 @@ async function readPostFile(locale: BlogLocale, slug: string) {
     } satisfies BlogPost;
 }
 
-export async function getAllPosts(locale: BlogLocale): Promise<BlogPostMeta[]> {
+const MEMORY_CACHE: Partial<Record<BlogLocale, BlogPostMeta[]>> = {};
+
+export const getAllPosts = cache(async (locale: BlogLocale): Promise<BlogPostMeta[]> => {
+    if (MEMORY_CACHE[locale]) {
+        return MEMORY_CACHE[locale]!;
+    }
+
     const fileNames = await getLocaleFileNames(locale);
 
     const posts = await Promise.all(
@@ -133,12 +140,14 @@ export async function getAllPosts(locale: BlogLocale): Promise<BlogPostMeta[]> {
         (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
     );
 
-    return validPosts;
-}
+    MEMORY_CACHE[locale] = validPosts;
 
-export async function getPost(locale: BlogLocale, slug: string): Promise<BlogPost | null> {
+    return validPosts;
+});
+
+export const getPost = cache(async (locale: BlogLocale, slug: string): Promise<BlogPost | null> => {
     return readPostFile(locale, slug);
-}
+});
 
 export async function hasPost(locale: BlogLocale, slug: string) {
     return (await readPostFile(locale, slug)) !== null;
