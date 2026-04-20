@@ -56,42 +56,42 @@ export async function Header() {
                     role="navigation"
                     aria-label="Main navigation"
                 >
-                    <a
-                        href="#services"
+                    <Link
+                        href={`/${locale}#services`}
                         className="hover:text-warm-gold transition focus-visible:ring-2 focus-visible:ring-offset-2 rounded px-2 py-2"
                     >
                         {t('services')}
-                    </a>
-                    <a
-                        href="#portfolio"
+                    </Link>
+                    <Link
+                        href={`/${locale}#portfolio`}
                         className="hover:text-warm-gold transition focus-visible:ring-2 focus-visible:ring-offset-2 rounded px-2 py-2"
                     >
                         {t('portfolio')}
-                    </a>
-                    <a
-                        href="#gear"
+                    </Link>
+                    <Link
+                        href={`/${locale}#gear`}
                         className="hover:text-warm-gold transition focus-visible:ring-2 focus-visible:ring-offset-2 rounded px-2 py-2"
                     >
                         {t('gear')}
-                    </a>
-                    <a
-                        href="#pricing"
+                    </Link>
+                    <Link
+                        href={`/${locale}#pricing`}
                         className="hover:text-warm-gold transition focus-visible:ring-2 focus-visible:ring-offset-2 rounded px-2 py-2"
                     >
                         {t('pricing')}
-                    </a>
+                    </Link>
                     <Link
                         href={`/${locale}/blog`}
                         className="hover:text-warm-gold transition focus-visible:ring-2 focus-visible:ring-offset-2 rounded px-2 py-2"
                     >
                         {t('blog')}
                     </Link>
-                    <a
-                        href="#contact"
+                    <Link
+                        href={`/${locale}#contact`}
                         className="bg-brick-red text-off-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full hover:scale-105 transition shadow-lg shadow-brick-red/20 focus-visible:ring-2 focus-visible:ring-offset-2"
                     >
                         {t('contact')}
-                    </a>
+                    </Link>
                 </nav>
 
                 {/* Right side - Theme & Language toggles + Mobile Menu */}

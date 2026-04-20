@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useState } from 'react';
 import {
     ArrowRight,
@@ -33,10 +35,10 @@ export function MobileNav() {
     const [open, setOpen] = useState(false);
 
     const navigationItems = [
-        { href: '#services', icon: Music2, key: 'services' },
-        { href: '#portfolio', icon: Disc3, key: 'portfolio' },
-        { href: '#gear', icon: SlidersHorizontal, key: 'gear' },
-        { href: '#pricing', icon: BadgeDollarSign, key: 'pricing' },
+        { href: `/${locale}#services`, icon: Music2, key: 'services' },
+        { href: `/${locale}#portfolio`, icon: Disc3, key: 'portfolio' },
+        { href: `/${locale}#gear`, icon: SlidersHorizontal, key: 'gear' },
+        { href: `/${locale}#pricing`, icon: BadgeDollarSign, key: 'pricing' },
         { href: `/${locale}/blog`, icon: BookOpen, key: 'blog' },
     ] as const;
 
@@ -82,7 +84,7 @@ export function MobileNav() {
                     <nav id="mobile-nav" className="flex flex-1 flex-col gap-2">
                         {navigationItems.map(({ href, icon: Icon, key }) => (
                             <SheetClose asChild key={href}>
-                                <a href={href} className={drawerLinkClassName}>
+                                <Link href={href} className={drawerLinkClassName}>
                                     <span className="flex items-center gap-3">
                                         <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-brick-red/10 text-brick-red transition group-hover:bg-brick-red group-hover:text-off-white dark:bg-white/10 dark:text-off-white">
                                             <Icon className="size-4" />
@@ -92,12 +94,12 @@ export function MobileNav() {
                                         </span>
                                     </span>
                                     <ArrowRight className="size-4 text-soft-brown transition group-hover:translate-x-0.5 group-hover:text-brick-red dark:text-off-white/50 dark:group-hover:text-off-white" />
-                                </a>
+                                </Link>
                             </SheetClose>
                         ))}
 
                         <SheetClose asChild>
-                            <a href="#contact" className={drawerCtaClassName}>
+                            <Link href={`/${locale}#contact`} className={drawerCtaClassName}>
                                 <span className="flex items-center gap-3">
                                     <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/15">
                                         <Mail className="size-4" />
@@ -107,7 +109,7 @@ export function MobileNav() {
                                     </span>
                                 </span>
                                 <ArrowRight className="size-4 text-off-white/80" />
-                            </a>
+                            </Link>
                         </SheetClose>
                     </nav>
                 </div>
