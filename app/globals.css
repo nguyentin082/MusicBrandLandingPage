@@ -201,3 +201,318 @@ html {
         @apply bg-background text-foreground;
     }
 }
+
+.mdx-content h2 a,
+.mdx-content h3 a {
+    text-decoration: none;
+}
+
+.mdx-content h2 a:hover,
+.mdx-content h3 a:hover {
+    color: var(--color-brick-red);
+}
+
+.mdx-html {
+    color: color-mix(in oklab, var(--color-soft-brown) 92%, black);
+}
+
+.dark .mdx-html {
+    color: color-mix(in oklab, var(--color-off-white) 88%, black);
+}
+
+.mdx-html h1 {
+    font-size: 2.25rem;
+    line-height: 1.15;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-top: 2rem;
+}
+
+.mdx-html h2 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-top: 2rem;
+}
+
+.mdx-html h3 {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-top: 1.75rem;
+}
+
+.mdx-html p,
+.mdx-html li {
+    font-size: 1.05rem;
+    line-height: 1.85;
+}
+
+.mdx-html p,
+.mdx-html ul,
+.mdx-html ol,
+.mdx-html blockquote,
+.mdx-html pre {
+    margin-top: 1.2rem;
+}
+
+.mdx-html > p:first-of-type {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: color-mix(in oklab, var(--color-soft-brown) 92%, black);
+}
+
+.dark .mdx-html > p:first-of-type {
+    color: color-mix(in oklab, var(--color-off-white) 84%, black);
+}
+
+.mdx-html ul,
+.mdx-html ol {
+    margin-left: 1.5rem;
+}
+
+.mdx-html li + li {
+    margin-top: 0.45rem;
+}
+
+.mdx-html ul {
+    list-style: disc;
+}
+
+.mdx-html ol {
+    list-style: decimal;
+}
+
+.mdx-html ul li::marker,
+.mdx-html ol li::marker {
+    color: var(--color-brick-red);
+    font-weight: 700;
+}
+
+.mdx-html blockquote {
+    border-left: 4px solid color-mix(in oklab, var(--color-brick-red) 82%, black);
+    border-radius: 0.75rem;
+    background: color-mix(in oklab, var(--color-warm-gold) 10%, white);
+    padding: 1rem 1.1rem;
+    font-style: italic;
+}
+
+.dark .mdx-html blockquote {
+    background: color-mix(in oklab, var(--color-warm-gold) 14%, black);
+}
+
+.mdx-html a {
+    color: var(--color-brick-red);
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2rem;
+    transition:
+        color 0.2s ease,
+        text-decoration-color 0.2s ease;
+}
+
+.mdx-html a:hover {
+    color: color-mix(in oklab, var(--color-brick-red) 80%, black);
+    text-decoration-color: color-mix(in oklab, var(--color-brick-red) 70%, black);
+}
+
+.mdx-html img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid color-mix(in oklab, var(--color-soft-brown) 14%, white);
+    box-shadow: 0 16px 36px -24px rgb(0 0 0 / 0.45);
+}
+
+.dark .mdx-html img {
+    border-color: color-mix(in oklab, var(--color-off-white) 18%, black);
+}
+
+.mdx-html figure {
+    margin-top: 1.25rem;
+}
+
+.mdx-html figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: color-mix(in oklab, var(--color-soft-brown) 78%, white);
+}
+
+.dark .mdx-html figcaption {
+    color: color-mix(in oklab, var(--color-off-white) 70%, black);
+}
+
+.mdx-html pre {
+    overflow-x: auto;
+    border-radius: 1rem;
+    border: 1px solid color-mix(in oklab, var(--color-off-white) 14%, black);
+    background: #171412;
+    color: #f8f8f8;
+    padding: 1rem 1.1rem;
+}
+
+.mdx-html code {
+    border-radius: 0.35rem;
+    background: color-mix(in oklab, var(--color-brick-red) 9%, white);
+    padding: 0.1rem 0.35rem;
+    font-size: 0.88em;
+    color: color-mix(in oklab, var(--color-brick-red) 80%, black);
+}
+
+.mdx-html pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+.mdx-html hr {
+    margin-top: 2rem;
+    border: 0;
+    border-top: 1px solid color-mix(in oklab, var(--color-soft-brown) 18%, white);
+}
+
+.dark .mdx-html hr {
+    border-top-color: color-mix(in oklab, var(--color-off-white) 20%, black);
+}
+
+/* Table Styling */
+.mdx-html table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.2rem;
+    border-radius: 1rem;
+    border: 2px solid var(--color-brick-red);
+    overflow: hidden;
+}
+
+.dark .mdx-html table {
+    border-color: var(--color-brick-red);
+}
+
+.mdx-html thead {
+    background: color-mix(in oklab, var(--color-brick-red) 15%, white);
+    border-bottom: 2px solid var(--color-brick-red);
+}
+
+.dark .mdx-html thead {
+    background: color-mix(in oklab, var(--color-brick-red) 22%, black);
+    border-bottom-color: var(--color-brick-red);
+}
+
+.mdx-html th {
+    padding: 0.95rem 1.1rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: color-mix(in oklab, var(--color-soft-brown) 92%, black);
+    letter-spacing: 0.01em;
+    border-right: 1px solid var(--color-brick-red);
+}
+
+.dark .mdx-html th {
+    color: color-mix(in oklab, var(--color-off-white) 88%, black);
+    border-right-color: var(--color-brick-red);
+}
+
+.mdx-html th:last-child {
+    border-right: none;
+}
+
+.mdx-html td {
+    padding: 0.85rem 1.1rem;
+    border-right: 1px solid var(--color-brick-red);
+    border-bottom: 1px solid var(--color-brick-red);
+    font-size: 0.98rem;
+    line-height: 1.65;
+}
+
+.dark .mdx-html td {
+    border-right-color: var(--color-brick-red);
+    border-bottom-color: var(--color-brick-red);
+}
+
+.mdx-html td:last-child {
+    border-right: none;
+}
+
+/* Alternating row background for better readability */
+.mdx-html tbody tr:nth-child(odd) {
+    background: color-mix(in oklab, var(--color-warm-gold) 6%, white);
+}
+
+.dark .mdx-html tbody tr:nth-child(odd) {
+    background: color-mix(in oklab, var(--color-warm-gold) 10%, black);
+}
+
+.mdx-html tbody tr:hover {
+    background: color-mix(in oklab, var(--color-warm-gold) 10%, white);
+}
+
+.dark .mdx-html tbody tr:hover {
+    background: color-mix(in oklab, var(--color-warm-gold) 14%, black);
+}
+
+/* Bold text in tables for emphasis */
+.mdx-html td strong {
+    color: color-mix(in oklab, var(--color-brick-red) 88%, black);
+    font-weight: 700;
+}
+
+.dark .mdx-html td strong {
+    color: var(--color-brick-red);
+}
+
+/* Responsive table wrapper for mobile */
+.mdx-html > table {
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+    .mdx-html table {
+        font-size: 0.9rem;
+    }
+
+    .mdx-html th,
+    .mdx-html td {
+        padding: 0.75rem 0.85rem;
+    }
+
+    .mdx-html th {
+        font-size: 0.85rem;
+    }
+
+    .mdx-html td {
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .mdx-html h1 {
+        font-size: 1.9rem;
+    }
+
+    .mdx-html h2 {
+        font-size: 1.45rem;
+    }
+
+    .mdx-html h3 {
+        font-size: 1.2rem;
+    }
+
+    .mdx-html table {
+        font-size: 0.8rem;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .mdx-html th,
+    .mdx-html td {
+        padding: 0.65rem 0.7rem;
+    }
+}
