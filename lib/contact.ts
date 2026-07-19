@@ -2,7 +2,7 @@ const contactPhone = '+84837216129';
 
 export const contactInfo = {
     phone: contactPhone,
-    email: 'hello@wavvietnam.studio',
+    email: 'contact@2lab.vn',
     map: {
         title: 'The Useful Apartment',
         address: '654/6 Lạc Long Quân, Phường 9, Tân Hòa, Hồ Chí Minh, Việt Nam',

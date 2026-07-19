@@ -1,6 +1,6 @@
-# WAV Vietnam
+# 2lab
 
-WAV Vietnam is a modern landing page for a music studio, built with Next.js and designed to showcase services, portfolio work, pricing, and contact information.
+2lab is a modern landing page for a music studio, built with Next.js and designed to showcase services, portfolio work, pricing, and contact information.
 
 ## Key Features
 

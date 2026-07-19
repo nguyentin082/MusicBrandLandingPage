@@ -1,10 +1,10 @@
 {
     "metadata": {
-        "title": "WAV Vietnam | Đồng hành cùng hành trình âm nhạc của bạn",
+        "title": "2lab | Đồng hành cùng hành trình âm nhạc của bạn",
         "description": "Phòng thu âm, sản xuất âm nhạc chuyên nghiệp tại Việt Nam. Dịch vụ Mix & Master cao cấp. Được tin tưởng bởi nhiều nghệ sĩ hàng đầu Việt Nam."
     },
     "navigation": {
-        "logo": "WAV VIETNAM",
+        "logo": "2lab",
         "tagline": "Đồng hành cùng âm nhạc của bạn",
         "services": "Dịch vụ",
         "portfolio": "Sản phẩm",
@@ -17,14 +17,14 @@
         "badge": "Compose - Arrange - Record - Edit - Mix - Master - Publish",
         "heading": "TỪ Ý TƯỞNG",
         "highlighted": "ĐẾN SẢN PHẨM",
-        "description": "Nơi những ý tưởng thô sơ được biến thành những sản phẩm chuẩn chất lượng thương mại. Tại WAV Vietnam, chúng mình tạo ra trải nghiệm âm nhạc đích thực.",
+        "description": "Nơi những ý tưởng thô sơ được biến thành những sản phẩm chuẩn chất lượng thương mại. Tại 2lab, chúng mình tạo ra trải nghiệm âm nhạc đích thực.",
         "cta_primary": "Liên hệ ngay",
         "cta_secondary": "Nghe các sản phẩm"
     },
     "philosophy": {
         "label": "Triết lý của chúng mình",
         "quote": "Chúng mình không làm việc máy móc, chúng mình đem lại sự chân thành trong từng nốt nhạc.",
-        "description": "Mỗi bài hát là một câu chuyện. Tại WAV Vietnam, chúng mình ở đây để đảm bảo câu chuyện của bạn được kể lại bằng âm thanh trung thực và cảm xúc nhất."
+        "description": "Mỗi bài hát là một câu chuyện. Tại 2lab, chúng mình ở đây để đảm bảo câu chuyện của bạn được kể lại bằng âm thanh trung thực và cảm xúc nhất."
     },
     "stats": {
         "projects": {
@@ -203,7 +203,7 @@
     "studio": {
         "label": "Vibe & Comfort",
         "heading": "Thư Thái Để Sáng Tạo",
-        "description": "Chúng mình tin rằng cảm hứng tuyệt vời nhất đến từ sự thoải mái. Tại WAV Vietnam, bạn không chỉ làm việc trong một môi trường chuyên nghiệp mà còn được hỗ trợ nhiệt tình bởi các nhân sự có kinh nghiệm và chuyên môn cao. Từ đó, chúng mình tạo ra một không gian nơi nghệ sĩ có thể thả hồn vào âm nhạc của mình mà không bị gián đoạn bởi những lo lắng về kỹ thuật hay môi trường xung quanh.",
+        "description": "Chúng mình tin rằng cảm hứng tuyệt vời nhất đến từ sự thoải mái. Tại 2lab, bạn không chỉ làm việc trong một môi trường chuyên nghiệp mà còn được hỗ trợ nhiệt tình bởi các nhân sự có kinh nghiệm và chuyên môn cao. Từ đó, chúng mình tạo ra một không gian nơi nghệ sĩ có thể thả hồn vào âm nhạc của mình mà không bị gián đoạn bởi những lo lắng về kỹ thuật hay môi trường xung quanh.",
         "amenities": [
             "Cà phê đặc sản",
             "Khu thư giãn sáng tạo",
@@ -282,7 +282,7 @@
             {
                 "name": "SniT",
                 "role": "Founder & Music Producer",
-                "bio": "8+ năm kinh nghiệm, linh hồn của các bản Mix & Master tại WAV Vietnam.",
+                "bio": "8+ năm kinh nghiệm, linh hồn của các bản Mix & Master tại 2lab.",
                 "avatar": "/image/team/snit.jpeg"
             },
             {
@@ -344,7 +344,7 @@
     "newsletter": {
         "label": "Join The Community",
         "heading": "Nhận Cẩm Nang Sản Xuất Âm Nhạc Miễn Phí",
-        "description": "Đăng ký để nhận những mẹo về thu âm tại nhà, cách chuẩn bị vocal stems và xu hướng âm nhạc mới nhất từ các chuyên gia tại WAV Vietnam.",
+        "description": "Đăng ký để nhận những mẹo về thu âm tại nhà, cách chuẩn bị vocal stems và xu hướng âm nhạc mới nhất từ các chuyên gia tại 2lab.",
         "placeholder": "Email của bạn",
         "cta": "Nhận Cẩm Nang"
     },
@@ -370,7 +370,7 @@
         ]
     },
     "footer": {
-        "companyName": "WAV VIETNAM",
+        "companyName": "2LAB",
         "tagline": "Đồng hành cùng âm nhạc của bạn",
         "contact": {
             "label": "Liên Hệ Với Chúng Mình",
@@ -380,7 +380,7 @@
             "copyAddress": "Sao Chép Địa Chỉ",
             "copied": "Đã Sao Chép",
             "phone": "+84 987 654 321",
-            "email": "hello@wavvietnam.studio",
+            "email": "contact@2lab.vn",
             "address": "Quận 1, TP. Hồ Chí Minh, Việt Nam"
         },
         "links": {
@@ -390,6 +390,6 @@
             "portfolio": "Sản Phẩm",
             "contact": "Liên Hệ"
         },
-        "copyright": "© {year} WAV Vietnam. All rights reserved."
+        "copyright": "© {year} 2lab. All rights reserved."
     }
 }

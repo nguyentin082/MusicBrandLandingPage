@@ -1,10 +1,10 @@
 {
     "metadata": {
-        "title": "WAV Vietnam | Premium Sound Studio - Recording, Production & Mix Master",
+        "title": "2lab | Premium Sound Studio - Recording, Production & Mix Master",
         "description": "Professional recording studio in Vietnam. Expert mix & master services with analog gear. Trusted by 150+ indie artists. Book your session today."
     },
     "navigation": {
-        "logo": "WAV VIETNAM",
+        "logo": "2lab",
         "tagline": "Sound Studio",
         "services": "Services",
         "portfolio": "Portfolio",
@@ -24,7 +24,7 @@
     "philosophy": {
         "label": "The Soul",
         "quote": "We don't just record machines, we capture the authenticity in every note.",
-        "description": "Every song is a story. At WAV Vietnam, we ensure your story is told through the most honest and emotional sound possible."
+        "description": "Every song is a story. At 2lab, we ensure your story is told through the most honest and emotional sound possible."
     },
     "stats": {
         "projects": {
@@ -203,7 +203,7 @@
     "studio": {
         "label": "Vibe & Comfort",
         "heading": "Comfort for Creativity",
-        "description": "We believe the best inspiration comes from comfort. At WAV Vietnam, you not only work in a professional environment but are also supported by a dedicated team with deep experience and expertise. This helps create a space where artists can fully immerse themselves in music without being interrupted by technical concerns or environmental distractions.",
+        "description": "We believe the best inspiration comes from comfort. At 2lab, you not only work in a professional environment but are also supported by a dedicated team with deep experience and expertise. This helps create a space where artists can fully immerse themselves in music without being interrupted by technical concerns or environmental distractions.",
         "amenities": [
             "Specialty Coffee",
             "Creative Chill Zone",
@@ -282,7 +282,7 @@
             {
                 "name": "SniT",
                 "role": "Founder & Music Producer",
-                "bio": "8+ years of experience, the driving force behind WAV Vietnam's Mix & Master quality.",
+                "bio": "8+ years of experience, the driving force behind 2lab's Mix & Master quality.",
                 "avatar": "/image/team/snit.jpeg"
             },
             {
@@ -344,7 +344,7 @@
     "newsletter": {
         "label": "Join The Community",
         "heading": "Get Free Music Production Guide",
-        "description": "Subscribe to get tips on home recording, vocal stem prep, and latest music trends from WAV Vietnam experts.",
+        "description": "Subscribe to get tips on home recording, vocal stem prep, and latest music trends from 2lab experts.",
         "placeholder": "Your Email",
         "cta": "Get Guide"
     },
@@ -370,7 +370,7 @@
         ]
     },
     "footer": {
-        "companyName": "WAV VIETNAM",
+        "companyName": "2LAB",
         "tagline": "Authentic Sound, Expert Craft",
         "contact": {
             "label": "Get in Touch",
@@ -380,7 +380,7 @@
             "copyAddress": "Copy Address",
             "copied": "Address Copied",
             "phone": "+84 987 654 321",
-            "email": "hello@wavvietnam.studio",
+            "email": "contact@2lab.vn",
             "address": "District 1, Ho Chi Minh City, Vietnam"
         },
         "links": {
@@ -390,6 +390,6 @@
             "portfolio": "Portfolio",
             "contact": "Contact"
         },
-        "copyright": "\u00a9 {year} WAV Vietnam. All rights reserved."
+        "copyright": "\u00a9 {year} 2lab. All rights reserved."
     }
 }
