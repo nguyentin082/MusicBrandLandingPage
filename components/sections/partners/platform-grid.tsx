@@ -84,25 +84,25 @@ const PlatformItem = memo(function PlatformItem({ platform }: PlatformItemProps)
         <div className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 md:gap-3 px-3 sm:px-4 md:px-5 lg:px-6 py-3 sm:py-4 md:py-6 rounded-lg opacity-60 hover:opacity-100 transition duration-300 hover:bg-warm-gold/5 min-w-fit">
             {IconComponent ? (
                 hasCustomIcon ? (
-                    <div className="w-12 sm:w-14 md:w-20 h-12 sm:h-14 md:h-20 flex items-center justify-center">
+                    <div className="w-14 sm:w-18 md:w-24 h-14 sm:h-18 md:h-24 flex items-center justify-center">
                         <CustomPlatformIcon
                             iconName={platform.icon}
                             label={platform.name}
                             IconComponent={IconComponent}
-                            size={48}
+                            size={64}
                         />
                     </div>
                 ) : (
-                    <div className="w-12 sm:w-14 md:w-20 h-12 sm:h-14 md:h-20 flex items-center justify-center">
+                    <div className="w-14 sm:w-18 md:w-24 h-14 sm:h-18 md:h-24 flex items-center justify-center">
                         <IconComponent
-                            size={48}
+                            size={64}
                             style={{ color: iconColor }}
                             aria-label={platform.name}
                         />
                     </div>
                 )
             ) : (
-                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-20 md:h-20 bg-off-white/20 rounded" />
+                <div className="w-14 h-14 sm:w-18 sm:h-18 md:w-24 md:h-24 bg-off-white/20 rounded" />
             )}
             <span className="text-xs sm:text-sm md:text-sm font-medium text-off-white dark:text-off-white text-center leading-tight line-clamp-2 max-w-16 sm:max-w-20 md:max-w-28">
                 {platform.name}
