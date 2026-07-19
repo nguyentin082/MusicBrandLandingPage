@@ -70,6 +70,7 @@ export default async function LocaleLayout({
         zalo: contactFabT('labels.zalo'),
         facebook: contactFabT('labels.facebook'),
         instagram: contactFabT('labels.instagram'),
+        tiktok: contactFabT('labels.tiktok'),
         telegram: contactFabT('labels.telegram'),
         scrollTop: contactFabT('labels.scrollTop'),
     };

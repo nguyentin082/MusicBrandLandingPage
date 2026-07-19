@@ -11,6 +11,8 @@ export const siteConfig = {
     socials: {
         facebook: contactInfo.links.facebook,
         instagram: contactInfo.links.instagram,
+        tiktok: contactInfo.links.tiktok,
+        youtube: contactInfo.links.youtube,
         telegram: contactInfo.links.telegram,
         zalo: contactInfo.links.zalo,
     },

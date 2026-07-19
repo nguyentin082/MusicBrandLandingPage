@@ -71,6 +71,7 @@
             "zalo": "Zalo",
             "facebook": "Facebook",
             "instagram": "Instagram",
+            "tiktok": "TikTok",
             "telegram": "Telegram",
             "scrollTop": "Lên Đầu Trang"
         },
@@ -78,6 +79,7 @@
             "zalo": "Chat Zalo",
             "facebook": "Trang Facebook",
             "instagram": "Nhắn Instagram",
+            "tiktok": "Xem TikTok",
             "telegram": "Chat Telegram"
         }
     },
@@ -379,7 +381,7 @@
             "directions": "Chỉ Đường",
             "copyAddress": "Sao Chép Địa Chỉ",
             "copied": "Đã Sao Chép",
-            "phone": "+84 987 654 321",
+            "phone": "+84 879 277 167",
             "email": "contact@2lab.vn",
             "address": "Quận 1, TP. Hồ Chí Minh, Việt Nam"
         },

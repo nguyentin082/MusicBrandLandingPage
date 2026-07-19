@@ -11,7 +11,7 @@ import {
     Send,
     X,
 } from 'lucide-react';
-import { SiZalo } from 'react-icons/si';
+import { SiZalo, SiTiktok } from 'react-icons/si';
 import { contactInfo } from '@/lib/contact';
 
 type ContactFabLabels = {
@@ -20,6 +20,7 @@ type ContactFabLabels = {
     zalo: string;
     facebook: string;
     instagram: string;
+    tiktok: string;
     telegram: string;
     scrollTop: string;
 };
@@ -58,6 +59,13 @@ const contactActions = [
         href: contactInfo.links.instagram,
         labelKey: 'instagram',
         icon: Instagram,
+        external: true,
+    },
+    {
+        key: 'tiktok',
+        href: contactInfo.links.tiktok,
+        labelKey: 'tiktok',
+        icon: SiTiktok,
         external: true,
     },
     {

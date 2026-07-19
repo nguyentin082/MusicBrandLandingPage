@@ -1,4 +1,4 @@
-const contactPhone = '+84837216129';
+const contactPhone = '+84879277167';
 
 export const contactInfo = {
     phone: contactPhone,
@@ -13,9 +13,11 @@ export const contactInfo = {
     links: {
         call: `tel:${contactPhone}`,
         sms: `sms:${contactPhone}`,
-        zalo: `https://zalo.me/${contactPhone.replace('+', '')}`,
-        facebook: 'https://www.facebook.com/trungtin.h.nguyen.908',
-        instagram: 'https://www.instagram.com/trungtin.h.nguyen.908',
-        telegram: 'https://t.me/nguyenhoangtrungtin',
+        zalo: 'https://zalo.me/84879277167',
+        facebook: 'https://www.facebook.com/2labvn',
+        instagram: 'https://www.instagram.com/2labvn/',
+        tiktok: 'https://www.tiktok.com/@2labvn',
+        youtube: 'https://www.youtube.com/@2labvn',
+        telegram: 'https://t.me/+84879277167',
     },
 } as const;
