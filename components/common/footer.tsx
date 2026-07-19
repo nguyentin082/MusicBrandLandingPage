@@ -4,6 +4,53 @@ import { Copy, ExternalLink, MapPin, Navigation } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { contactInfo } from '@/lib/contact';
+import {
+    SiFacebook,
+    SiInstagram,
+    SiTiktok,
+    SiYoutube,
+    SiZalo,
+    SiTelegram,
+} from 'react-icons/si';
+
+const SOCIALS = [
+    {
+        label: 'Facebook',
+        href: contactInfo.links.facebook,
+        icon: SiFacebook,
+        color: '#1877F2',
+    },
+    {
+        label: 'Instagram',
+        href: contactInfo.links.instagram,
+        icon: SiInstagram,
+        color: '#E4405F',
+    },
+    {
+        label: 'TikTok',
+        href: contactInfo.links.tiktok,
+        icon: SiTiktok,
+        color: '#FE2C55',
+    },
+    {
+        label: 'YouTube',
+        href: contactInfo.links.youtube,
+        icon: SiYoutube,
+        color: '#FF0000',
+    },
+    {
+        label: 'Zalo',
+        href: contactInfo.links.zalo,
+        icon: SiZalo,
+        color: '#0068FF',
+    },
+    {
+        label: 'Telegram',
+        href: contactInfo.links.telegram,
+        icon: SiTelegram,
+        color: '#26A5E4',
+    },
+] as const;
 
 export function Footer() {
     const t = useTranslations('footer');
@@ -38,6 +85,35 @@ export function Footer() {
                             Premium sound studio specializing in recording, mixing, and mastering
                             for independent artists worldwide.
                         </p>
+
+                        {/* Social Icons */}
+                        <div className="mt-8 flex flex-wrap gap-3">
+                            {SOCIALS.map(({ label, href, icon: Icon, color }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    aria-label={label}
+                                    title={label}
+                                    className="group relative flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80"
+                                    style={{
+                                        ['--brand-color' as string]: color,
+                                    }}
+                                >
+                                    <Icon
+                                        className="size-5 text-off-white/60 transition-all duration-300 group-hover:scale-110 group-hover:text-[var(--brand-color)]"
+                                        aria-hidden="true"
+                                    />
+                                    {/* Brand color glow on hover */}
+                                    <span
+                                        className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-15"
+                                        style={{ background: color }}
+                                        aria-hidden="true"
+                                    />
+                                </a>
+                            ))}
+                        </div>
                     </div>
 
                     <div className="w-full lg:self-start lg:justify-self-end">
