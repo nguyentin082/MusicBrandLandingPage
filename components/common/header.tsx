@@ -5,6 +5,10 @@ import { Suspense } from 'react';
 import { ThemeToggle } from './theme-toggle';
 import { LanguageSwitcher } from './language-switcher';
 import { MobileNav } from './mobile-nav';
+import { resolveMediaUrl } from '@/lib/media';
+
+const logoLight = resolveMediaUrl('/image/branding/2lab-logo-light-mode.PNG');
+const logoDark = resolveMediaUrl('/image/branding/2lab-logo-dark-mode.PNG');
 
 export async function Header() {
     const [t, locale] = await Promise.all([getTranslations('navigation'), getLocale()]);
@@ -24,21 +28,25 @@ export async function Header() {
                     href="/"
                     className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition shrink-0"
                 >
+                    {/* Light mode logo (hidden in dark mode) */}
                     <Image
-                        src="/icon-light.svg"
-                        alt=""
-                        width={120}
-                        height={80}
+                        src={logoLight}
+                        alt="2lab logo"
+                        width={160}
+                        height={60}
                         priority
-                        className="h-9 sm:h-10 w-auto drop-shadow-sm dark:hidden"
+                        sizes="(max-width: 640px) 120px, 160px"
+                        className="h-9 sm:h-10 w-auto object-contain rounded-lg drop-shadow-sm dark:hidden"
                     />
+                    {/* Dark mode logo (hidden in light mode) */}
                     <Image
-                        src="/icon.svg"
-                        alt=""
-                        width={120}
-                        height={80}
+                        src={logoDark}
+                        alt="2lab logo"
+                        width={160}
+                        height={60}
                         priority
-                        className="hidden h-9 sm:h-10 w-auto drop-shadow-sm dark:block"
+                        sizes="(max-width: 640px) 120px, 160px"
+                        className="hidden h-9 sm:h-10 w-auto object-contain rounded-lg drop-shadow-sm dark:block"
                     />
                     <div className="hidden flex-col gap-0.5 sm:flex">
                         <span className="text-base sm:text-lg font-bold tracking-tighter text-dark-umber dark:text-off-white">

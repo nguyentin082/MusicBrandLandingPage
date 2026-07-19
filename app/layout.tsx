@@ -77,17 +77,17 @@ export const metadata: Metadata = {
     icons: {
         icon: [
             {
-                url: '/icon-light.svg',
+                url: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/image/branding/2lab-logo-light-mode.PNG`,
                 media: '(prefers-color-scheme: light)',
-                type: 'image/svg+xml',
+                type: 'image/png',
             },
             {
-                url: '/icon.svg',
+                url: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/image/branding/2lab-logo-dark-mode.PNG`,
                 media: '(prefers-color-scheme: dark)',
-                type: 'image/svg+xml',
+                type: 'image/png',
             },
         ],
-        apple: '/apple-icon.png',
+        apple: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/image/branding/2lab-logo-dark-mode.PNG`,
     },
 };
 

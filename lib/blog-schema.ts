@@ -13,7 +13,7 @@ export function createBlogListSchema(locale: BlogLocale, posts: BlogPostMeta[]) 
             url: siteConfig.url,
             logo: {
                 '@type': 'ImageObject',
-                url: `${siteConfig.url}/icon.svg`,
+                url: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/image/branding/2lab-logo-dark-mode.PNG`,
             },
         },
         itemListElement: posts.map((post, index) => ({
@@ -47,7 +47,7 @@ export function createBlogPostSchema(locale: BlogLocale, post: BlogPost) {
             url: siteConfig.url,
             logo: {
                 '@type': 'ImageObject',
-                url: `${siteConfig.url}/icon.svg`,
+                url: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/image/branding/2lab-logo-dark-mode.PNG`,
             },
         },
         author: {
