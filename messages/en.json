@@ -343,12 +343,36 @@
             }
         ]
     },
-    "newsletter": {
-        "label": "Join The Community",
-        "heading": "Get Free Music Production Guide",
-        "description": "Subscribe to get tips on home recording, vocal stem prep, and latest music trends from 2lab experts.",
-        "placeholder": "Your Email",
-        "cta": "Get Guide"
+    "ctaForm": {
+        "label": "Booking Inquiry",
+        "heading": "Ready For Your Next Project?",
+        "description": "Leave your information and the 2lab team will contact you as soon as possible for detailed consultation.",
+        "fields": {
+            "name": "Full Name *",
+            "namePlaceholder": "Enter your full name",
+            "phone": "Phone Number *",
+            "phonePlaceholder": "e.g., +84987654321",
+            "email": "Email",
+            "emailPlaceholder": "example@gmail.com",
+            "service": "Service of Interest",
+            "message": "Message",
+            "messagePlaceholder": "How can we help you with your project..."
+        },
+        "services": {
+            "recording": "Recording",
+            "mixing": "Mix & Master",
+            "production": "Full Production",
+            "other": "Other"
+        },
+        "submit": "Send Request",
+        "submitting": "Sending...",
+        "success": {
+            "title": "Successfully Sent!",
+            "message": "Thank you for reaching out. We will get back to you as soon as possible."
+        },
+        "error": {
+            "message": "Something went wrong. Please try again later."
+        }
     },
     "faq": {
         "heading": "Frequently Asked Questions",

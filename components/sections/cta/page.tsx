@@ -1,30 +1,26 @@
 import { getTranslations } from 'next-intl/server';
+import { LeadForm } from './lead-form';
 
 export async function CTASection() {
-    const t = await getTranslations('newsletter');
+    const t = await getTranslations('ctaForm');
 
     return (
-        <section className="py-16 sm:py-24 md:py-32 bg-warm-gold dark:bg-warm-gold px-4 sm:px-6">
-            <div className="max-w-4xl mx-auto text-center">
+        <section className="py-16 sm:py-24 md:py-32 bg-warm-gold dark:bg-warm-gold px-4 sm:px-6 relative overflow-hidden">
+            {/* Subtle background decoration */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div className="max-w-5xl mx-auto text-center relative z-10">
                 <h2 className="text-dark-umber text-xs font-black uppercase tracking-[0.4em] mb-4 sm:mb-6 italic">
                     {t('label')}
                 </h2>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-dark-umber mb-6 sm:mb-8 italic">
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark-umber mb-6 sm:mb-8 italic tracking-tight">
                     {t('heading')}
                 </h3>
-                <p className="text-dark-umber/70 mb-8 sm:mb-10 italic font-medium leading-relaxed text-sm sm:text-base">
+                <p className="text-dark-umber/70 mb-10 sm:mb-16 italic font-medium leading-relaxed text-sm sm:text-base max-w-2xl mx-auto">
                     {t('description')}
                 </p>
-                <form className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-lg mx-auto">
-                    <input
-                        type="email"
-                        placeholder={t('placeholder')}
-                        className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-white/20 border border-dark-umber/20 focus:outline-none focus:border-dark-umber text-dark-umber italic text-sm placeholder:text-dark-umber/40"
-                    />
-                    <button className="px-6 sm:px-8 py-3 sm:py-4 bg-dark-umber text-off-white font-bold rounded-2xl hover:scale-105 transition italic whitespace-nowrap text-sm sm:text-base">
-                        {t('cta')}
-                    </button>
-                </form>
+                
+                <LeadForm />
             </div>
         </section>
     );

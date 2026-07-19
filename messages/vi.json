@@ -343,12 +343,36 @@
             }
         ]
     },
-    "newsletter": {
-        "label": "Join The Community",
-        "heading": "Nhận Cẩm Nang Sản Xuất Âm Nhạc Miễn Phí",
-        "description": "Đăng ký để nhận những mẹo về thu âm tại nhà, cách chuẩn bị vocal stems và xu hướng âm nhạc mới nhất từ các chuyên gia tại 2lab.",
-        "placeholder": "Email của bạn",
-        "cta": "Nhận Cẩm Nang"
+    "ctaForm": {
+        "label": "Liên Hệ Booking",
+        "heading": "Sẵn Sàng Cho Dự Án Mới?",
+        "description": "Để lại thông tin, đội ngũ 2lab sẽ liên hệ lại với bạn trong thời gian sớm nhất để tư vấn chi tiết.",
+        "fields": {
+            "name": "Họ tên *",
+            "namePlaceholder": "Nhập họ tên của bạn",
+            "phone": "Số điện thoại *",
+            "phonePlaceholder": "Ví dụ: 0987654321",
+            "email": "Email",
+            "emailPlaceholder": "example@gmail.com",
+            "service": "Dịch vụ quan tâm",
+            "message": "Nội dung",
+            "messagePlaceholder": "Bạn đang cần chúng mình hỗ trợ về vấn đề gì..."
+        },
+        "services": {
+            "recording": "Thu âm (Recording)",
+            "mixing": "Mix & Master",
+            "production": "Sản xuất trọn gói (Full Production)",
+            "other": "Khác"
+        },
+        "submit": "Gửi yêu cầu",
+        "submitting": "Đang gửi...",
+        "success": {
+            "title": "Gửi thành công!",
+            "message": "Cảm ơn bạn đã quan tâm. Chúng mình sẽ liên hệ lại sớm nhất có thể."
+        },
+        "error": {
+            "message": "Có lỗi xảy ra. Vui lòng thử lại sau."
+        }
     },
     "faq": {
         "heading": "Giải Đáp Thắc Mắc",
