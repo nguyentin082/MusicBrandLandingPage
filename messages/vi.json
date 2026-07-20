@@ -284,20 +284,20 @@
             {
                 "name": "SniT",
                 "role": "Founder & Music Producer",
-                "bio": "8+ năm kinh nghiệm, linh hồn của các bản Mix & Master tại 2lab.",
+                "bio": "Chuyên về hòa âm phối khí và Mix & Master.",
                 "avatar": "/image/team/snit.jpeg"
             },
             {
                 "name": "Thúy Quỳnh",
-                "role": "Vocal Producer & Recording Engineer",
-                "bio": "8+ năm kinh nghiệm, chuyên về sản xuất vocal và thu âm.",
-                "avatar": "/image/team/snit.jpeg"
+                "role": "Co-founder & Vocal Producer",
+                "bio": "Chuyên về sản xuất vocal và thu âm.",
+                "avatar": "/image/team/quynh.jpg"
             },
             {
                 "name": "Đạt Nguyễn",
                 "role": "Composer & Vocal Coach",
-                "bio": "8+ năm kinh nghiệm, chuyên về viết nhạc và huấn luyện giọng hát.",
-                "avatar": "/image/team/snit.jpeg"
+                "bio": "Chuyên về viết nhạc và huấn luyện giọng hát.",
+                "avatar": "/image/team/dat.jpeg"
             }
         ]
     },
