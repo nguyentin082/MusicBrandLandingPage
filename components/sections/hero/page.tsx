@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { MessageSquare, Headphones } from 'lucide-react';
 
 import { HeroCarousel } from './hero-carousel';
 
@@ -27,14 +28,16 @@ export async function HeroSection() {
                     <div className="flex flex-wrap gap-4 sm:gap-6">
                         <a
                             href="#contact"
-                            className="bg-brick-red px-6 sm:px-10 py-3 sm:py-5 rounded-2xl text-sm sm:text-base text-off-white font-bold hover:bg-brick-red/90 transition shadow-xl"
+                            className="bg-brick-red px-6 sm:px-10 py-3 sm:py-5 rounded-2xl text-sm sm:text-base text-off-white font-bold hover:bg-brick-red/90 transition shadow-xl flex items-center gap-2"
                         >
+                            <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
                             {t('cta_primary')}
                         </a>
                         <a
                             href="#portfolio"
-                            className="px-6 sm:px-10 py-3 sm:py-5 border border-off-white/20 rounded-2xl text-sm sm:text-base font-bold hover:bg-off-white/5 transition"
+                            className="px-6 sm:px-10 py-3 sm:py-5 border border-off-white/20 rounded-2xl text-sm sm:text-base font-bold hover:bg-off-white/5 transition flex items-center gap-2"
                         >
+                            <Headphones className="w-4 h-4 sm:w-5 sm:h-5" />
                             {t('cta_secondary')}
                         </a>
                     </div>
