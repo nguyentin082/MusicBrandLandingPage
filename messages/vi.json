@@ -220,9 +220,8 @@
         ]
     },
     "gear": {
-        "label": "The Armory",
+        "label": "Thiết bị phòng thu",
         "heading": "Vũ Khí Kỹ Thuật",
-        "description": "Chúng mình sử dụng những thiết bị huyền thoại được săn đón trên thế giới để đảm bảo mỗi bản thu đều mang chất lượng thương mại.",
         "cardLabel": "Bảng thiết bị",
         "itemNameLabel": "Tên thiết bị",
         "itemTypeLabel": "Loại thiết bị",

@@ -219,9 +219,8 @@
         ]
     },
     "gear": {
-        "label": "The Armory",
+        "label": "Studio Equipment",
         "heading": "Technical Arsenal",
-        "description": "We use legendary, highly sought-after equipment globally to ensure every recording meets commercial quality standards.",
         "cardLabel": "Equipment Board",
         "itemNameLabel": "Equipment Name",
         "itemTypeLabel": "Equipment Type",
