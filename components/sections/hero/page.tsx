@@ -16,26 +16,26 @@ export async function HeroSection() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 items-center gap-8 sm:gap-12 md:gap-16 relative z-10">
                 <div className="animate-fade-in">
 
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black mb-6 sm:mb-8 leading-[1.1] sm:leading-[1.1] md:leading-[1.1] tracking-tighter italic">
+                    <h1 className="text-6xl sm:text-6xl md:text-6xl lg:text-8xl font-black mb-6 sm:mb-8 leading-[1.1] tracking-tighter italic">
                         {t('heading')} <br />
                         <span className="text-warm-gold">{t('highlighted')}</span>
                     </h1>
-                    <p className="text-off-white/50 text-sm sm:text-base md:text-lg max-w-lg mb-8 sm:mb-12 font-light leading-relaxed">
+                    <p className="text-off-white/50 text-sm sm:text-base md:text-lg max-w-lg mb-8 sm:mb-12 font-light leading-relaxed text-justify sm:text-left">
                         {t('description')}
                     </p>
-                    <div className="flex flex-wrap gap-4 sm:gap-6">
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                         <a
                             href="#contact"
-                            className="bg-brick-red px-6 sm:px-10 py-3 sm:py-5 rounded-2xl text-sm sm:text-base text-off-white font-bold hover:bg-brick-red/90 transition shadow-xl flex items-center gap-2"
+                            className="bg-brick-red px-6 sm:px-10 py-4 sm:py-5 rounded-2xl text-base sm:text-base text-off-white font-bold hover:bg-brick-red/90 transition shadow-xl flex items-center justify-center gap-2 w-full sm:w-auto"
                         >
-                            <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <MessageSquare className="w-5 h-5 sm:w-5 sm:h-5" />
                             {t('cta_primary')}
                         </a>
                         <a
                             href="#portfolio"
-                            className="px-6 sm:px-10 py-3 sm:py-5 border border-off-white/20 rounded-2xl text-sm sm:text-base font-bold hover:bg-off-white/5 transition flex items-center gap-2"
+                            className="px-6 sm:px-10 py-4 sm:py-5 border border-off-white/20 rounded-2xl text-base sm:text-base font-bold hover:bg-off-white/5 transition flex items-center justify-center gap-2 w-full sm:w-auto"
                         >
-                            <Headphones className="w-4 h-4 sm:w-5 sm:h-5" />
+                            <Headphones className="w-5 h-5 sm:w-5 sm:h-5" />
                             {t('cta_secondary')}
                         </a>
                     </div>
