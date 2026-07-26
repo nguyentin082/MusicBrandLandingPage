@@ -17,14 +17,14 @@
         "badge": "Compose - Arrange - Record - Edit - Mix - Master - Publish",
         "heading": "TỪ Ý TƯỞNG",
         "highlighted": "ĐẾN SẢN PHẨM",
-        "description": "Nơi những ý tưởng thô sơ được biến thành những sản phẩm chuẩn chất lượng thương mại. Tại 2lab, chúng mình tạo ra trải nghiệm âm nhạc đích thực.",
+        "description": "2LAB không chỉ thu âm và sản xuất, mà còn đồng hành cùng bạn kể những câu chuyện bằng âm nhạc.",
         "cta_primary": "Liên hệ ngay",
         "cta_secondary": "Nghe các sản phẩm"
     },
     "philosophy": {
-        "label": "Triết lý của chúng mình",
-        "quote": "Chúng mình không làm việc máy móc, chúng mình đem lại sự chân thành trong từng nốt nhạc.",
-        "description": "Mỗi bài hát là một câu chuyện. Tại 2lab, chúng mình ở đây để đảm bảo câu chuyện của bạn được kể lại bằng âm thanh trung thực và cảm xúc nhất."
+        "label": "Với chúng mình",
+        "quote": "Điều quan trọng với bạn thì cũng quan trọng với 2LAB",
+        "description": "Có người đến để theo đuổi ước mơ. Có người đến để giữ lại một kỷ niệm. Dù là lý do nào, bọn mình đều làm bằng sự nghiêm túc."
     },
     "stats": {
         "projects": {
@@ -126,8 +126,8 @@
         ]
     },
     "audioComparison": {
-        "label": "Before & After",
-        "heading": "Sức Mạnh Của Mix Master",
+        "label": "Trước & Sau",
+        "heading": "Mix Master",
         "trackTitleDieOnThisHill": "\"Die On This Hill\" - Pop Ballad",
         "trackTitleCloseToYou": "\"Close To You\" - Pop Ballad",
         "rawButton": "Raw Recording",
@@ -137,7 +137,7 @@
         "pauseButton": "Tạm dừng"
     },
     "portfolio": {
-        "heading": "Dự Án Tiêu Biểu",
+        "heading": "Dự Án Hòa Âm & Phối Khí Tiêu Biểu",
         "showcase": {
             "spotlight": "Tiêu điểm",
             "signatureRelease": "Phát hành nổi bật",
@@ -344,9 +344,9 @@
         ]
     },
     "ctaForm": {
-        "label": "Liên Hệ Booking",
+        "label": "Liên Hệ Tư Vấn",
         "heading": "Sẵn Sàng Cho Dự Án Mới?",
-        "description": "Để lại thông tin, đội ngũ 2lab sẽ liên hệ lại với bạn trong thời gian sớm nhất để tư vấn chi tiết.",
+        "description": "Hãy để lại thông tin, đội ngũ 2LAB sẽ liên hệ lại với bạn trong thời gian sớm nhất để tư vấn chi tiết.",
         "fields": {
             "name": "Họ tên *",
             "namePlaceholder": "Nhập họ tên của bạn",
@@ -379,19 +379,19 @@
         "questions": [
             {
                 "question": "Tôi cần chuẩn bị gì trước khi đến thu âm?",
-                "answer": "Bạn nên thuộc lời bài hát, chuẩn bị beat (file WAV chất lượng cao) và gửi demo trước cho kỹ thuật viên. Một giấc ngủ ngon và uống đủ nước cũng giúp giọng hát đạt phong độ tốt nhất."
+                "answer": "Bạn nên thuộc lời bài hát, chuẩn bị beat (file WAV chất lượng cao được khuyên dùng) và gửi cho 2LAB hoặc liên hệ chúng tôi để được hỗ trợ thêm. Một giấc ngủ ngon và uống đủ nước cũng giúp giọng hát đạt phong độ tốt nhất."
             },
             {
                 "question": "Thời gian hoàn thiện bản Mix & Master là bao lâu?",
-                "answer": "Thông thường quá trình Mix & Master sẽ mất từ 3-5 ngày làm việc tùy vào độ phức tạp của bài hát. Chúng mình luôn ưu tiên chất lượng sản phẩm lên hàng đầu."
+                "answer": "Thông thường quá trình Mix & Master sẽ mất từ 3-5 ngày làm việc tùy vào độ phức tạp của bài hát. Chúng mình luôn ưu tiên chất lượng sản phẩm."
             },
             {
                 "question": "Bạn có cung cấp dịch vụ mixing online không?",
-                "answer": "Có, chúng mình cung cấp dịch vụ mixing chuyên nghiệp online trên toàn quốc và quốc tế. Hãy gửi stems của bạn qua hệ thống cloud của chúng mình và chúng mình sẽ gửi bản master hoàn chỉnh trong vòng 48 giờ."
+                "answer": "Có, chúng mình cung cấp dịch vụ mixing chuyên nghiệp online trên toàn quốc và quốc tế. Hãy gửi stems của bạn qua hệ thống cloud của chúng mình và chúng mình sẽ gửi bản master hoàn chỉnh trong vòng 3-5 ngày."
             },
             {
                 "question": "Bạn chấp nhận những định dạng tệp nào?",
-                "answer": "Chúng mình chấp nhận tất cả các định dạng âm thanh tiêu chuẩn bao gồm WAV, MP3, FLAC, v.v. Chúng mình khuyên dùng WAV để có chất lượng tốt nhất. Liên hệ với chúng mình để biết các yêu cầu cụ thể."
+                "answer": "Chúng mình chấp nhận tất cả các định dạng âm thanh tiêu chuẩn bao gồm WAV, MP3, FLAC, v.v. Chúng mình khuyên dùng WAV để có chất lượng tốt nhất. Liên hệ với 2LAB để biết các yêu cầu cụ thể."
             }
         ]
     },
