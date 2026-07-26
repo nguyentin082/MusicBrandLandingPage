@@ -60,7 +60,7 @@ export async function ServicesSection() {
                                 <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-dark-umber dark:text-off-white mb-3 sm:mb-4 italic">
                                     {title}
                                 </h4>
-                                <p className="text-soft-brown dark:text-off-white/70 text-xs sm:text-sm italic leading-relaxed flex-grow">
+                                <p className="text-soft-brown dark:text-off-white/70 text-xs sm:text-sm leading-relaxed flex-grow">
                                     {description}
                                 </p>
                                 <Link

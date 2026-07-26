@@ -20,7 +20,7 @@ export async function HeroSection() {
                         {t('heading')} <br />
                         <span className="text-warm-gold">{t('highlighted')}</span>
                     </h1>
-                    <p className="text-off-white/50 text-sm sm:text-base md:text-lg max-w-lg mb-8 sm:mb-12 font-light leading-relaxed italic">
+                    <p className="text-off-white/50 text-sm sm:text-base md:text-lg max-w-lg mb-8 sm:mb-12 font-light leading-relaxed">
                         {t('description')}
                     </p>
                     <div className="flex flex-wrap gap-4 sm:gap-6">

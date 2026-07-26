@@ -81,7 +81,7 @@ export function Footer() {
                         <p className="mb-6 text-sm font-bold uppercase tracking-widest text-warm-gold sm:mb-8">
                             {t('tagline')}
                         </p>
-                        <p className="max-w-xl text-sm leading-relaxed italic text-off-white/60 sm:text-base">
+                        <p className="max-w-xl text-sm leading-relaxed text-off-white/60 sm:text-base">
                             {t('description')}
                         </p>
 

@@ -36,7 +36,7 @@ export async function PricingSection() {
                             >
                                 {plan.badge && (
                                     <span
-                                        className={`absolute top-0 left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-1 rounded-full px-4 py-1.5 text-[10px] font-black uppercase italic whitespace-nowrap ${
+                                        className={`absolute top-0 left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-1 rounded-full px-4 py-1.5 text-[10px] font-black uppercase whitespace-nowrap ${
                                             isBestSeller
                                                 ? 'bg-warm-gold text-dark-umber border border-warm-gold/80 shadow-lg shadow-warm-gold/30'
                                                 : 'bg-warm-gold text-dark-umber'
@@ -60,11 +60,11 @@ export async function PricingSection() {
                                 >
                                     {plan.subtitle}
                                 </p>
-                                <div className="text-2xl sm:text-3xl font-black mb-6 sm:mb-8 italic">
+                                <div className="text-2xl sm:text-3xl font-black mb-6 sm:mb-8">
                                     {plan.price}
                                 </div>
                                 <ul
-                                    className={`text-[11px] sm:text-xs space-y-3 sm:space-y-4 grow italic mb-8 sm:mb-10 ${
+                                    className={`text-[11px] sm:text-xs space-y-3 sm:space-y-4 grow mb-8 sm:mb-10 ${
                                         idx === 1
                                             ? 'text-off-white/60'
                                             : 'text-soft-brown dark:text-off-white/70'

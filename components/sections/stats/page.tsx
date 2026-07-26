@@ -76,7 +76,7 @@ export function StatsSection() {
                         {t(`${statKey}.number`)}
                     </div>
                     <p
-                        className={`text-[10px] font-bold uppercase tracking-widest italic ${labelClassName}`}
+                        className={`text-[10px] font-bold uppercase tracking-widest ${labelClassName}`}
                     >
                         {t(`${statKey}.label`)}
                     </p>

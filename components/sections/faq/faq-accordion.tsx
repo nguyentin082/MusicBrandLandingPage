@@ -21,7 +21,7 @@ export function FAQAccordion({ questions }: { questions: FAQItem[] }) {
                     onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
                 >
                     <div className="flex justify-between items-center text-left">
-                        <span className="font-bold text-dark-umber dark:text-off-white italic">
+                        <span className="font-bold text-dark-umber dark:text-off-white">
                             {item.question}
                         </span>
                         <motion.div
@@ -41,7 +41,7 @@ export function FAQAccordion({ questions }: { questions: FAQItem[] }) {
                         transition={{ duration: 0.3 }}
                         className="overflow-hidden"
                     >
-                        <div className="pt-4 text-sm text-soft-brown dark:text-off-white/70 italic leading-relaxed">
+                        <div className="pt-4 text-sm text-soft-brown dark:text-off-white/70 leading-relaxed">
                             {item.answer}
                         </div>
                     </motion.div>
