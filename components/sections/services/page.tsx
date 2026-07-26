@@ -32,9 +32,14 @@ export async function ServicesSection() {
             className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-white dark:bg-dark-umber"
         >
             <div className="max-w-7xl mx-auto">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-12 sm:mb-16 text-center text-dark-umber dark:text-off-white italic">
-                    {t('heading')}
-                </h2>
+                <div className="text-center mb-12 sm:mb-16">
+                    <h2 className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-4 italic">
+                        {t('label')}
+                    </h2>
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark-umber dark:text-off-white tracking-tighter italic">
+                        {t('heading')}
+                    </h3>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {services.map(({ icon: Icon, key, title, description }, index, arr) => {
                         const isOddCardAlone = arr.length % 2 === 1 && index === arr.length - 1;

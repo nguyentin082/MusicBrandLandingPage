@@ -44,7 +44,8 @@
         }
     },
     "services": {
-        "heading": "Dịch Vụ Chính",
+        "label": "Dịch Vụ Chính",
+        "heading": "Giải Pháp Âm Nhạc Toàn Diện",
         "consultNow": "Tư Vấn Ngay",
         "recording": {
             "title": "Thu Âm Vocal / Nhac Cụ",
@@ -83,7 +84,8 @@
         }
     },
     "partners": {
-        "label": "Sẵn sàng trên mọi nền tảng",
+        "label": "Phát Hành Nhạc Số",
+        "heading": "Đưa Âm Nhạc Của Bạn Đến Khắp Nơi",
         "platforms": [
             {
                 "name": "Spotify",

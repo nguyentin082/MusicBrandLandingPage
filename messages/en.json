@@ -44,7 +44,8 @@
         }
     },
     "services": {
-        "heading": "Core Services",
+        "label": "Core Services",
+        "heading": "Comprehensive Music Solutions",
         "consultNow": "Consult Now",
         "recording": {
             "title": "Vocal / Instrument Recording",
@@ -83,7 +84,8 @@
         }
     },
     "partners": {
-        "label": "Available on all platforms",
+        "label": "Digital Release",
+        "heading": "Bring Your Music Everywhere",
         "platforms": [
             {
                 "name": "Spotify",
