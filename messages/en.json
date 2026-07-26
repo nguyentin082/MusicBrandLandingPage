@@ -58,6 +58,10 @@
         "mixing": {
             "title": "Edit & Mixing & Mastering",
             "description": "Professional post-production, bringing the perfect combination of detail and emotion in every track."
+        },
+        "sheetMusic": {
+            "title": "Sheet Music Transcription",
+            "description": "Transcribe classical pieces, instruments (drums, piano, etc.), pop music, and write band scores."
         }
     },
     "contactFab": {
@@ -363,6 +367,7 @@
             "recording": "Recording",
             "mixing": "Mix & Master",
             "production": "Full Production",
+            "sheetMusic": "Sheet Music Transcription",
             "other": "Other"
         },
         "submit": "Submit Request",

@@ -58,6 +58,10 @@
         "mixing": {
             "title": "Edit & Mixing & Mastering",
             "description": "Xử lý hậu kỳ chuyên nghiệp, mang lại sự kết hợp hoàn hảo giữa độ chi tiết và cảm xúc trong từng bản thu."
+        },
+        "sheetMusic": {
+            "title": "Ký Sheet Nhạc",
+            "description": "Ký sheet tác phẩm cổ điển, nhạc cụ (trống, piano,..), nhạc nhẹ,... viết phổ band nhạc."
         }
     },
     "contactFab": {
@@ -364,6 +368,7 @@
             "recording": "Thu âm (Recording)",
             "mixing": "Mix & Master",
             "production": "Sản xuất trọn gói (Full Production)",
+            "sheetMusic": "Ký Sheet Nhạc",
             "other": "Khác"
         },
         "submit": "Gửi yêu cầu",
