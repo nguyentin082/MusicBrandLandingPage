@@ -214,7 +214,10 @@
         "buttons": {
             "band": "Sample Band Score",
             "classical": "Sample Classical Sheet"
-        }
+        },
+        "mobilePreviewLabel": "Preview (PDF only)",
+        "mobileOpenLabel": "Open Fullscreen",
+        "mobileDownloadLabel": "Download PDF"
     },
     "gear": {
         "label": "Studio Equipment",

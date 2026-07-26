@@ -215,7 +215,10 @@
         "buttons": {
             "band": "Mẫu Sheet Phổ Band",
             "classical": "Mẫu Sheet Cổ Điển"
-        }
+        },
+        "mobilePreviewLabel": "Xem Trước (Chỉ PDF)",
+        "mobileOpenLabel": "Mở toàn màn hình",
+        "mobileDownloadLabel": "Tải về PDF"
     },
     "gear": {
         "label": "Thiết bị phòng thu",
