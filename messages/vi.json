@@ -1,10 +1,10 @@
 {
     "metadata": {
-        "title": "2lab | GO 2 OUR LAB",
+        "title": "2LAB | GO 2 OUR LAB",
         "description": "Phòng thu âm, sản xuất âm nhạc chuyên nghiệp tại Việt Nam. Dịch vụ Mix & Master cao cấp. Được tin tưởng bởi nhiều nghệ sĩ hàng đầu Việt Nam."
     },
     "navigation": {
-        "logo": "2lab",
+        "logo": "2LAB",
         "tagline": "GO 2 OUR LAB",
         "services": "Dịch vụ",
         "portfolio": "Sản phẩm",
@@ -127,7 +127,7 @@
     },
     "audioComparison": {
         "label": "Trước & Sau",
-        "heading": "Mix Master",
+        "heading": "Mixing & Mastering",
         "trackTitleDieOnThisHill": "\"Die On This Hill\" - Pop Ballad",
         "trackTitleCloseToYou": "\"Close To You\" - Pop Ballad",
         "rawButton": "Raw Recording",
@@ -205,7 +205,7 @@
     "studio": {
         "label": "Vibe & Comfort",
         "heading": "Thư Thái Để Sáng Tạo",
-        "description": "Chúng mình tin rằng cảm hứng tuyệt vời nhất đến từ sự thoải mái. Tại 2lab, bạn không chỉ làm việc trong một môi trường chuyên nghiệp mà còn được hỗ trợ nhiệt tình bởi các nhân sự có kinh nghiệm và chuyên môn cao. Từ đó, chúng mình tạo ra một không gian nơi nghệ sĩ có thể thả hồn vào âm nhạc của mình mà không bị gián đoạn bởi những lo lắng về kỹ thuật hay môi trường xung quanh.",
+        "description": "Chúng mình tin rằng cảm hứng tuyệt vời nhất đến từ sự thoải mái. Tại 2LAB, bạn không chỉ làm việc trong một môi trường chuyên nghiệp mà còn được hỗ trợ nhiệt tình bởi các nhân sự có kinh nghiệm và chuyên môn cao. Từ đó, chúng mình tạo ra một không gian nơi nghệ sĩ có thể thả hồn vào âm nhạc của mình mà không bị gián đoạn bởi những lo lắng về kỹ thuật hay môi trường xung quanh.",
         "amenities": [
             "Cà phê đặc sản",
             "Khu thư giãn sáng tạo",
@@ -396,7 +396,7 @@
         ]
     },
     "footer": {
-        "companyName": "2lab",
+        "companyName": "2LAB",
         "tagline": "GO 2 OUR LAB",
         "contact": {
             "label": "Liên Hệ Với Chúng Mình",
@@ -416,6 +416,6 @@
             "portfolio": "Sản Phẩm",
             "contact": "Liên Hệ"
         },
-        "copyright": "© {year} 2lab. All rights reserved."
+        "copyright": "© {year} 2LAB. All rights reserved."
     }
 }

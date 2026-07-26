@@ -1,7 +1,7 @@
 import { contactInfo } from '@/lib/contact';
 
 export const siteConfig = {
-    name: '2lab',
+    name: '2LAB',
     description:
         'Professional recording studio in Vietnam. Expert mix & master services with analog gear. Trusted by 150+ indie artists.',
     url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://2lab.vn',

@@ -1,6 +1,6 @@
-# 2lab
+# 2LAB
 
-2lab is a modern landing page for a music studio, built with Next.js and designed to showcase services, portfolio work, pricing, and contact information.
+2LAB is a modern landing page for a music studio, built with Next.js and designed to showcase services, portfolio work, pricing, and contact information.
 
 ## Key Features
 

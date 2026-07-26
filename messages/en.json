@@ -1,10 +1,10 @@
 {
     "metadata": {
-        "title": "2lab | GO 2 OUR LAB",
+        "title": "2LAB | GO 2 OUR LAB",
         "description": "Professional recording studio in Vietnam. Expert mix & master services with analog gear. Trusted by 150+ indie artists. Book your session today."
     },
     "navigation": {
-        "logo": "2lab",
+        "logo": "2LAB",
         "tagline": "GO 2 OUR LAB",
         "services": "Services",
         "portfolio": "Portfolio",
@@ -24,7 +24,7 @@
     "philosophy": {
         "label": "The Soul",
         "quote": "We don't just record machines, we capture the authenticity in every note.",
-        "description": "Every song is a story. At 2lab, we ensure your story is told through the most honest and emotional sound possible."
+        "description": "Every song is a story. At 2LAB, we ensure your story is told through the most honest and emotional sound possible."
     },
     "stats": {
         "projects": {
@@ -205,7 +205,7 @@
     "studio": {
         "label": "Vibe & Comfort",
         "heading": "Comfort for Creativity",
-        "description": "We believe the best inspiration comes from comfort. At 2lab, you not only work in a professional environment but are also supported by a dedicated team with deep experience and expertise. This helps create a space where artists can fully immerse themselves in music without being interrupted by technical concerns or environmental distractions.",
+        "description": "We believe the best inspiration comes from comfort. At 2LAB, you not only work in a professional environment but are also supported by a dedicated team with deep experience and expertise. This helps create a space where artists can fully immerse themselves in music without being interrupted by technical concerns or environmental distractions.",
         "amenities": [
             "Specialty Coffee",
             "Creative Chill Zone",
@@ -346,7 +346,7 @@
     "ctaForm": {
         "label": "Booking Inquiry",
         "heading": "Ready For Your Next Project?",
-        "description": "Leave your information and the 2lab team will contact you as soon as possible for detailed consultation.",
+        "description": "Leave your information and the 2LAB team will contact you as soon as possible for detailed consultation.",
         "fields": {
             "name": "Full Name *",
             "namePlaceholder": "Enter your full name",
@@ -396,7 +396,7 @@
         ]
     },
     "footer": {
-        "companyName": "2lab",
+        "companyName": "2LAB",
         "tagline": "GO 2 OUR LAB",
         "contact": {
             "label": "Get in Touch",
@@ -416,6 +416,6 @@
             "portfolio": "Portfolio",
             "contact": "Contact"
         },
-        "copyright": "\u00a9 {year} 2lab. All rights reserved."
+        "copyright": "\u00a9 {year} 2LAB. All rights reserved."
     }
 }

@@ -4,7 +4,7 @@ const blogListCopy = {
     en: {
         title: 'Music Production Blog',
         description:
-            'Guides and insights about recording, vocal production, and mix/master workflows from 2lab.',
+            'Guides and insights about recording, vocal production, and mix/master workflows from 2LAB.',
         badge: 'Studio Journal',
         heading: 'Blog for Indie Artists and Producers',
         back: 'Back to home',
@@ -21,7 +21,7 @@ const blogListCopy = {
     vi: {
         title: 'Blog Sản Xuất Âm Nhạc',
         description:
-            'Kiến thức thực chiến về thu âm, vocal production, mix/master workflow từ đội ngũ 2lab.',
+            'Kiến thức thực chiến về thu âm, vocal production, mix/master workflow từ đội ngũ 2LAB.',
         badge: 'Studio Journal',
         heading: 'Blog Cho Nghệ Sĩ và Producer',
         back: 'Về trang chủ',
