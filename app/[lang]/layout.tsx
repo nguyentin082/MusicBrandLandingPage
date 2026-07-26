@@ -42,7 +42,7 @@ export async function generateMetadata({
             locale: lang === 'vi' ? 'vi_VN' : 'en_US',
         },
         twitter: {
-            card: 'summary_large_image',
+            card: 'summary',
             title: t('title'),
             description: t('description'),
         },

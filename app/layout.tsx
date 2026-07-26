@@ -38,7 +38,11 @@ export const metadata: Metadata = {
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,
     publisher: siteConfig.name,
+    verification: {
+        google: 'your-google-site-verification-code', // Add your Google Search Console verification code here
+    },
     keywords: [
+        // English
         'recording studio',
         'mixing',
         'mastering',
@@ -46,9 +50,29 @@ export const metadata: Metadata = {
         'Ho Chi Minh City',
         'music production',
         'sound studio',
+        '2LAB',
+        '2lab studio',
+        // Tiếng Việt
+        'phòng thu âm',
+        'phòng thu âm TPHCM',
+        'phòng thu âm chuyên nghiệp',
+        'thu âm giọng hát',
+        'mix master',
+        'mix mastering',
+        'sản xuất âm nhạc',
+        'hòa âm phối khí',
+        'ký sheet nhạc',
+        'viết sheet nhạc',
+        'phòng thu quận 1',
+        'dịch vụ thu âm Hồ Chí Minh',
     ],
     alternates: {
         canonical: '/',
+        languages: {
+            en: '/en',
+            vi: '/vi',
+            'x-default': '/en',
+        },
     },
     openGraph: {
         type: 'website',
@@ -56,17 +80,18 @@ export const metadata: Metadata = {
         siteName: siteConfig.name,
         title: siteConfig.name,
         description: siteConfig.description,
+        locale: 'vi_VN',
         images: [
             {
                 url: '/og-dark-square.png',
                 width: 630,
                 height: 630,
-                alt: siteConfig.name,
+                alt: `${siteConfig.name} — Phòng thu âm chuyên nghiệp tại TP.HCM`,
             },
         ],
     },
     twitter: {
-        card: 'summary_large_image',
+        card: 'summary',
         title: siteConfig.name,
         description: siteConfig.description,
         images: ['/og-dark-square.png'],

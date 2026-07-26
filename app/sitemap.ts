@@ -27,6 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 lastModified: new Date(post.updatedAt ?? post.publishedAt),
                 changeFrequency: 'monthly' as const,
                 priority: 0.7,
+                ...(post.coverImage && { images: [post.coverImage] }),
             }));
         }),
     );

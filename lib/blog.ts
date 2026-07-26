@@ -16,8 +16,10 @@ export type BlogPostMeta = {
     publishedAt: string;
     updatedAt?: string;
     tags: string[];
+    category?: string;
     coverImage?: string;
     readingTimeMinutes: number;
+    wordCount: number;
 };
 
 export type BlogPost = BlogPostMeta & {
@@ -32,6 +34,7 @@ type Frontmatter = {
     publishedAt?: string;
     updatedAt?: string;
     tags?: string[];
+    category?: string;
     coverImage?: string;
     image?: string;
     draft?: boolean;
@@ -110,8 +113,10 @@ async function readPostFile(locale: BlogLocale, slug: string) {
         publishedAt,
         updatedAt,
         tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
+        category: frontmatter.category,
         coverImage: frontmatter.coverImage ?? frontmatter.image,
         readingTimeMinutes: estimateReadingTimeMinutes(content),
+        wordCount: content.trim().split(/\s+/).filter(Boolean).length,
         content,
     } satisfies BlogPost;
 }

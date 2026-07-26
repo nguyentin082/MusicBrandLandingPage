@@ -7,7 +7,15 @@ export const siteConfig = {
     url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://2lab.vn',
     phone: contactInfo.phone,
     email: contactInfo.email,
-    address: 'Ho Chi Minh City, Vietnam',
+    address: '654/6 Lạc Long Quân, Tân Hòa, Hồ Chí Minh',
+    addressLocality: 'Hồ Chí Minh',
+    addressRegion: 'TP. Hồ Chí Minh',
+    addressCountry: 'VN',
+    postalCode: '700000',
+    geo: {
+        latitude: 10.7749577,
+        longitude: 106.6492273,
+    },
     socials: {
         facebook: contactInfo.links.facebook,
         instagram: contactInfo.links.instagram,

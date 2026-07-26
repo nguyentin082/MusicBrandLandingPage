@@ -26,7 +26,7 @@ const assetRemotePattern = (() => {
 /** @type {import('next').NextConfig} */
 const baseConfig = {
     typescript: {
-        ignoreBuildErrors: true,
+        ignoreBuildErrors: false,
     },
     compress: true,
     // Enable React Server Components streaming

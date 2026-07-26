@@ -82,12 +82,42 @@ export default async function BlogPostPage({
     const { contentHtml, tocItems } = await renderBlogPostContent(post.content);
     const t = getBlogPostCopy(locale);
     const blogSchema = createBlogPostSchema(locale, post);
+    
+    const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: `${siteConfig.url}/${locale}`,
+            },
+            {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: `${siteConfig.url}/${locale}/blog`,
+            },
+            {
+                '@type': 'ListItem',
+                position: 3,
+                name: post.title,
+                item: `${siteConfig.url}/${locale}/blog/${post.slug}`,
+            },
+        ],
+    };
+
+    const combinedSchema = {
+        '@context': 'https://schema.org',
+        '@graph': [blogSchema, breadcrumbSchema],
+    };
 
     return (
         <div className="min-h-screen bg-off-white dark:bg-dark-umber text-dark-umber dark:text-off-white">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
             />
 
             <Header />
