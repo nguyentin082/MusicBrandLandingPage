@@ -82,8 +82,7 @@ export function Footer() {
                             {t('tagline')}
                         </p>
                         <p className="max-w-xl text-sm leading-relaxed italic text-off-white/60 sm:text-base">
-                            Premium sound studio specializing in recording, mixing, and mastering
-                            for independent artists worldwide.
+                            {t('description')}
                         </p>
 
                         {/* Social Icons */}
