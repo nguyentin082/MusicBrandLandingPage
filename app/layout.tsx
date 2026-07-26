@@ -56,11 +56,20 @@ export const metadata: Metadata = {
         siteName: siteConfig.name,
         title: siteConfig.name,
         description: siteConfig.description,
+        images: [
+            {
+                url: '/og-dark-square.png',
+                width: 630,
+                height: 630,
+                alt: siteConfig.name,
+            },
+        ],
     },
     twitter: {
         card: 'summary_large_image',
         title: siteConfig.name,
         description: siteConfig.description,
+        images: ['/og-dark-square.png'],
     },
     robots: {
         index: true,
@@ -73,21 +82,50 @@ export const metadata: Metadata = {
             'max-video-preview': -1,
         },
     },
-    generator: 'v0.app',
     icons: {
         icon: [
+            // Light mode favicons
             {
-                url: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/image/branding/2lab-logo-light-mode.PNG`,
+                url: '/icon-light-16x16.png',
+                sizes: '16x16',
+                type: 'image/png',
                 media: '(prefers-color-scheme: light)',
+            },
+            {
+                url: '/icon-light-32x32.png',
+                sizes: '32x32',
+                type: 'image/png',
+                media: '(prefers-color-scheme: light)',
+            },
+            // Dark mode favicons
+            {
+                url: '/icon-dark-16x16.png',
+                sizes: '16x16',
+                type: 'image/png',
+                media: '(prefers-color-scheme: dark)',
+            },
+            {
+                url: '/icon-dark-32x32.png',
+                sizes: '32x32',
+                type: 'image/png',
+                media: '(prefers-color-scheme: dark)',
+            },
+            // PWA / High-res icons
+            {
+                url: '/icon-192.png',
+                sizes: '192x192',
                 type: 'image/png',
             },
             {
-                url: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/image/branding/2lab-logo-dark-mode.PNG`,
-                media: '(prefers-color-scheme: dark)',
+                url: '/icon-512.png',
+                sizes: '512x512',
                 type: 'image/png',
             },
         ],
-        apple: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/image/branding/2lab-logo-dark-mode.PNG`,
+        apple: [
+            { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+        ],
+        shortcut: '/icon-light-32x32.png',
     },
 };
 
