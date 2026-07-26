@@ -136,7 +136,8 @@
         "pauseButton": "Tạm dừng"
     },
     "portfolio": {
-        "heading": "Dự Án Hòa Âm & Phối Khí Tiêu Biểu",
+        "label": "Dự Án Tiêu Biểu",
+        "heading": "Hòa Âm & Phối Khí",
         "showcase": {
             "spotlight": "Tiêu điểm",
             "signatureRelease": "Phát hành nổi bật",

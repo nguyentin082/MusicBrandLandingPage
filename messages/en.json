@@ -135,7 +135,8 @@
         "pauseButton": "Pause"
     },
     "portfolio": {
-        "heading": "Featured Arrangement & Production Projects",
+        "label": "Featured Projects",
+        "heading": "Arrangement & Production",
         "showcase": {
             "spotlight": "Spotlight",
             "signatureRelease": "Featured Release",
