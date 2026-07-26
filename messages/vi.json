@@ -367,7 +367,9 @@
             "recording": "Thu âm (Recording)",
             "mixing": "Mix & Master",
             "production": "Sản xuất trọn gói (Full Production)",
-            "sheetMusic": "Ký Sheet Nhạc",
+            "sheetMusic": "Ký/Viết Sheet Nhạc",
+            "arranging": "Hòa âm phối khí",
+            "beatRemaking": "Làm lại beat nhạc",
             "other": "Khác"
         },
         "submit": "Gửi yêu cầu",

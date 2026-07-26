@@ -111,6 +111,8 @@ export function LeadForm() {
                             <option value="Mixing & Mastering">{t('services.mixing')}</option>
                             <option value="Full Production">{t('services.production')}</option>
                             <option value="Sheet Music">{t('services.sheetMusic')}</option>
+                            <option value="Arranging">{t('services.arranging')}</option>
+                            <option value="Beat Remaking">{t('services.beatRemaking')}</option>
                             <option value="Other">{t('services.other')}</option>
                         </select>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-dark-umber/60">

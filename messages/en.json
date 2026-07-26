@@ -367,6 +367,8 @@
             "mixing": "Mix & Master",
             "production": "Full Production",
             "sheetMusic": "Sheet Music Transcription",
+            "arranging": "Arranging / Orchestration",
+            "beatRemaking": "Beat Remaking",
             "other": "Other"
         },
         "submit": "Submit Request",
