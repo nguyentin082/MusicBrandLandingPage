@@ -213,7 +213,7 @@
         "description": "2LAB offers custom transcription, arranging, and sheet music writing services. Check out these sample sheets we've created to see our quality before booking:",
         "buttons": {
             "band": "Sample Band Score",
-            "classical": "Sample Piano Sheet"
+            "classical": "Sample Classical Sheet"
         }
     },
     "gear": {
