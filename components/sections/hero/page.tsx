@@ -8,7 +8,7 @@ export async function HeroSection() {
 
     return (
         <section className="relative min-h-screen flex items-center bg-dark-umber dark:bg-dark-umber text-off-white dark:text-off-white overflow-hidden py-16 sm:py-24 md:py-32">
-            <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
                 <div className="absolute top-[-10%] right-[-10%] w-150 h-150 bg-brick-red rounded-full blur-[120px]"></div>
                 <div className="absolute bottom-[-10%] left-[-10%] w-100 h-100 bg-warm-gold rounded-full blur-[100px]"></div>
             </div>

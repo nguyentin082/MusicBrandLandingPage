@@ -57,7 +57,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     };
 
     return (
-        <div className="min-h-screen bg-off-white dark:bg-dark-umber text-dark-umber dark:text-off-white">
+        <div className="min-h-screen overflow-x-hidden bg-off-white dark:bg-dark-umber text-dark-umber dark:text-off-white">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

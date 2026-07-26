@@ -7,7 +7,7 @@ export async function CTASection() {
     return (
         <section className="py-16 sm:py-24 md:py-32 bg-warm-gold dark:bg-warm-gold px-4 sm:px-6 relative overflow-hidden">
             {/* Subtle background decoration */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[800px] bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
 
             <div className="max-w-5xl mx-auto text-center relative z-10">
                 <h2 className="text-dark-umber text-xs font-black uppercase tracking-[0.4em] mb-4 sm:mb-6 italic">
