@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Music, AudioLines } from 'lucide-react';
+import { ScaledPdfIframe } from './scaled-pdf-iframe';
 
 const sheets = [
     {
         id: 'band',
-        url: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/pdf/LẠC MẤT MÙA XUÂN - LẮNG NGHE MÙA XUÂN VỀ.pdf`,
+        url: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/pdf/LẠC MẤT MÙA XUÂN - LẮNG NGHE MÙA XUÂN VỀ.pdf`,
         icon: AudioLines,
     },
     {
@@ -26,21 +27,16 @@ export function SheetSection() {
     return (
         <section className="py-24 sm:py-32 px-6 bg-white dark:bg-dark-umber">
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
-                {/* Left side: Sheet PDF */}
+                {/* Left side: Scaled PDF viewer */}
                 <div className="w-full lg:w-1/2 order-2 lg:order-1">
                     {activeSheetUrl && (
-                        <div className="w-full h-[600px] sm:h-[800px] rounded-2xl overflow-hidden shadow-2xl border border-dark-umber/10 dark:border-off-white/10 bg-white dark:bg-dark-umber/50">
-                            <iframe 
-                                src={`${activeSheetUrl}#toolbar=0`} 
-                                width="100%" 
-                                height="100%" 
-                                className="border-0 w-full h-full"
-                                title="Sheet Music PDF"
-                            ></iframe>
-                        </div>
+                        <ScaledPdfIframe
+                            src={activeSheetUrl}
+                            title="Sheet Music PDF"
+                        />
                     )}
                 </div>
-                
+
                 {/* Right side: Text and Buttons */}
                 <div className="w-full lg:w-1/2 order-1 lg:order-2 text-left">
                     <h2 className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-4 italic">
