@@ -15,14 +15,12 @@ export async function HeroSection() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 items-center gap-8 sm:gap-12 md:gap-16 relative z-10">
                 <div className="animate-fade-in">
-                    <div className="block w-full px-4 py-1 rounded-full border border-warm-gold/30 text-warm-gold text-[10px] font-bold uppercase tracking-[0.2em] mb-4 sm:mb-6">
-                        {t('badge')}
-                    </div>
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black mb-6 sm:mb-8 leading-[0.9] tracking-tighter italic">
+
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black mb-6 sm:mb-8 leading-[1.1] sm:leading-[1.1] md:leading-[1.1] tracking-tighter italic">
                         {t('heading')} <br />
                         <span className="text-warm-gold">{t('highlighted')}</span>
                     </h1>
-                    <p className="text-off-white/50 text-sm sm:text-base md:text-lg max-w-lg mb-8 sm:mb-12 font-light leading-relaxed italic">
+                    <p className="text-off-white/50 text-sm sm:text-base md:text-lg max-w-lg mb-8 sm:mb-12 font-light leading-relaxed">
                         {t('description')}
                     </p>
                     <div className="flex flex-wrap gap-4 sm:gap-6">

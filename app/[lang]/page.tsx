@@ -8,7 +8,7 @@ import { ServicesSection } from '@/components/sections/services/page';
 import { PartnersSection } from '@/components/sections/partners/page';
 import { AudioComparisonSection } from '@/components/sections/audio-comparison/page';
 import { PortfolioSection } from '@/components/sections/portfolio/page';
-import { StudioSection } from '@/components/sections/studio/page';
+import { SheetSection } from '@/components/sections/sheet/page';
 import { GearSection } from '@/components/sections/gear/page';
 import { TeamSection } from '@/components/sections/team/page';
 import { PricingSection } from '@/components/sections/pricing/page';
@@ -70,9 +70,9 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                 <StatsSection />
                 <ServicesSection />
                 <PartnersSection />
+                <SheetSection />
                 <AudioComparisonSection />
                 <PortfolioSection />
-                <StudioSection />
                 <GearSection />
                 <TeamSection />
                 <PricingSection />

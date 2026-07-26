@@ -12,7 +12,7 @@ export async function PhilosophySection() {
                 <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-dark-umber dark:text-off-white leading-tight tracking-tighter mb-6 sm:mb-8 md:mb-10 italic">
                     &ldquo;{t('quote')}&rdquo;
                 </p>
-                <p className="text-soft-brown dark:text-off-white/50 text-sm sm:text-base md:text-lg font-light leading-relaxed italic">
+                <p className="text-soft-brown dark:text-off-white/50 text-sm sm:text-base md:text-lg font-light leading-relaxed">
                     {t('description')}
                 </p>
             </div>

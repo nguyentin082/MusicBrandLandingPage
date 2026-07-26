@@ -45,7 +45,7 @@ export async function TeamSection() {
                             <p className="text-[9px] sm:text-[10px] text-warm-gold font-bold uppercase tracking-widest mb-3 sm:mb-4">
                                 {member.role}
                             </p>
-                            <p className="text-[11px] sm:text-xs text-off-white/60 dark:text-off-white/60 italic px-2 sm:px-4 leading-relaxed">
+                            <p className="text-[11px] sm:text-xs text-off-white/60 dark:text-off-white/60 px-2 sm:px-4 leading-relaxed">
                                 {member.bio}
                             </p>
                         </div>

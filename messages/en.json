@@ -1,43 +1,42 @@
 {
     "metadata": {
-        "title": "2lab | GO 2 OUR LAB",
-        "description": "Professional recording studio in Vietnam. Expert mix & master services with analog gear. Trusted by 150+ indie artists. Book your session today."
+        "title": "2LAB | GO 2 OUR LAB",
+        "description": "Professional recording and music production studio in Vietnam. Premium Mix & Master services. Trusted by top Vietnamese artists."
     },
     "navigation": {
-        "logo": "2lab",
+        "logo": "2LAB",
         "tagline": "GO 2 OUR LAB",
         "services": "Services",
         "portfolio": "Portfolio",
-        "gear": "Equipment",
+        "gear": "Gear",
         "pricing": "Pricing",
         "blog": "Blog",
         "contact": "Contact Now"
     },
     "hero": {
-        "badge": "Artisan Sound Studio",
-        "heading": "Authentic Sound",
-        "highlighted": "True to Life",
-        "description": "Where raw ideas are refined into sonic masterpieces using cutting-edge analog high-end equipment.",
+        "heading": "FROM IDEAS",
+        "highlighted": "TO REALITY",
+        "description": "2LAB doesn't just record and produce, we accompany you in telling stories through music.",
         "cta_primary": "Contact Now",
-        "cta_secondary": "Hear Our Work"
+        "cta_secondary": "Listen to our work"
     },
     "philosophy": {
-        "label": "The Soul",
-        "quote": "We don't just record machines, we capture the authenticity in every note.",
-        "description": "Every song is a story. At 2lab, we ensure your story is told through the most honest and emotional sound possible."
+        "label": "Our Philosophy",
+        "quote": "What matters to you, matters to 2LAB",
+        "description": "Some come to pursue a dream. Some come to preserve a memory. Whatever the reason, we treat it with utmost seriousness."
     },
     "stats": {
         "projects": {
-            "number": "500+",
-            "label": "Projects Completed"
+            "number": "100+",
+            "label": "Completed Projects"
         },
         "artists": {
-            "number": "150+",
-            "label": "Indie Artists Trust Us"
+            "number": "50+",
+            "label": "Trusted Artists"
         },
         "streams": {
-            "number": "50M+",
-            "label": "Total Project Streams"
+            "number": "50K+",
+            "label": "Project Streams"
         },
         "experience": {
             "number": "10+",
@@ -45,26 +44,31 @@
         }
     },
     "services": {
-        "heading": "Core Services",
+        "label": "Core Services",
+        "heading": "Comprehensive Music Solutions",
         "consultNow": "Consult Now",
         "recording": {
-            "title": "Acoustic Recording",
-            "description": "International standard acoustic processing, delivering absolute clarity and authenticity for vocals."
+            "title": "Vocal / Instrument Recording",
+            "description": "International standard acoustic treatment, delivering absolute clarity and fidelity."
         },
         "production": {
             "title": "Music Production",
-            "description": "Professional arrangement and composition, creating a distinct sonic identity for artists."
+            "description": "Professional arrangement and orchestration, shaping a distinct musical style for the artist."
         },
         "mixing": {
-            "title": "Pro Mix & Master",
-            "description": "Analog gear processing for signature warmth and depth in every track."
+            "title": "Edit & Mixing & Mastering",
+            "description": "Professional post-production, bringing the perfect combination of detail and emotion in every track."
+        },
+        "sheetMusic": {
+            "title": "Sheet Music Transcription",
+            "description": "Transcribe classical pieces, instruments (drums, piano, etc.), pop music, and write band scores."
         }
     },
     "contactFab": {
         "eyebrow": "Quick Contact",
-        "trigger": "Contact Us",
-        "title": "Reach the studio fast",
-        "description": "Pick the channel that suits you best and we will get back to you quickly.",
+        "trigger": "Contact",
+        "title": "Connect with our studio now",
+        "description": "Choose the channel that suits you best, we will respond as quickly as possible.",
         "labels": {
             "call": "Call",
             "sms": "SMS",
@@ -76,15 +80,16 @@
             "scrollTop": "Back to Top"
         },
         "handles": {
-            "zalo": "Zalo chat",
+            "zalo": "Chat on Zalo",
             "facebook": "Facebook Page",
-            "instagram": "Instagram DM",
-            "tiktok": "TikTok profile",
-            "telegram": "Telegram chat"
+            "instagram": "Message on Instagram",
+            "tiktok": "Watch on TikTok",
+            "telegram": "Chat on Telegram"
         }
     },
     "partners": {
-        "label": "Available on All Platforms",
+        "label": "Digital Release",
+        "heading": "Bring Your Music Everywhere",
         "platforms": [
             {
                 "name": "Spotify",
@@ -118,7 +123,6 @@
                 "name": "Snapchat",
                 "icon": "SiSnapchat"
             },
-
             {
                 "name": "Deezer",
                 "icon": "FaDeezer"
@@ -127,7 +131,7 @@
     },
     "audioComparison": {
         "label": "Before & After",
-        "heading": "The Power of Mix Master",
+        "heading": "Mixing & Mastering",
         "trackTitleDieOnThisHill": "\"Die On This Hill\" - Pop Ballad",
         "trackTitleCloseToYou": "\"Close To You\" - Pop Ballad",
         "rawButton": "Raw Recording",
@@ -137,25 +141,26 @@
         "pauseButton": "Pause"
     },
     "portfolio": {
-        "heading": "Featured Projects",
+        "label": "Featured Projects",
+        "heading": "Arrangement & Production",
         "showcase": {
             "spotlight": "Spotlight",
-            "signatureRelease": "Signature Release",
-            "availablePlatforms": "{count} platforms available",
-            "slideIndicators": "Portfolio slide indicators",
+            "signatureRelease": "Featured Release",
+            "availablePlatforms": "Available on {count} platforms",
+            "slideIndicators": "Project list slide indicators",
             "goToProject": "Go to project {index}"
         },
         "dialog": {
-            "artistUpdateSoon": "Artist update soon",
-            "embedUnavailable": "Embed is not available for this platform.",
-            "externalLinksOnly": "This project currently has external links only.",
-            "embedPlayerTitle": "{platform} embed player"
+            "artistUpdateSoon": "Artist information will be updated soon",
+            "embedUnavailable": "This platform currently does not support an embed player.",
+            "externalLinksOnly": "This project only has external links available at the moment.",
+            "embedPlayerTitle": "{platform} Embed Player"
         },
         "projects": [
             {
                 "genre": "Pop Ballad",
                 "artist": "Rose Prudente",
-                "title": "Thank You for Not Giving Up on Me",
+                "title": "Cảm Ơn Em Vì Đã Không Từ Bỏ",
                 "coverImage": "/image/project/cam-on-em-vi-da-khong-tu-bo.jpg",
                 "spotifyUrl": "https://open.spotify.com/track/2pVxdfR331XVjLUoP8StvO?si=394ec190931d4023",
                 "spotifyEmbedUrlLarge": "<iframe data-testid='embed-iframe' style='border-radius:12px' src='https://open.spotify.com/embed/track/2pVxdfR331XVjLUoP8StvO?utm_source=generator&theme=0' width='100%' height='352' frameBorder='0' allowFullScreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
@@ -166,8 +171,8 @@
             },
             {
                 "genre": "Pop Ballad",
-                "artist": "Ha An Huy & Dat Nguyen",
-                "title": "Tet Is Home",
+                "artist": "Hà An Huy & Đạt Nguyễn",
+                "title": "Tết Là Nhà",
                 "coverImage": "/image/project/tet-la-nha-project.jpg",
                 "youtubeUrl": "https://youtu.be/qobeDYSaky0?si=C6P3XZIweO_DLx3U",
                 "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/qobeDYSaky0?si=C6P3XZIweO_DLx3U' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>",
@@ -180,8 +185,8 @@
             },
             {
                 "genre": "Pop Ballad",
-                "artist": "Vinh Loc & Van Quan",
-                "title": "It Seems Like",
+                "artist": "Vĩnh Lộc & Văn Quân",
+                "title": "Hình Như",
                 "coverImage": "/image/project/hinh-nhu-project.jpg",
                 "youtubeUrl": "https://youtu.be/jwWTlxYISag?si=hTWmUkCQpCJhPdR4",
                 "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/jwWTlxYISag?si=hTWmUkCQpCJhPdR4' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>",
@@ -195,34 +200,31 @@
             {
                 "genre": "Rock",
                 "artist": "Kaito",
-                "title": "The Letter",
+                "title": "Chữ",
                 "coverImage": "/image/project/chu-project.jpg",
                 "youtubeUrl": "https://youtu.be/QnJn6Epiqvg?si=zCctfHw8GivG11Q3",
                 "youtubeEmbedUrl": "<iframe width='560' height='315' src='https://www.youtube.com/embed/QnJn6Epiqvg?si=zCctfHw8GivG11Q3' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>"
             }
         ]
     },
-    "studio": {
-        "label": "Vibe & Comfort",
-        "heading": "Comfort for Creativity",
-        "description": "We believe the best inspiration comes from comfort. At 2lab, you not only work in a professional environment but are also supported by a dedicated team with deep experience and expertise. This helps create a space where artists can fully immerse themselves in music without being interrupted by technical concerns or environmental distractions.",
-        "amenities": [
-            "Specialty Coffee",
-            "Creative Chill Zone",
-            "Air Purification System",
-            "Dedicated Engineer Support"
-        ]
+    "sheet": {
+        "label": "Sheet Music Transcription",
+        "heading": "Professional Sheet Music Services",
+        "description": "2LAB offers custom transcription, arranging, and sheet music writing services. Check out these sample sheets we've created to see our quality before booking:",
+        "buttons": {
+            "band": "Sample Band Score",
+            "classical": "Sample Piano Sheet"
+        }
     },
     "gear": {
-        "label": "The Armory",
-        "heading": "Technical Weaponry",
-        "description": "We use legendary equipment sought after worldwide to ensure every recording meets commercial quality standards.",
-        "cardLabel": "Gear Table",
-        "itemNameLabel": "Item name",
-        "itemTypeLabel": "Item type",
+        "label": "Studio Equipment",
+        "heading": "Technical Arsenal",
+        "cardLabel": "Equipment Board",
+        "itemNameLabel": "Equipment Name",
+        "itemTypeLabel": "Equipment Type",
         "tables": [
             {
-                "title": "The Hub",
+                "title": "Central Processing System",
                 "items": [
                     {
                         "name": "Logic Pro",
@@ -243,7 +245,7 @@
                 ]
             },
             {
-                "title": "Input Sources",
+                "title": "Recording Equipment",
                 "items": [
                     {
                         "name": "Rode NT1 5th Generation",
@@ -256,7 +258,7 @@
                 ]
             },
             {
-                "title": "Monitoring",
+                "title": "Monitoring System",
                 "items": [
                     {
                         "name": "Audio Technica ATH-M50x",
@@ -268,35 +270,35 @@
                     },
                     {
                         "name": "Behringer HA400",
-                        "type": "Studio Headphone Splitter"
+                        "type": "Studio Headphone Amplifier"
                     },
                     {
                         "name": "Kali Audio LP-6 Gen 2",
-                        "type": "Nearfield Studio Monitor"
+                        "type": "Nearfield Studio Monitors"
                     }
                 ]
             }
         ]
     },
     "team": {
-        "heading": "Meet The Team",
+        "heading": "Our Team",
         "members": [
             {
                 "name": "SniT",
                 "role": "Founder & Music Producer",
-                "bio": "Specializing in music arrangement, mixing, and mastering.",
+                "bio": "Specializes in arrangement and Mix & Master.",
                 "avatar": "/image/team/snit.jpeg"
             },
             {
                 "name": "Thúy Quỳnh",
                 "role": "Co-founder & Vocal Producer",
-                "bio": "Specializing in vocal production and recording.",
+                "bio": "Specializes in vocal production and recording.",
                 "avatar": "/image/team/quynh.jpg"
             },
             {
                 "name": "Đạt Nguyễn",
                 "role": "Composer & Vocal Coach",
-                "bio": "Specializing in songwriting and vocal coaching.",
+                "bio": "Specializes in songwriting and vocal coaching.",
                 "avatar": "/image/team/dat.jpeg"
             }
         ]
@@ -305,106 +307,110 @@
         "heading": "Service Pricing",
         "plans": [
             {
-                "title": "Arrangement & Music Production",
-                "subtitle": "For new songs or cover projects",
+                "title": "Arrangement & Production",
+                "subtitle": "For new original songs or covers",
                 "price": "Starter Package",
                 "features": [
-                    "Concept consultation and genre direction",
-                    "Arrangement tailored to the artist's vocal range",
-                    "Delivery of the completed instrumental production",
-                    "Final production revisions based on feedback"
+                    "Concept consultation and genre orientation",
+                    "Arrangement based on artist's vocal range",
+                    "Delivery of the completed instrumental",
+                    "Final track revisions based on feedback"
                 ],
                 "cta": "Consult Now"
             },
             {
-                "title": "Full Song Production",
+                "title": "Full Production",
                 "subtitle": "End-to-end production from idea to completion",
-                "price": "Special Package",
+                "price": "Premium Package",
                 "features": [
-                    "Includes all services from the Starter and Popular packages",
-                    "Artwork design support for single/album releases",
-                    "Distribution support across digital music platforms"
+                    "Includes all services from Starter and Popular Packages",
+                    "Artwork design for single/album",
+                    "Assistance with distribution to digital music platforms"
                 ],
                 "cta": "Consult Now"
             },
             {
                 "title": "Recording, Editing & Mix & Master",
-                "subtitle": "Professional full recording completion solution",
+                "subtitle": "Professional recording completion solution",
                 "price": "Popular Package",
                 "badge": "Best Seller",
                 "features": [
-                    "In-studio recording session with engineer assistance",
-                    "Detailed vocal support and corrections",
-                    "Vocal editing and tuning",
-                    "Release-ready Mix & Master",
-                    "Final version revisions based on feedback"
+                    "Studio recording with a dedicated engineer",
+                    "Vocal directing and detailed editing",
+                    "Vocal tuning and alignment",
+                    "Release-standard Mix & Master",
+                    "Final mix revisions based on feedback"
                 ],
                 "cta": "Consult Now"
             }
         ]
     },
     "ctaForm": {
-        "label": "Booking Inquiry",
-        "heading": "Ready For Your Next Project?",
-        "description": "Leave your information and the 2lab team will contact you as soon as possible for detailed consultation.",
+        "label": "Consultation Inquiry",
+        "heading": "Ready For A New Project?",
+        "description": "Please leave your information, the 2LAB team will contact you as soon as possible for detailed consultation.",
         "fields": {
             "name": "Full Name *",
             "namePlaceholder": "Enter your full name",
             "phone": "Phone Number *",
-            "phonePlaceholder": "e.g., +84987654321",
+            "phonePlaceholder": "Example: 0987654321",
             "email": "Email",
             "emailPlaceholder": "example@gmail.com",
             "service": "Service of Interest",
             "message": "Message",
-            "messagePlaceholder": "How can we help you with your project..."
+            "messagePlaceholder": "What do you need our support with..."
         },
         "services": {
             "recording": "Recording",
             "mixing": "Mix & Master",
             "production": "Full Production",
+            "sheetMusic": "Sheet Music Transcription",
+            "arranging": "Arranging / Orchestration",
+            "beatRemaking": "Beat Remaking",
             "other": "Other"
         },
-        "submit": "Send Request",
-        "submitting": "Sending...",
+        "submit": "Submit Request",
+        "submitting": "Submitting...",
         "success": {
-            "title": "Successfully Sent!",
-            "message": "Thank you for reaching out. We will get back to you as soon as possible."
+            "title": "Sent Successfully!",
+            "message": "Thank you for your interest. We will contact you back as soon as possible."
         },
         "error": {
-            "message": "Something went wrong. Please try again later."
+            "message": "An error occurred. Please try again later."
         }
     },
     "faq": {
         "heading": "Frequently Asked Questions",
         "questions": [
             {
-                "question": "What should I prepare before recording?",
-                "answer": "You should memorize the lyrics, prepare beats (high-quality WAV file), and send a demo to the engineer beforehand. Good sleep and proper hydration also help your voice reach peak performance."
+                "question": "What should I prepare before coming to record?",
+                "answer": "You should memorize the lyrics, prepare the beat (high-quality WAV file recommended) and send it to 2LAB, or contact us for further assistance. A good night's sleep and drinking enough water also help your voice perform at its best."
             },
             {
-                "question": "How long does Mix & Master take?",
-                "answer": "Typically, the mix & master process takes 3-5 business days depending on the song's complexity. We always prioritize product quality above all else."
+                "question": "How long does it take to complete the Mix & Master?",
+                "answer": "Normally, the Mix & Master process will take 3-5 working days depending on the complexity of the song. We always prioritize product quality."
             },
             {
-                "question": "Can you do online mixing services?",
-                "answer": "Yes, we offer professional online mixing services nationwide and internationally. Simply send your stems through our cloud system and we'll deliver the final master within 48 hours."
+                "question": "Do you offer online mixing services?",
+                "answer": "Yes, we provide professional online mixing services nationwide and internationally. Just send your stems via our cloud system and we'll send back the final master within 3-5 days."
             },
             {
-                "question": "What formats do you accept?",
-                "answer": "We accept all standard audio formats including WAV, MP3, FLAC, and more. We recommend WAV for best quality. Contact us for specific requirements."
+                "question": "What file formats do you accept?",
+                "answer": "We accept all standard audio formats including WAV, MP3, FLAC, etc. We highly recommend WAV for the best quality. Contact 2LAB for specific requirements."
             }
         ]
     },
     "footer": {
-        "companyName": "2lab",
+        "companyName": "2LAB",
         "tagline": "GO 2 OUR LAB",
+        "description": "Where passion is elevated with dedication and care. 2LAB accompanies you in crafting soundscapes that carry your personal signature.",
         "contact": {
-            "label": "Get in Touch",
+            "label": "Get In Touch With Us",
             "mapLabel": "Interactive Map",
             "openInMaps": "Open Google Maps",
             "directions": "Directions",
             "copyAddress": "Copy Address",
-            "copied": "Address Copied",
+            "copied": "Copied",
             "phone": "+84 879 277 167",
             "email": "contact@2lab.vn",
             "address": "District 1, Ho Chi Minh City, Vietnam"
@@ -416,6 +422,6 @@
             "portfolio": "Portfolio",
             "contact": "Contact"
         },
-        "copyright": "\u00a9 {year} 2lab. All rights reserved."
+        "copyright": "© {year} 2LAB. All rights reserved."
     }
 }

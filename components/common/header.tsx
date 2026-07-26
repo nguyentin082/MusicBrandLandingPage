@@ -31,7 +31,7 @@ export async function Header() {
                     {/* Light mode logo (hidden in dark mode) */}
                     <Image
                         src={logoLight}
-                        alt="2lab logo"
+                        alt="2LAB logo"
                         width={160}
                         height={60}
                         priority
@@ -41,7 +41,7 @@ export async function Header() {
                     {/* Dark mode logo (hidden in light mode) */}
                     <Image
                         src={logoDark}
-                        alt="2lab logo"
+                        alt="2LAB logo"
                         width={160}
                         height={60}
                         priority

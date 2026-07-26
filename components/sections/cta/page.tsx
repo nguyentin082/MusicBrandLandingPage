@@ -16,7 +16,7 @@ export async function CTASection() {
                 <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark-umber mb-6 sm:mb-8 italic tracking-tight">
                     {t('heading')}
                 </h3>
-                <p className="text-dark-umber/70 mb-10 sm:mb-16 italic font-medium leading-relaxed text-sm sm:text-base max-w-2xl mx-auto">
+                <p className="text-dark-umber/70 mb-10 sm:mb-16 font-medium leading-relaxed text-sm sm:text-base max-w-2xl mx-auto">
                     {t('description')}
                 </p>
                 
