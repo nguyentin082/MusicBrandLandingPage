@@ -207,16 +207,14 @@
             }
         ]
     },
-    "studio": {
-        "label": "Vibe & Comfort",
-        "heading": "Relax to Create",
-        "description": "We believe the greatest inspiration comes from comfort. At 2LAB, you not only work in a professional environment but are also enthusiastically supported by highly experienced and skilled staff. Hence, we create a space where artists can pour their soul into their music without being interrupted by technical worries or environmental distractions.",
-        "amenities": [
-            "Specialty Coffee",
-            "Creative Chill Zone",
-            "Air Purification System",
-            "Dedicated Engineers"
-        ]
+    "sheet": {
+        "label": "Sheet Music Transcription",
+        "heading": "Professional Sheet Music Services",
+        "description": "2LAB offers custom transcription, arranging, and sheet music writing services. Check out these sample sheets we've created to see our quality before booking:",
+        "buttons": {
+            "band": "Sample Band Score",
+            "classical": "Sample Piano Sheet"
+        }
     },
     "gear": {
         "label": "Studio Equipment",
