@@ -141,6 +141,24 @@
         "playButton": "Phát",
         "pauseButton": "Tạm dừng"
     },
+    "beats": {
+        "label": "Sản Phẩm Beat",
+        "heading": "Thực hiện bởi 2LAB",
+        "playButton": "Phát",
+        "pauseButton": "Tạm dừng",
+        "items": [
+            {
+                "title": "If I Ain't Got You",
+                "genre": "Master Beat",
+                "description": "Bản beat sản xuất với chất lượng master chân thực."
+            },
+            {
+                "title": "Zenith",
+                "genre": "Original Beat",
+                "description": "Bản hòa tấu hiện đại làm nổi bật dải động và độ chi tiết."
+            }
+        ]
+    },
     "portfolio": {
         "label": "Dự Án Tiêu Biểu",
         "heading": "Hòa Âm & Phối Khí",

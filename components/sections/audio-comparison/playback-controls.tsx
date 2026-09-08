@@ -29,7 +29,7 @@ export const PlaybackControls = memo(function PlaybackControls({
                     onClick={() => {
                         void onTogglePlay();
                     }}
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-dark-umber text-white dark:bg-off-white dark:text-dark-umber font-semibold text-sm"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-dark-umber text-white dark:bg-off-white dark:text-dark-umber font-semibold text-sm cursor-pointer hover:opacity-80 transition-opacity"
                 >
                     {isPlaying ? <Pause size={16} /> : <Play size={16} />}
                     {isPlaying ? pauseButton : playButton}
@@ -46,7 +46,7 @@ export const PlaybackControls = memo(function PlaybackControls({
                 step={0.01}
                 value={duration ? currentTime : 0}
                 onChange={(event) => onSeek(Number(event.target.value))}
-                className="w-full accent-brick-red"
+                className="w-full accent-brick-red cursor-pointer"
             />
         </div>
     );

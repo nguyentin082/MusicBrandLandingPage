@@ -140,6 +140,24 @@
         "playButton": "Play",
         "pauseButton": "Pause"
     },
+    "beats": {
+        "label": "Original Beats",
+        "heading": "Produced by 2LAB",
+        "playButton": "Play",
+        "pauseButton": "Pause",
+        "items": [
+            {
+                "title": "If I Ain't Got You",
+                "genre": "Master Beat",
+                "description": "Custom beat production with high fidelity mastering."
+            },
+            {
+                "title": "Zenith",
+                "genre": "Original Beat",
+                "description": "Modern instrumental highlighting dynamic range and clarity."
+            }
+        ]
+    },
     "portfolio": {
         "label": "Featured Projects",
         "heading": "Arrangement & Production",
