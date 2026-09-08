@@ -104,7 +104,7 @@ const PlatformItem = memo(function PlatformItem({ platform }: PlatformItemProps)
             ) : (
                 <div className="w-14 h-14 sm:w-18 sm:h-18 md:w-24 md:h-24 bg-off-white/20 rounded" />
             )}
-            <span className="text-xs sm:text-sm md:text-sm font-medium text-off-white dark:text-off-white text-center leading-tight line-clamp-2 max-w-16 sm:max-w-20 md:max-w-28">
+            <span className="text-xs sm:text-sm md:text-sm font-medium text-dark-umber dark:text-off-white text-center leading-tight line-clamp-2 max-w-16 sm:max-w-20 md:max-w-28">
                 {platform.name}
             </span>
         </div>

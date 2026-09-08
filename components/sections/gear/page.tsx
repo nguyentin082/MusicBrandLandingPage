@@ -53,7 +53,7 @@ export async function GearSection() {
     return (
         <section
             id="gear"
-            className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-white dark:bg-dark-umber overflow-hidden"
+            className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-off-white dark:bg-dark-umber overflow-hidden"
         >
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 sm:gap-16 md:gap-20 items-center">
                 <div className="relative order-2 lg:order-1">
@@ -91,7 +91,7 @@ export async function GearSection() {
                             <AccordionItem
                                 value={table.title}
                                 key={table.title}
-                                className="overflow-hidden rounded-3xl border-b-0 border border-dark-umber/5 bg-off-white shadow-[0_8px_30px_rgba(26,22,20,0.04)] dark:border-off-white/10 dark:bg-soft-brown dark:shadow-none transition-all duration-500 hover:border-brick-red/40 hover:shadow-[0_0_20px_rgba(178,58,72,0.15)] dark:hover:border-warm-gold/50 dark:hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] data-[state=open]:border-brick-red/40 data-[state=open]:shadow-[0_0_20px_rgba(178,58,72,0.15)] dark:data-[state=open]:border-warm-gold/50 dark:data-[state=open]:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
+                                className="overflow-hidden rounded-3xl border-b-0 border border-dark-umber/5 bg-white shadow-[0_8px_30px_rgba(26,22,20,0.04)] dark:border-off-white/10 dark:bg-soft-brown dark:shadow-none transition-all duration-500 hover:border-brick-red/40 hover:shadow-[0_0_20px_rgba(178,58,72,0.15)] dark:hover:border-warm-gold/50 dark:hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] data-[state=open]:border-brick-red/40 data-[state=open]:shadow-[0_0_20px_rgba(178,58,72,0.15)] dark:data-[state=open]:border-warm-gold/50 dark:data-[state=open]:shadow-[0_0_20px_rgba(212,175,55,0.15)]"
                             >
                                 <AccordionTrigger className="hover:no-underline cursor-pointer items-center border-b border-transparent data-[state=open]:border-dark-umber/5 dark:data-[state=open]:border-off-white/10 bg-dark-umber/3 px-6 py-5 dark:bg-off-white/4 sm:px-8 [&>svg]:text-brick-red dark:[&>svg]:text-warm-gold [&>svg]:size-5 transition-colors duration-300">
                                     <div className="flex flex-col text-left">

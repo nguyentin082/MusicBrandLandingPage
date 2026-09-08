@@ -15,9 +15,9 @@ export async function TeamSection() {
     const members = t.raw('members') as TeamMember[];
 
     return (
-        <section className="py-16 sm:py-24 md:py-32 bg-dark-umber dark:bg-dark-umber px-4 sm:px-6">
+        <section className="py-16 sm:py-24 md:py-32 bg-white dark:bg-soft-brown px-4 sm:px-6">
             <div className="max-w-7xl mx-auto">
-                <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-off-white dark:text-off-white tracking-tighter mb-12 sm:mb-16 md:mb-20 italic">
+                <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-12 sm:mb-16 md:mb-20 italic">
                     {t('heading')}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12 group/team-list">
@@ -39,13 +39,13 @@ export async function TeamSection() {
                                     alt={member.name}
                                 />
                             </div>
-                            <h4 className="font-bold text-off-white dark:text-off-white text-lg sm:text-xl italic transition-colors duration-500 group-hover/member:text-warm-gold group-focus-visible/member:text-warm-gold">
+                            <h4 className="font-bold text-dark-umber dark:text-off-white text-lg sm:text-xl italic transition-colors duration-500 group-hover/member:text-warm-gold group-focus-visible/member:text-warm-gold">
                                 {member.name}
                             </h4>
                             <p className="text-[9px] sm:text-[10px] text-warm-gold font-bold uppercase tracking-widest mb-3 sm:mb-4">
                                 {member.role}
                             </p>
-                            <p className="text-[11px] sm:text-xs text-off-white/60 dark:text-off-white/60 px-2 sm:px-4 leading-relaxed">
+                            <p className="text-[11px] sm:text-xs text-dark-umber/70 dark:text-off-white/60 px-2 sm:px-4 leading-relaxed">
                                 {member.bio}
                             </p>
                         </div>

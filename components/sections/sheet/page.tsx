@@ -25,7 +25,7 @@ export function SheetSection() {
     const activeSheetUrl = sheets.find(s => s.id === activeSheet)?.url;
 
     return (
-        <section className="py-24 sm:py-32 px-6 bg-white dark:bg-dark-umber">
+        <section className="py-24 sm:py-32 px-6 bg-off-white dark:bg-dark-umber">
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
                 {/* Left side: Scaled PDF viewer */}
                 <div className="w-full lg:w-1/2 order-2 lg:order-1">
