@@ -151,7 +151,11 @@ export function StickyContactFab({ labels }: { labels: ContactFabLabels }) {
                                                 : 'border-dark-umber/10 bg-off-white text-dark-umber dark:border-off-white/10 dark:bg-off-white/10 dark:text-off-white'
                                         }`}
                                     >
-                                        <Icon className="size-6 shrink-0 transition-transform duration-200 ease-out group-hover:scale-110" />
+                                        <Icon
+                                            className="size-6 shrink-0 transition-transform duration-200 ease-out group-hover:scale-110"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
                                         <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-center">
                                             {labels[labelKey]}
                                         </span>

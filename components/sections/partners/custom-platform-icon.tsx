@@ -84,6 +84,7 @@ export function CustomPlatformIcon({
             <div
                 className="flex items-end justify-center gap-0.5 rounded-md bg-[#111111] p-1.5"
                 style={{ width: size, height: size }}
+                role="img"
                 aria-label={label}
             >
                 <span
