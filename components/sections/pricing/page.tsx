@@ -55,7 +55,7 @@ export async function PricingSection() {
                                 </div>
                                 <p
                                     className={`text-[9px] sm:text-[10px] font-bold uppercase mb-6 sm:mb-8 ${
-                                        idx === 1 ? 'text-warm-gold' : 'text-warm-gold'
+                                        idx === 1 ? 'text-off-white' : 'text-brick-red dark:text-warm-gold'
                                     }`}
                                 >
                                     {plan.subtitle}
@@ -66,14 +66,15 @@ export async function PricingSection() {
                                 <ul
                                     className={`text-[11px] sm:text-xs space-y-3 sm:space-y-4 grow mb-8 sm:mb-10 ${
                                         idx === 1
-                                            ? 'text-off-white/60'
+                                            ? 'text-off-white/90'
                                             : 'text-soft-brown dark:text-off-white/70'
                                     }`}
                                 >
                                     {(plan.features as string[]).map((feature, fidx) => (
                                         <li key={fidx} className="flex items-center gap-2">
                                             <Check
-                                                className={`w-4 h-4 shrink-0 ${idx === 1 ? 'text-warm-gold' : 'text-warm-gold'}`}
+                                                className={`w-4 h-4 shrink-0 ${idx === 1 ? 'text-off-white' : 'text-warm-gold'}`}
+                                                aria-hidden="true"
                                             />
                                             {feature}
                                         </li>
