@@ -66,7 +66,13 @@ const baseConfig = {
     },
     experimental: {
         // Tree-shake unused icons/components
-        optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui/react-accordion'],
+        optimizePackageImports: [
+            'lucide-react',
+            'framer-motion',
+            '@radix-ui/react-accordion',
+            'react-icons/si',
+            'react-icons/fa6',
+        ],
         // Enable PPR (Partial Pre-rendering) for static shell + dynamic streams
         ppr: false, // set to true when upgrading to Next.js 15 stable PPR
     },

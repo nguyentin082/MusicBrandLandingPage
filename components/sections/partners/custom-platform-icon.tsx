@@ -1,4 +1,4 @@
-import * as Fa6Icons from 'react-icons/fa6';
+import { FaFacebookF } from './icon-map';
 
 interface CustomPlatformIconProps {
     iconName: string;
@@ -70,7 +70,7 @@ export function CustomPlatformIcon({
                 className="flex items-center justify-center rounded-full bg-[#1877F2] shadow-[0_0_14px_rgba(24,119,242,0.35)]"
                 style={{ width: size, height: size }}
             >
-                <Fa6Icons.FaFacebookF
+                <FaFacebookF
                     size={Math.round(22 * scaleFactor)}
                     style={{ color: '#FFFFFF' }}
                     aria-label={label}
