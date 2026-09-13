@@ -321,6 +321,18 @@
                 "role": "Composer & Vocal Coach",
                 "bio": "Specializes in songwriting and vocal coaching.",
                 "avatar": "/image/team/dat.jpeg"
+            },
+            {
+                "name": "An",
+                "role": "Vocal Coach - Vocal Arranger",
+                "bio": "Specializes in vocal coaching and vocal arrangement.",
+                "avatar": "/image/team/an.jpg"
+            },
+            {
+                "name": "Khanh",
+                "role": "Visual Designer / Graphic Designer",
+                "bio": "In charge of visual and graphic design for projects.",
+                "avatar": "/image/team/khanh.jpeg"
             }
         ]
     },

@@ -322,6 +322,18 @@
                 "role": "Composer & Vocal Coach",
                 "bio": "Chuyên về viết nhạc và huấn luyện giọng hát.",
                 "avatar": "/image/team/dat.jpeg"
+            },
+            {
+                "name": "An",
+                "role": "Vocal Coach - Vocal Arranger",
+                "bio": "Chuyên huấn luyện giọng hát và dàn dựng biên đạo ca.",
+                "avatar": "/image/team/an.jpg"
+            },
+            {
+                "name": "Khanh",
+                "role": "Visual Designer / Graphic Designer",
+                "bio": "Chuyên về thiết kế hình ảnh và đồ họa cho các dự án.",
+                "avatar": "/image/team/khanh.jpeg"
             }
         ]
     },
