@@ -10,6 +10,8 @@ interface UseAudioVisualizerParams {
     onTimelineTick: () => void;
 }
 
+const PLAYING_FRAME_INTERVAL = 33;
+
 export function useAudioVisualizer({
     canvasRef,
     analyser,
@@ -23,30 +25,26 @@ export function useAudioVisualizer({
     const lastFrameRef = useRef(0);
 
     useEffect(() => {
-        const draw = (timestamp: number) => {
+        // Draws exactly one frame. Returns false when the canvas is not laid out
+        // yet so the caller can repaint once it has a measurable size.
+        const paint = () => {
             const canvas = canvasRef.current;
-
             if (!canvas) {
-                rafRef.current = requestAnimationFrame(draw);
-                return;
+                return false;
             }
-
-            const frameInterval = isPlaying ? 33 : 125;
-            if (timestamp - lastFrameRef.current < frameInterval) {
-                rafRef.current = requestAnimationFrame(draw);
-                return;
-            }
-            lastFrameRef.current = timestamp;
 
             const context = canvas.getContext('2d');
             if (!context) {
-                rafRef.current = requestAnimationFrame(draw);
-                return;
+                return false;
+            }
+
+            const cssWidth = canvas.clientWidth;
+            const cssHeight = canvas.clientHeight;
+            if (cssWidth < 1 || cssHeight < 1) {
+                return false;
             }
 
             const dpr = window.devicePixelRatio || 1;
-            const cssWidth = Math.max(1, canvas.clientWidth);
-            const cssHeight = Math.max(1, canvas.clientHeight);
             const nextWidth = Math.floor(cssWidth * dpr);
             const nextHeight = Math.floor(cssHeight * dpr);
 
@@ -95,6 +93,10 @@ export function useAudioVisualizer({
                 context.fill();
             }
 
+            if (shouldRenderIdle) {
+                return true;
+            }
+
             const visualizerColor = isDarkMode && activeTrackId === 'raw' ? '#f6f4f0' : activeColor;
             const gradient = context.createLinearGradient(0, cssHeight, 0, 0);
             gradient.addColorStop(0, visualizerColor);
@@ -104,9 +106,7 @@ export function useAudioVisualizer({
             for (let i = 0; i < bars; i += 1) {
                 let normalized = 0;
 
-                if (shouldRenderIdle) {
-                    continue;
-                } else if (dataArray && bufferLength > 0) {
+                if (dataArray && bufferLength > 0) {
                     const startFreq = minFreq * Math.pow(nyquist / minFreq, i / bars);
                     const endFreq = minFreq * Math.pow(nyquist / minFreq, (i + 1) / bars);
                     const startIndex = Math.max(
@@ -143,18 +143,55 @@ export function useAudioVisualizer({
                 context.fill();
             }
 
-            if (isPlaying) {
+            return true;
+        };
+
+        // Idle: paint the resting bars once and then stay off the main thread
+        // completely. A permanently scheduled rAF loop here would keep the page
+        // from ever reaching an idle state (it wrecked TTI and Speed Index).
+        if (!isPlaying) {
+            paint();
+
+            const canvas = canvasRef.current;
+            const resizeObserver = new ResizeObserver(() => {
+                paint();
+            });
+            if (canvas) {
+                resizeObserver.observe(canvas);
+            }
+
+            // Repaint when the theme flips, since the resting bar colour depends
+            // on the `dark` class rather than on any React state.
+            const themeObserver = new MutationObserver(() => {
+                paint();
+            });
+            themeObserver.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['class'],
+            });
+
+            return () => {
+                resizeObserver.disconnect();
+                themeObserver.disconnect();
+            };
+        }
+
+        const loop = (timestamp: number) => {
+            if (timestamp - lastFrameRef.current >= PLAYING_FRAME_INTERVAL) {
+                lastFrameRef.current = timestamp;
+                paint();
                 onTimelineTick();
             }
 
-            rafRef.current = requestAnimationFrame(draw);
+            rafRef.current = requestAnimationFrame(loop);
         };
 
-        rafRef.current = requestAnimationFrame(draw);
+        rafRef.current = requestAnimationFrame(loop);
 
         return () => {
             if (rafRef.current) {
                 cancelAnimationFrame(rafRef.current);
+                rafRef.current = null;
             }
         };
     }, [activeColor, activeTrackId, analyser, canvasRef, isPlaying, onTimelineTick]);
