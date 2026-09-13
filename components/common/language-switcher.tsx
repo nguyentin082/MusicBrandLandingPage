@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useTransition } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import CountryFlag from 'react-country-flag';
+import { FlagGB, FlagVN } from './flag-icons';
 
 const SUPPORTED_LOCALES = ['en', 'vi'] as const;
 type Locale = (typeof SUPPORTED_LOCALES)[number];
@@ -86,12 +86,7 @@ export function LanguageSwitcher() {
                             : 'text-dark-umber dark:text-off-white/80'
                     }`}
                 >
-                    <CountryFlag
-                        countryCode="GB"
-                        svg
-                        style={{ width: '1.8em', height: '1.8em' }}
-                        aria-label="English flag"
-                    />
+                    <FlagGB className="h-[1.8em] w-[1.8em] shrink-0 rounded-[2px]" />
                     <span className="hidden sm:inline">EN</span>
                 </span>
 
@@ -102,12 +97,7 @@ export function LanguageSwitcher() {
                             : 'text-dark-umber dark:text-off-white/80'
                     }`}
                 >
-                    <CountryFlag
-                        countryCode="VN"
-                        svg
-                        style={{ width: '1.8em', height: '1.8em' }}
-                        aria-label="Vietnamese flag"
-                    />
+                    <FlagVN className="h-[1.8em] w-[1.8em] shrink-0 rounded-[2px]" />
                     <span className="hidden sm:inline">VI</span>
                 </span>
             </span>
