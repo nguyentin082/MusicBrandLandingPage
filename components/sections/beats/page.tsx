@@ -66,6 +66,7 @@ export async function BeatsSection() {
                             track={track}
                             playButton={t('playButton')}
                             pauseButton={t('pauseButton')}
+                            seekLabel={t('seekLabel')}
                         />
                     ))}
                 </div>

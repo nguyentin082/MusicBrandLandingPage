@@ -8,7 +8,7 @@ import { useMultiTrackAudio } from '../audio-comparison/use-multi-track-audio';
 import { useAudioVisualizer } from '../audio-comparison/use-audio-visualizer';
 import type { BeatPlayerProps } from './types';
 
-export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) {
+export function BeatPlayer({ track, playButton, pauseButton, seekLabel }: BeatPlayerProps) {
     const internalTracks = useMemo(() => [{ id: 'main', label: track.title, src: track.src }], [track.title, track.src]);
 
     const {
@@ -147,6 +147,7 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
                     isPlaying={isPlaying}
                     playButton={playButton}
                     pauseButton={pauseButton}
+                    seekLabel={seekLabel}
                     currentTime={currentTime}
                     duration={duration}
                     onTogglePlay={togglePlay}

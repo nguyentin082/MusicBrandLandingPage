@@ -9,7 +9,13 @@ import { getTrackColor } from './utils';
 import { useAudioVisualizer } from './use-audio-visualizer';
 import { useMultiTrackAudio } from './use-multi-track-audio';
 
-export function AudioToggle({ trackTitle, playButton, pauseButton, tracks }: AudioToggleProps) {
+export function AudioToggle({
+    trackTitle,
+    playButton,
+    pauseButton,
+    seekLabel,
+    tracks,
+}: AudioToggleProps) {
     const {
         activeTrackId,
         activeTrack,
@@ -79,6 +85,7 @@ export function AudioToggle({ trackTitle, playButton, pauseButton, tracks }: Aud
                 isPlaying={isPlaying}
                 playButton={playButton}
                 pauseButton={pauseButton}
+                seekLabel={seekLabel}
                 currentTime={currentTime}
                 duration={duration}
                 onTogglePlay={togglePlay}

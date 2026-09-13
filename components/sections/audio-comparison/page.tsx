@@ -80,6 +80,7 @@ export async function AudioComparisonSection() {
                             trackTitle={item.trackTitle}
                             playButton={t('playButton')}
                             pauseButton={t('pauseButton')}
+                            seekLabel={t('seekLabel')}
                             tracks={item.tracks}
                         />
                     ))}

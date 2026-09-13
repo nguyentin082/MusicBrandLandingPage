@@ -123,7 +123,6 @@
                 "name": "Snapchat",
                 "icon": "SiSnapchat"
             },
-
             {
                 "name": "Deezer",
                 "icon": "FaDeezer"
@@ -139,7 +138,8 @@
         "vocalButton": "Only Vocal",
         "masterButton": "Final Master",
         "playButton": "Phát",
-        "pauseButton": "Tạm dừng"
+        "pauseButton": "Tạm dừng",
+        "seekLabel": "Tua bài hát"
     },
     "beats": {
         "label": "Sản Phẩm Beat",
@@ -157,7 +157,8 @@
                 "genre": "Original Beat",
                 "description": "Bản hòa tấu hiện đại làm nổi bật dải động và độ chi tiết."
             }
-        ]
+        ],
+        "seekLabel": "Tua bài hát"
     },
     "portfolio": {
         "label": "Dự Án Tiêu Biểu",
