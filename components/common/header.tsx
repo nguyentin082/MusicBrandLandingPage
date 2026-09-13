@@ -48,7 +48,7 @@ export async function Header() {
                         sizes="(max-width: 640px) 120px, 160px"
                         className="hidden h-9 sm:h-10 w-auto object-contain rounded-lg drop-shadow-sm dark:block"
                     />
-                    <div className="hidden flex-col gap-0.5 sm:flex">
+                    <div className="flex flex-col gap-0.5">
                         <span className="text-base sm:text-lg font-bold tracking-tighter text-dark-umber dark:text-off-white">
                             {t('logo')}
                         </span>
