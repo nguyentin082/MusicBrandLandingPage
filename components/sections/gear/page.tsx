@@ -79,12 +79,12 @@ export async function GearSection() {
                 </div>
 
                 <div className="order-1 lg:order-2">
-                    <h2 className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-3 sm:mb-4 italic">
+                    <p className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-3 sm:mb-4 italic">
                         {t('label')}
-                    </h2>
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-8 sm:mb-10 italic">
+                    </p>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-8 sm:mb-10 italic">
                         {t('heading')}
-                    </h3>
+                    </h2>
 
                     <Accordion type="single" collapsible defaultValue={tables[0]?.title} className="flex flex-col gap-4 sm:gap-5 w-full">
                         {tables.map((table) => (
@@ -98,9 +98,12 @@ export async function GearSection() {
                                         <p className="text-[10px] font-black uppercase tracking-[0.35em] text-brick-red dark:text-warm-gold transition-colors duration-300">
                                             {t('cardLabel')}
                                         </p>
-                                        <h4 className="mt-1 sm:mt-2 text-xl font-black italic tracking-tight text-dark-umber dark:text-off-white transition-colors duration-300">
+                                        {/* Radix's AccordionTrigger already renders an
+                                            <h3> wrapper, so this stays a plain span —
+                                            a heading here would nest inside a heading. */}
+                                        <span className="mt-1 sm:mt-2 block text-xl font-black italic tracking-tight text-dark-umber dark:text-off-white transition-colors duration-300">
                                             {table.title}
-                                        </h4>
+                                        </span>
                                     </div>
                                 </AccordionTrigger>
 

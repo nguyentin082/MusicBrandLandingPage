@@ -67,9 +67,9 @@ export function AudioToggle({
             className="bg-white dark:bg-dark-umber p-8 md:p-12 rounded-[48px] border border-dark-umber/5 dark:border-off-white/10 shadow-xl flex flex-col gap-8"
         >
             <div>
-                <h4 className="text-xl font-bold italic mb-6 text-dark-umber dark:text-off-white">
+                <h3 className="text-xl font-bold italic mb-6 text-dark-umber dark:text-off-white">
                     {trackTitle}
-                </h4>
+                </h3>
                 <AudioTrackTabs
                     tracks={tracks}
                     activeTrackId={activeTrackId}

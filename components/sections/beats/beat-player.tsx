@@ -128,9 +128,9 @@ export function BeatPlayer({ track, playButton, pauseButton, seekLabel }: BeatPl
                     <p className="text-xs font-black text-brick-red dark:text-warm-gold uppercase tracking-[0.2em] mb-2">
                         {track.genre}
                     </p>
-                    <h4 className="text-2xl md:text-3xl font-extrabold italic mb-2 text-dark-umber dark:text-off-white">
+                    <h3 className="text-2xl md:text-3xl font-extrabold italic mb-2 text-dark-umber dark:text-off-white">
                         {track.title}
-                    </h4>
+                    </h3>
                     <p className="text-sm text-dark-umber/70 dark:text-off-white/70 line-clamp-2">
                         {track.description}
                     </p>

@@ -39,12 +39,12 @@ export function SheetSection() {
 
                 {/* Right side: Text and Buttons */}
                 <div className="w-full lg:w-1/2 order-1 lg:order-2 text-left">
-                    <h2 className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-4 italic">
+                    <p className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-4 italic">
                         {t('label')}
-                    </h2>
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-8 italic">
+                    </p>
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-8 italic">
                         {t('heading')}
-                    </h3>
+                    </h2>
                     <p className="text-soft-brown dark:text-off-white/70 mb-10 text-sm sm:text-base leading-relaxed">
                         {t('description')}
                     </p>

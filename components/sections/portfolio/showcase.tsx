@@ -254,9 +254,9 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                                 <p className="mb-2 text-xs font-bold tracking-widest text-warm-gold uppercase">
                                     {project.genre}
                                 </p>
-                                <h4 className="text-2xl font-bold italic text-off-white">
+                                <h3 className="text-2xl font-bold italic text-off-white">
                                     {project.title}
-                                </h4>
+                                </h3>
                                 {project.artist && (
                                     <p className="mt-1 text-sm font-medium text-off-white/80">
                                         {project.artist}
@@ -342,13 +342,13 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                                         <p className="mb-2 text-xs font-bold tracking-widest text-warm-gold uppercase">
                                             {project.genre}
                                         </p>
-                                        <h4
+                                        <h3
                                             className={`font-bold italic text-off-white ${
                                                 isTetSpotlight ? 'text-3xl' : 'text-xl'
                                             }`}
                                         >
                                             {project.title}
-                                        </h4>
+                                        </h3>
                                         {project.artist && (
                                             <p
                                                 className={`mt-1 font-medium text-off-white/80 ${

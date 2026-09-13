@@ -39,12 +39,12 @@ export async function ServicesSection() {
         >
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-12 sm:mb-16">
-                    <h2 className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-4 italic">
+                    <p className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-4 italic">
                         {t('label')}
-                    </h2>
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark-umber dark:text-off-white tracking-tighter italic">
+                    </p>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark-umber dark:text-off-white tracking-tighter italic">
                         {t('heading')}
-                    </h3>
+                    </h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-8">
                     {services.map(({ icon: Icon, key, title, description }, index, arr) => {
@@ -57,9 +57,9 @@ export async function ServicesSection() {
                                 <div className="w-12 sm:w-14 md:w-16 h-12 sm:h-14 md:h-16 bg-white dark:bg-dark-umber rounded-2xl flex items-center justify-center mb-6 sm:mb-8 text-brick-red group-hover:bg-warm-gold/10 transition">
                                     <Icon className="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8" />
                                 </div>
-                                <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-dark-umber dark:text-off-white mb-3 sm:mb-4 italic">
+                                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-dark-umber dark:text-off-white mb-3 sm:mb-4 italic">
                                     {title}
-                                </h4>
+                                </h3>
                                 <p className="text-soft-brown dark:text-off-white/70 text-xs sm:text-sm leading-relaxed flex-grow">
                                     {description}
                                 </p>

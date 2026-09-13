@@ -75,9 +75,9 @@ export function Footer() {
             <div className="mx-auto max-w-7xl">
                 <div className="mb-12 space-y-10 lg:mb-20 lg:grid lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-16 lg:space-y-0 sm:mb-20 sm:space-y-12">
                     <div className="max-w-2xl">
-                        <h3 className="mb-4 text-3xl font-black italic tracking-tighter sm:text-4xl">
+                        <h2 className="mb-4 text-3xl font-black italic tracking-tighter sm:text-4xl">
                             {t('companyName')}
-                        </h3>
+                        </h2>
                         <p className="mb-6 text-sm font-bold uppercase tracking-widest text-warm-gold sm:mb-8">
                             {t('tagline')}
                         </p>

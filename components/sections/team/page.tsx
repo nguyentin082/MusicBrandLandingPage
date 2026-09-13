@@ -43,11 +43,11 @@ export async function TeamSection() {
                                     alt={member.name}
                                 />
                             </div>
-                            <h4 className={`font-bold text-dark-umber dark:text-off-white italic transition-colors duration-500 group-hover/member:text-warm-gold group-focus-visible/member:text-warm-gold ${
+                            <h3 className={`font-bold text-dark-umber dark:text-off-white italic transition-colors duration-500 group-hover/member:text-warm-gold group-focus-visible/member:text-warm-gold ${
                                 idx < 2 ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'
                             }`}>
                                 {member.name}
-                            </h4>
+                            </h3>
                             <p className={`text-warm-gold font-bold uppercase tracking-widest mb-3 sm:mb-4 ${
                                 idx < 2 ? 'text-[10px] sm:text-xs' : 'text-[9px] sm:text-[10px]'
                             }`}>
