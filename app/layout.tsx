@@ -11,11 +11,17 @@ const sansFont = Be_Vietnam_Pro({
     variable: '--font-geist-sans',
     display: 'swap',
 });
+// The mono face is only referenced by `font-mono`, which the landing page does
+// not use. One weight and one subset keeps the token defined without shipping
+// eight extra font files on every visit.
 const monoFont = IBM_Plex_Mono({
-    subsets: ['latin', 'latin-ext'],
-    weight: ['400', '500', '600', '700'],
+    subsets: ['latin'],
+    weight: ['400'],
     variable: '--font-geist-mono',
     display: 'swap',
+    // Nothing on the landing page renders `font-mono`, so preloading it only
+    // took bandwidth away from the LCP image. It still loads if a page uses it.
+    preload: false,
 });
 
 export const viewport: Viewport = {
