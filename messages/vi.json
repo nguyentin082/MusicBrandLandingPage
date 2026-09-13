@@ -85,7 +85,8 @@
             "instagram": "Nhắn Instagram",
             "tiktok": "Xem TikTok",
             "telegram": "Chat Telegram"
-        }
+        },
+        "closeTrigger": "Đóng menu liên hệ"
     },
     "partners": {
         "label": "Phát Hành Nhạc Số",

@@ -69,6 +69,7 @@ export default async function LocaleLayout({
     const contactFabLabels = {
         eyebrow: contactFabT('eyebrow'),
         trigger: contactFabT('trigger'),
+        closeTrigger: contactFabT('closeTrigger'),
         title: contactFabT('title'),
         description: contactFabT('description'),
         call: contactFabT('labels.call'),

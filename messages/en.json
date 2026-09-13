@@ -85,7 +85,8 @@
             "instagram": "Message on Instagram",
             "tiktok": "Watch on TikTok",
             "telegram": "Chat on Telegram"
-        }
+        },
+        "closeTrigger": "Close contact menu"
     },
     "partners": {
         "label": "Digital Release",
