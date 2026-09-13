@@ -78,7 +78,15 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
                 <div className="relative flex-shrink-0 cursor-pointer" onClick={() => { void togglePlay(); }}>
                     <motion.div 
                         animate={{ rotate: isPlaying ? 360 : 0 }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        transition={
+                            // Only keep a repeating animation alive while audio is
+                            // actually playing. `repeat: Infinity` on a 0 -> 0 tween
+                            // still holds a driver loop open and keeps the main
+                            // thread from ever going idle.
+                            isPlaying
+                                ? { duration: 3, repeat: Infinity, ease: 'linear' }
+                                : { duration: 0.3, ease: 'easeOut' }
+                        }
                         className={`w-28 h-28 md:w-36 md:h-36 rounded-full bg-dark-umber flex items-center justify-center border-4 border-dark-umber/20 dark:border-off-white/20 shadow-xl transition-shadow ${isPlaying ? 'shadow-brick-red/30' : ''}`}
                     >
                         {/* Vinyl grooves */}
