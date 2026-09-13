@@ -65,7 +65,10 @@ export function LanguageSwitcher() {
             type="button"
             onClick={handleSwitchLanguage}
             disabled={isPending}
-            aria-label={`Chuyển sang ${nextLocaleLabel}`}
+            // No aria-label here on purpose: an override would replace the
+            // visible "EN"/"VI" text with a name that does not contain it, which
+            // breaks voice control ("click EN") and fails label-content-name-
+            // mismatch. The sr-only span below supplies the full description.
             aria-busy={isPending}
             className="group inline-flex cursor-pointer items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brick-red focus-visible:ring-offset-2 focus-visible:ring-offset-off-white disabled:cursor-not-allowed disabled:opacity-80 dark:focus-visible:ring-offset-dark-umber transition-opacity"
             style={{
