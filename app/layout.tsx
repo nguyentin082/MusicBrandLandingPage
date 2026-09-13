@@ -24,6 +24,19 @@ const monoFont = IBM_Plex_Mono({
     preload: false,
 });
 
+const assetOrigin = (() => {
+    const base = process.env.NEXT_PUBLIC_ASSET_BASE_URL;
+    if (!base) {
+        return null;
+    }
+
+    try {
+        return new URL(base).origin;
+    } catch {
+        return null;
+    }
+})();
+
 export const viewport: Viewport = {
     width: 'device-width',
     initialScale: 1,
@@ -176,6 +189,17 @@ export default async function RootLayout({
             suppressHydrationWarning
             className={`${sansFont.variable} ${monoFont.variable}`}
         >
+            <head>
+                {assetOrigin && (
+                    <>
+                        {/* The hero image (the LCP element) lives on this origin,
+                            so pay the DNS + TLS cost up front instead of after
+                            the HTML has been parsed. */}
+                        <link rel="preconnect" href={assetOrigin} crossOrigin="anonymous" />
+                        <link rel="dns-prefetch" href={assetOrigin} />
+                    </>
+                )}
+            </head>
             <body suppressHydrationWarning className="font-sans antialiased">
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                     {children}
