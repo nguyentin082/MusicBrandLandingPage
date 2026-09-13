@@ -22,6 +22,7 @@ export function AudioToggle({ trackTitle, playButton, pauseButton, tracks }: Aud
         setCurrentTime,
         switchTrack,
         togglePlay,
+        warmUpMetadata,
         handleTrackEnded,
         handleTrackMetadataLoaded,
     } = useMultiTrackAudio(tracks);
@@ -54,7 +55,11 @@ export function AudioToggle({ trackTitle, playButton, pauseButton, tracks }: Aud
     });
 
     return (
-        <div className="bg-white dark:bg-dark-umber p-8 md:p-12 rounded-[48px] border border-dark-umber/5 dark:border-off-white/10 shadow-xl flex flex-col gap-8">
+        <div
+            onPointerEnter={warmUpMetadata}
+            onFocusCapture={warmUpMetadata}
+            className="bg-white dark:bg-dark-umber p-8 md:p-12 rounded-[48px] border border-dark-umber/5 dark:border-off-white/10 shadow-xl flex flex-col gap-8"
+        >
             <div>
                 <h4 className="text-xl font-bold italic mb-6 text-dark-umber dark:text-off-white">
                     {trackTitle}
@@ -88,7 +93,7 @@ export function AudioToggle({ trackTitle, playButton, pauseButton, tracks }: Aud
                     }}
                     src={track.src}
                     crossOrigin="anonymous"
-                    preload="auto"
+                    preload="none"
                     onLoadedMetadata={() => {
                         handleTrackMetadataLoaded(track.id);
                     }}

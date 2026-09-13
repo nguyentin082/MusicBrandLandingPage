@@ -21,6 +21,7 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
         seek,
         setCurrentTime,
         togglePlay,
+        warmUpMetadata,
         handleTrackEnded,
         handleTrackMetadataLoaded,
     } = useMultiTrackAudio(internalTracks);
@@ -57,6 +58,8 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
             viewport={{ once: true }}
             whileHover={{ y: -5 }}
             transition={{ duration: 0.5 }}
+            onPointerEnter={warmUpMetadata}
+            onFocusCapture={warmUpMetadata}
             className="group relative bg-white/80 dark:bg-dark-umber/80 backdrop-blur-xl p-8 md:p-10 rounded-[40px] border border-dark-umber/10 dark:border-off-white/10 shadow-2xl overflow-hidden flex flex-col gap-8"
         >
             {/* Background glowing effect when playing */}
@@ -149,7 +152,7 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
                 }}
                 src={track.src}
                 crossOrigin="anonymous"
-                preload="auto"
+                preload="none"
                 onLoadedMetadata={() => {
                     handleTrackMetadataLoaded(activeTrackId);
                 }}
