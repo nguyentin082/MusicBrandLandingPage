@@ -35,7 +35,7 @@ export async function BeatsSection() {
                 description: track.description,
                 byArtist: {
                     '@type': 'MusicGroup',
-                    name: '2LAB',
+                    name: '2lab',
                 },
                 url: toAbsoluteUrl(track.src, siteConfig.url),
             },

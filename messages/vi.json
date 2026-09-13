@@ -1,10 +1,10 @@
 {
     "metadata": {
-        "title": "2LAB | GO 2 OUR LAB",
+        "title": "2lab | GO 2 OUR LAB",
         "description": "Phòng thu âm, sản xuất âm nhạc chuyên nghiệp tại Việt Nam. Dịch vụ Mix & Master cao cấp. Được tin tưởng bởi nhiều nghệ sĩ hàng đầu Việt Nam."
     },
     "navigation": {
-        "logo": "2LAB",
+        "logo": "2lab",
         "tagline": "GO 2 OUR LAB",
         "services": "Dịch vụ",
         "portfolio": "Sản phẩm",
@@ -16,13 +16,13 @@
     "hero": {
         "heading": "TỪ Ý TƯỞNG",
         "highlighted": "ĐẾN SẢN PHẨM",
-        "description": "2LAB không chỉ thu âm và sản xuất, mà còn đồng hành cùng bạn kể những câu chuyện bằng âm nhạc.",
+        "description": "2lab không chỉ thu âm và sản xuất, mà còn đồng hành cùng bạn kể những câu chuyện bằng âm nhạc.",
         "cta_primary": "Liên hệ ngay",
         "cta_secondary": "Nghe các sản phẩm"
     },
     "philosophy": {
         "label": "Với chúng mình",
-        "quote": "Điều quan trọng với bạn thì cũng quan trọng với 2LAB",
+        "quote": "Điều quan trọng với bạn thì cũng quan trọng với 2lab",
         "description": "Có người đến để theo đuổi ước mơ. Có người đến để giữ lại một kỷ niệm. Dù là lý do nào, bọn mình đều làm bằng sự nghiêm túc."
     },
     "stats": {
@@ -143,7 +143,7 @@
     },
     "beats": {
         "label": "Sản Phẩm Beat",
-        "heading": "Thực hiện bởi 2LAB",
+        "heading": "Thực hiện bởi 2lab",
         "playButton": "Phát",
         "pauseButton": "Tạm dừng",
         "items": [
@@ -229,7 +229,7 @@
     "sheet": {
         "label": "Ký/Viết Sheet Nhạc",
         "heading": "Dịch Vụ Viết Sheet Nhạc Chuyên Nghiệp",
-        "description": "2LAB nhận ký âm, chuyển soạn và viết sheet nhạc theo yêu cầu. Dưới đây là các bản sheet mẫu mà chúng mình đã thực hiện để bạn có thể tham khảo chất lượng trước khi đặt lịch:",
+        "description": "2lab nhận ký âm, chuyển soạn và viết sheet nhạc theo yêu cầu. Dưới đây là các bản sheet mẫu mà chúng mình đã thực hiện để bạn có thể tham khảo chất lượng trước khi đặt lịch:",
         "buttons": {
             "band": "Mẫu Sheet Phổ Band",
             "classical": "Mẫu Sheet Cổ Điển"
@@ -382,7 +382,7 @@
     "ctaForm": {
         "label": "Liên Hệ Tư Vấn",
         "heading": "Sẵn Sàng Cho Dự Án Mới?",
-        "description": "Hãy để lại thông tin, đội ngũ 2LAB sẽ liên hệ lại với bạn trong thời gian sớm nhất để tư vấn chi tiết.",
+        "description": "Hãy để lại thông tin, đội ngũ 2lab sẽ liên hệ lại với bạn trong thời gian sớm nhất để tư vấn chi tiết.",
         "fields": {
             "name": "Họ tên *",
             "namePlaceholder": "Nhập họ tên của bạn",
@@ -418,7 +418,7 @@
         "questions": [
             {
                 "question": "Tôi cần chuẩn bị gì trước khi đến thu âm?",
-                "answer": "Bạn nên thuộc lời bài hát, chuẩn bị beat (file WAV chất lượng cao được khuyên dùng) và gửi cho 2LAB hoặc liên hệ chúng tôi để được hỗ trợ thêm. Một giấc ngủ ngon và uống đủ nước cũng giúp giọng hát đạt phong độ tốt nhất."
+                "answer": "Bạn nên thuộc lời bài hát, chuẩn bị beat (file WAV chất lượng cao được khuyên dùng) và gửi cho 2lab hoặc liên hệ chúng tôi để được hỗ trợ thêm. Một giấc ngủ ngon và uống đủ nước cũng giúp giọng hát đạt phong độ tốt nhất."
             },
             {
                 "question": "Thời gian hoàn thiện bản Mix & Master là bao lâu?",
@@ -430,14 +430,14 @@
             },
             {
                 "question": "Bạn chấp nhận những định dạng tệp nào?",
-                "answer": "Chúng mình chấp nhận tất cả các định dạng âm thanh tiêu chuẩn bao gồm WAV, MP3, FLAC, v.v. Chúng mình khuyên dùng WAV để có chất lượng tốt nhất. Liên hệ với 2LAB để biết các yêu cầu cụ thể."
+                "answer": "Chúng mình chấp nhận tất cả các định dạng âm thanh tiêu chuẩn bao gồm WAV, MP3, FLAC, v.v. Chúng mình khuyên dùng WAV để có chất lượng tốt nhất. Liên hệ với 2lab để biết các yêu cầu cụ thể."
             }
         ]
     },
     "footer": {
-        "companyName": "2LAB",
+        "companyName": "2lab",
         "tagline": "GO 2 OUR LAB",
-        "description": "Nơi đam mê được thăng hoa bằng sự nghiêm túc và chỉn chu. 2LAB đồng hành cùng bạn kiến tạo nên những không gian âm thanh mang đậm dấu ấn cá nhân.",
+        "description": "Nơi đam mê được thăng hoa bằng sự nghiêm túc và chỉn chu. 2lab đồng hành cùng bạn kiến tạo nên những không gian âm thanh mang đậm dấu ấn cá nhân.",
         "contact": {
             "label": "Liên Hệ Với Chúng Mình",
             "mapLabel": "Bản Đồ Tương Tác",
@@ -456,6 +456,6 @@
             "portfolio": "Sản Phẩm",
             "contact": "Liên Hệ"
         },
-        "copyright": "© {year} 2LAB. All rights reserved."
+        "copyright": "© {year} 2lab. All rights reserved."
     }
 }

@@ -1,7 +1,7 @@
 import { contactInfo } from '@/lib/contact';
 
 export const siteConfig = {
-    name: '2LAB',
+    name: '2lab',
     description:
         'Phòng thu âm, sản xuất âm nhạc chuyên nghiệp tại Việt Nam. Dịch vụ Mix & Master cao cấp. Được tin tưởng bởi nhiều nghệ sĩ hàng đầu Việt Nam.',
     url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://2lab.vn',

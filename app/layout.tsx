@@ -50,7 +50,7 @@ export const metadata: Metadata = {
         'Ho Chi Minh City',
         'music production',
         'sound studio',
-        '2LAB',
+        '2lab',
         '2lab studio',
         // Tiếng Việt
         'phòng thu âm',

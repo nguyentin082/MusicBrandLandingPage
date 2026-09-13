@@ -1,10 +1,10 @@
 {
     "metadata": {
-        "title": "2LAB | GO 2 OUR LAB",
+        "title": "2lab | GO 2 OUR LAB",
         "description": "Professional recording and music production studio in Vietnam. Premium Mix & Master services. Trusted by top Vietnamese artists."
     },
     "navigation": {
-        "logo": "2LAB",
+        "logo": "2lab",
         "tagline": "GO 2 OUR LAB",
         "services": "Services",
         "portfolio": "Portfolio",
@@ -16,13 +16,13 @@
     "hero": {
         "heading": "FROM IDEAS",
         "highlighted": "TO REALITY",
-        "description": "2LAB doesn't just record and produce, we accompany you in telling stories through music.",
+        "description": "2lab doesn't just record and produce, we accompany you in telling stories through music.",
         "cta_primary": "Contact Now",
         "cta_secondary": "Listen to our work"
     },
     "philosophy": {
         "label": "Our Philosophy",
-        "quote": "What matters to you, matters to 2LAB",
+        "quote": "What matters to you, matters to 2lab",
         "description": "Some come to pursue a dream. Some come to preserve a memory. Whatever the reason, we treat it with utmost seriousness."
     },
     "stats": {
@@ -142,7 +142,7 @@
     },
     "beats": {
         "label": "Original Beats",
-        "heading": "Produced by 2LAB",
+        "heading": "Produced by 2lab",
         "playButton": "Play",
         "pauseButton": "Pause",
         "items": [
@@ -228,7 +228,7 @@
     "sheet": {
         "label": "Sheet Music Transcription",
         "heading": "Professional Sheet Music Services",
-        "description": "2LAB offers custom transcription, arranging, and sheet music writing services. Check out these sample sheets we've created to see our quality before booking:",
+        "description": "2lab offers custom transcription, arranging, and sheet music writing services. Check out these sample sheets we've created to see our quality before booking:",
         "buttons": {
             "band": "Sample Band Score",
             "classical": "Sample Classical Sheet"
@@ -381,7 +381,7 @@
     "ctaForm": {
         "label": "Consultation Inquiry",
         "heading": "Ready For A New Project?",
-        "description": "Please leave your information, the 2LAB team will contact you as soon as possible for detailed consultation.",
+        "description": "Please leave your information, the 2lab team will contact you as soon as possible for detailed consultation.",
         "fields": {
             "name": "Full Name *",
             "namePlaceholder": "Enter your full name",
@@ -417,7 +417,7 @@
         "questions": [
             {
                 "question": "What should I prepare before coming to record?",
-                "answer": "You should memorize the lyrics, prepare the beat (high-quality WAV file recommended) and send it to 2LAB, or contact us for further assistance. A good night's sleep and drinking enough water also help your voice perform at its best."
+                "answer": "You should memorize the lyrics, prepare the beat (high-quality WAV file recommended) and send it to 2lab, or contact us for further assistance. A good night's sleep and drinking enough water also help your voice perform at its best."
             },
             {
                 "question": "How long does it take to complete the Mix & Master?",
@@ -429,14 +429,14 @@
             },
             {
                 "question": "What file formats do you accept?",
-                "answer": "We accept all standard audio formats including WAV, MP3, FLAC, etc. We highly recommend WAV for the best quality. Contact 2LAB for specific requirements."
+                "answer": "We accept all standard audio formats including WAV, MP3, FLAC, etc. We highly recommend WAV for the best quality. Contact 2lab for specific requirements."
             }
         ]
     },
     "footer": {
-        "companyName": "2LAB",
+        "companyName": "2lab",
         "tagline": "GO 2 OUR LAB",
-        "description": "Where passion is elevated with dedication and care. 2LAB accompanies you in crafting soundscapes that carry your personal signature.",
+        "description": "Where passion is elevated with dedication and care. 2lab accompanies you in crafting soundscapes that carry your personal signature.",
         "contact": {
             "label": "Get In Touch With Us",
             "mapLabel": "Interactive Map",
@@ -455,6 +455,6 @@
             "portfolio": "Portfolio",
             "contact": "Contact"
         },
-        "copyright": "© {year} 2LAB. All rights reserved."
+        "copyright": "© {year} 2lab. All rights reserved."
     }
 }
