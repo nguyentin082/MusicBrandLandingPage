@@ -20,11 +20,17 @@ export default {
       },
       animation: {
         marquee: 'marquee 35s linear infinite',
+        'soft-pulse': 'soft-pulse 2s infinite',
       },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
+        },
+        'soft-pulse': {
+          '0%': { boxShadow: '0 0 0 0 rgba(212, 163, 83, 0.5)' },
+          '70%': { boxShadow: '0 0 0 15px rgba(212, 163, 83, 0)' },
+          '100%': { boxShadow: '0 0 0 0 rgba(212, 163, 83, 0)' },
         },
       },
     },
