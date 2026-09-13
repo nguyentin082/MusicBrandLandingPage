@@ -34,7 +34,6 @@ export async function Header() {
                         alt="2lab logo"
                         width={160}
                         height={60}
-                        priority
                         sizes="(max-width: 640px) 120px, 160px"
                         className="h-9 sm:h-10 w-auto object-contain rounded-lg drop-shadow-sm dark:hidden"
                     />
@@ -44,7 +43,6 @@ export async function Header() {
                         alt="2lab logo"
                         width={160}
                         height={60}
-                        priority
                         sizes="(max-width: 640px) 120px, 160px"
                         className="hidden h-9 sm:h-10 w-auto object-contain rounded-lg drop-shadow-sm dark:block"
                     />

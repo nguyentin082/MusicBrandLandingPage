@@ -67,7 +67,7 @@ export async function GearSection() {
                                 <Image
                                     src={image.src}
                                     fill
-                                    priority={idx === 0}
+                                    loading="lazy"
                                     sizes={image.sizes}
                                     className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition duration-700"
                                     alt={image.alt}
