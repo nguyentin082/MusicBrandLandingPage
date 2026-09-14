@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useTransition } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import CountryFlag from 'react-country-flag';
+import { FlagGB, FlagVN } from './flag-icons';
 
 const SUPPORTED_LOCALES = ['en', 'vi'] as const;
 type Locale = (typeof SUPPORTED_LOCALES)[number];
@@ -65,7 +65,10 @@ export function LanguageSwitcher() {
             type="button"
             onClick={handleSwitchLanguage}
             disabled={isPending}
-            aria-label={`Chuyển sang ${nextLocaleLabel}`}
+            // No aria-label here on purpose: an override would replace the
+            // visible "EN"/"VI" text with a name that does not contain it, which
+            // breaks voice control ("click EN") and fails label-content-name-
+            // mismatch. The sr-only span below supplies the full description.
             aria-busy={isPending}
             className="group inline-flex cursor-pointer items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brick-red focus-visible:ring-offset-2 focus-visible:ring-offset-off-white disabled:cursor-not-allowed disabled:opacity-80 dark:focus-visible:ring-offset-dark-umber transition-opacity"
             style={{
@@ -86,12 +89,7 @@ export function LanguageSwitcher() {
                             : 'text-dark-umber dark:text-off-white/80'
                     }`}
                 >
-                    <CountryFlag
-                        countryCode="GB"
-                        svg
-                        style={{ width: '1.8em', height: '1.8em' }}
-                        aria-label="English flag"
-                    />
+                    <FlagGB className="h-[1.8em] w-[1.8em] shrink-0 rounded-[2px]" />
                     <span className="hidden sm:inline">EN</span>
                 </span>
 
@@ -102,12 +100,7 @@ export function LanguageSwitcher() {
                             : 'text-dark-umber dark:text-off-white/80'
                     }`}
                 >
-                    <CountryFlag
-                        countryCode="VN"
-                        svg
-                        style={{ width: '1.8em', height: '1.8em' }}
-                        aria-label="Vietnamese flag"
-                    />
+                    <FlagVN className="h-[1.8em] w-[1.8em] shrink-0 rounded-[2px]" />
                     <span className="hidden sm:inline">VI</span>
                 </span>
             </span>

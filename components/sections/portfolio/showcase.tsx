@@ -254,9 +254,9 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                                 <p className="mb-2 text-xs font-bold tracking-widest text-warm-gold uppercase">
                                     {project.genre}
                                 </p>
-                                <h4 className="text-2xl font-bold italic text-off-white">
+                                <h3 className="text-2xl font-bold italic text-off-white">
                                     {project.title}
-                                </h4>
+                                </h3>
                                 {project.artist && (
                                     <p className="mt-1 text-sm font-medium text-off-white/80">
                                         {project.artist}
@@ -273,21 +273,31 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
             </div>
 
             <div
-                className="md:hidden mt-2 flex items-center justify-center gap-2"
+                className="md:hidden mt-2 flex items-center justify-center"
                 aria-label={t('slideIndicators')}
             >
+                {/*
+                 * The dot itself stays 10px for the visual rhythm, but the button
+                 * around it is padded out to a 24px touch target so it clears the
+                 * WCAG target-size minimum.
+                 */}
                 {projectCards.map((project, idx) => (
                     <button
                         key={`${project.title}-dot-${project.sourceIndex}`}
                         type="button"
                         onClick={() => scrollToMobileCard(idx)}
                         aria-label={t('goToProject', { index: idx + 1 })}
-                        className={`h-2.5 rounded-full transition-all duration-300 ${
-                            idx === activeMobileIndex
-                                ? 'w-6 bg-warm-gold'
-                                : 'w-2.5 bg-dark-umber/30 dark:bg-off-white/30'
-                        }`}
-                    />
+                        aria-current={idx === activeMobileIndex ? 'true' : undefined}
+                        className="flex h-6 min-w-6 items-center justify-center px-1"
+                    >
+                        <span
+                            className={`block h-2.5 rounded-full transition-all duration-300 ${
+                                idx === activeMobileIndex
+                                    ? 'w-6 bg-warm-gold'
+                                    : 'w-2.5 bg-dark-umber/30 dark:bg-off-white/30'
+                            }`}
+                        />
+                    </button>
                 ))}
             </div>
 
@@ -342,13 +352,13 @@ export function PortfolioShowcase({ projects }: { projects: PortfolioProject[] }
                                         <p className="mb-2 text-xs font-bold tracking-widest text-warm-gold uppercase">
                                             {project.genre}
                                         </p>
-                                        <h4
+                                        <h3
                                             className={`font-bold italic text-off-white ${
                                                 isTetSpotlight ? 'text-3xl' : 'text-xl'
                                             }`}
                                         >
                                             {project.title}
-                                        </h4>
+                                        </h3>
                                         {project.artist && (
                                             <p
                                                 className={`mt-1 font-medium text-off-white/80 ${

@@ -85,7 +85,8 @@
             "instagram": "Message on Instagram",
             "tiktok": "Watch on TikTok",
             "telegram": "Chat on Telegram"
-        }
+        },
+        "closeTrigger": "Close contact menu"
     },
     "partners": {
         "label": "Digital Release",
@@ -138,7 +139,8 @@
         "vocalButton": "Only Vocal",
         "masterButton": "Final Master",
         "playButton": "Play",
-        "pauseButton": "Pause"
+        "pauseButton": "Pause",
+        "seekLabel": "Seek track position"
     },
     "beats": {
         "label": "Original Beats",
@@ -156,7 +158,8 @@
                 "genre": "Original Beat",
                 "description": "Modern instrumental highlighting dynamic range and clarity."
             }
-        ]
+        ],
+        "seekLabel": "Seek track position"
     },
     "portfolio": {
         "label": "Featured Projects",

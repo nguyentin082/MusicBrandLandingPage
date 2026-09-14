@@ -11,12 +11,31 @@ const sansFont = Be_Vietnam_Pro({
     variable: '--font-geist-sans',
     display: 'swap',
 });
+// The mono face is only referenced by `font-mono`, which the landing page does
+// not use. One weight and one subset keeps the token defined without shipping
+// eight extra font files on every visit.
 const monoFont = IBM_Plex_Mono({
-    subsets: ['latin', 'latin-ext'],
-    weight: ['400', '500', '600', '700'],
+    subsets: ['latin'],
+    weight: ['400'],
     variable: '--font-geist-mono',
     display: 'swap',
+    // Nothing on the landing page renders `font-mono`, so preloading it only
+    // took bandwidth away from the LCP image. It still loads if a page uses it.
+    preload: false,
 });
+
+const assetOrigin = (() => {
+    const base = process.env.NEXT_PUBLIC_ASSET_BASE_URL;
+    if (!base) {
+        return null;
+    }
+
+    try {
+        return new URL(base).origin;
+    } catch {
+        return null;
+    }
+})();
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -170,6 +189,17 @@ export default async function RootLayout({
             suppressHydrationWarning
             className={`${sansFont.variable} ${monoFont.variable}`}
         >
+            <head>
+                {assetOrigin && (
+                    <>
+                        {/* The hero image (the LCP element) lives on this origin,
+                            so pay the DNS + TLS cost up front instead of after
+                            the HTML has been parsed. */}
+                        <link rel="preconnect" href={assetOrigin} crossOrigin="anonymous" />
+                        <link rel="dns-prefetch" href={assetOrigin} />
+                    </>
+                )}
+            </head>
             <body suppressHydrationWarning className="font-sans antialiased">
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                     {children}

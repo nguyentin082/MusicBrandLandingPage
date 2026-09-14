@@ -33,6 +33,7 @@ interface UseMultiTrackAudioResult {
     audioRefs: MutableRefObject<Record<string, HTMLAudioElement | null>>;
     analyserNodesRef: MutableRefObject<Record<string, AnalyserNode>>;
     togglePlay: () => Promise<void>;
+    warmUpMetadata: () => void;
     switchTrack: (trackId: string) => void;
     seek: (nextTime: number) => void;
     setCurrentTime: (nextTime: number) => void;
@@ -122,6 +123,19 @@ export function useMultiTrackAudio(tracks: AudioTrack[]): UseMultiTrackAudioResu
         [tracks],
     );
 
+    // Pull just the MP3 headers (a few KB) once the user shows intent by
+    // hovering or focusing the player, so the seek bar has a real duration
+    // before they hit play. Full audio is still only fetched on play.
+    const warmUpMetadata = useCallback(() => {
+        tracks.forEach((track) => {
+            const audio = audioRefs.current[track.id];
+            if (audio && audio.preload === 'none') {
+                audio.preload = 'metadata';
+                audio.load();
+            }
+        });
+    }, [tracks]);
+
     const pausePlayback = useCallback(() => {
         tracks.forEach((track) => audioRefs.current[track.id]?.pause());
         setIsPlaying(false);
@@ -132,6 +146,17 @@ export function useMultiTrackAudio(tracks: AudioTrack[]): UseMultiTrackAudioResu
         if (!activeTrack) {
             return;
         }
+
+        // The <audio> elements ship with preload="none" so that opening the page
+        // does not pull tens of megabytes of MP3 down before anyone asks for it.
+        // Kick off the fetch here, on the first real play intent.
+        tracks.forEach((track) => {
+            const audio = audioRefs.current[track.id];
+            if (audio && audio.preload === 'none') {
+                audio.preload = 'auto';
+                audio.load();
+            }
+        });
 
         tracks.forEach((track) => ensureGraphForTrack(track.id));
 
@@ -261,6 +286,7 @@ export function useMultiTrackAudio(tracks: AudioTrack[]): UseMultiTrackAudioResu
         audioRefs,
         analyserNodesRef,
         togglePlay,
+        warmUpMetadata,
         switchTrack,
         seek,
         setCurrentTime,

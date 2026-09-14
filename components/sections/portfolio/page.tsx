@@ -53,12 +53,12 @@ export async function PortfolioSection() {
         >
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-12 sm:mb-16">
-                    <h2 className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-4 italic">
+                    <p className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-4 italic">
                         {t('label')}
-                    </h2>
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter italic">
+                    </p>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter italic">
                         {t('heading')}
-                    </h3>
+                    </h2>
                 </div>
 
                 <script

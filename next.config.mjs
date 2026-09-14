@@ -66,28 +66,39 @@ const baseConfig = {
     },
     experimental: {
         // Tree-shake unused icons/components
-        optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui/react-accordion'],
+        optimizePackageImports: [
+            'lucide-react',
+            'framer-motion',
+            '@radix-ui/react-accordion',
+            'react-icons/si',
+            'react-icons/fa6',
+        ],
         // Enable PPR (Partial Pre-rendering) for static shell + dynamic streams
         ppr: false, // set to true when upgrading to Next.js 15 stable PPR
     },
-    // HTTP headers for static assets caching
+    // HTTP headers for static assets caching.
+    //
+    // Order matters: every matching rule is applied and the LAST one wins for a
+    // duplicate header key. The extension rule below matches .woff2 files under
+    // /_next/static/media too, so it has to come first — otherwise it downgrades
+    // content-hashed, immutable build output to a 24 hour cache.
     async headers() {
         return [
-            {
-                source: '/_next/static/(.*)',
-                headers: [
-                    {
-                        key: 'Cache-Control',
-                        value: 'public, max-age=31536000, immutable',
-                    },
-                ],
-            },
             {
                 source: '/(.*)\\.(ico|png|svg|jpg|jpeg|webp|avif|woff|woff2)',
                 headers: [
                     {
                         key: 'Cache-Control',
                         value: 'public, max-age=86400, stale-while-revalidate=604800',
+                    },
+                ],
+            },
+            {
+                source: '/_next/static/(.*)',
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'public, max-age=31536000, immutable',
                     },
                 ],
             },

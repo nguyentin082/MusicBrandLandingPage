@@ -12,9 +12,9 @@ export async function PricingSection() {
             className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-off-white dark:bg-dark-umber"
         >
             <div className="max-w-7xl mx-auto">
-                <h3 className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-12 sm:mb-16 md:mb-20 italic">
+                <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-12 sm:mb-16 md:mb-20 italic">
                     {t('heading')}
-                </h3>
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                     {plans.map((plan, idx) => {
                         const isBestSeller =
@@ -49,13 +49,13 @@ export async function PricingSection() {
                                     </span>
                                 )}
                                 <div className="mb-2">
-                                    <h4 className="text-lg sm:text-xl font-bold italic">
+                                    <h3 className="text-lg sm:text-xl font-bold italic">
                                         {plan.title}
-                                    </h4>
+                                    </h3>
                                 </div>
                                 <p
                                     className={`text-[9px] sm:text-[10px] font-bold uppercase mb-6 sm:mb-8 ${
-                                        idx === 1 ? 'text-warm-gold' : 'text-warm-gold'
+                                        idx === 1 ? 'text-off-white' : 'text-brick-red dark:text-warm-gold'
                                     }`}
                                 >
                                     {plan.subtitle}
@@ -66,14 +66,15 @@ export async function PricingSection() {
                                 <ul
                                     className={`text-[11px] sm:text-xs space-y-3 sm:space-y-4 grow mb-8 sm:mb-10 ${
                                         idx === 1
-                                            ? 'text-off-white/60'
+                                            ? 'text-off-white/90'
                                             : 'text-soft-brown dark:text-off-white/70'
                                     }`}
                                 >
                                     {(plan.features as string[]).map((feature, fidx) => (
                                         <li key={fidx} className="flex items-center gap-2">
                                             <Check
-                                                className={`w-4 h-4 shrink-0 ${idx === 1 ? 'text-warm-gold' : 'text-warm-gold'}`}
+                                                className={`w-4 h-4 shrink-0 ${idx === 1 ? 'text-off-white' : 'text-warm-gold'}`}
+                                                aria-hidden="true"
                                             />
                                             {feature}
                                         </li>

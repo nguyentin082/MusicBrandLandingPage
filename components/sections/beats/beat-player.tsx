@@ -8,7 +8,7 @@ import { useMultiTrackAudio } from '../audio-comparison/use-multi-track-audio';
 import { useAudioVisualizer } from '../audio-comparison/use-audio-visualizer';
 import type { BeatPlayerProps } from './types';
 
-export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) {
+export function BeatPlayer({ track, playButton, pauseButton, seekLabel }: BeatPlayerProps) {
     const internalTracks = useMemo(() => [{ id: 'main', label: track.title, src: track.src }], [track.title, track.src]);
 
     const {
@@ -21,6 +21,7 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
         seek,
         setCurrentTime,
         togglePlay,
+        warmUpMetadata,
         handleTrackEnded,
         handleTrackMetadataLoaded,
     } = useMultiTrackAudio(internalTracks);
@@ -57,6 +58,8 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
             viewport={{ once: true }}
             whileHover={{ y: -5 }}
             transition={{ duration: 0.5 }}
+            onPointerEnter={warmUpMetadata}
+            onFocusCapture={warmUpMetadata}
             className="group relative bg-white/80 dark:bg-dark-umber/80 backdrop-blur-xl p-8 md:p-10 rounded-[40px] border border-dark-umber/10 dark:border-off-white/10 shadow-2xl overflow-hidden flex flex-col gap-8"
         >
             {/* Background glowing effect when playing */}
@@ -75,7 +78,15 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
                 <div className="relative flex-shrink-0 cursor-pointer" onClick={() => { void togglePlay(); }}>
                     <motion.div 
                         animate={{ rotate: isPlaying ? 360 : 0 }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        transition={
+                            // Only keep a repeating animation alive while audio is
+                            // actually playing. `repeat: Infinity` on a 0 -> 0 tween
+                            // still holds a driver loop open and keeps the main
+                            // thread from ever going idle.
+                            isPlaying
+                                ? { duration: 3, repeat: Infinity, ease: 'linear' }
+                                : { duration: 0.3, ease: 'easeOut' }
+                        }
                         className={`w-28 h-28 md:w-36 md:h-36 rounded-full bg-dark-umber flex items-center justify-center border-4 border-dark-umber/20 dark:border-off-white/20 shadow-xl transition-shadow ${isPlaying ? 'shadow-brick-red/30' : ''}`}
                     >
                         {/* Vinyl grooves */}
@@ -117,9 +128,9 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
                     <p className="text-xs font-black text-brick-red dark:text-warm-gold uppercase tracking-[0.2em] mb-2">
                         {track.genre}
                     </p>
-                    <h4 className="text-2xl md:text-3xl font-extrabold italic mb-2 text-dark-umber dark:text-off-white">
+                    <h3 className="text-2xl md:text-3xl font-extrabold italic mb-2 text-dark-umber dark:text-off-white">
                         {track.title}
-                    </h4>
+                    </h3>
                     <p className="text-sm text-dark-umber/70 dark:text-off-white/70 line-clamp-2">
                         {track.description}
                     </p>
@@ -136,6 +147,7 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
                     isPlaying={isPlaying}
                     playButton={playButton}
                     pauseButton={pauseButton}
+                    seekLabel={seekLabel}
                     currentTime={currentTime}
                     duration={duration}
                     onTogglePlay={togglePlay}
@@ -149,7 +161,7 @@ export function BeatPlayer({ track, playButton, pauseButton }: BeatPlayerProps) 
                 }}
                 src={track.src}
                 crossOrigin="anonymous"
-                preload="auto"
+                preload="none"
                 onLoadedMetadata={() => {
                     handleTrackMetadataLoaded(activeTrackId);
                 }}

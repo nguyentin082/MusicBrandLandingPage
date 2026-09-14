@@ -99,7 +99,7 @@ export function StatsSection() {
             <style>{STATS_ANIMATION_CSS}</style>
             <div className="relative z-10 max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 text-center">
-                    {renderStatItems('text-dark-umber', 'text-dark-umber/70')}
+                    {renderStatItems('text-dark-umber', 'text-dark-umber/85')}
                 </div>
             </div>
             <motion.div

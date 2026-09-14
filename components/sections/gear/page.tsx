@@ -67,7 +67,7 @@ export async function GearSection() {
                                 <Image
                                     src={image.src}
                                     fill
-                                    priority={idx === 0}
+                                    loading="lazy"
                                     sizes={image.sizes}
                                     className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition duration-700"
                                     alt={image.alt}
@@ -79,12 +79,12 @@ export async function GearSection() {
                 </div>
 
                 <div className="order-1 lg:order-2">
-                    <h2 className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-3 sm:mb-4 italic">
+                    <p className="text-brick-red dark:text-warm-gold text-xs font-black uppercase tracking-[0.4em] mb-3 sm:mb-4 italic">
                         {t('label')}
-                    </h2>
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-8 sm:mb-10 italic">
+                    </p>
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-dark-umber dark:text-off-white tracking-tighter mb-8 sm:mb-10 italic">
                         {t('heading')}
-                    </h3>
+                    </h2>
 
                     <Accordion type="single" collapsible defaultValue={tables[0]?.title} className="flex flex-col gap-4 sm:gap-5 w-full">
                         {tables.map((table) => (
@@ -98,36 +98,43 @@ export async function GearSection() {
                                         <p className="text-[10px] font-black uppercase tracking-[0.35em] text-brick-red dark:text-warm-gold transition-colors duration-300">
                                             {t('cardLabel')}
                                         </p>
-                                        <h4 className="mt-1 sm:mt-2 text-xl font-black italic tracking-tight text-dark-umber dark:text-off-white transition-colors duration-300">
+                                        {/* Radix's AccordionTrigger already renders an
+                                            <h3> wrapper, so this stays a plain span —
+                                            a heading here would nest inside a heading. */}
+                                        <span className="mt-1 sm:mt-2 block text-xl font-black italic tracking-tight text-dark-umber dark:text-off-white transition-colors duration-300">
                                             {table.title}
-                                        </h4>
+                                        </span>
                                     </div>
                                 </AccordionTrigger>
 
                                 <AccordionContent className="p-0">
                                     <dl className="divide-y divide-dark-umber/5 dark:divide-off-white/10">
                                         {table.items.map((item, idx) => (
+                                            /*
+                                             * <dt>/<dd> must sit directly inside the <dl>, or
+                                             * inside a single wrapping <div>. Nesting them two
+                                             * divs deep — as the old grid layout did — makes the
+                                             * list invalid and strips the pairing from the
+                                             * accessibility tree. Grid placement gives the same
+                                             * two-column look without the extra wrapper.
+                                             */
                                             <div
                                                 key={`${table.title}-${idx}`}
-                                                className="grid gap-2 sm:gap-4 px-6 py-4 sm:grid-cols-[minmax(0,1fr)_minmax(9rem,auto)] sm:items-center sm:px-8"
+                                                className="grid gap-x-4 px-6 py-4 sm:grid-cols-[minmax(0,1fr)_minmax(9rem,auto)] sm:px-8"
                                             >
-                                                <div className="min-w-0">
-                                                    <dt className="text-[10px] font-bold uppercase tracking-[0.28em] text-dark-umber/45 dark:text-off-white/45">
-                                                        {itemNameLabel}
-                                                    </dt>
-                                                    <dd className="mt-1 wrap-break-word text-sm font-semibold not-italic text-dark-umber dark:text-off-white">
-                                                        {item.name}
-                                                    </dd>
-                                                </div>
+                                                <dt className="min-w-0 text-[10px] font-bold uppercase tracking-[0.28em] text-dark-umber/70 dark:text-off-white/60 sm:col-start-1 sm:row-start-1">
+                                                    {itemNameLabel}
+                                                </dt>
+                                                <dd className="mt-1 min-w-0 wrap-break-word text-sm font-semibold not-italic text-dark-umber dark:text-off-white sm:col-start-1 sm:row-start-2">
+                                                    {item.name}
+                                                </dd>
 
-                                                <div className="sm:text-right">
-                                                    <dt className="text-[10px] font-bold uppercase tracking-[0.28em] text-dark-umber/45 dark:text-off-white/45">
-                                                        {itemTypeLabel}
-                                                    </dt>
-                                                    <dd className="mt-1 text-xs font-medium not-italic text-brick-red dark:text-warm-gold">
-                                                        {item.type}
-                                                    </dd>
-                                                </div>
+                                                <dt className="mt-3 text-[10px] font-bold uppercase tracking-[0.28em] text-dark-umber/70 dark:text-off-white/60 sm:col-start-2 sm:row-start-1 sm:mt-0 sm:text-right">
+                                                    {itemTypeLabel}
+                                                </dt>
+                                                <dd className="mt-1 text-xs font-medium not-italic text-brick-red dark:text-warm-gold sm:col-start-2 sm:row-start-2 sm:text-right">
+                                                    {item.type}
+                                                </dd>
                                             </div>
                                         ))}
                                     </dl>

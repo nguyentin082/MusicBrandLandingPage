@@ -17,22 +17,38 @@ export function FAQAccordion({ questions }: { questions: FAQItem[] }) {
             {questions.map((item, idx) => (
                 <div
                     key={idx}
-                    className="bg-white dark:bg-dark-umber border border-dark-umber/5 dark:border-off-white/10 rounded-3xl p-8 cursor-pointer overflow-hidden"
-                    onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                    className="bg-white dark:bg-dark-umber border border-dark-umber/5 dark:border-off-white/10 rounded-3xl p-8 overflow-hidden"
                 >
-                    <div className="flex justify-between items-center text-left">
-                        <span className="font-bold text-dark-umber dark:text-off-white">
-                            {item.question}
-                        </span>
-                        <motion.div
-                            animate={{ rotate: openIdx === idx ? 45 : 0 }}
-                            transition={{ duration: 0.3 }}
+                    {/* A <button> rather than a clickable <div>: the previous markup
+                        could not be reached or toggled with a keyboard at all. */}
+                    <h3>
+                        <button
+                            type="button"
+                            aria-expanded={openIdx === idx}
+                            aria-controls={`faq-answer-${idx}`}
+                            id={`faq-question-${idx}`}
+                            onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                            className="flex w-full cursor-pointer items-center justify-between gap-4 text-left font-bold text-dark-umber dark:text-off-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80 rounded-lg"
                         >
-                            <Plus className="w-5 h-5 text-warm-gold shrink-0" />
-                        </motion.div>
-                    </div>
+                            <span>{item.question}</span>
+                            <motion.span
+                                animate={{ rotate: openIdx === idx ? 45 : 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="inline-flex shrink-0"
+                            >
+                                <Plus
+                                    className="w-5 h-5 text-warm-gold shrink-0"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                />
+                            </motion.span>
+                        </button>
+                    </h3>
 
                     <motion.div
+                        id={`faq-answer-${idx}`}
+                        role="region"
+                        aria-labelledby={`faq-question-${idx}`}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{
                             height: openIdx === idx ? 'auto' : 0,

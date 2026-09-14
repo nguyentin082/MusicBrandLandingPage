@@ -1,9 +1,8 @@
 'use client';
 
-import * as SiIcons from 'react-icons/si';
-import * as Fa6Icons from 'react-icons/fa6';
 import { memo } from 'react';
 import { CustomPlatformIcon } from './custom-platform-icon';
+import { getPlatformIcon } from './icon-map';
 
 interface Platform {
     name: string;
@@ -71,9 +70,7 @@ const BRAND_ICON_COLORS: Record<string, string> = {
 };
 
 const PlatformItem = memo(function PlatformItem({ platform }: PlatformItemProps) {
-    const IconComponent = platform.icon.startsWith('Fa')
-        ? (Fa6Icons[platform.icon as keyof typeof Fa6Icons] as React.ElementType | undefined)
-        : (SiIcons[platform.icon as keyof typeof SiIcons] as React.ElementType | undefined);
+    const IconComponent = getPlatformIcon(platform.icon);
     const iconColor = BRAND_ICON_COLORS[platform.icon] ?? '#F5F5F5';
 
     const hasCustomIcon = ['SiInstagram', 'SiTiktok', 'SiFacebook', 'FaDeezer'].includes(

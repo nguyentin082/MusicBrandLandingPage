@@ -9,6 +9,7 @@ interface PlaybackControlsProps {
     pauseButton: string;
     currentTime: number;
     duration: number;
+    seekLabel: string;
     onTogglePlay: () => void | Promise<void>;
     onSeek: (nextTime: number) => void;
 }
@@ -19,6 +20,7 @@ export const PlaybackControls = memo(function PlaybackControls({
     pauseButton,
     currentTime,
     duration,
+    seekLabel,
     onTogglePlay,
     onSeek,
 }: PlaybackControlsProps) {
@@ -46,6 +48,8 @@ export const PlaybackControls = memo(function PlaybackControls({
                 step={0.01}
                 value={duration ? currentTime : 0}
                 onChange={(event) => onSeek(Number(event.target.value))}
+                aria-label={seekLabel}
+                aria-valuetext={`${formatTime(currentTime)} / ${formatTime(duration)}`}
                 className="w-full accent-brick-red cursor-pointer"
             />
         </div>

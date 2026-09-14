@@ -9,4 +9,5 @@ export interface BeatPlayerProps {
     track: BeatTrack;
     playButton: string;
     pauseButton: string;
+    seekLabel: string;
 }

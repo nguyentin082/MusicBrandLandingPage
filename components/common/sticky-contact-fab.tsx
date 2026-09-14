@@ -17,6 +17,7 @@ import { contactInfo } from '@/lib/contact';
 type ContactFabLabels = {
     eyebrow: string;
     trigger: string;
+    closeTrigger: string;
     title: string;
     description: string;
     call: string;
@@ -151,7 +152,11 @@ export function StickyContactFab({ labels }: { labels: ContactFabLabels }) {
                                                 : 'border-dark-umber/10 bg-off-white text-dark-umber dark:border-off-white/10 dark:bg-off-white/10 dark:text-off-white'
                                         }`}
                                     >
-                                        <Icon className="size-6 shrink-0 transition-transform duration-200 ease-out group-hover:scale-110" />
+                                        <Icon
+                                            className="size-6 shrink-0 transition-transform duration-200 ease-out group-hover:scale-110"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                        />
                                         <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-center">
                                             {labels[labelKey]}
                                         </span>
@@ -177,14 +182,13 @@ export function StickyContactFab({ labels }: { labels: ContactFabLabels }) {
                         type="button"
                         aria-expanded={isMobileOpen}
                         aria-controls="sticky-contact-mobile-menu"
-                        aria-label={isMobileOpen ? 'Close contact menu' : 'Open contact menu'}
+                        aria-label={isMobileOpen ? labels.closeTrigger : labels.trigger}
                         onClick={() => setIsMobileOpen((current) => !current)}
                         className={`relative flex h-14 items-center justify-center rounded-full border border-dark-umber/10 bg-warm-gold text-dark-umber shadow-[0_16px_30px_rgba(26,22,20,0.24)] transition-[transform,background-color,box-shadow,color,width,padding] duration-300 ease-out active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80 motion-reduce:transition-none touch-manipulation [-webkit-tap-highlight-color:transparent] dark:border-off-white/10 dark:bg-warm-gold dark:text-dark-umber ${isMobileOpen ? 'w-14 px-0' : 'w-auto px-6 gap-2'}`}
                     >
                         {!isMobileOpen && (
                             <span className="absolute inset-0 -z-10 animate-fab-pulse rounded-full"></span>
                         )}
-                        <span className="sr-only">Toggle contact options</span>
                         {isMobileOpen ? (
                             <X
                                 className="size-5 shrink-0 transition-transform duration-300 ease-out motion-reduce:transition-none"
