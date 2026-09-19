@@ -6,6 +6,9 @@
 /* Smooth scrolling for anchor links - optimized for fixed header */
 html {
     scroll-behavior: smooth;
+    /* The site ships dark-only, so native UI (scrollbars, form controls) should
+       render dark from the first paint rather than after hydration. */
+    color-scheme: dark;
 }
 
 /* Ensure anchors have proper scroll margin for fixed header */

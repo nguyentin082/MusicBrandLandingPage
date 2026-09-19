@@ -40,10 +40,9 @@ const assetOrigin = (() => {
 export const viewport: Viewport = {
     width: 'device-width',
     initialScale: 1,
-    themeColor: [
-        { media: '(prefers-color-scheme: light)', color: '#FDFBF7' },
-        { media: '(prefers-color-scheme: dark)', color: '#1A1614' },
-    ],
+    // The site renders in dark mode only, so the browser chrome matches it
+    // regardless of the visitor's OS preference.
+    themeColor: '#1A1614',
 };
 
 export const metadata: Metadata = {
@@ -187,7 +186,7 @@ export default async function RootLayout({
         <html
             lang={lang}
             suppressHydrationWarning
-            className={`${sansFont.variable} ${monoFont.variable}`}
+            className={`dark ${sansFont.variable} ${monoFont.variable}`}
         >
             <head>
                 {assetOrigin && (
@@ -201,7 +200,12 @@ export default async function RootLayout({
                 )}
             </head>
             <body suppressHydrationWarning className="font-sans antialiased">
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                <ThemeProvider
+                    attribute="class"
+                    forcedTheme="dark"
+                    defaultTheme="dark"
+                    enableSystem={false}
+                >
                     {children}
                     <Analytics />
                 </ThemeProvider>

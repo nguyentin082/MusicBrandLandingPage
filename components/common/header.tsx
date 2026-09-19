@@ -2,12 +2,10 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { ThemeToggle } from './theme-toggle';
 import { LanguageSwitcher } from './language-switcher';
 import { MobileNav } from './mobile-nav';
 import { resolveMediaUrl } from '@/lib/media';
 
-const logoLight = resolveMediaUrl('/image/branding/2lab-logo-light-mode.PNG');
 const logoDark = resolveMediaUrl('/image/branding/2lab-logo-dark-mode.PNG');
 
 export async function Header() {
@@ -28,23 +26,13 @@ export async function Header() {
                     href="/"
                     className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition shrink-0"
                 >
-                    {/* Light mode logo (hidden in dark mode) */}
-                    <Image
-                        src={logoLight}
-                        alt="2lab logo"
-                        width={160}
-                        height={60}
-                        sizes="(max-width: 640px) 120px, 160px"
-                        className="h-9 sm:h-10 w-auto object-contain rounded-lg drop-shadow-sm dark:hidden"
-                    />
-                    {/* Dark mode logo (hidden in light mode) */}
                     <Image
                         src={logoDark}
                         alt="2lab logo"
                         width={160}
                         height={60}
                         sizes="(max-width: 640px) 120px, 160px"
-                        className="hidden h-9 sm:h-10 w-auto object-contain rounded-lg drop-shadow-sm dark:block"
+                        className="h-9 sm:h-10 w-auto object-contain rounded-lg drop-shadow-sm"
                     />
                     <div className="flex flex-col gap-0.5">
                         <span className="text-base sm:text-lg font-bold tracking-tighter text-dark-umber dark:text-off-white">
@@ -100,9 +88,8 @@ export async function Header() {
                     </Link>
                 </nav>
 
-                {/* Right side - Theme & Language toggles + Mobile Menu */}
+                {/* Right side - Language toggle + Mobile Menu */}
                 <div className="flex items-center gap-2 sm:gap-4 ml-auto sm:ml-0 shrink-0">
-                    <ThemeToggle />
                     <Suspense
                         fallback={
                             <div className="h-9 w-20 sm:h-10 sm:w-36 rounded-full border border-dark-umber/10 bg-white/70 dark:border-off-white/10 dark:bg-white/5" />
