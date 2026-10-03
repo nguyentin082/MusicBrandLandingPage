@@ -118,8 +118,8 @@ export function StickyContactFab({ labels }: { labels: ContactFabLabels }) {
                     animation: fab-soft-pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
                 }
             `}</style>
-            
-            <div 
+
+            <div
                 className={`fixed inset-0 z-40 bg-dark-umber/60 backdrop-blur-sm transition-opacity duration-300 sm:hidden ${isMobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
                 onClick={() => setIsMobileOpen(false)}
             />
@@ -131,38 +131,42 @@ export function StickyContactFab({ labels }: { labels: ContactFabLabels }) {
                 >
                     <div className="flex flex-col gap-3">
                         <div className="px-4 py-3 border-b border-dark-umber/10 dark:border-white/10 text-center">
-                            <p className="text-[10px] font-bold text-warm-gold uppercase tracking-widest mb-1">{labels.eyebrow}</p>
-                            <p className="text-base font-bold text-dark-umber dark:text-off-white leading-tight">{labels.title}</p>
-                            <p className="text-[11px] text-dark-umber/60 dark:text-off-white/60 mt-1.5 leading-relaxed">{labels.description}</p>
+                            <p className="text-[10px] font-bold text-warm-gold uppercase tracking-widest mb-1">
+                                {labels.eyebrow}
+                            </p>
+                            <p className="text-base font-bold text-dark-umber dark:text-off-white leading-tight">
+                                {labels.title}
+                            </p>
+                            <p className="text-[11px] text-dark-umber/60 dark:text-off-white/60 mt-1.5 leading-relaxed">
+                                {labels.description}
+                            </p>
                         </div>
                         <div className="grid grid-cols-2 gap-2">
-                            {contactActions.map(
-                                ({ key, href, labelKey, icon: Icon, external }) => (
-                                    <a
-                                        key={key}
-                                        href={href}
-                                        target={external ? '_blank' : undefined}
-                                        rel={external ? 'noreferrer' : undefined}
-                                        aria-label={labels[labelKey]}
-                                        title={labels[labelKey]}
-                                        onClick={() => setIsMobileOpen(false)}
-                                        className={`group relative flex flex-col items-center justify-center gap-2.5 rounded-2xl border p-4 shadow-sm transition-[transform,background-color,color] duration-200 ease-out active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80 touch-manipulation [-webkit-tap-highlight-color:transparent] ${
-                                            key === 'call'
-                                                ? 'border-warm-gold/40 bg-warm-gold/15 text-dark-umber dark:border-warm-gold/30 dark:bg-warm-gold/20 dark:text-warm-gold font-semibold'
-                                                : 'border-dark-umber/10 bg-off-white text-dark-umber dark:border-off-white/10 dark:bg-off-white/10 dark:text-off-white'
-                                        }`}
-                                    >
-                                        <Icon
-                                            className="size-6 shrink-0 transition-transform duration-200 ease-out group-hover:scale-110"
-                                            aria-hidden="true"
-                                            focusable="false"
-                                        />
-                                        <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-center">
-                                            {labels[labelKey]}
-                                        </span>
-                                    </a>
-                                ),
-                            )}
+                            {contactActions.map(({ key, href, labelKey, icon: Icon, external }) => (
+                                <a
+                                    key={key}
+                                    href={href}
+                                    target={external ? '_blank' : undefined}
+                                    rel={external ? 'noreferrer' : undefined}
+                                    aria-label={labels[labelKey]}
+                                    title={labels[labelKey]}
+                                    onClick={() => setIsMobileOpen(false)}
+                                    className={`group relative flex flex-col items-center justify-center gap-2.5 rounded-2xl border p-4 shadow-sm transition-[transform,background-color,color] duration-200 ease-out active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-gold/80 touch-manipulation [-webkit-tap-highlight-color:transparent] ${
+                                        key === 'call'
+                                            ? 'border-warm-gold/40 bg-warm-gold/15 text-dark-umber dark:border-warm-gold/30 dark:bg-warm-gold/20 dark:text-warm-gold font-semibold'
+                                            : 'border-dark-umber/10 bg-off-white text-dark-umber dark:border-off-white/10 dark:bg-off-white/10 dark:text-off-white'
+                                    }`}
+                                >
+                                    <Icon
+                                        className="size-6 shrink-0 transition-transform duration-200 ease-out group-hover:scale-110"
+                                        aria-hidden="true"
+                                        focusable="false"
+                                    />
+                                    <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-center">
+                                        {labels[labelKey]}
+                                    </span>
+                                </a>
+                            ))}
                         </div>
                     </div>
                 </div>

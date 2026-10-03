@@ -22,7 +22,7 @@ export async function generateMetadata({
 
     return {
         title: {
-            absolute: t('title')
+            absolute: t('title'),
         },
         description: t('description'),
         alternates: {

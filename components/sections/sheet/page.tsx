@@ -15,14 +15,14 @@ const sheets = [
         id: 'classical',
         url: `${process.env.NEXT_PUBLIC_ASSET_BASE_URL}/pdf/full - К О Л Ы Б Е Л Ь Н А Я П Е С Н Я.pdf`,
         icon: Music,
-    }
+    },
 ];
 
 export function SheetSection() {
     const t = useTranslations('sheet');
     const [activeSheet, setActiveSheet] = useState(sheets[0].id);
 
-    const activeSheetUrl = sheets.find(s => s.id === activeSheet)?.url;
+    const activeSheetUrl = sheets.find((s) => s.id === activeSheet)?.url;
 
     return (
         <section className="py-24 sm:py-32 px-6 bg-off-white dark:bg-dark-umber">
@@ -30,10 +30,7 @@ export function SheetSection() {
                 {/* Left side: Scaled PDF viewer */}
                 <div className="w-full lg:w-1/2 order-2 lg:order-1">
                     {activeSheetUrl && (
-                        <ScaledPdfIframe
-                            src={activeSheetUrl}
-                            title="Sheet Music PDF"
-                        />
+                        <ScaledPdfIframe src={activeSheetUrl} title="Sheet Music PDF" />
                     )}
                 </div>
 
@@ -49,7 +46,7 @@ export function SheetSection() {
                         {t('description')}
                     </p>
                     <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row flex-wrap gap-4">
-                        {sheets.map(sheet => {
+                        {sheets.map((sheet) => {
                             const Icon = sheet.icon;
                             return (
                                 <button

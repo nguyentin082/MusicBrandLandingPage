@@ -4,14 +4,7 @@ import { Copy, ExternalLink, MapPin, Navigation } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { contactInfo } from '@/lib/contact';
-import {
-    SiFacebook,
-    SiInstagram,
-    SiTiktok,
-    SiYoutube,
-    SiZalo,
-    SiTelegram,
-} from 'react-icons/si';
+import { SiFacebook, SiInstagram, SiTiktok, SiYoutube, SiZalo, SiTelegram } from 'react-icons/si';
 
 const SOCIALS = [
     {

@@ -27,7 +27,13 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     const tPricing = await getTranslations({ locale: lang, namespace: 'pricing' });
 
     const faqQuestions = tFaq.raw('questions') as Array<{ question: string; answer: string }>;
-    const pricingPlans = tPricing.raw('plans') as Array<{ title: string; subtitle: string; price: string; features: string[]; cta: string }>;
+    const pricingPlans = tPricing.raw('plans') as Array<{
+        title: string;
+        subtitle: string;
+        price: string;
+        features: string[];
+        cta: string;
+    }>;
 
     const schema = {
         '@context': 'https://schema.org',
@@ -94,8 +100,13 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                     {
                         '@type': 'OpeningHoursSpecification',
                         dayOfWeek: [
-                            'Monday', 'Tuesday', 'Wednesday', 'Thursday',
-                            'Friday', 'Saturday', 'Sunday',
+                            'Monday',
+                            'Tuesday',
+                            'Wednesday',
+                            'Thursday',
+                            'Friday',
+                            'Saturday',
+                            'Sunday',
                         ],
                         opens: '00:00',
                         closes: '23:59',
@@ -108,7 +119,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                 ],
                 hasOfferCatalog: {
                     '@type': 'OfferCatalog',
-                    name: lang === 'vi' ? 'Dịch vụ âm nhạc chuyên nghiệp' : 'Professional Music Services',
+                    name:
+                        lang === 'vi'
+                            ? 'Dịch vụ âm nhạc chuyên nghiệp'
+                            : 'Professional Music Services',
                     itemListElement: pricingPlans.map((plan, idx) => ({
                         '@type': 'Offer',
                         position: idx + 1,

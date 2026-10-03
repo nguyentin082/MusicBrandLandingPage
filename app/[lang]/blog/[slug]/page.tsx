@@ -82,7 +82,7 @@ export default async function BlogPostPage({
     const { contentHtml, tocItems } = await renderBlogPostContent(post.content);
     const t = getBlogPostCopy(locale);
     const blogSchema = createBlogPostSchema(locale, post);
-    
+
     const breadcrumbSchema = {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',

@@ -55,7 +55,9 @@ export async function PricingSection() {
                                 </div>
                                 <p
                                     className={`text-[9px] sm:text-[10px] font-bold uppercase mb-6 sm:mb-8 ${
-                                        idx === 1 ? 'text-off-white' : 'text-brick-red dark:text-warm-gold'
+                                        idx === 1
+                                            ? 'text-off-white'
+                                            : 'text-brick-red dark:text-warm-gold'
                                     }`}
                                 >
                                     {plan.subtitle}

@@ -27,9 +27,7 @@ export function HeroCarousel() {
     const hasInteractedRef = useRef(false);
 
     useEffect(() => {
-        const prefersReducedMotion = window.matchMedia(
-            '(prefers-reduced-motion: reduce)',
-        ).matches;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) {
             return;
         }
@@ -75,8 +73,7 @@ export function HeroCarousel() {
     };
 
     const nextIndex = (currentImageIndex + 1) % HERO_IMAGES.length;
-    const previousIndex =
-        currentImageIndex === 0 ? HERO_IMAGES.length - 1 : currentImageIndex - 1;
+    const previousIndex = currentImageIndex === 0 ? HERO_IMAGES.length - 1 : currentImageIndex - 1;
 
     return (
         <div className="relative animate-fade-in mt-8 lg:mt-0">

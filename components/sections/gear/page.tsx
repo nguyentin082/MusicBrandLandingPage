@@ -86,7 +86,12 @@ export async function GearSection() {
                         {t('heading')}
                     </h2>
 
-                    <Accordion type="single" collapsible defaultValue={tables[0]?.title} className="flex flex-col gap-4 sm:gap-5 w-full">
+                    <Accordion
+                        type="single"
+                        collapsible
+                        defaultValue={tables[0]?.title}
+                        className="flex flex-col gap-4 sm:gap-5 w-full"
+                    >
                         {tables.map((table) => (
                             <AccordionItem
                                 value={table.title}

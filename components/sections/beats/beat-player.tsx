@@ -9,7 +9,10 @@ import { useAudioVisualizer } from '../audio-comparison/use-audio-visualizer';
 import type { BeatPlayerProps } from './types';
 
 export function BeatPlayer({ track, playButton, pauseButton, seekLabel }: BeatPlayerProps) {
-    const internalTracks = useMemo(() => [{ id: 'main', label: track.title, src: track.src }], [track.title, track.src]);
+    const internalTracks = useMemo(
+        () => [{ id: 'main', label: track.title, src: track.src }],
+        [track.title, track.src],
+    );
 
     const {
         activeTrackId,
@@ -52,7 +55,7 @@ export function BeatPlayer({ track, playButton, pauseButton, seekLabel }: BeatPl
     });
 
     return (
-        <motion.div 
+        <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -63,10 +66,10 @@ export function BeatPlayer({ track, playButton, pauseButton, seekLabel }: BeatPl
             className="group relative bg-white/80 dark:bg-dark-umber/80 backdrop-blur-xl p-8 md:p-10 rounded-[40px] border border-dark-umber/10 dark:border-off-white/10 shadow-2xl overflow-hidden flex flex-col gap-8"
         >
             {/* Background glowing effect when playing */}
-            <motion.div 
-                animate={{ 
+            <motion.div
+                animate={{
                     opacity: isPlaying ? 0.15 : 0,
-                    scale: isPlaying ? 1.1 : 1
+                    scale: isPlaying ? 1.1 : 1,
                 }}
                 transition={{ duration: 1 }}
                 className="absolute inset-0 bg-gradient-to-tr from-brick-red to-warm-gold blur-3xl pointer-events-none rounded-[40px]"
@@ -75,8 +78,13 @@ export function BeatPlayer({ track, playButton, pauseButton, seekLabel }: BeatPl
             {/* Top Section: Vinyl & Titles */}
             <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 items-center sm:items-center z-10 w-full">
                 {/* Spinning Vinyl Record */}
-                <div className="relative flex-shrink-0 cursor-pointer" onClick={() => { void togglePlay(); }}>
-                    <motion.div 
+                <div
+                    className="relative flex-shrink-0 cursor-pointer"
+                    onClick={() => {
+                        void togglePlay();
+                    }}
+                >
+                    <motion.div
                         animate={{ rotate: isPlaying ? 360 : 0 }}
                         transition={
                             // Only keep a repeating animation alive while audio is
@@ -93,17 +101,17 @@ export function BeatPlayer({ track, playButton, pauseButton, seekLabel }: BeatPl
                         <div className="absolute inset-2 rounded-full border border-white/10 pointer-events-none" />
                         <div className="absolute inset-6 rounded-full border border-white/5 pointer-events-none" />
                         <div className="absolute inset-10 rounded-full border border-white/10 pointer-events-none" />
-                        
+
                         <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-brick-red flex items-center justify-center relative">
                             <div className="w-3 h-3 md:w-4 md:h-4 bg-off-white rounded-full absolute z-10" />
                             <Disc className="text-white w-6 h-6 md:w-8 md:h-8 opacity-50 z-0" />
                         </div>
                     </motion.div>
-                    
+
                     {/* Floating music notes when playing */}
                     {isPlaying && (
                         <>
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, y: 10, scale: 0.5, x: 0 }}
                                 animate={{ opacity: [0, 1, 0], y: -60, scale: 1.5, x: 20 }}
                                 transition={{ duration: 2, repeat: Infinity, delay: 0.1 }}
@@ -111,7 +119,7 @@ export function BeatPlayer({ track, playButton, pauseButton, seekLabel }: BeatPl
                             >
                                 <Music size={16} />
                             </motion.div>
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, y: 10, scale: 0.5, x: 0 }}
                                 animate={{ opacity: [0, 1, 0], y: -50, scale: 1.2, x: -20 }}
                                 transition={{ duration: 2.5, repeat: Infinity, delay: 0.8 }}

@@ -8,14 +8,16 @@ export async function HeroSection() {
 
     return (
         <section className="relative min-h-screen flex items-center bg-dark-umber dark:bg-dark-umber text-off-white dark:text-off-white overflow-hidden py-16 sm:py-24 md:py-32">
-            <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+            <div
+                className="absolute inset-0 pointer-events-none overflow-hidden"
+                aria-hidden="true"
+            >
                 <div className="absolute top-[-10%] right-[-10%] w-150 h-150 bg-brick-red/10 rounded-full blur-[120px]"></div>
                 <div className="absolute bottom-[-10%] left-[-10%] w-100 h-100 bg-warm-gold/10 rounded-full blur-[100px]"></div>
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 items-center gap-8 sm:gap-12 md:gap-16 relative z-10">
                 <div className="animate-fade-in">
-
                     <h1 className="text-6xl sm:text-6xl md:text-6xl lg:text-8xl font-black mb-6 sm:mb-8 leading-[1.1] tracking-tighter italic">
                         {t('heading')} <br />
                         <span className="text-warm-gold">{t('highlighted')}</span>

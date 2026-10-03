@@ -3,3 +3,9 @@ node_modules
 coverage
 public
 package-lock.json
+
+# Vendored agent skills and generated files
+.agents
+skills-lock.json
+next-env.d.ts
+tsconfig.tsbuildinfo

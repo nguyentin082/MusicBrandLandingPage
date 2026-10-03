@@ -8,7 +8,7 @@ export async function BeatsSection() {
     const t = await getTranslations('beats');
 
     const items = t.raw('items') as Omit<BeatTrack, 'src'>[];
-    
+
     // We hardcode the URLs here based on the instructions, or we could add them to the translation file if needed.
     // However, keeping them here ensures they match the uploaded R2 paths exactly.
     const audioUrls = [

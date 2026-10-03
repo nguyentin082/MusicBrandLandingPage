@@ -19,7 +19,7 @@ export async function CTASection() {
                 <p className="text-dark-umber/85 mb-10 sm:mb-16 font-medium leading-relaxed text-sm sm:text-base max-w-2xl mx-auto">
                     {t('description')}
                 </p>
-                
+
                 <LeadForm />
             </div>
         </section>

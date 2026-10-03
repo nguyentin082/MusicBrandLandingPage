@@ -44,6 +44,7 @@ NEXT_PUBLIC_ASSET_BASE_URL=https://assets.your-domain.com
 ```
 
 Notes:
+
 - Keep asset paths in content as relative paths (example: `/image/studio/studio-1.jpg`, `/audio/close-to-you/CloseToYouOnlyVocal.wav`).
 - The app automatically prefixes those paths with `NEXT_PUBLIC_ASSET_BASE_URL` for images, audio, logos, avatars, and metadata icons.
 - If this variable is not set, media paths fall back to local relative URLs for local development.
