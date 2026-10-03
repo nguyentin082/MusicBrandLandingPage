@@ -459,5 +459,15 @@
             "contact": "Contact"
         },
         "copyright": "© {year} 2lab. All rights reserved."
+    },
+    "notFound": {
+        "badge": "Error 404",
+        "heading": "Page",
+        "highlighted": "not found",
+        "description": "The page you're looking for doesn't exist or has been moved.",
+        "home": "Back to home",
+        "blog": "Read the blog",
+        "contact": "Contact the studio",
+        "otherLanguage": "Xem bằng tiếng Việt"
     }
 }
