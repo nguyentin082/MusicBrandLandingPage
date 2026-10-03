@@ -127,46 +127,16 @@ export const metadata: Metadata = {
     },
     icons: {
         icon: [
-            // Light mode favicons
-            {
-                url: '/icon-light-16x16.png',
-                sizes: '16x16',
-                type: 'image/png',
-                media: '(prefers-color-scheme: light)',
-            },
-            {
-                url: '/icon-light-32x32.png',
-                sizes: '32x32',
-                type: 'image/png',
-                media: '(prefers-color-scheme: light)',
-            },
-            // Dark mode favicons
-            {
-                url: '/icon-dark-16x16.png',
-                sizes: '16x16',
-                type: 'image/png',
-                media: '(prefers-color-scheme: dark)',
-            },
-            {
-                url: '/icon-dark-32x32.png',
-                sizes: '32x32',
-                type: 'image/png',
-                media: '(prefers-color-scheme: dark)',
-            },
-            // PWA / High-res icons
-            {
-                url: '/icon-192.png',
-                sizes: '192x192',
-                type: 'image/png',
-            },
-            {
-                url: '/icon-512.png',
-                sizes: '512x512',
-                type: 'image/png',
-            },
+            // The site ships dark-only, so the favicon always uses the same
+            // cream logo as the header, with the same rounded corners,
+            // whatever the visitor's OS theme.
+            { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
+            { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+            { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
+            { url: '/favicon-512.png', sizes: '512x512', type: 'image/png' },
         ],
         apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
-        shortcut: '/icon-light-32x32.png',
+        shortcut: '/favicon-32.png',
     },
 };
 

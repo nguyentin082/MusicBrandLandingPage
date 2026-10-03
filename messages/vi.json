@@ -459,5 +459,15 @@
             "contact": "Liên Hệ"
         },
         "copyright": "© {year} 2lab. All rights reserved."
+    },
+    "notFound": {
+        "badge": "Lỗi 404",
+        "heading": "Không tìm thấy",
+        "highlighted": "trang này",
+        "description": "Trang bạn tìm không tồn tại hoặc đã được chuyển đi.",
+        "home": "Về trang chủ",
+        "blog": "Đọc blog",
+        "contact": "Liên hệ phòng thu",
+        "otherLanguage": "View in English"
     }
 }

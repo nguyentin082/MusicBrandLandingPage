@@ -12,6 +12,10 @@ import { renderBlogPostContent } from '@/lib/blog-renderer';
 import { createBlogPostSchema } from '@/lib/blog-schema';
 import { siteConfig } from '@/lib/site';
 
+// Posts are read from disk at build time, so unknown or draft slugs 404
+// instead of being rendered on demand.
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
     return getAllPostParams();
 }
