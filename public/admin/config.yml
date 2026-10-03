@@ -1,0 +1,276 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+# Sveltia CMS configuration for 2lab.vn/admin
+# Docs: https://sveltiacms.app/en/docs
+
+backend:
+  name: github
+  repo: nguyentin082/MusicBrandLandingPage
+  branch: main
+  # URL of the deployed sveltia-cms-auth Worker. Until it is set, sign in with
+  # "Sign In with Token" (fine-grained token: Contents + Pull requests, read/write).
+  # base_url: https://sveltia-cms-auth.<your-subdomain>.workers.dev
+  commit_messages:
+    create: 'content({{collection}}): create {{slug}}'
+    update: 'content({{collection}}): update {{slug}}'
+    delete: 'content({{collection}}): delete {{slug}}'
+    uploadMedia: 'content(media): upload {{path}}'
+    deleteMedia: 'content(media): delete {{path}}'
+
+site_url: https://2lab.vn
+display_url: https://2lab.vn
+logo:
+  src: https://assets.2lab.vn/image/branding/2lab-logo-dark-mode.PNG
+
+# Fallback for the built-in asset library. Post images should go to R2 below.
+media_folder: public/uploads
+public_folder: /uploads
+
+# Cloudflare R2, served from the same domain as NEXT_PUBLIC_ASSET_BASE_URL.
+# Fill in the bucket, account and access key ID, then uncomment. The secret key
+# is never stored here: each editor enters it once in their own browser.
+# media_libraries:
+#   cloudflare_r2:
+#     bucket: <bucket-name>
+#     account_id: <cloudflare-account-id>
+#     access_key_id: <r2-access-key-id>
+#     public_url: https://assets.2lab.vn
+#     prefix: blog/
+
+# Slugs and file names are plain ASCII: "Arrangement là gì" -> arrangement-la-gi
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+# Match the existing files (Prettier style: 4-space indent, indented lists) so
+# saving a post does not reformat its front matter.
+output:
+  omit_empty_optional_fields: true
+  yaml:
+    quote: none
+    indent_size: 4
+    indent_sequences: true
+
+i18n:
+  structure: multiple_folders
+  locales: [vi, en]
+  default_locale: vi
+
+collections:
+  # content/blog/{vi,en}/<slug>.mdx
+  - name: blog
+    label: Bài viết
+    label_singular: Bài viết
+    folder: content/blog
+    format: yaml-frontmatter
+    extension: mdx
+    create: true
+    i18n: true
+    identifier_field: title
+    slug:
+      template: '{{slug}}'
+      editable: [create]
+      hint: Chỉ dùng chữ thường không dấu và dấu gạch ngang. Không đổi được sau khi tạo.
+    summary: '{{title}} · {{publishedAt}}'
+    sortable_fields: [publishedAt, title]
+    view_filters:
+      - label: Bản nháp
+        field: draft
+        pattern: true
+    preview_path: '{{locale}}/blog/{{slug}}'
+    fields:
+      - name: title
+        label: 📝 Tiêu đề
+        widget: string
+        i18n: true
+      - name: description
+        label: 🔍 Mô tả (hiện trên Google)
+        widget: text
+        i18n: true
+        hint: Khoảng 120–160 ký tự.
+      - name: draft
+        label: 📄 Bản nháp
+        widget: boolean
+        default: true
+        required: false
+        i18n: duplicate
+        hint: Bỏ tick rồi Lưu để xuất bản. Bài nháp không hiện trên website.
+      - name: publishedAt
+        label: 📅 Ngày đăng
+        widget: datetime
+        type: date
+        default: '{{now}}'
+        i18n: duplicate
+      - name: updatedAt
+        label: 🔄 Ngày cập nhật
+        widget: datetime
+        type: date
+        required: false
+        i18n: duplicate
+      - name: author
+        label: 👤 Tác giả
+        widget: string
+        default: 2lab
+        i18n: duplicate
+      - name: category
+        label: 🗂️ Chuyên mục
+        widget: string
+        default: Kiến thức âm nhạc
+        i18n: true
+      - name: image
+        label: 🖼️ Ảnh bìa
+        widget: image
+        required: false
+        i18n: duplicate
+      - name: tags
+        label: 🏷️ Thẻ
+        widget: list
+        required: false
+        i18n: true
+      - name: aiFlags
+        label: ⚠️ Cảnh báo của AI
+        widget: list
+        required: false
+        hint: Những chỗ AI không chắc chắn. Kiểm tra từng mục, xử lý xong thì xóa.
+      - name: social
+        label: 📣 Mạng xã hội
+        widget: object
+        required: false
+        collapsed: true
+        hint: AI soạn sẵn. Sửa nếu cần; hệ thống tự đăng khi bài được xuất bản.
+        fields:
+          - { name: facebook, label: 📘 Facebook, widget: text, required: false }
+          - { name: instagram, label: 📸 Instagram, widget: text, required: false }
+          - { name: zalo, label: 💬 Zalo, widget: text, required: false }
+          - { name: tiktokScript, label: 🎬 Kịch bản TikTok, widget: text, required: false }
+          - { name: scheduledAt, label: ⏰ Hẹn giờ đăng, widget: datetime, required: false }
+          - name: status
+            label: 📮 Trạng thái
+            widget: select
+            required: false
+            options:
+              - { label: ⏳ Chưa đăng, value: pending }
+              - { label: ✅ Đã đăng, value: sent }
+      - name: body
+        label: ✍️ Nội dung
+        widget: markdown
+        i18n: true
+
+  # content/topics/<slug>.yml
+  - name: topics
+    label: Chủ đề
+    label_singular: Chủ đề
+    folder: content/topics
+    format: yaml
+    extension: yml
+    create: true
+    identifier_field: title
+    slug: '{{slug}}'
+    summary: '{{title}} · {{status}}'
+    view_filters:
+      - { label: Chờ viết, field: status, pattern: queued }
+      - { label: Chờ duyệt, field: status, pattern: review }
+      - { label: Cần viết lại, field: status, pattern: rewrite }
+      - { label: AI đề xuất, field: status, pattern: suggested }
+    editor:
+      preview: false
+    fields:
+      - name: title
+        label: 💡 Chủ đề
+        widget: string
+      - name: status
+        label: 🚦 Trạng thái
+        widget: select
+        default: idea
+        hint: Chọn "Chờ viết" rồi Lưu để AI bắt đầu viết.
+        options:
+          - { label: 💡 Ý tưởng, value: idea }
+          - { label: 🤖 AI đề xuất, value: suggested }
+          - { label: ⏳ Chờ viết, value: queued }
+          - { label: ✍️ AI đang viết, value: writing }
+          - { label: 👀 Chờ duyệt, value: review }
+          - { label: 🔁 Cần viết lại, value: rewrite }
+          - { label: ✅ Đã xuất bản, value: published }
+      - name: keywordVi
+        label: 🇻🇳 Từ khóa tiếng Việt
+        widget: string
+      - name: keywordEn
+        label: 🇬🇧 Từ khóa tiếng Anh
+        widget: string
+        required: false
+      - name: notes
+        label: 🗒️ Ghi chú cho AI
+        widget: text
+        required: false
+        hint: Góc nhìn, ý chính, ví dụ thực tế ở studio muốn đưa vào bài.
+      - name: feedback
+        label: 🛠️ Góp ý khi viết lại
+        widget: text
+        required: false
+        hint: Dùng khi chọn "Cần viết lại".
+      - name: postSlug
+        label: 🔗 Slug bài viết
+        widget: string
+        required: false
+        hint: AI tự điền sau khi viết xong.
+      - name: source
+        label: 📥 Nguồn
+        widget: select
+        default: human
+        required: false
+        options:
+          - { label: 👤 Người tạo, value: human }
+          - { label: ✈️ Telegram, value: telegram }
+          - { label: 📊 Báo cáo tuần, value: report }
+
+  # content/settings/*.yml
+  - name: settings
+    label: Cài đặt
+    editor:
+      preview: false
+    files:
+      - name: ai
+        label: Cài đặt AI
+        file: content/settings/ai.yml
+        fields:
+          - name: model
+            label: 🧠 Model Gemini
+            widget: string
+            required: false
+          - name: voice
+            label: 🎙️ Giọng văn
+            widget: text
+          - name: audience
+            label: 👥 Người đọc
+            widget: text
+          - name: rules
+            label: 📏 Quy tắc viết
+            widget: list
+            required: false
+          - name: glossary
+            label: 📖 Bảng thuật ngữ
+            widget: list
+            required: false
+            summary: '{{vi}} ↔ {{en}}'
+            fields:
+              - { name: vi, label: 🇻🇳 Tiếng Việt, widget: string }
+              - { name: en, label: 🇬🇧 Tiếng Anh, widget: string }
+              - { name: note, label: 🗒️ Ghi chú, widget: string, required: false }
+          - name: studioFacts
+            label: 🎧 Thông tin studio
+            widget: list
+            required: false
+            hint: AI chỉ được dùng những thông tin có ở đây khi nói về 2lab.
+          - name: pricing
+            label: 💰 Bảng giá
+            widget: list
+            required: false
+            summary: '{{service}}: {{price}}'
+            fields:
+              - { name: service, label: 🎵 Dịch vụ, widget: string }
+              - { name: price, label: 💵 Giá, widget: string }
+              - { name: note, label: 🗒️ Ghi chú, widget: string, required: false }
+          - name: bannedClaims
+            label: 🚫 Điều không được viết
+            widget: list
+            required: false

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="robots" content="noindex" />
+        <title>2lab CMS</title>
+        <style>
+            /* Field labels: Sveltia renders them at 13px in a muted grey. Make them
+               larger, uppercase and full-contrast so each field is easy to find. The extra
+               `body` keeps these rules ahead of Sveltia's scoped styles, which are
+               injected later. Check after upgrading Sveltia. */
+            body section[data-field-type] > header {
+                height: auto;
+                min-height: var(--sui-button-small-height);
+            }
+            body section[data-field-type] > header > h4 {
+                margin-block: 0;
+                font-size: var(--sui-font-size-large);
+                font-weight: var(--sui-font-weight-bold);
+                color: var(--sui-primary-foreground-color);
+                text-transform: uppercase;
+                letter-spacing: 0.02em;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Pinned on purpose: Sveltia CMS is still in beta. Read the release notes before bumping. -->
+        <script src="https://unpkg.com/@sveltia/cms@0.227.3/dist/sveltia-cms.js"></script>
+    </body>
+</html>

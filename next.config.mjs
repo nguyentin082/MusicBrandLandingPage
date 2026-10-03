@@ -82,8 +82,17 @@ const baseConfig = {
     // duplicate header key. The extension rule below matches .woff2 files under
     // /_next/static/media too, so it has to come first — otherwise it downgrades
     // content-hashed, immutable build output to a 24 hour cache.
+    // Sveltia CMS is a static page in public/admin. Without this, /admin would
+    // fall through to the /[lang] route and 404.
+    async rewrites() {
+        return [{ source: '/admin', destination: '/admin/index.html' }];
+    },
     async headers() {
         return [
+            {
+                source: '/admin/:path*',
+                headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+            },
             {
                 source: '/(.*)\\.(ico|png|svg|jpg|jpeg|webp|avif|woff|woff2)',
                 headers: [
