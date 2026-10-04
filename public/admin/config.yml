@@ -77,6 +77,14 @@ collections:
       - label: Bản nháp
         field: draft
         pattern: true
+    # "Group by" in the entry list: publishedAt is stored as YYYY-MM-DD.
+    view_groups:
+      - label: Tháng đăng
+        field: publishedAt
+        pattern: '\d{4}-\d{2}'
+      - label: Năm đăng
+        field: publishedAt
+        pattern: '\d{4}'
     preview_path: '{{locale}}/blog/{{slug}}'
     fields:
       - name: title
