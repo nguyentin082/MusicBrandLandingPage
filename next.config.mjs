@@ -29,6 +29,10 @@ const baseConfig = {
         ignoreBuildErrors: false,
     },
     compress: true,
+    // The draft preview reads posts from disk at request time.
+    outputFileTracingIncludes: {
+        '/[lang]/blog/preview/[slug]': ['./content/blog/**/*'],
+    },
     // Enable React Server Components streaming
     reactStrictMode: true,
     images: {
@@ -92,6 +96,16 @@ const baseConfig = {
             {
                 source: '/admin/:path*',
                 headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+            },
+            {
+                // Draft preview: the token is in the URL, so keep it out of caches,
+                // search engines and Referer headers sent to other sites.
+                source: '/:lang/blog/preview/:path*',
+                headers: [
+                    { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+                    { key: 'Cache-Control', value: 'private, no-store' },
+                    { key: 'Referrer-Policy', value: 'no-referrer' },
+                ],
             },
             {
                 source: '/(.*)\\.(ico|png|svg|jpg|jpeg|webp|avif|woff|woff2)',

@@ -81,6 +81,8 @@ Gỡ ai đó khỏi repo trên GitHub là họ mất quyền dùng Gemini trong 
 
 ### 4. Vercel
 
+Thêm biến `PREVIEW_TOKEN` (một chuỗi ngẫu nhiên dài, tạo bằng `openssl rand -hex 24`). Người duyệt xem bài nháp tại `https://2lab.vn/<vi|en>/blog/preview/<slug>?token=<PREVIEW_TOKEN>`. Sai token thì trang trả 404. Lộ link thì đổi token trên Vercel rồi Redeploy.
+
 `vercel.json` bỏ qua build khi commit chỉ sửa `content/topics/`, `content/settings/`, `.github/`, `scripts/content/` hoặc `docs/`. Mọi thay đổi khác, kể cả bài viết, đều build như bình thường.
 
 ### Thử trên máy
