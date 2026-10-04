@@ -63,8 +63,8 @@ i18n:
 collections:
   # content/blog/{vi,en}/<slug>.mdx
   - name: blog
-    label: Bài viết
-    label_singular: Bài viết
+    label: Bài viết · Posts
+    label_singular: Bài viết · Posts
     folder: content/blog
     format: yaml-frontmatter
     extension: mdx
@@ -74,106 +74,110 @@ collections:
     slug:
       template: '{{slug}}'
       editable: [create]
-      hint: Chỉ dùng chữ thường không dấu và dấu gạch ngang. Không đổi được sau khi tạo.
+      hint: Chỉ dùng chữ thường không dấu và dấu gạch ngang. Không đổi được sau khi tạo. · Lowercase letters and hyphens only. Cannot be changed later.
     summary: '{{title}} · {{publishedAt}}'
     sortable_fields: [publishedAt, title]
     view_filters:
-      - label: Bản nháp
+      - label: Bản nháp · Drafts
         field: draft
         pattern: true
     # "Group by" in the entry list: publishedAt is stored as YYYY-MM-DD.
     view_groups:
-      - label: Tháng đăng
+      - label: Tháng đăng · Month
         field: publishedAt
         pattern: '\d{4}-\d{2}'
-      - label: Năm đăng
+      - label: Năm đăng · Year
         field: publishedAt
         pattern: '\d{4}'
     preview_path: '{{locale}}/blog/{{slug}}'
     fields:
       - name: title
-        label: 📝 Tiêu đề
+        label: 📝 Tiêu đề · Title
         widget: string
         i18n: true
       - name: description
-        label: 🔍 Mô tả (hiện trên Google)
+        label: 🔍 Mô tả · Description (Google)
         widget: text
         i18n: true
-        hint: Khoảng 120–160 ký tự.
+        hint: Khoảng 120–160 ký tự. · About 120–160 characters.
       - name: draft
-        label: 📄 Bản nháp
+        label: 📄 Bản nháp · Draft
         widget: boolean
         # New posts start as drafts. Sveltia also applies this default to files that
         # lack the key, so every post must keep an explicit `draft: false|true`.
         default: true
         required: false
         i18n: duplicate
-        hint: Bỏ tick rồi Lưu để xuất bản. Bài nháp không hiện trên website.
+        hint: Bỏ tick rồi Lưu để xuất bản. Bài nháp không hiện trên website. · Untick and save to publish. Drafts are not on the website.
       - name: publishedAt
-        label: 📅 Ngày đăng
+        label: 📅 Ngày đăng · Published
         widget: datetime
         type: date
         default: '{{now}}'
         i18n: duplicate
       - name: updatedAt
-        label: 🔄 Ngày cập nhật
+        label: 🔄 Ngày cập nhật · Updated
         widget: datetime
         type: date
         required: false
         i18n: duplicate
       - name: author
-        label: 👤 Tác giả
+        label: 👤 Tác giả · Author
         widget: string
         default: 2lab
         i18n: duplicate
+      # Stored as a language-neutral key; the site shows a per-locale label from
+      # lib/blog-i18n.ts. A new category needs an entry there too.
       - name: category
-        label: 🗂️ Chuyên mục
-        widget: string
-        default: Kiến thức âm nhạc
-        i18n: true
+        label: 🗂️ Chuyên mục · Category
+        widget: select
+        default: music-knowledge
+        i18n: duplicate
+        options:
+          - { label: Kiến thức âm nhạc · Music Knowledge, value: music-knowledge }
       - name: image
-        label: 🖼️ Ảnh bìa
+        label: 🖼️ Ảnh bìa · Cover image
         widget: image
         required: false
         i18n: duplicate
       - name: tags
-        label: 🏷️ Thẻ
+        label: 🏷️ Thẻ · Tags
         widget: list
         required: false
         i18n: true
       - name: aiFlags
-        label: ⚠️ Cảnh báo của AI
+        label: ⚠️ Cảnh báo của AI · AI flags
         widget: list
         required: false
-        hint: Những chỗ AI không chắc chắn. Kiểm tra từng mục, xử lý xong thì xóa.
+        hint: Những chỗ AI không chắc chắn. Kiểm tra từng mục, xử lý xong thì xóa. · Points the AI is unsure about. Check each one and delete it when resolved.
       - name: social
-        label: 📣 Mạng xã hội
+        label: 📣 Mạng xã hội · Social
         widget: object
         required: false
         collapsed: true
-        hint: AI soạn sẵn. Sửa nếu cần; hệ thống tự đăng khi bài được xuất bản.
+        hint: AI soạn sẵn. Sửa nếu cần; hệ thống tự đăng khi bài được xuất bản. · Drafted by AI. Edit if needed; posted automatically when the post is published.
         fields:
           - { name: facebook, label: 📘 Facebook, widget: text, required: false }
           - { name: instagram, label: 📸 Instagram, widget: text, required: false }
           - { name: zalo, label: 💬 Zalo, widget: text, required: false }
-          - { name: tiktokScript, label: 🎬 Kịch bản TikTok, widget: text, required: false }
-          - { name: scheduledAt, label: ⏰ Hẹn giờ đăng, widget: datetime, required: false }
+          - { name: tiktokScript, label: 🎬 Kịch bản TikTok · TikTok script, widget: text, required: false }
+          - { name: scheduledAt, label: ⏰ Hẹn giờ đăng · Schedule, widget: datetime, required: false }
           - name: status
-            label: 📮 Trạng thái
+            label: 📮 Trạng thái · Status
             widget: select
             required: false
             options:
-              - { label: ⏳ Chưa đăng, value: pending }
-              - { label: ✅ Đã đăng, value: sent }
+              - { label: ⏳ Chưa đăng · Pending, value: pending }
+              - { label: ✅ Đã đăng · Sent, value: sent }
       - name: body
-        label: ✍️ Nội dung
+        label: ✍️ Nội dung · Body
         widget: markdown
         i18n: true
 
   # content/topics/<slug>.yml
   - name: topics
-    label: Chủ đề
-    label_singular: Chủ đề
+    label: Chủ đề · Topics
+    label_singular: Chủ đề · Topics
     folder: content/topics
     format: yaml
     extension: yml
@@ -182,109 +186,109 @@ collections:
     slug: '{{slug}}'
     summary: '{{title}} · {{status}}'
     view_filters:
-      - { label: Chờ viết, field: status, pattern: queued }
-      - { label: Chờ duyệt, field: status, pattern: review }
-      - { label: Cần viết lại, field: status, pattern: rewrite }
-      - { label: AI đề xuất, field: status, pattern: suggested }
+      - { label: Chờ viết · Queued, field: status, pattern: queued }
+      - { label: Chờ duyệt · In review, field: status, pattern: review }
+      - { label: Cần viết lại · Rewrite, field: status, pattern: rewrite }
+      - { label: AI đề xuất · Suggested, field: status, pattern: suggested }
     editor:
       preview: false
     fields:
       - name: title
-        label: 💡 Chủ đề
+        label: 💡 Chủ đề · Topic
         widget: string
       - name: status
-        label: 🚦 Trạng thái
+        label: 🚦 Trạng thái · Status
         widget: select
         default: idea
-        hint: Chọn "Chờ viết" rồi Lưu để AI bắt đầu viết.
+        hint: Chọn "Chờ viết" rồi Lưu để AI bắt đầu viết. · Choose "Queued" and save to start the AI writer.
         options:
-          - { label: 💡 Ý tưởng, value: idea }
-          - { label: 🤖 AI đề xuất, value: suggested }
-          - { label: ⏳ Chờ viết, value: queued }
-          - { label: ✍️ AI đang viết, value: writing }
-          - { label: 👀 Chờ duyệt, value: review }
-          - { label: 🔁 Cần viết lại, value: rewrite }
-          - { label: ✅ Đã xuất bản, value: published }
+          - { label: 💡 Ý tưởng · Idea, value: idea }
+          - { label: 🤖 AI đề xuất · Suggested, value: suggested }
+          - { label: ⏳ Chờ viết · Queued, value: queued }
+          - { label: ✍️ AI đang viết · Writing, value: writing }
+          - { label: 👀 Chờ duyệt · In review, value: review }
+          - { label: 🔁 Cần viết lại · Rewrite, value: rewrite }
+          - { label: ✅ Đã xuất bản · Published, value: published }
       - name: keywordVi
-        label: 🇻🇳 Từ khóa tiếng Việt
+        label: 🇻🇳 Từ khóa tiếng Việt · Vietnamese keyword
         widget: string
       - name: keywordEn
-        label: 🇬🇧 Từ khóa tiếng Anh
+        label: 🇬🇧 Từ khóa tiếng Anh · English keyword
         widget: string
         required: false
       - name: notes
-        label: 🗒️ Ghi chú cho AI
+        label: 🗒️ Ghi chú cho AI · Notes for AI
         widget: text
         required: false
-        hint: Góc nhìn, ý chính, ví dụ thực tế ở studio muốn đưa vào bài.
+        hint: Góc nhìn, ý chính, ví dụ thực tế ở studio muốn đưa vào bài. · Angle, key points and real studio examples to include.
       - name: feedback
-        label: 🛠️ Góp ý khi viết lại
+        label: 🛠️ Góp ý khi viết lại · Rewrite feedback
         widget: text
         required: false
-        hint: Dùng khi chọn "Cần viết lại".
+        hint: Dùng khi chọn "Cần viết lại". · Used with "Rewrite".
       - name: postSlug
-        label: 🔗 Slug bài viết
+        label: 🔗 Slug bài viết · Post slug
         widget: string
         required: false
-        hint: AI tự điền sau khi viết xong.
+        hint: AI tự điền sau khi viết xong. · Filled in by the AI after writing.
       - name: source
-        label: 📥 Nguồn
+        label: 📥 Nguồn · Source
         widget: select
         default: human
         required: false
         options:
-          - { label: 👤 Người tạo, value: human }
+          - { label: 👤 Người tạo · Person, value: human }
           - { label: ✈️ Telegram, value: telegram }
-          - { label: 📊 Báo cáo tuần, value: report }
+          - { label: 📊 Báo cáo tuần · Weekly report, value: report }
 
   # content/settings/*.yml
   - name: settings
-    label: Cài đặt
+    label: Cài đặt · Settings
     editor:
       preview: false
     files:
       - name: ai
-        label: Cài đặt AI
+        label: Cài đặt AI · AI settings
         file: content/settings/ai.yml
         fields:
           - name: model
-            label: 🧠 Model Gemini
+            label: 🧠 Model Gemini · Gemini model
             widget: gemini-model # custom field, registered in public/admin/index.html
             required: false
           - name: voice
-            label: 🎙️ Giọng văn
+            label: 🎙️ Giọng văn · Voice
             widget: text
           - name: audience
-            label: 👥 Người đọc
+            label: 👥 Người đọc · Audience
             widget: text
           - name: rules
-            label: 📏 Quy tắc viết
+            label: 📏 Quy tắc viết · Writing rules
             widget: list
             required: false
           - name: glossary
-            label: 📖 Bảng thuật ngữ
+            label: 📖 Bảng thuật ngữ · Glossary
             widget: list
             required: false
             summary: '{{vi}} ↔ {{en}}'
             fields:
-              - { name: vi, label: 🇻🇳 Tiếng Việt, widget: string }
-              - { name: en, label: 🇬🇧 Tiếng Anh, widget: string }
-              - { name: note, label: 🗒️ Ghi chú, widget: string, required: false }
+              - { name: vi, label: 🇻🇳 Tiếng Việt · Vietnamese, widget: string }
+              - { name: en, label: 🇬🇧 Tiếng Anh · English, widget: string }
+              - { name: note, label: 🗒️ Ghi chú · Note, widget: string, required: false }
           - name: studioFacts
-            label: 🎧 Thông tin studio
+            label: 🎧 Thông tin studio · Studio facts
             widget: list
             required: false
-            hint: AI chỉ được dùng những thông tin có ở đây khi nói về 2lab.
+            hint: AI chỉ được dùng những thông tin có ở đây khi nói về 2lab. · The AI may only use facts listed here when writing about 2lab.
           - name: pricing
-            label: 💰 Bảng giá
+            label: 💰 Bảng giá · Pricing
             widget: list
             required: false
             summary: '{{service}}: {{price}}'
             fields:
-              - { name: service, label: 🎵 Dịch vụ, widget: string }
-              - { name: price, label: 💵 Giá, widget: string }
-              - { name: note, label: 🗒️ Ghi chú, widget: string, required: false }
+              - { name: service, label: 🎵 Dịch vụ · Service, widget: string }
+              - { name: price, label: 💵 Giá · Price, widget: string }
+              - { name: note, label: 🗒️ Ghi chú · Note, widget: string, required: false }
           - name: bannedClaims
-            label: 🚫 Điều không được viết
+            label: 🚫 Điều không được viết · Banned claims
             widget: list
             required: false

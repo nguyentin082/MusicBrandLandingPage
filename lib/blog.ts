@@ -4,6 +4,7 @@ import { cache } from 'react';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
+import { getCategoryLabel } from '@/lib/blog-i18n';
 
 export const BLOG_LOCALES = ['en', 'vi'] as const;
 export type BlogLocale = (typeof BLOG_LOCALES)[number];
@@ -114,7 +115,7 @@ async function readPostFile(locale: BlogLocale, slug: string, { includeDrafts = 
         publishedAt,
         updatedAt,
         tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
-        category: frontmatter.category,
+        category: getCategoryLabel(frontmatter.category, locale),
         coverImage: frontmatter.coverImage ?? frontmatter.image,
         readingTimeMinutes: estimateReadingTimeMinutes(content),
         wordCount: content.trim().split(/\s+/).filter(Boolean).length,

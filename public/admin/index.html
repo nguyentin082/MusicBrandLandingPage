@@ -123,7 +123,7 @@
 
                     const current = value ?? '';
                     const { status, models } = state;
-                    const options = [h('option', { key: '', value: '' }, '— Chọn model —')];
+                    const options = [h('option', { key: '', value: '' }, '— Chọn model · Choose a model —')];
                     if (current && !models.some((m) => m.id === current)) {
                         options.push(h('option', { key: current, value: current }, current));
                     }
@@ -132,8 +132,8 @@
                     );
 
                     const message = {
-                        loading: 'Đang tải danh sách model từ Google…',
-                        error: `Không tải được danh sách model: ${state.error}`,
+                        loading: 'Đang tải danh sách model… · Loading models…',
+                        error: `Không tải được danh sách model · Could not load models: ${state.error}`,
                         ready: `${models.length} model.`,
                     }[status];
 
@@ -164,7 +164,7 @@
                                   style: controlStyle,
                                   type: 'text',
                                   value: current,
-                                  placeholder: 'vd: gemini-2.5-flash',
+                                  placeholder: 'vd / e.g. gemini-2.5-flash',
                                   onChange: (e) => onChange(e.target.value),
                               });
 
@@ -176,7 +176,7 @@
                             'div',
                             { style: { display: 'flex', gap: '8px', alignItems: 'center', fontSize: '13px' } },
                             h('span', { style: { flex: 1, opacity: 0.8 } }, message),
-                            h('button', { type: 'button', onClick: load, disabled: status === 'loading' }, 'Tải lại'),
+                            h('button', { type: 'button', onClick: load, disabled: status === 'loading' }, 'Tải lại · Reload'),
                         ),
                     );
                 };

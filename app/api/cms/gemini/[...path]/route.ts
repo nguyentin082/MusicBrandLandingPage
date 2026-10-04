@@ -48,15 +48,22 @@ const authorize = async (req: NextRequest) => {
     if (process.env.NODE_ENV === 'development') return null;
 
     const token = req.headers.get('authorization')?.match(/^Bearer (.+)$/)?.[1];
-    if (!token) return error(401, 'Chưa đăng nhập CMS.');
+    if (!token) return error(401, 'Chưa đăng nhập CMS. · Not signed in to the CMS.');
     if (!(await canEditRepo(token)))
-        return error(403, 'Tài khoản không có quyền sửa repo nội dung.');
+        return error(
+            403,
+            'Tài khoản không có quyền sửa repo nội dung. · This account cannot edit the content repo.',
+        );
     return null;
 };
 
 const forward = async (url: string, init: RequestInit) => {
     const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) return error(500, 'Server chưa cấu hình GEMINI_API_KEY.');
+    if (!apiKey)
+        return error(
+            500,
+            'Server chưa cấu hình GEMINI_API_KEY. · GEMINI_API_KEY is not set on the server.',
+        );
 
     const res = await fetch(url, {
         ...init,
@@ -94,7 +101,8 @@ export async function POST(req: NextRequest, { params }: Context) {
     if (denied) return denied;
 
     const body = await req.text();
-    if (Buffer.byteLength(body) > MAX_BODY_BYTES) return error(413, 'Nội dung quá dài.');
+    if (Buffer.byteLength(body) > MAX_BODY_BYTES)
+        return error(413, 'Nội dung quá dài. · Content is too long.');
 
     return forward(`${GEMINI_BASE}/${path}`, {
         method: 'POST',

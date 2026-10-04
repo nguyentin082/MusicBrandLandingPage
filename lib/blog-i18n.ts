@@ -61,3 +61,13 @@ export function getBlogListCopy(locale: BlogLocale) {
 export function getBlogPostCopy(locale: BlogLocale) {
     return blogPostCopy[locale];
 }
+
+// Front matter stores a language-neutral category key; each locale shows its own label.
+const blogCategories: Record<string, Record<BlogLocale, string>> = {
+    'music-knowledge': { en: 'Music Knowledge', vi: 'Kiến thức âm nhạc' },
+};
+
+export function getCategoryLabel(category: string | undefined, locale: BlogLocale) {
+    if (!category) return undefined;
+    return blogCategories[category]?.[locale] ?? category;
+}
