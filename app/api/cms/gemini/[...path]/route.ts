@@ -1,5 +1,5 @@
-import { createHash } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
+import { authorizeCmsRequest as authorize, cmsError as error } from '@/lib/cms-auth';
 
 /**
  * Gemini proxy for Sveltia CMS (public/admin). The browser never sees the API key:
@@ -14,48 +14,8 @@ import { NextRequest, NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta';
-const REPO = process.env.CMS_GITHUB_REPO ?? 'nguyentin082/MusicBrandLandingPage';
 const MAX_BODY_BYTES = 1_000_000;
-const AUTH_CACHE_MS = 5 * 60 * 1000;
 const GENERATE_PATH = /^models\/[\w.-]+:generateContent$/;
-
-// Per-instance cache so each Gemini call does not also cost a GitHub API call.
-const authCache = new Map<string, { ok: boolean; expires: number }>();
-
-const error = (status: number, message: string) =>
-    NextResponse.json({ error: { message } }, { status });
-
-const canEditRepo = async (token: string) => {
-    const key = createHash('sha256').update(token).digest('hex');
-    const cached = authCache.get(key);
-    if (cached && cached.expires > Date.now()) return cached.ok;
-
-    const res = await fetch(`https://api.github.com/repos/${REPO}`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/vnd.github+json',
-            'User-Agent': '2lab-cms',
-        },
-        cache: 'no-store',
-    });
-    const ok = res.ok && (await res.json()).permissions?.push === true;
-    authCache.set(key, { ok, expires: Date.now() + AUTH_CACHE_MS });
-    return ok;
-};
-
-const authorize = async (req: NextRequest) => {
-    // "Work with Local Repository" has no GitHub token; allow it on `next dev` only.
-    if (process.env.NODE_ENV === 'development') return null;
-
-    const token = req.headers.get('authorization')?.match(/^Bearer (.+)$/)?.[1];
-    if (!token) return error(401, 'Chưa đăng nhập CMS. · Not signed in to the CMS.');
-    if (!(await canEditRepo(token)))
-        return error(
-            403,
-            'Tài khoản không có quyền sửa repo nội dung. · This account cannot edit the content repo.',
-        );
-    return null;
-};
 
 const forward = async (url: string, init: RequestInit) => {
     const apiKey = process.env.GEMINI_API_KEY;

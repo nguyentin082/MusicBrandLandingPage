@@ -62,6 +62,41 @@ export function getBlogPostCopy(locale: BlogLocale) {
     return blogPostCopy[locale];
 }
 
+// Draft preview route (/<lang>/blog/preview/<slug>).
+const blogPreviewCopy = {
+    en: {
+        draftTitle: 'Draft · Not published',
+        draftBody:
+            'This post is not on the website yet. Untick "Draft" in the CMS and save to publish it.',
+        publishedTitle: 'Published · Live on the website',
+        publishedBody: 'This is a preview of a post that is already on the website.',
+        openLive: 'Open live page →',
+        checking: 'Checking your access to drafts…',
+        deniedTitle: 'Sign in to the CMS to view drafts.',
+        deniedBefore: 'Open the',
+        deniedLink: 'admin page',
+        deniedAfter: ', sign in with GitHub, then reload this page.',
+    },
+    vi: {
+        draftTitle: 'Bản nháp · Chưa xuất bản',
+        draftBody: 'Bài chưa hiện trên website. Bỏ tick "Bản nháp" trong CMS rồi Lưu để xuất bản.',
+        publishedTitle: 'Đã xuất bản · Đang hiện trên website',
+        publishedBody: 'Đây là bản xem trước của bài đã có trên website.',
+        openLive: 'Mở trang thật →',
+        checking: 'Đang kiểm tra quyền xem bản nháp…',
+        deniedTitle: 'Bạn cần đăng nhập CMS để xem bản nháp.',
+        deniedBefore: 'Mở',
+        deniedLink: 'trang quản trị',
+        deniedAfter: ', đăng nhập bằng GitHub, rồi tải lại trang này.',
+    },
+} as const;
+
+export type BlogPreviewCopy = (typeof blogPreviewCopy)[BlogLocale];
+
+export function getBlogPreviewCopy(locale: BlogLocale): BlogPreviewCopy {
+    return blogPreviewCopy[locale];
+}
+
 // Front matter stores a language-neutral category key; each locale shows its own label.
 const blogCategories: Record<string, Record<BlogLocale, string>> = {
     'music-knowledge': { en: 'Music Knowledge', vi: 'Kiến thức âm nhạc' },

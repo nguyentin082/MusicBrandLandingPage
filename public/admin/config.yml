@@ -20,7 +20,8 @@ backend:
     uploadMedia: 'content(media): upload {{path}}'
     deleteMedia: 'content(media): delete {{path}}'
 
-site_url: https://2lab.vn
+# No site_url on purpose: Sveltia then builds "View on Live Site" links from the
+# current origin, so they work on localhost and Vercel previews too.
 display_url: https://2lab.vn
 logo:
   src: https://assets.2lab.vn/image/branding/2lab-logo-dark-mode.PNG
@@ -89,7 +90,9 @@ collections:
       - label: Năm đăng · Year
         field: publishedAt
         pattern: '\d{4}'
-    preview_path: '{{locale}}/blog/{{slug}}'
+    # "View on Live Site" opens the draft preview route (works for drafts too).
+    # It signs editors in from their CMS session, so no token goes in this file.
+    preview_path: '{{locale}}/blog/preview/{{slug}}'
     fields:
       - name: title
         label: 📝 Tiêu đề · Title
