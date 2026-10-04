@@ -5,14 +5,18 @@
 backend:
   name: github
   repo: nguyentin082/MusicBrandLandingPage
-  branch: main
-  # URL of the deployed sveltia-cms-auth Worker. Until it is set, sign in with
-  # "Sign In with Token" (fine-grained token: Contents + Pull requests, read/write).
-  # base_url: https://sveltia-cms-auth.<your-subdomain>.workers.dev
+  branch: feat/sveltia-cms # need change to 'main' branch after testing 
+  # GitHub OAuth goes through the sveltia-cms-auth Worker on Cloudflare.
+  base_url: https://sveltia-cms-auth.nguyentin082.workers.dev
+  # Sent to the Worker as `site_id`, checked against its ALLOWED_DOMAINS. Without it,
+  # Sveltia sends `cms.netlify.com` on localhost and the Worker rejects the login.
+  site_domain: 2lab.vn
+  # {{collection}} is the collection's display label ("Bài viết"), so use the file
+  # path instead. Sveltia appends " +N" when the commit touches N more files.
   commit_messages:
-    create: 'content({{collection}}): create {{slug}}'
-    update: 'content({{collection}}): update {{slug}}'
-    delete: 'content({{collection}}): delete {{slug}}'
+    create: 'content: create {{path}}'
+    update: 'content: update {{path}}'
+    delete: 'content: delete {{path}}'
     uploadMedia: 'content(media): upload {{path}}'
     deleteMedia: 'content(media): delete {{path}}'
 
@@ -26,15 +30,15 @@ media_folder: public/uploads
 public_folder: /uploads
 
 # Cloudflare R2, served from the same domain as NEXT_PUBLIC_ASSET_BASE_URL.
-# Fill in the bucket, account and access key ID, then uncomment. The secret key
-# is never stored here: each editor enters it once in their own browser.
-# media_libraries:
-#   cloudflare_r2:
-#     bucket: <bucket-name>
-#     account_id: <cloudflare-account-id>
-#     access_key_id: <r2-access-key-id>
-#     public_url: https://assets.2lab.vn
-#     prefix: blog/
+# The access key ID is not a secret. The secret key is never stored here: each
+# editor enters it once in their own browser.
+media_libraries:
+  cloudflare_r2:
+    bucket: music-landing-page
+    account_id: fed331f33fe9962c815eb2b2663462dc
+    access_key_id: 453403792393d9618e38e37e9179b5d8
+    public_url: https://assets.2lab.vn
+    prefix: blog/
 
 # Slugs and file names are plain ASCII: "Arrangement là gì" -> arrangement-la-gi
 slug:
@@ -99,6 +103,8 @@ collections:
       - name: draft
         label: 📄 Bản nháp
         widget: boolean
+        # New posts start as drafts. Sveltia also applies this default to files that
+        # lack the key, so every post must keep an explicit `draft: false|true`.
         default: true
         required: false
         i18n: duplicate
