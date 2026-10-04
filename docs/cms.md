@@ -30,7 +30,7 @@ Lần đầu tải ảnh lên, CMS sẽ hỏi **R2 Secret Access Key**. Hỏi qu
 ### Lưu ý
 
 - **Slug** (tên file, phần cuối URL) không đổi được sau khi tạo bài.
-- Muốn dịch tự động: bấm biểu tượng dịch trong khung soạn thảo. Lần đầu dùng, CMS sẽ hỏi API key của Gemini hoặc Google Translate. Key được lưu trên trình duyệt của bạn.
+- Muốn dịch tự động: bấm biểu tượng dịch trong khung soạn thảo và chọn **Google Gemini**. Không cần nhập API key.
 - Không ghi thông tin cá nhân của khách hàng vào bài hay vào ghi chú cho AI.
 
 ## Dành cho quản trị viên: cài đặt lần đầu
@@ -68,7 +68,18 @@ Khi chưa có Worker, vẫn đăng nhập được bằng **Sign In Using Access
     ```
 3. Trong `public/admin/config.yml`, bỏ comment khối `media_libraries`, rồi điền `bucket`, `account_id` và `access_key_id`. Access Key ID không phải bí mật. Secret key chỉ đưa riêng cho từng người duyệt.
 
-### 3. Vercel
+### 3. Gemini (dịch và chọn model AI)
+
+Key Gemini chỉ nằm trên server. Trang `/admin` gửi mọi lệnh gọi Gemini qua `app/api/cms/gemini`, kèm token GitHub của người đang đăng nhập. Route chỉ cho qua người có quyền push vào repo nội dung.
+
+1. Tạo một Google Cloud project riêng cho CMS, rồi tạo key tại [Google AI Studio](https://aistudio.google.com/api-keys).
+2. Trong Google Cloud → APIs & Services → Credentials, mở key, ở **API restrictions** chỉ chọn _Generative Language API_.
+3. Đặt quota hoặc budget alert cho project đó.
+4. Trong Vercel → Settings → Environment Variables, thêm `GEMINI_API_KEY` (không có tiền tố `NEXT_PUBLIC_`). Nếu repo nội dung đổi tên, thêm `CMS_GITHUB_REPO` = `owner/repo`.
+
+Gỡ ai đó khỏi repo trên GitHub là họ mất quyền dùng Gemini trong CMS, không cần đổi key. Khi chạy `npm run dev`, route bỏ qua bước kiểm tra GitHub để dùng được với **Work with Local Repository**. Muốn thử thì thêm `GEMINI_API_KEY` vào `.env.local`.
+
+### 4. Vercel
 
 `vercel.json` bỏ qua build khi commit chỉ sửa `content/topics/`, `content/settings/`, `.github/`, `scripts/content/` hoặc `docs/`. Mọi thay đổi khác, kể cả bài viết, đều build như bình thường.
 

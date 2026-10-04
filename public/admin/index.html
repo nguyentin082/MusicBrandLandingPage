@@ -24,7 +24,165 @@
         </style>
     </head>
     <body>
+        <script>
+            /* Gemini goes through our server (app/api/cms/gemini), so the API key never
+               reaches the browser. Must run before Sveltia loads:
+               - Store a placeholder Gemini key so Sveltia's translator does not ask for one.
+                 It matches Sveltia's `AIza…` format check; the proxy ignores it.
+               - Rewrite every fetch to generativelanguage.googleapis.com to the proxy and
+                 send the CMS user's GitHub token, which the proxy checks for push access.
+               Relies on Sveltia internals (`sveltia-cms.prefs`, `sveltia-cms.user`, the
+               `google-ai` service id). Check after upgrading Sveltia. */
+            (() => {
+                const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/';
+                const PROXY_BASE = '/api/cms/gemini/';
+                const PLACEHOLDER_KEY = 'AIza' + '0'.repeat(35);
+
+                const readJSON = (key) => {
+                    try {
+                        return JSON.parse(localStorage.getItem(key) || '{}') ?? {};
+                    } catch {
+                        return {};
+                    }
+                };
+
+                const prefs = readJSON('sveltia-cms.prefs');
+                if (prefs.apiKeys?.['google-ai'] !== PLACEHOLDER_KEY) {
+                    prefs.apiKeys = { ...prefs.apiKeys, 'google-ai': PLACEHOLDER_KEY };
+                    try {
+                        localStorage.setItem('sveltia-cms.prefs', JSON.stringify(prefs));
+                    } catch {}
+                }
+
+                const nativeFetch = window.fetch.bind(window);
+                window.fetch = (input, init = {}) => {
+                    const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+                    if (!url.startsWith(GEMINI_BASE)) return nativeFetch(input, init);
+
+                    const target = new URL(PROXY_BASE + url.slice(GEMINI_BASE.length), location.origin);
+                    target.searchParams.delete('key');
+                    const headers = new Headers(init.headers ?? (input instanceof Request ? input.headers : undefined));
+                    headers.delete('x-goog-api-key');
+                    const { token } = readJSON('sveltia-cms.user');
+                    if (token) headers.set('Authorization', `Bearer ${token}`);
+                    return nativeFetch(target, { ...init, headers });
+                };
+            })();
+        </script>
         <!-- Pinned on purpose: Sveltia CMS is still in beta. Read the release notes before bumping. -->
         <script src="https://unpkg.com/@sveltia/cms@0.227.3/dist/sveltia-cms.js"></script>
+        <script>
+            /* `gemini-model` field: a dropdown filled from Google's ListModels API, so new
+               Gemini models show up without editing config.yml. The request goes through
+               the Gemini proxy set up above. */
+            (() => {
+                const { React } = window.CMS;
+                const h = React.createElement;
+                const MODELS_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
+                // generateContent models that do not return text.
+                const NON_TEXT = /(tts|image|embedding|native-audio)/i;
+
+                const fetchModels = async () => {
+                    const models = [];
+                    let pageToken = '';
+                    do {
+                        const params = new URLSearchParams({ pageSize: '1000' });
+                        if (pageToken) params.set('pageToken', pageToken);
+                        const res = await fetch(`${MODELS_URL}?${params}`);
+                        const data = await res.json();
+                        if (!res.ok) throw new Error(data.error?.message || `HTTP ${res.status}`);
+                        models.push(...(data.models ?? []));
+                        pageToken = data.nextPageToken ?? '';
+                    } while (pageToken);
+
+                    return models
+                        .filter(
+                            (m) =>
+                                m.supportedGenerationMethods?.includes('generateContent') &&
+                                !NON_TEXT.test(m.name),
+                        )
+                        .map((m) => ({
+                            id: m.name.replace(/^models\//, ''),
+                            label: m.displayName || m.name,
+                        }))
+                        .sort((a, b) => a.id.localeCompare(b.id));
+                };
+
+                const GeminiModelControl = ({ value, onChange, forID, classNameWrapper }) => {
+                    const [state, setState] = React.useState({ status: 'loading', models: [] });
+
+                    const load = React.useCallback(() => {
+                        setState((s) => ({ ...s, status: 'loading' }));
+                        fetchModels().then(
+                            (models) => setState({ status: 'ready', models }),
+                            (error) => setState({ status: 'error', models: [], error: error.message }),
+                        );
+                    }, []);
+
+                    React.useEffect(load, [load]);
+
+                    const current = value ?? '';
+                    const { status, models } = state;
+                    const options = [h('option', { key: '', value: '' }, '— Chọn model —')];
+                    if (current && !models.some((m) => m.id === current)) {
+                        options.push(h('option', { key: current, value: current }, current));
+                    }
+                    models.forEach((m) =>
+                        options.push(h('option', { key: m.id, value: m.id }, `${m.label} (${m.id})`)),
+                    );
+
+                    const message = {
+                        loading: 'Đang tải danh sách model từ Google…',
+                        error: `Không tải được danh sách model: ${state.error}`,
+                        ready: `${models.length} model.`,
+                    }[status];
+
+                    // Native controls render small by default; match Sveltia's field size.
+                    const controlStyle = {
+                        width: '100%',
+                        minHeight: '44px',
+                        padding: '8px 12px',
+                        fontSize: 'var(--sui-font-size-large)',
+                    };
+
+                    const field =
+                        status === 'ready'
+                            ? h(
+                                  'select',
+                                  {
+                                      id: forID,
+                                      className: classNameWrapper,
+                                      style: controlStyle,
+                                      value: current,
+                                      onChange: (e) => onChange(e.target.value),
+                                  },
+                                  options,
+                              )
+                            : h('input', {
+                                  id: forID,
+                                  className: classNameWrapper,
+                                  style: controlStyle,
+                                  type: 'text',
+                                  value: current,
+                                  placeholder: 'vd: gemini-2.5-flash',
+                                  onChange: (e) => onChange(e.target.value),
+                              });
+
+                    return h(
+                        'div',
+                        { style: { display: 'grid', gap: '8px' } },
+                        field,
+                        h(
+                            'div',
+                            { style: { display: 'flex', gap: '8px', alignItems: 'center', fontSize: '13px' } },
+                            h('span', { style: { flex: 1, opacity: 0.8 } }, message),
+                            h('button', { type: 'button', onClick: load, disabled: status === 'loading' }, 'Tải lại'),
+                        ),
+                    );
+                };
+
+                window.CMS.registerFieldType('gemini-model', GeminiModelControl);
+            })();
+        </script>
     </body>
 </html>

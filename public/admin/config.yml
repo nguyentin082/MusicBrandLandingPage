@@ -235,7 +235,7 @@ collections:
         fields:
           - name: model
             label: 🧠 Model Gemini
-            widget: string
+            widget: gemini-model # custom field, registered in public/admin/index.html
             required: false
           - name: voice
             label: 🎙️ Giọng văn
