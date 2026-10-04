@@ -9,3 +9,7 @@ package-lock.json
 skills-lock.json
 next-env.d.ts
 tsconfig.tsbuildinfo
+
+# Sveltia CMS writes these files with its own Markdown style (compact tables, `***`
+# rules). Formatting them with Prettier would rewrite them back on every save.
+content/blog
