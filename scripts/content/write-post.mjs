@@ -5,7 +5,7 @@
 // the CMS shows it), then:
 //   scope check -> outline (vi) -> write (vi) -> self-review (vi) -> rewrite
 //   for English readers -> social posts -> studio-facts check -> price check
-//   -> hashtags -> MDX check
+//   -> hashtags -> CMS-safe bold/italic -> MDX check
 // and writes content/blog/{vi,en}/<slug>.mdx with `draft: true`. The topic
 // moves to `review`. Nothing is published: a person unticks "draft" in the CMS.
 //
@@ -25,6 +25,7 @@ import remarkMdx from 'remark-mdx';
 import remarkParse from 'remark-parse';
 import { unified } from 'unified';
 import { parse, parseDocument, stringify } from 'yaml';
+import { fixEmphasis } from './emphasis.mjs';
 
 const ROOT = process.cwd();
 const TOPICS_DIR = path.join(ROOT, 'content/topics');
@@ -700,6 +701,16 @@ Xóa mọi con số tiền, giá, khoảng giá, mức phí. Thay bằng câu m�
             }
 
             addHashtags(post);
+            // Bold that Sveltia would break the first time an editor saves the post.
+            for (const locale of ['vi', 'en']) {
+                const { body, unfixable } = fixEmphasis(post[locale].body);
+                post[locale].body = body;
+                for (const { text } of unfixable) {
+                    post.flags.push(
+                        `Định dạng in đậm/nghiêng ${text} (bản ${locale}) có thể bị hỏng khi lưu trong CMS. Kiểm tra lại.`,
+                    );
+                }
+            }
             assertValidMdx(post.vi.body, 'vi body');
             assertValidMdx(post.en.body, 'en body');
 

@@ -76,6 +76,8 @@ Khi chưa có Worker, vẫn đăng nhập được bằng **Sign In Using Access
     ```
 3. Trong `cms/config.yml`, bỏ comment khối `media_libraries`, rồi điền `bucket`, `account_id` và `access_key_id`. Access Key ID không phải bí mật. Secret key chỉ đưa riêng cho từng người duyệt.
 
+Mọi ảnh đều lên R2. Thư viện lưu ảnh vào repo đã bị tắt (`media_libraries.default: false`), vì ảnh trong Git làm repo phình mãi (xóa file thì ảnh vẫn nằm trong lịch sử) và mỗi lần tải ảnh lại kích hoạt một lần build.
+
 ### 3. Gemini (dịch và chọn model AI)
 
 Key Gemini chỉ nằm trên server. Trang `/admin` gửi mọi lệnh gọi Gemini qua `app/api/cms/gemini`, kèm token GitHub của người đang đăng nhập. Route chỉ cho qua người có quyền push vào repo nội dung.
@@ -151,6 +153,13 @@ Website, blog và mạng xã hội không nêu giá. Khách hàng phải liên h
 - Quy định không nêu giá nằm trong code của Action, nên sửa Cài đặt AI không gỡ được nó.
 - Sau khi viết, Action quét giá trong mọi trường của bài, kể cả nội dung mạng xã hội. Nếu thấy giá, AI phải sửa lại một lần. Nếu vẫn còn, Action không ghi bài và báo lỗi trong Nhật ký AI.
 - Khi duyệt bài do người viết, bạn vẫn phải tự kiểm tra phần này.
+
+### In đậm bị hỏng khi lưu bài cũ
+
+Trình soạn thảo của Sveltia không nhận chữ in đậm khi dấu `**` nằm sát dấu câu ASCII ở bên trong và một ký tự như `—`, `“` hay chữ cái ở bên ngoài, ví dụ `**"tai của thế giới"**—nó`. Lưu bài đó trong CMS sẽ biến chữ in đậm thành `\*\*` hiện nguyên trên trang.
+
+- Bài do AI viết được sửa tự động trước khi ghi.
+- Với bài viết tay hoặc bài cũ, chạy `npm run content:fix-emphasis`. Lệnh này đưa dấu câu ra ngoài phần in đậm (`"**tai của thế giới**"—nó`), trang vẫn hiển thị như cũ. Thêm `-- --check` để chỉ liệt kê, không sửa.
 
 ### Thử trên máy
 
