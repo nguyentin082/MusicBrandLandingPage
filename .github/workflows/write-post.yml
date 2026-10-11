@@ -41,6 +41,12 @@ jobs:
 
             - run: npm ci --ignore-scripts --no-audit --no-fund
 
+            # The script pushes the "writing" status as soon as it starts a topic.
+            - name: Git identity
+              run: |
+                  git config user.name "2lab AI writer"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+
             - name: Write drafts
               id: write
               run: node scripts/content/write-post.mjs
@@ -53,17 +59,23 @@ jobs:
                   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
                   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
+            # A crash, timeout or cancel would leave a topic stuck in "AI đang viết".
+            - name: Recover stuck topics
+              id: recover
+              if: failure() || cancelled()
+              run: node scripts/content/write-post.mjs --recover
+
             - name: Commit
+              if: always()
               env:
-                  MESSAGE: ${{ steps.write.outputs.commit_message }}
+                  MESSAGE: ${{ steps.recover.outputs.commit_message || steps.write.outputs.commit_message }}
               run: |
+                  MESSAGE="${MESSAGE:-content(ai): update topics}"
                   git add content/blog content/topics
                   if git diff --cached --quiet; then
                       echo "Nothing to commit"
                       exit 0
                   fi
-                  git config user.name "2lab AI writer"
-                  git config user.email "github-actions[bot]@users.noreply.github.com"
                   git commit -m "$MESSAGE"
                   # An editor may have saved in the CMS while the AI was writing.
                   for attempt in 1 2 3; do
