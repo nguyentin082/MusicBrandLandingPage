@@ -2,7 +2,8 @@
 # "Cần viết lại" (rewrite) in the CMS. See scripts/content/write-post.mjs.
 #
 # Secrets: GEMINI_API_KEY (required), TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (optional).
-# Variables: GEMINI_MODEL (optional, overrides content/settings/ai.yml), SITE_URL (optional).
+# Variables: GEMINI_MODEL (optional, overrides content/settings/ai.yml), SITE_URL (optional,
+# production URL; runs on the `staging` branch always link to https://staging.2lab.vn).
 
 name: AI write post
 
@@ -46,7 +47,8 @@ jobs:
               env:
                   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
                   GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
-                  SITE_URL: ${{ vars.SITE_URL }}
+                  # Links in the Telegram message point at the site this branch deploys to.
+                  SITE_URL: ${{ github.ref_name == 'staging' && 'https://staging.2lab.vn' || vars.SITE_URL }}
                   TOPIC_SLUG: ${{ inputs.topic }}
                   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
                   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

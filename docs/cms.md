@@ -1,8 +1,11 @@
 # CMS 2lab (Sveltia)
 
-Trang quản trị: **https://2lab.vn/admin**
+Trang quản trị:
 
-Mọi thay đổi trong CMS là một commit lên nhánh `main` của repo. Không có nút "Hủy" sau khi Lưu, nhưng mọi phiên bản cũ đều còn trong lịch sử Git.
+- **https://2lab.vn/admin**: nội dung thật, commit vào nhánh `main`.
+- **https://staging.2lab.vn/admin**: thử nghiệm (CMS, AI viết bài), commit vào nhánh `staging`. Không hiện trên Google.
+
+Mọi thay đổi trong CMS là một commit lên nhánh của trang đó. Không có nút "Hủy" sau khi Lưu, nhưng mọi phiên bản cũ đều còn trong lịch sử Git.
 
 ## Dành cho người duyệt
 
@@ -44,7 +47,7 @@ Lần đầu tải ảnh lên, CMS sẽ hỏi **R2 Secret Access Key**. Hỏi qu
 3. Trong Worker, thêm các biến:
     - `GITHUB_CLIENT_ID`
     - `GITHUB_CLIENT_SECRET`
-    - `ALLOWED_DOMAINS` = `2lab.vn, localhost`
+    - `ALLOWED_DOMAINS` = `2lab.vn, staging.2lab.vn, localhost`
 4. Trong `cms/config.yml`, bỏ comment dòng `base_url` và điền URL của Worker.
 
 Khi chưa có Worker, vẫn đăng nhập được bằng **Sign In Using Access Token**. Tạo một fine-grained token chỉ cho repo này, với quyền Contents và Pull requests (read/write).
@@ -58,7 +61,12 @@ Khi chưa có Worker, vẫn đăng nhập được bằng **Sign In Using Access
     ```json
     [
         {
-            "AllowedOrigins": ["https://2lab.vn", "http://localhost:3000"],
+            "AllowedOrigins": [
+                "https://2lab.vn",
+                "https://www.2lab.vn",
+                "https://staging.2lab.vn",
+                "http://localhost:3000"
+            ],
             "AllowedMethods": ["GET", "PUT", "DELETE", "HEAD"],
             "AllowedHeaders": ["*"],
             "ExposeHeaders": ["ETag"],
@@ -93,7 +101,20 @@ Thêm biến `PREVIEW_TOKEN` (một chuỗi ngẫu nhiên dài, tạo bằng `op
 
 `vercel.json` bỏ qua build khi commit chỉ sửa `content/topics/`, `content/settings/`, `.github/`, `scripts/content/` hoặc `docs/`. Mọi thay đổi khác, kể cả bài viết, đều build như bình thường.
 
-### 5. AI viết bài (GitHub Actions)
+### 5. Staging (staging.2lab.vn)
+
+Nhánh `staging` là môi trường thử. Luồng làm việc: `feat/*` → `staging` → `main`.
+
+1. Vercel → Settings → Domains → Add `staging.2lab.vn`, chọn **Git Branch** = `staging`.
+2. DNS của `2lab.vn`: thêm `CNAME staging → cname.vercel-dns.com`. Trên Cloudflare, chọn **DNS only**.
+3. Biến môi trường mục **Preview** trên Vercel dùng cho staging. Không đặt `CMS_GITHUB_BRANCH` cho Preview; CMS tự dùng nhánh `staging`.
+4. Thêm `staging.2lab.vn` vào CORS của R2 và `ALLOWED_DOMAINS` của Worker (như ở trên).
+
+Mọi bản deploy không phải production đều trả `robots.txt` chặn toàn bộ và header `X-Robots-Tag: noindex`, nên staging không bị Google index.
+
+Bài và chủ đề tạo trên staging sẽ theo vào `main` khi merge. Xóa nội dung thử trước khi merge `staging → main`. Thỉnh thoảng merge `main → staging` để staging có đủ bài mới.
+
+### 6. AI viết bài (GitHub Actions)
 
 `.github/workflows/write-post.yml` chạy khi có commit sửa `content/topics/`. Action viết mọi chủ đề đang ở trạng thái **Chờ viết** hoặc **Cần viết lại**, ghi `content/blog/{vi,en}/<slug>.mdx` với `draft: true`, chuyển chủ đề sang **Chờ duyệt**, rồi commit lại vào đúng nhánh đó. Kết quả hoặc lỗi được ghi vào ô **Nhật ký AI** của chủ đề.
 
@@ -102,7 +123,7 @@ Cài đặt trong GitHub → repo → Settings → Secrets and variables → Act
 - Secret `GEMINI_API_KEY`: bắt buộc. Nên dùng một key riêng, khác key của Vercel.
 - Secret `TELEGRAM_BOT_TOKEN` và `TELEGRAM_CHAT_ID`: không bắt buộc. Có thì Action gửi link duyệt bài qua Telegram.
 - Variable `GEMINI_MODEL`: không bắt buộc, dùng thay model trong **Cài đặt AI**.
-- Variable `SITE_URL`: không bắt buộc, mặc định là `https://2lab.vn`.
+- Variable `SITE_URL`: không bắt buộc, mặc định là `https://2lab.vn`. Khi chạy trên nhánh `staging`, link gửi qua Telegram luôn là `https://staging.2lab.vn`.
 
 Muốn chạy tay: vào tab Actions → **AI write post** → Run workflow, chọn nhánh, điền slug của chủ đề nếu chỉ muốn viết một chủ đề.
 

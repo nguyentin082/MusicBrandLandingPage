@@ -98,6 +98,16 @@ const baseConfig = {
     },
     async headers() {
         return [
+            // staging.2lab.vn and other non-production deployments: keep every page
+            // out of search results (robots.txt alone does not stop indexing).
+            ...(process.env.VERCEL_ENV === 'production'
+                ? []
+                : [
+                      {
+                          source: '/:path*',
+                          headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+                      },
+                  ]),
             {
                 source: '/admin/:path*',
                 headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
