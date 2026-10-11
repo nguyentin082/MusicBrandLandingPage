@@ -1,8 +1,8 @@
 title: Sản xuất trọn gói
-status: idea
+status: queued
 keywordVi: San xuat am nhac
 source: human
-aiLog: |
+aiLog: |-
     2026-10-11: lỗi: Gemini 404: {
       "error": {
         "code": 404,
