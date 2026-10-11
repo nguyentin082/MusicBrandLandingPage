@@ -78,6 +78,8 @@ Khi chưa có Worker, vẫn đăng nhập được bằng **Sign In Using Access
 
 Mọi ảnh đều lên R2. Thư viện lưu ảnh vào repo đã bị tắt (`media_libraries.default: false`), vì ảnh trong Git làm repo phình mãi (xóa file thì ảnh vẫn nằm trong lịch sử) và mỗi lần tải ảnh lại kích hoạt một lần build.
 
+Dán hoặc kéo ảnh thẳng vào ô ảnh vẫn có thể khiến Sveltia lưu ảnh vào `public/uploads/`. Vì vậy trang `/admin` chặn thêm một lớp: commit nào có file trong `public/uploads/` sẽ không được gửi, CMS báo lỗi lưu và nhắc tải ảnh lên tab **Cloudflare R2**. Nội dung đang sửa vẫn còn nguyên trong khung soạn thảo.
+
 ### 3. Gemini (dịch và chọn model AI)
 
 Key Gemini chỉ nằm trên server. Trang `/admin` gửi mọi lệnh gọi Gemini qua `app/api/cms/gemini`, kèm token GitHub của người đang đăng nhập. Route chỉ cho qua người có quyền push vào repo nội dung.

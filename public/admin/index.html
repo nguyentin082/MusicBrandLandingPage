@@ -31,19 +31,12 @@
                  It matches Sveltia's `AIza…` format check; the proxy ignores it.
                - Rewrite every fetch to generativelanguage.googleapis.com to the proxy and
                  send the CMS user's GitHub token, which the proxy checks for push access.
-               Also: Sveltia looks for new commits (from the AI writer or other editors)
-               every minute and when the tab regains focus, by fetching the branch head.
-               GitHub sends that response with `Cache-Control: max-age=60`, so the browser
-               kept returning the old head and new posts only showed up after clearing site
-               data. Those requests now revalidate every time; an unchanged head is a cheap
-               304 that does not count against the GitHub rate limit.
                Relies on Sveltia internals (`sveltia-cms.prefs`, `sveltia-cms.user`, the
-               `google-ai` service id, the `/branches/` request). Check after upgrading Sveltia. */
+               `google-ai` service id). Check after upgrading Sveltia. */
             (() => {
                 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/';
                 const PROXY_BASE = '/api/cms/gemini/';
                 const PLACEHOLDER_KEY = 'AIza' + '0'.repeat(35);
-                const BRANCH_HEAD = /^https:\/\/api\.github\.com\/repos\/[^/]+\/[^/]+\/branches\//;
 
                 const readJSON = (key) => {
                     try {
@@ -64,7 +57,6 @@
                 const nativeFetch = window.fetch.bind(window);
                 window.fetch = (input, init = {}) => {
                     const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
-                    if (BRANCH_HEAD.test(url)) return nativeFetch(input, { ...init, cache: 'no-cache' });
                     if (!url.startsWith(GEMINI_BASE)) return nativeFetch(input, init);
 
                     const target = new URL(PROXY_BASE + url.slice(GEMINI_BASE.length), location.origin);
@@ -74,6 +66,51 @@
                     const { token } = readJSON('sveltia-cms.user');
                     if (token) headers.set('Authorization', `Bearer ${token}`);
                     return nativeFetch(target, { ...init, headers });
+                };
+            })();
+        </script>
+        <script>
+            /* Images must go to R2, never into the repo. `media_libraries.default: false`
+               in cms/config.yml hides the repository library, but pasting or dropping an
+               image straight onto an image field can still save it under public/uploads.
+               This is the backstop: Sveltia saves with one GraphQL createCommitOnBranch
+               call, so a commit that adds a file under public/uploads/ is not sent, and
+               Sveltia shows the save as failed (the edits stay in the editor).
+               Relies on Sveltia's GitHub commit request. Check after upgrading Sveltia. */
+            (() => {
+                const GRAPHQL = 'https://api.github.com/graphql';
+                const BLOCKED = /^public\/uploads\//;
+                const MESSAGE =
+                    'Ảnh phải tải lên Cloudflare R2, không lưu vào repo.\n\n' +
+                    'Xóa ảnh vừa dán, bấm vào ô ảnh → chọn tab "Cloudflare R2" → tải ảnh lên, rồi Lưu lại.\n\n' +
+                    'Images must be uploaded to Cloudflare R2, not saved in the repository.';
+
+                const blockedPaths = (body) => {
+                    try {
+                        const additions = JSON.parse(body)?.variables?.input?.fileChanges?.additions ?? [];
+                        return additions.map((a) => a.path).filter((p) => BLOCKED.test(p));
+                    } catch {
+                        return [];
+                    }
+                };
+
+                const previousFetch = window.fetch;
+                window.fetch = (input, init = {}) => {
+                    const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+                    if (url === GRAPHQL && typeof init.body === 'string') {
+                        const paths = blockedPaths(init.body);
+                        if (paths.length) {
+                            console.warn('Blocked a commit with repository images:', paths);
+                            window.alert(MESSAGE);
+                            return Promise.resolve(
+                                new Response(JSON.stringify({ errors: [{ message: MESSAGE }] }), {
+                                    status: 200,
+                                    headers: { 'Content-Type': 'application/json' },
+                                }),
+                            );
+                        }
+                    }
+                    return previousFetch(input, init);
                 };
             })();
         </script>
