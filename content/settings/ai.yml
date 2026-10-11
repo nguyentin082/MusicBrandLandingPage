@@ -5,7 +5,7 @@ rules:
     - Viết tiếng Việt trực tiếp, không dịch từ tiếng Anh.
     - Bản tiếng Anh là bản viết lại cho người đọc tiếng Anh, dùng từ khóa tiếng Anh riêng.
     - Giải thích thuật ngữ tiếng Anh ở lần đầu xuất hiện.
-    - Kết bài bằng lời mời liên hệ 2lab, không ép mua.
+    - Kết bài bằng lời mời liên hệ 2lab để được tư vấn và báo giá riêng, không ép mua.
 glossary:
     - vi: hòa âm phối khí
       en: arrangement
@@ -27,7 +27,7 @@ studioFacts:
     - Hơn 100 dự án hoàn thiện, hơn 50 nghệ sĩ tin tưởng, hơn 10 năm kinh nghiệm.
     - 'Liên hệ: contact@2lab.vn hoặc nút liên hệ trên website 2lab.vn.'
 bannedClaims:
-    - Không tự đưa ra giá. Chỉ dùng giá có trong bảng giá ở trên.
+    - Không nêu giá, khoảng giá, mức phí, khuyến mãi hay so sánh giá dưới bất kỳ hình thức nào. Khi người đọc có thể quan tâm đến chi phí, mời họ liên hệ 2lab để được báo giá riêng.
     - Không nêu tên nghệ sĩ, khách hàng hoặc dự án cụ thể nếu không có ở trên.
     - Không hứa hẹn kết quả như lên top, viral hay tăng lượt nghe.
     - Không đưa thông tin cá nhân của khách hàng vào bài.

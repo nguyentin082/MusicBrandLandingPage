@@ -45,7 +45,7 @@ Lần đầu tải ảnh lên, CMS sẽ hỏi **R2 Secret Access Key**. Hỏi qu
     - `GITHUB_CLIENT_ID`
     - `GITHUB_CLIENT_SECRET`
     - `ALLOWED_DOMAINS` = `2lab.vn, localhost`
-4. Trong `public/admin/config.yml`, bỏ comment dòng `base_url` và điền URL của Worker.
+4. Trong `cms/config.yml`, bỏ comment dòng `base_url` và điền URL của Worker.
 
 Khi chưa có Worker, vẫn đăng nhập được bằng **Sign In Using Access Token**. Tạo một fine-grained token chỉ cho repo này, với quyền Contents và Pull requests (read/write).
 
@@ -66,7 +66,7 @@ Khi chưa có Worker, vẫn đăng nhập được bằng **Sign In Using Access
         }
     ]
     ```
-3. Trong `public/admin/config.yml`, bỏ comment khối `media_libraries`, rồi điền `bucket`, `account_id` và `access_key_id`. Access Key ID không phải bí mật. Secret key chỉ đưa riêng cho từng người duyệt.
+3. Trong `cms/config.yml`, bỏ comment khối `media_libraries`, rồi điền `bucket`, `account_id` và `access_key_id`. Access Key ID không phải bí mật. Secret key chỉ đưa riêng cho từng người duyệt.
 
 ### 3. Gemini (dịch và chọn model AI)
 
@@ -81,9 +81,41 @@ Gỡ ai đó khỏi repo trên GitHub là họ mất quyền dùng Gemini trong 
 
 ### 4. Vercel
 
+**Repo và nhánh mà CMS commit vào** không ghi cứng trong `cms/config.yml`. Route `app/api/cms/config` đọc file này và phục vụ ở `/admin/config.yml`, thay `backend.repo` và `backend.branch` bằng:
+
+- `CMS_GITHUB_BRANCH` nếu có đặt;
+- nếu không, nhánh mà Vercel đang deploy (`VERCEL_GIT_COMMIT_REF`): bản production sửa `main`, bản preview của một nhánh sửa chính nhánh đó;
+- nếu không có cả hai thì dùng `main`.
+
+`CMS_GITHUB_REPO` (dạng `owner/repo`) thay repo theo cách tương tự. Giá trị được lấy lúc build, nên đổi biến xong phải Redeploy. Khi dev trên máy, đặt `CMS_GITHUB_BRANCH` trong `.env.local`.
+
 Thêm biến `PREVIEW_TOKEN` (một chuỗi ngẫu nhiên dài, tạo bằng `openssl rand -hex 24`). Người duyệt xem bài nháp tại `https://2lab.vn/<vi|en>/blog/preview/<slug>?token=<PREVIEW_TOKEN>`. Sai token thì trang trả 404. Lộ link thì đổi token trên Vercel rồi Redeploy.
 
 `vercel.json` bỏ qua build khi commit chỉ sửa `content/topics/`, `content/settings/`, `.github/`, `scripts/content/` hoặc `docs/`. Mọi thay đổi khác, kể cả bài viết, đều build như bình thường.
+
+### 5. AI viết bài (GitHub Actions)
+
+`.github/workflows/write-post.yml` chạy khi có commit sửa `content/topics/`. Action viết mọi chủ đề đang ở trạng thái **Chờ viết** hoặc **Cần viết lại**, ghi `content/blog/{vi,en}/<slug>.mdx` với `draft: true`, chuyển chủ đề sang **Chờ duyệt**, rồi commit lại vào đúng nhánh đó. Kết quả hoặc lỗi được ghi vào ô **Nhật ký AI** của chủ đề.
+
+Cài đặt trong GitHub → repo → Settings → Secrets and variables → Actions:
+
+- Secret `GEMINI_API_KEY`: bắt buộc. Nên dùng một key riêng, khác key của Vercel.
+- Secret `TELEGRAM_BOT_TOKEN` và `TELEGRAM_CHAT_ID`: không bắt buộc. Có thì Action gửi link duyệt bài qua Telegram.
+- Variable `GEMINI_MODEL`: không bắt buộc, dùng thay model trong **Cài đặt AI**.
+- Variable `SITE_URL`: không bắt buộc, mặc định là `https://2lab.vn`.
+
+Muốn chạy tay: vào tab Actions → **AI write post** → Run workflow, chọn nhánh, điền slug của chủ đề nếu chỉ muốn viết một chủ đề.
+
+AI không bao giờ viết đè một bài đang xuất bản. Muốn AI viết lại bài đó, tick **Bản nháp** cho bài trước.
+
+### Không công khai giá
+
+Website, blog và mạng xã hội không nêu giá. Khách hàng phải liên hệ để được báo giá.
+
+- **Cài đặt AI** không có ô bảng giá. Đừng thêm giá vào bất kỳ ô nào, vì repo và prompt không phải nơi giữ bí mật.
+- Quy định không nêu giá nằm trong code của Action, nên sửa Cài đặt AI không gỡ được nó.
+- Sau khi viết, Action quét giá trong mọi trường của bài, kể cả nội dung mạng xã hội. Nếu thấy giá, AI phải sửa lại một lần. Nếu vẫn còn, Action không ghi bài và báo lỗi trong Nhật ký AI.
+- Khi duyệt bài do người viết, bạn vẫn phải tự kiểm tra phần này.
 
 ### Thử trên máy
 

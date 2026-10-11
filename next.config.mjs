@@ -32,6 +32,7 @@ const baseConfig = {
     // The draft preview reads posts from disk at request time.
     outputFileTracingIncludes: {
         '/[lang]/blog/preview/[slug]': ['./content/blog/**/*'],
+        '/api/cms/config': ['./cms/config.yml'],
     },
     // Enable React Server Components streaming
     reactStrictMode: true,
@@ -89,7 +90,11 @@ const baseConfig = {
     // Sveltia CMS is a static page in public/admin. Without this, /admin would
     // fall through to the /[lang] route and 404.
     async rewrites() {
-        return [{ source: '/admin', destination: '/admin/index.html' }];
+        return [
+            { source: '/admin', destination: '/admin/index.html' },
+            // The config is generated so the branch can come from the environment.
+            { source: '/admin/config.yml', destination: '/api/cms/config' },
+        ];
     },
     async headers() {
         return [

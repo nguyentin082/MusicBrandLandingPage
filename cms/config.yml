@@ -2,10 +2,14 @@
 # Sveltia CMS configuration for 2lab.vn/admin
 # Docs: https://sveltiacms.app/en/docs
 
+# Served at /admin/config.yml by app/api/cms/config/route.ts, which sets
+# backend.repo and backend.branch from the environment (CMS_GITHUB_REPO,
+# CMS_GITHUB_BRANCH, else the branch Vercel deployed). The values here are
+# only the fallback.
 backend:
   name: github
   repo: nguyentin082/MusicBrandLandingPage
-  branch: feat/sveltia-cms # need change to 'main' branch after testing 
+  branch: main
   # GitHub OAuth goes through the sveltia-cms-auth Worker on Cloudflare.
   base_url: https://sveltia-cms-auth.nguyentin082.workers.dev
   # Sent to the Worker as `site_id`, checked against its ALLOWED_DOMAINS. Without it,
@@ -243,6 +247,11 @@ collections:
           - { label: 👤 Người tạo · Person, value: human }
           - { label: ✈️ Telegram, value: telegram }
           - { label: 📊 Báo cáo tuần · Weekly report, value: report }
+      - name: aiLog
+        label: 🤖 Nhật ký AI · AI log
+        widget: text
+        required: false
+        hint: AI ghi kết quả hoặc lỗi của lần viết gần nhất. · Result or error of the last AI run.
 
   # content/settings/*.yml
   - name: settings
@@ -282,15 +291,9 @@ collections:
             widget: list
             required: false
             hint: AI chỉ được dùng những thông tin có ở đây khi nói về 2lab. · The AI may only use facts listed here when writing about 2lab.
-          - name: pricing
-            label: 💰 Bảng giá · Pricing
-            widget: list
-            required: false
-            summary: '{{service}}: {{price}}'
-            fields:
-              - { name: service, label: 🎵 Dịch vụ · Service, widget: string }
-              - { name: price, label: 💵 Giá · Price, widget: string }
-              - { name: note, label: 🗒️ Ghi chú · Note, widget: string, required: false }
+          # No pricing field on purpose: prices are never published or given to the
+          # AI. Readers must contact 2lab for a quote (enforced again in
+          # scripts/content/write-post.mjs).
           - name: bannedClaims
             label: 🚫 Điều không được viết · Banned claims
             widget: list
