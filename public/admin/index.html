@@ -181,6 +181,14 @@
                     changes.additions = changes.additions.filter((a) => !a.path.startsWith(UPLOADS));
                     // Nothing under public/uploads exists in the repo, so deleting it would fail.
                     changes.deletions = (changes.deletions ?? []).filter((d) => !d.path.startsWith(UPLOADS));
+                    // The mutation also asks for each added file's blob id, as
+                    // `file_N: file(path: "public/uploads/…") { oid }`. Those files are no
+                    // longer in the commit, so GitHub would answer with an error and Sveltia
+                    // would report a failed save although the commit went through.
+                    request.query = request.query.replace(
+                        /file_\d+: file\(path: "public\/uploads\/(?:[^"\\]|\\.)*"\) \{ oid \}/g,
+                        '',
+                    );
                     return previousFetch(input, { ...init, body: JSON.stringify(request) });
                 };
             })();
