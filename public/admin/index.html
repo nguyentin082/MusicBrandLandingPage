@@ -184,5 +184,41 @@
                 window.CMS.registerFieldType('gemini-model', GeminiModelControl);
             })();
         </script>
+        <script>
+            /* Same idea as components/common/environment-badge.tsx: mark every CMS that
+               is not production, so nobody edits staging thinking it is the live site.
+               This page is static, so it goes by hostname instead of VERCEL_ENV. */
+            (() => {
+                const host = location.hostname;
+                if (host === '2lab.vn' || host === 'www.2lab.vn') return;
+
+                const label = host.startsWith('staging.')
+                    ? 'STAGING'
+                    : host === 'localhost' || host === '127.0.0.1'
+                      ? 'LOCAL'
+                      : 'PREVIEW';
+                document.title = `[${label}] ${document.title}`;
+
+                const badge = document.createElement('div');
+                badge.textContent = label;
+                badge.style.cssText = [
+                    'position:fixed',
+                    'top:0',
+                    'left:50%',
+                    'transform:translateX(-50%)',
+                    'z-index:2147483647',
+                    'pointer-events:none',
+                    'background:#fbbf24',
+                    'color:#000',
+                    'font:700 11px/1.6 system-ui,sans-serif',
+                    'letter-spacing:0.18em',
+                    'padding:1px 12px',
+                    'border-radius:0 0 6px 6px',
+                    'border-top:4px solid #fbbf24',
+                    'box-shadow:0 4px 12px rgb(0 0 0 / 0.3)',
+                ].join(';');
+                document.body.append(badge);
+            })();
+        </script>
     </body>
 </html>
