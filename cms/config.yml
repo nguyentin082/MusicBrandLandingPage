@@ -30,8 +30,9 @@ display_url: https://2lab.vn
 logo:
   src: https://assets.2lab.vn/image/branding/2lab-logo-dark-mode.PNG
 
-# Required by Sveltia, but unused: the built-in (repository) library is turned
-# off below, so no image is ever committed to the repo.
+# Images pasted or dropped into the CMS. They never reach the repo: at save time
+# public/admin/index.html uploads them to R2 as blog/<name> and commits only the
+# posts, which keep /uploads/<name>; the site maps that to R2 (lib/media.ts).
 media_folder: public/uploads
 public_folder: /uploads
 
@@ -39,10 +40,6 @@ public_folder: /uploads
 # The access key ID is not a secret. The secret key is never stored here: each
 # editor enters it once in their own browser.
 media_libraries:
-  # Images in Git bloat the repo forever (deleting them keeps them in history)
-  # and each upload triggers a site build. `false` removes the repository tab
-  # from the image picker, so uploads and pasted images all go to R2.
-  default: false
   cloudflare_r2:
     bucket: music-landing-page
     account_id: fed331f33fe9962c815eb2b2663462dc

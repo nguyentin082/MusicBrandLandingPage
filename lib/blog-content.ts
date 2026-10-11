@@ -1,3 +1,5 @@
+import { resolveContentImage } from '@/lib/media';
+
 export type TocItem = {
     id: string;
     text: string;
@@ -85,6 +87,11 @@ export function rehypeOptimizeImages() {
 
             if (elementNode.type === 'element' && elementNode.tagName === 'img') {
                 elementNode.properties ??= {};
+
+                // CMS-pasted images: /uploads/<name> lives on R2 (lib/media.ts).
+                if (typeof elementNode.properties.src === 'string') {
+                    elementNode.properties.src = resolveContentImage(elementNode.properties.src);
+                }
 
                 if (!('loading' in elementNode.properties)) {
                     elementNode.properties.loading = 'lazy';

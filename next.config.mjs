@@ -96,6 +96,20 @@ const baseConfig = {
             { source: '/admin/config.yml', destination: '/api/cms/config' },
         ];
     },
+    // CMS-pasted images are stored as /uploads/<name> but live on R2 (lib/media.ts
+    // maps them when rendering). This covers anything that loads the path directly,
+    // such as the CMS preview.
+    async redirects() {
+        return assetBaseUrl
+            ? [
+                  {
+                      source: '/uploads/:path*',
+                      destination: `${assetBaseUrl.replace(/\/$/, '')}/blog/:path*`,
+                      permanent: false,
+                  },
+              ]
+            : [];
+    },
     async headers() {
         return [
             // staging.2lab.vn and other non-production deployments: keep every page
