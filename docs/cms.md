@@ -76,7 +76,21 @@ Khi chưa có Worker, vẫn đăng nhập được bằng **Sign In Using Access
     ```
 3. Trong `cms/config.yml`, bỏ comment khối `media_libraries`, rồi điền `bucket`, `account_id` và `access_key_id`. Access Key ID không phải bí mật. Secret key chỉ đưa riêng cho từng người duyệt.
 
-Mọi ảnh đều lên R2. Thư viện lưu ảnh vào repo đã bị tắt (`media_libraries.default: false`), vì ảnh trong Git làm repo phình mãi (xóa file thì ảnh vẫn nằm trong lịch sử) và mỗi lần tải ảnh lại kích hoạt một lần build.
+Mọi ảnh đều lên R2, không bao giờ vào repo (ảnh trong Git làm repo phình mãi, xóa file thì ảnh vẫn nằm trong lịch sử, và mỗi lần tải ảnh lại kích hoạt một lần build).
+
+- **Dán hoặc kéo ảnh** vào ô ảnh hay vào bài: cứ dán bình thường. Khi bấm Lưu, `/admin` tải ảnh lên R2 (`blog/<tên file>`), hiện "Đang tải ảnh lên R2…", rồi mới commit bài. Trong bài, ảnh vẫn ghi là `/uploads/<tên file>`; website tự đổi thành `https://assets.2lab.vn/blog/<tên file>`.
+- **Tab Cloudflare R2** trong hộp chọn ảnh vẫn dùng được như cũ.
+- Nếu tải lên R2 lỗi, hoặc trên R2 đã có ảnh khác cùng tên, CMS báo lỗi và **không lưu gì**. Nội dung vẫn còn trong khung soạn thảo; đổi tên file ảnh rồi thử lại.
+
+Server cần thêm biến môi trường (Vercel, mục Production và Preview) để cấp quyền tải ảnh lên:
+
+| Biến                                       | Giá trị                                                                              |
+| ------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `R2_ACCOUNT_ID`                            | Account ID của Cloudflare (giống `account_id` trong `cms/config.yml`)                |
+| `R2_BUCKET`                                | `music-landing-page`                                                                 |
+| `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY` | Một R2 API token **riêng cho server**, quyền Object Read & Write, chỉ cho bucket này |
+
+Trình duyệt tải ảnh thẳng lên R2 bằng link ký sẵn có hạn 5 phút, nên CORS của bucket phải cho phép `PUT` từ domain của CMS (đã có ở bước 2).
 
 Dán hoặc kéo ảnh thẳng vào ô ảnh vẫn có thể khiến Sveltia lưu ảnh vào `public/uploads/`. Vì vậy trang `/admin` chặn thêm một lớp: commit nào có file trong `public/uploads/` sẽ không được gửi, CMS báo lỗi lưu và nhắc tải ảnh lên tab **Cloudflare R2**. Nội dung đang sửa vẫn còn nguyên trong khung soạn thảo.
 

@@ -70,47 +70,118 @@
             })();
         </script>
         <script>
-            /* Images must go to R2, never into the repo. `media_libraries.default: false`
-               in cms/config.yml hides the repository library, but pasting or dropping an
-               image straight onto an image field can still save it under public/uploads.
-               This is the backstop: Sveltia saves with one GraphQL createCommitOnBranch
-               call, so a commit that adds a file under public/uploads/ is not sent, and
-               Sveltia shows the save as failed (the edits stay in the editor).
+            /* Images go to R2, never into the repo, however they are added.
+               Pasting or dropping an image onto an image field or into the editor makes
+               Sveltia save it under public/uploads/ and write /uploads/<name> in the post;
+               Sveltia has no option to send those to a cloud library. So at save time
+               (one GraphQL createCommitOnBranch call) this script:
+                 1. takes every public/uploads/ file out of the commit,
+                 2. uploads it to R2 as blog/<name> through app/api/cms/upload,
+                 3. sends the commit with only the text files.
+               The post keeps /uploads/<name>; the site maps it to R2 (lib/media.ts).
+               If an upload fails, nothing is committed and the edits stay in the editor.
                Relies on Sveltia's GitHub commit request. Check after upgrading Sveltia. */
             (() => {
                 const GRAPHQL = 'https://api.github.com/graphql';
-                const BLOCKED = /^public\/uploads\//;
-                const MESSAGE =
-                    'Ảnh phải tải lên Cloudflare R2, không lưu vào repo.\n\n' +
-                    'Xóa ảnh vừa dán, bấm vào ô ảnh → chọn tab "Cloudflare R2" → tải ảnh lên, rồi Lưu lại.\n\n' +
-                    'Images must be uploaded to Cloudflare R2, not saved in the repository.';
+                const UPLOADS = 'public/uploads/';
+                const TYPES = {
+                    png: 'image/png',
+                    jpg: 'image/jpeg',
+                    jpeg: 'image/jpeg',
+                    webp: 'image/webp',
+                    gif: 'image/gif',
+                    avif: 'image/avif',
+                    svg: 'image/svg+xml',
+                };
 
-                const blockedPaths = (body) => {
+                const token = () => {
                     try {
-                        const additions = JSON.parse(body)?.variables?.input?.fileChanges?.additions ?? [];
-                        return additions.map((a) => a.path).filter((p) => BLOCKED.test(p));
+                        return JSON.parse(localStorage.getItem('sveltia-cms.user') || '{}')?.token;
                     } catch {
-                        return [];
+                        return undefined;
                     }
                 };
 
-                const previousFetch = window.fetch;
-                window.fetch = (input, init = {}) => {
-                    const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
-                    if (url === GRAPHQL && typeof init.body === 'string') {
-                        const paths = blockedPaths(init.body);
-                        if (paths.length) {
-                            console.warn('Blocked a commit with repository images:', paths);
-                            window.alert(MESSAGE);
-                            return Promise.resolve(
-                                new Response(JSON.stringify({ errors: [{ message: MESSAGE }] }), {
-                                    status: 200,
-                                    headers: { 'Content-Type': 'application/json' },
-                                }),
-                            );
-                        }
+                const toast = (text) => {
+                    let el = document.getElementById('r2-upload-toast');
+                    if (!text) return el?.remove();
+                    if (!el) {
+                        el = document.createElement('div');
+                        el.id = 'r2-upload-toast';
+                        el.style.cssText =
+                            'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:2147483647;' +
+                            'background:#111;color:#fff;font:500 13px/1.4 system-ui,sans-serif;padding:8px 14px;' +
+                            'border-radius:8px;box-shadow:0 4px 12px rgb(0 0 0 / 0.3);pointer-events:none';
+                        document.body.append(el);
                     }
-                    return previousFetch(input, init);
+                    el.textContent = text;
+                };
+
+                const uploadToR2 = async (fetchImpl, { path, contents }) => {
+                    const name = path.slice(UPLOADS.length);
+                    const type = TYPES[name.split('.').pop().toLowerCase()];
+                    if (name.includes('/') || !type) throw new Error(`File không hỗ trợ: ${name}`);
+
+                    const bytes = Uint8Array.from(atob(contents), (c) => c.charCodeAt(0));
+                    const slot = await fetchImpl('/api/cms/upload', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
+                        body: JSON.stringify({ name, type, size: bytes.length }),
+                    });
+                    const data = await slot.json().catch(() => ({}));
+                    if (!slot.ok) throw new Error(data.error?.message || `Upload API ${slot.status}`);
+                    if (data.exists) return;
+
+                    const put = await fetchImpl(data.uploadUrl, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': type },
+                        body: new Blob([bytes], { type }),
+                    });
+                    if (!put.ok) throw new Error(`R2 PUT ${put.status} (${name})`);
+                };
+
+                const fail = (message) => {
+                    const text =
+                        `Không tải được ảnh lên R2, chưa lưu gì cả. Nội dung vẫn còn trong khung soạn thảo.\n\n${message}\n\n` +
+                        'Could not upload the image to R2; nothing was saved.';
+                    window.alert(text);
+                    return new Response(JSON.stringify({ errors: [{ message: text }] }), {
+                        status: 200,
+                        headers: { 'Content-Type': 'application/json' },
+                    });
+                };
+
+                const previousFetch = window.fetch;
+                window.fetch = async (input, init = {}) => {
+                    const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+                    if (url !== GRAPHQL || typeof init.body !== 'string' || !init.body.includes(UPLOADS))
+                        return previousFetch(input, init);
+
+                    let request;
+                    try {
+                        request = JSON.parse(init.body);
+                    } catch {
+                        return previousFetch(input, init);
+                    }
+                    const changes = request?.variables?.input?.fileChanges;
+                    const images = (changes?.additions ?? []).filter((a) => a.path.startsWith(UPLOADS));
+                    if (!changes || !images.length) return previousFetch(input, init);
+
+                    try {
+                        for (const [i, image] of images.entries()) {
+                            toast(`Đang tải ảnh lên R2 (${i + 1}/${images.length})…`);
+                            await uploadToR2(previousFetch, image);
+                        }
+                    } catch (err) {
+                        return fail(err.message);
+                    } finally {
+                        toast();
+                    }
+
+                    changes.additions = changes.additions.filter((a) => !a.path.startsWith(UPLOADS));
+                    // Nothing under public/uploads exists in the repo, so deleting it would fail.
+                    changes.deletions = (changes.deletions ?? []).filter((d) => !d.path.startsWith(UPLOADS));
+                    return previousFetch(input, { ...init, body: JSON.stringify(request) });
                 };
             })();
         </script>
