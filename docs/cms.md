@@ -129,6 +129,20 @@ Muốn chạy tay: vào tab Actions → **AI write post** → Run workflow, ch�
 
 AI không bao giờ viết đè một bài đang xuất bản. Muốn AI viết lại bài đó, tick **Bản nháp** cho bài trước.
 
+Khi Action bắt đầu viết, chủ đề chuyển ngay sang **AI đang viết**. Nếu Action lỗi hoặc bị hủy giữa chừng, chủ đề tự quay về **Ý tưởng** (hoặc **Chờ duyệt** nếu đã có bài), kèm lý do trong Nhật ký AI.
+
+Hashtag Instagram do code tạo từ **Thẻ** của bài (bỏ dấu, viết liền, thêm `#2lab`), nên muốn đổi hashtag thì sửa Thẻ.
+
+Nếu Google ngừng model đang chọn, Nhật ký AI sẽ báo "Model … không dùng được". Vào **Cài đặt AI → Model Gemini** chọn model khác.
+
+### Chỉ viết đúng Thông tin studio
+
+AI chỉ được viết rằng 2lab có, làm hoặc cam kết điều gì khi điều đó có trong **Cài đặt AI → Thông tin studio**. Quy định này nằm trong code, sửa Cài đặt AI không gỡ được.
+
+- Trước khi viết, AI đối chiếu chủ đề với Thông tin studio. Chủ đề nhắc tới dịch vụ không có trong danh sách (ví dụ thiết kế artwork, phát hành) thì AI không viết rằng 2lab làm, và ghi một cảnh báo.
+- Sau khi viết, AI rà lại toàn bộ bài và nội dung mạng xã hội, gỡ những câu nói về 2lab mà danh sách không có. Câu nào còn nghi ngờ được ghi vào **Cảnh báo của AI** với dấu ❗.
+- 2lab có thêm dịch vụ mới: thêm vào Thông tin studio trước, rồi mới tạo chủ đề.
+
 ### Không công khai giá
 
 Website, blog và mạng xã hội không nêu giá. Khách hàng phải liên hệ để được báo giá.

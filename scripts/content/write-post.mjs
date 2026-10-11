@@ -1,16 +1,22 @@
 // AI writer for 2lab blog posts. Run by .github/workflows/write-post.yml.
 //
 // Picks every topic in content/topics/ whose status is `queued` or `rewrite`
-// (only TOPIC_SLUG when set), then:
-//   outline (vi) -> write (vi) -> self-review (vi) -> rewrite for English
-//   readers -> social posts -> price check -> MDX check
+// (only TOPIC_SLUG when set), marks it `writing` (pushed right away in CI so
+// the CMS shows it), then:
+//   scope check -> outline (vi) -> write (vi) -> self-review (vi) -> rewrite
+//   for English readers -> social posts -> studio-facts check -> price check
+//   -> hashtags -> MDX check
 // and writes content/blog/{vi,en}/<slug>.mdx with `draft: true`. The topic
 // moves to `review`. Nothing is published: a person unticks "draft" in the CMS.
+//
+// `--recover` (run by the workflow when a job fails or is cancelled) moves
+// topics left in `writing` out of it, so they do not look busy forever.
 //
 // Env: GEMINI_API_KEY (required), GEMINI_MODEL, TOPIC_SLUG, SITE_URL,
 //      TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (optional notification),
 //      GITHUB_OUTPUT (set by Actions; receives `commit_message`).
 
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
@@ -25,7 +31,9 @@ const TOPICS_DIR = path.join(ROOT, 'content/topics');
 const BLOG_DIR = path.join(ROOT, 'content/blog');
 const SETTINGS_FILE = path.join(ROOT, 'content/settings/ai.yml');
 const SITE_URL = (process.env.SITE_URL || 'https://2lab.vn').replace(/\/$/, '');
-const DEFAULT_MODEL = 'gemini-2.5-flash';
+// Only used when content/settings/ai.yml has no model. Google retires model names
+// often; a retired one fails with a 404 that the topic's AI log explains.
+const DEFAULT_MODEL = 'gemini-3.8-flash';
 
 // Same YAML style as Sveltia (cms/config.yml `output.yaml`) and Prettier.
 const YAML_STYLE = { indent: 4, indentSeq: true, lineWidth: 0 };
@@ -36,6 +44,11 @@ const YAML_STYLE = { indent: 4, indentSeq: true, lineWidth: 0 };
 
 const PRICE_POLICY = `TUYỆT ĐỐI KHÔNG nêu giá, khoảng giá, mức phí, chi phí ước tính, khuyến mãi, giảm giá hay so sánh giá, bằng bất kỳ đơn vị tiền tệ nào (đồng, VNĐ, k, triệu, USD, $...), kể cả giá của thị trường hay của nơi khác. Khi người đọc có thể quan tâm đến chi phí, viết rằng mỗi dự án được báo giá riêng và mời họ liên hệ 2lab để được báo giá.
 NEVER mention prices, price ranges, fees, cost estimates, discounts or price comparisons in any currency, including market or competitor prices. When cost is relevant, say each project is quoted individually and invite the reader to contact 2lab for a quote.`;
+
+// Like the price policy: what the AI may say about 2lab is limited to the
+// studio facts, and that rule cannot be removed from the CMS.
+const FACTS_POLICY = `Chỉ được viết rằng 2lab có, làm, cung cấp, cam kết hay đạt được điều gì khi điều đó có trong "Thông tin về 2lab". Không suy diễn thêm dịch vụ (ví dụ thiết kế artwork, phát hành, quay MV, quảng bá nếu chúng không có trong danh sách), thiết bị, nhân sự, quy trình, thời gian bàn giao, số lần sửa, chính sách hay con số nào khác, kể cả khi chủ đề, ghi chú hay góp ý nhắc tới. Kiến thức chung về âm nhạc thì được viết, nhưng không gắn với 2lab.
+Only say 2lab has, does, offers, promises or achieved something when it is listed in the 2lab facts. Do not infer any other service, equipment, staff, process, turnaround, revision policy or number, even if the topic or notes mention it. General music knowledge is fine as long as it is not attributed to 2lab.`;
 
 const CURRENCY = String.raw`(?:₫|đ|đồng|vn[dđ]|usd|đô|dollars?|euros?|€|£)`;
 const PRICE_PATTERNS = [
@@ -111,7 +124,13 @@ async function gemini({ model, system, prompt, schema, temperature = 0.7 }) {
             await new Promise((r) => setTimeout(r, 15_000 * attempt));
             continue;
         }
-        throw new Error(`Gemini ${res.status}: ${(await res.text()).slice(0, 500)}`);
+        const detail = (await res.text()).slice(0, 500);
+        if (res.status === 404) {
+            throw new Error(
+                `Model "${model}" không dùng được (Google trả 404). Vào Cài đặt AI → Model Gemini, chọn model khác rồi chọn lại "Chờ viết". Chi tiết: ${detail}`,
+            );
+        }
+        throw new Error(`Gemini ${res.status}: ${detail}`);
     }
 }
 
@@ -146,12 +165,28 @@ ${list(settings.studioFacts)}
 Không được viết:
 ${list(settings.bannedClaims)}
 
+${FACTS_POLICY}
+
 ${PRICE_POLICY}
 
 Định dạng: Markdown. Không dùng HTML, JSX, import/export, ký tự { } hay < >. Không chèn ảnh. Không bịa số liệu, nghiên cứu hay trích dẫn; nếu không chắc một thông tin kỹ thuật, ghi vào danh sách cảnh báo.`;
 }
 
 const SCHEMAS = {
+    scope: OBJ({
+        unsupported: LIST(
+            'Những điều chủ đề muốn bài nói 2lab có/làm/cung cấp nhưng không có trong Thông tin về 2lab. Rỗng nếu không có.',
+        ),
+    }),
+    facts: OBJ({
+        claims: {
+            type: 'ARRAY',
+            items: OBJ({
+                field: S('Tên trường chứa câu vi phạm, đúng như khóa trong dữ liệu, ví dụ vi_body'),
+                claim: S('Câu vi phạm, trích nguyên văn'),
+            }),
+        },
+    }),
     outline: OBJ({
         title: S('Tiêu đề SEO tiếng Việt, chứa từ khóa, dưới 65 ký tự'),
         description: S('Meta description tiếng Việt, 120–160 ký tự, chứa từ khóa'),
@@ -175,8 +210,10 @@ const SCHEMAS = {
         body: S('Full article in Markdown'),
     }),
     social: OBJ({
-        facebook: S('Bài Facebook tiếng Việt, 80–150 từ, có lời kêu gọi đọc bài'),
-        instagram: S('Caption Instagram tiếng Việt, ngắn, có 5–8 hashtag ở cuối'),
+        facebook: S('Bài Facebook tiếng Việt, 80–150 từ, có lời kêu gọi đọc bài, không có hashtag'),
+        // Hashtags are added by code from the post tags (addHashtags), so they are
+        // always spelled right.
+        instagram: S('Caption Instagram tiếng Việt, ngắn, KHÔNG viết hashtag'),
         zalo: S('Tin nhắn Zalo OA tiếng Việt, dưới 80 từ, thân thiện'),
         tiktokScript: S(
             'Kịch bản TikTok 30–45 giây tiếng Việt: hook 3 giây đầu, các cảnh, lời thoại, kêu gọi hành động',
@@ -187,9 +224,31 @@ const SCHEMAS = {
 async function writePost({ model, settings, topic, slug, existing }) {
     const sysVi = systemPrompt(settings, 'vi');
     const sysEn = systemPrompt(settings, 'en');
-    const brief = `Chủ đề: ${topic.title}
+    const request = `Chủ đề: ${topic.title}
 Từ khóa chính (tiếng Việt): ${topic.keywordVi}
 ${topic.notes ? `Ghi chú của 2lab: ${topic.notes}` : ''}`;
+
+    // Before writing: what does the topic ask us to claim that the facts do not
+    // back? The writer is told not to claim it, and the reviewer gets a flag.
+    console.log(`  scope`);
+    const scope = await gemini({
+        model,
+        system: sysVi,
+        temperature: 0.1,
+        prompt: `${request}
+${topic.feedback ? `Góp ý của người duyệt: ${topic.feedback}` : ''}
+
+Đối chiếu yêu cầu trên với "Thông tin về 2lab". Liệt kê những dịch vụ, cam kết, quy trình, thiết bị hay con số mà yêu cầu muốn bài nói 2lab có hoặc làm, nhưng KHÔNG có trong danh sách. Kiến thức chung về âm nhạc không tính. Rỗng nếu không có.`,
+        schema: SCHEMAS.scope,
+    });
+    const unsupported = scope.unsupported ?? [];
+    const brief = unsupported.length
+        ? `${request}
+
+KHÔNG được viết rằng 2lab có hoặc làm những điều sau, vì chúng không có trong Thông tin về 2lab:
+${unsupported.map((x) => `- ${x}`).join('\n')}
+Nếu cần, chỉ giải thích chung cho người đọc, không gắn với 2lab.`
+        : request;
     const rewrite =
         existing && topic.feedback
             ? `\n\nĐây là bản viết lại. Góp ý của người duyệt (bắt buộc làm theo):\n${topic.feedback}\n\nBản cũ:\n${existing.vi.content}`
@@ -262,7 +321,13 @@ Bài:\n${reviewed.body}`,
         },
         en: { title: en.title, description: en.description, tags: en.tags, body: en.body },
         social,
-        flags: reviewed.flags ?? [],
+        flags: [
+            ...unsupported.map(
+                (x) =>
+                    `Chủ đề nhắc tới "${x}" nhưng Thông tin studio không có, nên AI không viết rằng 2lab làm điều này. Nếu 2lab có làm, thêm vào Cài đặt AI → Thông tin studio rồi chọn "Cần viết lại".`,
+            ),
+            ...(reviewed.flags ?? []),
+        ],
     };
 }
 
@@ -290,35 +355,117 @@ function priceHits(post) {
         .filter((x) => x.hits.length);
 }
 
-/** Asks the model once to remove prices from the offending fields. */
-async function removePrices({ model, settings, post, hits }) {
-    const fields = Object.fromEntries(hits.map(({ field }) => [field, textFields(post)[field]]));
-    const schema = OBJ(
-        Object.fromEntries(Object.keys(fields).map((k) => [k, S('Văn bản đã sửa')])),
+// Field names go to Gemini as JSON schema keys, so use `vi_body`, not `vi.body`.
+const toKey = (field) => field.replace('.', '_');
+const fromKey = (key) => key.replace('_', '.');
+
+/** Asks the model once to rewrite the given fields of the post, in place. */
+async function fixFields({ model, settings, post, fields, instruction }) {
+    const all = textFields(post);
+    const input = Object.fromEntries(
+        [...new Set(fields)].filter((f) => f in all).map((f) => [toKey(f), all[f]]),
     );
+    if (!Object.keys(input).length) return;
+
     const fixed = await gemini({
         model,
         system: systemPrompt(settings, 'vi'),
         temperature: 0.2,
-        prompt: `Các đoạn văn sau có nhắc tới giá hoặc chi phí: ${hits.flatMap((h) => h.hits).join(' | ')}
+        prompt: `${instruction}
 
-Sửa từng trường: xóa mọi con số tiền, giá, khoảng giá, mức phí. Thay bằng câu mời liên hệ 2lab để được báo giá. Giữ nguyên ngôn ngữ, định dạng và phần còn lại.
+Sửa từng trường dưới đây. Giữ nguyên ngôn ngữ, định dạng Markdown và phần còn lại.
 
-${JSON.stringify(fields, null, 2)}`,
-        schema,
+${JSON.stringify(input, null, 2)}`,
+        schema: OBJ(Object.fromEntries(Object.keys(input).map((k) => [k, S('Văn bản đã sửa')]))),
     });
 
-    for (const [field, text] of Object.entries(fixed)) {
-        const [group, key] = field.split('.');
+    for (const [key, text] of Object.entries(fixed)) {
+        const [group, name] = fromKey(key).split('.');
         const target = group === 'social' ? post.social : post[group];
-        target[key] =
-            key === 'tags'
+        if (!target || !(name in target)) continue;
+        target[name] =
+            name === 'tags'
                 ? text
                       .split(',')
                       .map((t) => t.trim())
                       .filter(Boolean)
                 : text;
     }
+}
+
+/** Claims about 2lab in the post that the studio facts do not back. */
+async function unsupportedClaims({ model, settings, post }) {
+    const fields = Object.fromEntries(
+        Object.entries(textFields(post))
+            .filter(([field]) => !field.endsWith('.tags'))
+            .map(([field, text]) => [toKey(field), text]),
+    );
+    const { claims = [] } = await gemini({
+        model,
+        system: systemPrompt(settings, 'vi'),
+        temperature: 0.1,
+        prompt: `Thông tin về 2lab (nguồn duy nhất được phép):
+${(settings.studioFacts ?? []).map((x) => `- ${x}`).join('\n')}
+
+Kiểm tra các trường dưới đây. Tìm mọi câu nói 2lab có, làm, cung cấp, cam kết hay đạt được điều gì KHÔNG có trong danh sách trên: dịch vụ, thiết bị, nhân sự, quy trình, thời gian, chính sách, con số, khách hàng.
+Không tính: kiến thức chung về âm nhạc; lời mời liên hệ hoặc báo giá riêng; diễn đạt lại thông tin có trong danh sách; việc hiển nhiên thuộc dịch vụ đã liệt kê (ví dụ kỹ thuật viên hỗ trợ khi thu âm).
+Trả về danh sách vi phạm, rỗng nếu không có.
+
+${JSON.stringify(fields, null, 2)}`,
+        schema: SCHEMAS.facts,
+    });
+    return claims
+        .map(({ field, claim }) => ({ field: fromKey(String(field)), claim }))
+        .filter(({ claim }) => claim);
+}
+
+/** Checks the post against the studio facts, fixes once, and flags what is left. */
+async function enforceStudioFacts({ model, settings, post }) {
+    let claims = await unsupportedClaims({ model, settings, post });
+    if (!claims.length) return;
+
+    console.log(`  removing ${claims.length} claim(s) not in the studio facts`);
+    await fixFields({
+        model,
+        settings,
+        post,
+        fields: claims.map((c) => c.field),
+        instruction: `Các câu sau nói về 2lab nhưng không có trong Thông tin về 2lab:
+${claims.map((c) => `- ${c.claim}`).join('\n')}
+
+Xóa hoặc viết lại các câu đó để không còn nói 2lab có hoặc làm điều không có trong danh sách. Nếu cần, giữ phần giải thích chung nhưng không gắn với 2lab.`,
+    });
+
+    claims = await unsupportedClaims({ model, settings, post });
+    for (const { field, claim } of claims) {
+        post.flags.push(
+            `❗ Có thể chưa đúng Thông tin studio (${field}): "${claim}". Kiểm tra trước khi xuất bản.`,
+        );
+    }
+}
+
+/** "Hòa âm phối khí" -> "#hoaamphoikhi". */
+export function toHashtag(text) {
+    const word = String(text)
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/Đ/g, 'D')
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, '');
+    return word ? `#${word}` : '';
+}
+
+/** Replaces any hashtags the model wrote with ones built from the post tags. */
+function addHashtags(post) {
+    const tags = [...new Set(['#2lab', ...post.vi.tags.map(toHashtag)].filter(Boolean))];
+    const strip = (text) =>
+        String(text ?? '')
+            .replace(/(^|\s)#[\p{L}\p{N}_]+/gu, '$1')
+            .replace(/[ \t]+\n/g, '\n')
+            .trim();
+    for (const key of Object.keys(post.social)) post.social[key] = strip(post.social[key]);
+    post.social.instagram = `${post.social.instagram}\n\n${tags.join(' ')}`;
 }
 
 const mdxParser = unified().use(remarkParse).use(remarkMdx).use(remarkGfm);
@@ -434,7 +581,58 @@ async function notify(lines) {
     if (!res.ok) console.warn(`Telegram: ${res.status} ${await res.text()}`);
 }
 
+const git = (...args) => execFileSync('git', args, { stdio: 'inherit' });
+
+/**
+ * In CI, commits and pushes one topic file right away, so editors see the
+ * `writing` status in the CMS while the AI works. The workflow commits the
+ * rest at the end. Pushes made with GITHUB_TOKEN do not start new workflow
+ * runs, and Vercel skips builds for topic-only commits (vercel.json).
+ */
+async function pushProgress(file, message) {
+    const branch = process.env.GITHUB_REF_NAME;
+    if (!process.env.GITHUB_ACTIONS || !branch) return;
+    try {
+        git('add', file);
+        git('commit', '-m', message);
+        for (let attempt = 1; attempt <= 3; attempt++) {
+            try {
+                git('pull', '--rebase', 'origin', branch);
+                git('push', 'origin', `HEAD:${branch}`);
+                return;
+            } catch {
+                await new Promise((r) => setTimeout(r, 5_000));
+            }
+        }
+        console.warn(`Could not push "${message}"; the final commit will include it.`);
+    } catch (err) {
+        console.warn(`Could not commit "${message}": ${err.message}`);
+    }
+}
+
+/** After a failed or cancelled run: no topic should stay in `writing`. */
+async function recover() {
+    const files = (await fs.readdir(TOPICS_DIR).catch(() => [])).filter((f) => f.endsWith('.yml'));
+    const stuck = [];
+    for (const name of files) {
+        const file = path.join(TOPICS_DIR, name);
+        const topic = parse(await fs.readFile(file, 'utf8')) ?? {};
+        if (topic.status !== 'writing') continue;
+        const hasPost = topic.postSlug && (await exists(postFile('vi', topic.postSlug)));
+        await updateTopic(file, {
+            status: hasPost ? 'review' : 'idea',
+            aiLog: `${today()}: lỗi: Action bị dừng giữa chừng (xem tab Actions trên GitHub). Chọn lại "${hasPost ? 'Cần viết lại' : 'Chờ viết'}" để thử lại.`,
+        });
+        stuck.push(name.replace(/\.yml$/, ''));
+    }
+    const message = `content(ai): ${stuck.length ? `recover ${stuck.join(', ')}` : 'nothing to recover'}`;
+    if (process.env.GITHUB_OUTPUT)
+        await fs.appendFile(process.env.GITHUB_OUTPUT, `commit_message=${message}\n`);
+    console.log(message);
+}
+
 export async function main() {
+    if (process.argv.includes('--recover')) return recover();
     if (!process.env.GEMINI_API_KEY) throw new Error('GEMINI_API_KEY is not set');
 
     const settings = parse(await fs.readFile(SETTINGS_FILE, 'utf8')) ?? {};
@@ -457,6 +655,11 @@ export async function main() {
 
         console.log(`Topic ${topicSlug} (${topic.status}), model ${model}`);
         const slug = await pickSlug(topicSlug, topic);
+        await updateTopic(file, {
+            status: 'writing',
+            aiLog: `${today()}: AI đang viết bằng ${model}...`,
+        });
+        await pushProgress(file, `content(ai): writing ${topicSlug}`);
         try {
             if (!topic.title || !topic.keywordVi)
                 throw new Error('Chủ đề cần có tiêu đề và từ khóa tiếng Việt.');
@@ -474,10 +677,20 @@ export async function main() {
             post.vi.body = cleanBody(post.vi.body);
             post.en.body = cleanBody(post.en.body);
 
+            await enforceStudioFacts({ model, settings, post });
+
             let hits = priceHits(post);
             if (hits.length) {
                 console.log(`  removing prices from ${hits.map((h) => h.field).join(', ')}`);
-                await removePrices({ model, settings, post, hits });
+                await fixFields({
+                    model,
+                    settings,
+                    post,
+                    fields: hits.map((h) => h.field),
+                    instruction: `Các đoạn văn sau có nhắc tới giá hoặc chi phí: ${hits.flatMap((h) => h.hits).join(' | ')}
+
+Xóa mọi con số tiền, giá, khoảng giá, mức phí. Thay bằng câu mời liên hệ 2lab để được báo giá.`,
+                });
                 hits = priceHits(post);
             }
             if (hits.length) {
@@ -486,6 +699,7 @@ export async function main() {
                 );
             }
 
+            addHashtags(post);
             assertValidMdx(post.vi.body, 'vi body');
             assertValidMdx(post.en.body, 'en body');
 
