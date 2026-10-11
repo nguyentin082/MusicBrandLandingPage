@@ -73,17 +73,28 @@
             /* Images go to R2, never into the repo, however they are added.
                Pasting or dropping an image onto an image field or into the editor makes
                Sveltia save it under public/uploads/ and write /uploads/<name> in the post;
-               Sveltia has no option to send those to a cloud library. So at save time
-               (one GraphQL createCommitOnBranch call) this script:
+               Sveltia has no option to send those to a cloud library, and its
+               public_folder cannot be a URL. So at save time (one GraphQL
+               createCommitOnBranch call) this script:
                  1. takes every public/uploads/ file out of the commit,
                  2. uploads it to R2 as blog/<name> through app/api/cms/upload,
-                 3. sends the commit with only the text files.
-               The post keeps /uploads/<name>; the site maps it to R2 (lib/media.ts).
+                 3. rewrites /uploads/<name> in the posts to the full R2 URL,
+                 4. sends the commit with only the text files.
                If an upload fails, nothing is committed and the edits stay in the editor.
-               Relies on Sveltia's GitHub commit request. Check after upgrading Sveltia. */
+
+               Sveltia keeps a copy of the repo in IndexedDB and would keep showing the
+               old /uploads/ paths it wrote. After such a save the page reloads, and on load
+               (before Sveltia reads it) the cached copy of the rewritten files and the
+               cached commit hash are dropped, so Sveltia fetches them again from GitHub.
+               The site still maps any leftover /uploads/ path to R2 (lib/media.ts).
+               Relies on Sveltia internals (commit request, `github:<owner>/<repo>` cache
+               database). Check after upgrading Sveltia. */
             (() => {
                 const GRAPHQL = 'https://api.github.com/graphql';
                 const UPLOADS = 'public/uploads/';
+                const TEXT_FILE = /\.(mdx?|ya?ml|json)$/;
+                const UPLOAD_REF = /(^|[\s("'=:])\/uploads\/([^\s)"'<>]+)/gm;
+                const PENDING_KEY = '2lab-cms.refresh-after-r2';
                 const TYPES = {
                     png: 'image/png',
                     jpg: 'image/jpeg',
@@ -93,6 +104,34 @@
                     avif: 'image/avif',
                     svg: 'image/svg+xml',
                 };
+
+                /* --- On load: drop Sveltia's cached copy of files rewritten by the last save. */
+                const dropCachedFiles = async ({ database, paths }) => {
+                    if (!(await indexedDB.databases?.())?.some((d) => d.name === database)) return;
+                    const db = await new Promise((resolve, reject) => {
+                        const open = indexedDB.open(database);
+                        open.onsuccess = () => resolve(open.result);
+                        open.onerror = () => reject(open.error);
+                    });
+                    const stores = ['meta', 'file-cache'].filter((n) => db.objectStoreNames.contains(n));
+                    if (stores.length) {
+                        await new Promise((resolve) => {
+                            const tx = db.transaction(stores, 'readwrite');
+                            if (stores.includes('meta')) tx.objectStore('meta').delete('last_commit_hash');
+                            if (stores.includes('file-cache'))
+                                paths.forEach((p) => tx.objectStore('file-cache').delete(p));
+                            tx.oncomplete = tx.onerror = tx.onabort = () => resolve();
+                        });
+                    }
+                    db.close();
+                };
+                try {
+                    const pending = JSON.parse(localStorage.getItem(PENDING_KEY) || 'null');
+                    if (pending) {
+                        localStorage.removeItem(PENDING_KEY);
+                        dropCachedFiles(pending).catch((err) => console.warn('Cache cleanup failed', err));
+                    }
+                } catch {}
 
                 const token = () => {
                     try {
@@ -117,27 +156,57 @@
                     el.textContent = text;
                 };
 
+                const fromBase64 = (b64) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+                const toBase64 = (bytes) => {
+                    let binary = '';
+                    for (let i = 0; i < bytes.length; i += 0x8000)
+                        binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+                    return btoa(binary);
+                };
+
+                const uploadApi = (fetchImpl, init = {}) =>
+                    fetchImpl('/api/cms/upload', {
+                        ...init,
+                        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
+                    }).then(async (res) => {
+                        const data = await res.json().catch(() => ({}));
+                        if (!res.ok) throw new Error(data.error?.message || `Upload API ${res.status}`);
+                        return data;
+                    });
+
                 const uploadToR2 = async (fetchImpl, { path, contents }) => {
                     const name = path.slice(UPLOADS.length);
                     const type = TYPES[name.split('.').pop().toLowerCase()];
                     if (name.includes('/') || !type) throw new Error(`File không hỗ trợ: ${name}`);
 
-                    const bytes = Uint8Array.from(atob(contents), (c) => c.charCodeAt(0));
-                    const slot = await fetchImpl('/api/cms/upload', {
+                    const bytes = fromBase64(contents);
+                    const slot = await uploadApi(fetchImpl, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
                         body: JSON.stringify({ name, type, size: bytes.length }),
                     });
-                    const data = await slot.json().catch(() => ({}));
-                    if (!slot.ok) throw new Error(data.error?.message || `Upload API ${slot.status}`);
-                    if (data.exists) return;
+                    if (slot.exists) return;
 
-                    const put = await fetchImpl(data.uploadUrl, {
+                    const put = await fetchImpl(slot.uploadUrl, {
                         method: 'PUT',
                         headers: { 'Content-Type': type },
                         body: new Blob([bytes], { type }),
                     });
                     if (!put.ok) throw new Error(`R2 PUT ${put.status} (${name})`);
+                };
+
+                /** Rewrites /uploads/<name> to the R2 URL in text files. Returns the changed paths. */
+                const rewriteUploadRefs = (additions, publicBase) => {
+                    const changed = [];
+                    for (const addition of additions) {
+                        if (!TEXT_FILE.test(addition.path)) continue;
+                        const text = new TextDecoder().decode(fromBase64(addition.contents));
+                        UPLOAD_REF.lastIndex = 0;
+                        if (!UPLOAD_REF.test(text)) continue;
+                        const next = text.replace(UPLOAD_REF, (_, lead, name) => `${lead}${publicBase}${name}`);
+                        addition.contents = toBase64(new TextEncoder().encode(next));
+                        changed.push(addition.path);
+                    }
+                    return changed;
                 };
 
                 const fail = (message) => {
@@ -151,10 +220,15 @@
                     });
                 };
 
+                let publicBase;
                 const previousFetch = window.fetch;
                 window.fetch = async (input, init = {}) => {
                     const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
-                    if (url !== GRAPHQL || typeof init.body !== 'string' || !init.body.includes(UPLOADS))
+                    if (
+                        url !== GRAPHQL ||
+                        typeof init.body !== 'string' ||
+                        !init.body.includes('createCommitOnBranch')
+                    )
                         return previousFetch(input, init);
 
                     let request;
@@ -163,9 +237,10 @@
                     } catch {
                         return previousFetch(input, init);
                     }
-                    const changes = request?.variables?.input?.fileChanges;
-                    const images = (changes?.additions ?? []).filter((a) => a.path.startsWith(UPLOADS));
-                    if (!changes || !images.length) return previousFetch(input, init);
+                    const commitInput = request?.variables?.input;
+                    const changes = commitInput?.fileChanges;
+                    if (!changes) return previousFetch(input, init);
+                    const images = (changes.additions ?? []).filter((a) => a.path.startsWith(UPLOADS));
 
                     try {
                         for (const [i, image] of images.entries()) {
@@ -178,7 +253,7 @@
                         toast();
                     }
 
-                    changes.additions = changes.additions.filter((a) => !a.path.startsWith(UPLOADS));
+                    changes.additions = (changes.additions ?? []).filter((a) => !a.path.startsWith(UPLOADS));
                     // Nothing under public/uploads exists in the repo, so deleting it would fail.
                     changes.deletions = (changes.deletions ?? []).filter((d) => !d.path.startsWith(UPLOADS));
                     // The mutation also asks for each added file's blob id, as
@@ -189,7 +264,35 @@
                         /file_\d+: file\(path: "public\/uploads\/(?:[^"\\]|\\.)*"\) \{ oid \}/g,
                         '',
                     );
-                    return previousFetch(input, { ...init, body: JSON.stringify(request) });
+
+                    // Store the full R2 URL in the post. Without the base URL, keep /uploads/:
+                    // the site maps it anyway.
+                    let rewritten = [];
+                    try {
+                        publicBase ??= (await uploadApi(previousFetch)).publicBase;
+                        rewritten = rewriteUploadRefs(changes.additions, publicBase);
+                    } catch (err) {
+                        console.warn('Kept /uploads/ paths:', err);
+                    }
+                    if (!images.length && !rewritten.length) return previousFetch(input, init);
+
+                    const response = await previousFetch(input, { ...init, body: JSON.stringify(request) });
+                    if (rewritten.length) {
+                        const result = await response
+                            .clone()
+                            .json()
+                            .catch(() => null);
+                        if (response.ok && result && !result.errors) {
+                            const repo = commitInput.branch?.repositoryNameWithOwner;
+                            localStorage.setItem(
+                                PENDING_KEY,
+                                JSON.stringify({ database: `github:${repo}`, paths: rewritten }),
+                            );
+                            toast('Đã lưu. Ảnh đã ở trên R2, đang tải lại CMS…');
+                            setTimeout(() => location.reload(), 1500);
+                        }
+                    }
+                    return response;
                 };
             })();
         </script>

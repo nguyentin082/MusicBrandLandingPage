@@ -78,7 +78,7 @@ Khi chưa có Worker, vẫn đăng nhập được bằng **Sign In Using Access
 
 Mọi ảnh đều lên R2, không bao giờ vào repo (ảnh trong Git làm repo phình mãi, xóa file thì ảnh vẫn nằm trong lịch sử, và mỗi lần tải ảnh lại kích hoạt một lần build).
 
-- **Dán hoặc kéo ảnh** vào ô ảnh hay vào bài: cứ dán bình thường. Khi bấm Lưu, `/admin` tải ảnh lên R2 (`blog/<tên file>`), hiện "Đang tải ảnh lên R2…", rồi mới commit bài. Trong bài, ảnh vẫn ghi là `/uploads/<tên file>`; website tự đổi thành `https://assets.2lab.vn/blog/<tên file>`.
+- **Dán hoặc kéo ảnh** vào ô ảnh hay vào bài: cứ dán bình thường. Khi bấm Lưu, `/admin` tải ảnh lên R2 (`blog/<tên file>`), hiện "Đang tải ảnh lên R2…", ghi đường dẫn đầy đủ `https://assets.2lab.vn/blog/<tên file>` vào bài, rồi mới commit. Sau đó CMS tự tải lại để hiện đúng ảnh. Bài cũ còn ghi `/uploads/<tên file>` vẫn hiển thị đúng, vì website tự đổi đường dẫn đó sang R2.
 - **Tab Cloudflare R2** trong hộp chọn ảnh vẫn dùng được như cũ.
 - Nếu tải lên R2 lỗi, hoặc trên R2 đã có ảnh khác cùng tên, CMS báo lỗi và **không lưu gì**. Nội dung vẫn còn trong khung soạn thảo; đổi tên file ảnh rồi thử lại.
 

@@ -9,8 +9,9 @@ import { CMS_UPLOADS_R2_PREFIX } from '@/lib/media';
  * Sveltia saves such images under public/uploads/ in the commit. /admin
  * (public/admin/index.html) takes them out of the commit, asks this route for a
  * presigned PUT URL, uploads the file straight from the browser (no Vercel body
- * size limit) and only then lets the commit through. The post keeps the path
- * /uploads/<name>, which the site maps to R2 (lib/media.ts).
+ * size limit), rewrites /uploads/<name> in the posts to the full R2 URL and
+ * only then lets the commit through. The site also maps any leftover
+ * /uploads/<name> to R2 (lib/media.ts).
  *
  * POST { name, type, size } with the CMS user's GitHub token (Bearer).
  * 200 { uploadUrl, publicUrl } or { exists: true, publicUrl } when the same
@@ -27,6 +28,16 @@ const MAX_BYTES = 20 * 1024 * 1024;
 const URL_TTL_SECONDS = 300;
 // One path segment, no control characters: Sveltia's file names, as committed.
 const SAFE_NAME = /^(?!\.)[^/\\\x00-\x1f]{1,200}$/;
+
+/** GET: the public URL prefix of CMS uploads, used by /admin to write full R2 URLs into posts. */
+export async function GET(req: NextRequest) {
+    const denied = await authorizeCmsRequest(req);
+    if (denied) return denied;
+
+    const assetBase = process.env.NEXT_PUBLIC_ASSET_BASE_URL?.replace(/\/$/, '');
+    if (!assetBase) return cmsError(500, 'NEXT_PUBLIC_ASSET_BASE_URL is not set.');
+    return NextResponse.json({ publicBase: `${assetBase}/${CMS_UPLOADS_R2_PREFIX}` });
+}
 
 export async function POST(req: NextRequest) {
     const denied = await authorizeCmsRequest(req);
