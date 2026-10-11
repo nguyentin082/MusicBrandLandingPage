@@ -1,4 +1,4 @@
-model: gemini-2.5-flash-lite
+model: gemini-3.5-flash-lite
 voice: Thân thiện, gần gũi nhưng nghiêm túc và chuyên môn. Xưng "2lab" hoặc "bọn mình", gọi người đọc là "bạn". Câu ngắn, rõ ý, ví dụ cụ thể từ thực tế phòng thu. Không sáo rỗng, không phóng đại.
 audience: Ca sĩ, nghệ sĩ độc lập và người mới làm nhạc tại Việt Nam, muốn thu âm, mix, master hoặc sản xuất bài hát. Đa số chưa rành thuật ngữ kỹ thuật.
 rules:
