@@ -92,8 +92,6 @@ Server cần thêm biến môi trường (Vercel, mục Production và Preview) 
 
 Trình duyệt tải ảnh thẳng lên R2 bằng link ký sẵn có hạn 5 phút, nên CORS của bucket phải cho phép `PUT` từ domain của CMS (đã có ở bước 2).
 
-Dán hoặc kéo ảnh thẳng vào ô ảnh vẫn có thể khiến Sveltia lưu ảnh vào `public/uploads/`. Vì vậy trang `/admin` chặn thêm một lớp: commit nào có file trong `public/uploads/` sẽ không được gửi, CMS báo lỗi lưu và nhắc tải ảnh lên tab **Cloudflare R2**. Nội dung đang sửa vẫn còn nguyên trong khung soạn thảo.
-
 ### 3. Gemini (dịch và chọn model AI)
 
 Key Gemini chỉ nằm trên server. Trang `/admin` gửi mọi lệnh gọi Gemini qua `app/api/cms/gemini`, kèm token GitHub của người đang đăng nhập. Route chỉ cho qua người có quyền push vào repo nội dung.
