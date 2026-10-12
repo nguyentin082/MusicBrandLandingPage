@@ -137,7 +137,7 @@ Bài và chủ đề tạo trên staging sẽ theo vào `main` khi merge. Xóa n
 Cài đặt trong GitHub → repo → Settings → Secrets and variables → Actions:
 
 - Secret `GEMINI_API_KEY`: bắt buộc. Nên dùng một key riêng, khác key của Vercel.
-- Secret `TELEGRAM_BOT_TOKEN` và `TELEGRAM_CHAT_ID`: không bắt buộc. Có thì Action gửi link duyệt bài qua Telegram.
+- Secret `TELEGRAM_BOT_TOKEN` và `TELEGRAM_CHAT_ID`: không bắt buộc. Có thì Action gửi link duyệt bài qua Telegram. Đặt trong **Settings → Environments**, không đặt ở mục chung: environment `content-production` (nhánh `main`) dùng bot production, environment `content-staging` (mọi nhánh khác) dùng bot staging.
 - Variable `GEMINI_MODEL`: không bắt buộc, dùng thay model trong **Cài đặt AI**.
 - Variable `SITE_URL`: không bắt buộc, mặc định là `https://2lab.vn`. Khi chạy trên nhánh `staging`, link gửi qua Telegram luôn là `https://staging.2lab.vn`.
 

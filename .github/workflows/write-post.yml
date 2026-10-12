@@ -29,6 +29,9 @@ jobs:
     write:
         # Commits pushed with GITHUB_TOKEN do not trigger workflows, but guard anyway.
         if: github.actor != 'github-actions[bot]'
+        # Environment secrets (e.g. TELEGRAM_BOT_TOKEN) override repo secrets of the same
+        # name, so staging and production can notify through different bots.
+        environment: ${{ github.ref_name == 'main' && 'content-production' || 'content-staging' }}
         runs-on: ubuntu-latest
         timeout-minutes: 30
         steps:
