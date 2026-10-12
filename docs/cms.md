@@ -47,7 +47,7 @@ Lần đầu tải ảnh lên, CMS sẽ hỏi **R2 Secret Access Key**. Hỏi qu
 3. Trong Worker, thêm các biến:
     - `GITHUB_CLIENT_ID`
     - `GITHUB_CLIENT_SECRET`
-    - `ALLOWED_DOMAINS` = `2lab.vn, staging.2lab.vn, localhost`
+    - `ALLOWED_DOMAINS` = `2lab.vn, *.2lab.vn, localhost` 
 4. Trong `cms/config.yml`, bỏ comment dòng `base_url` và điền URL của Worker.
 
 Khi chưa có Worker, vẫn đăng nhập được bằng **Sign In Using Access Token**. Tạo một fine-grained token chỉ cho repo này, với quyền Contents và Pull requests (read/write).
