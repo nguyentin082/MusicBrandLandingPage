@@ -1,7 +1,8 @@
 # AI writes a draft post when a topic is set to "Chờ viết" (queued) or
 # "Cần viết lại" (rewrite) in the CMS. See scripts/content/write-post.mjs.
 #
-# Secrets: GEMINI_API_KEY (required), TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (optional).
+# Secrets: GEMINI_API_KEY (required), TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID + PREVIEW_TOKEN
+# (optional, per environment: content-staging, content-production).
 # Variables: GEMINI_MODEL (optional, overrides content/settings/ai.yml), SITE_URL (optional,
 # production URL; runs on the `staging` branch always link to https://staging.2lab.vn).
 
@@ -61,6 +62,8 @@ jobs:
                   TOPIC_SLUG: ${{ inputs.topic }}
                   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
                   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+                  # Same value as PREVIEW_TOKEN on the site this branch deploys to.
+                  PREVIEW_TOKEN: ${{ secrets.PREVIEW_TOKEN }}
 
             # A crash, timeout or cancel would leave a topic stuck in "AI đang viết".
             - name: Recover stuck topics

@@ -5,7 +5,7 @@
 // Steps are in ./writer, prompts in ./prompts.
 //
 // Env: GEMINI_API_KEY (required), GEMINI_MODEL, TOPIC_SLUG, SITE_URL,
-//      TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID, GITHUB_OUTPUT.
+//      TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID, PREVIEW_TOKEN, GITHUB_OUTPUT.
 
 import { notify, pushProgress, setCommitMessage } from './writer/ci.mjs';
 import { SITE_URL, loadSettings } from './writer/config.mjs';
@@ -107,10 +107,16 @@ export async function main() {
         }
     }
 
+    // Reviewers open Telegram links without a CMS sign-in, so the preview link
+    // carries the site's PREVIEW_TOKEN (see app/[lang]/blog/preview).
+    const token = process.env.PREVIEW_TOKEN;
+    const previewUrl = (slug) =>
+        `${SITE_URL}/vi/blog/preview/${slug}${token ? `?token=${encodeURIComponent(token)}` : ''}`;
+
     await notify([
         ...done.map(
             (slug) =>
-                `✍️ AI đã viết xong "${slug}". Chờ duyệt:\n${SITE_URL}/admin/#/collections/blog/entries/${slug}\nXem trước: ${SITE_URL}/vi/blog/preview/${slug}`,
+                `✍️ AI đã viết xong "${slug}". Chờ duyệt:\n${SITE_URL}/admin/#/collections/blog/entries/${slug}\nXem trước: ${previewUrl(slug)}`,
         ),
         ...failed.map(
             ({ topicSlug, message }) => `⚠️ AI không viết được "${topicSlug}": ${message}`,
