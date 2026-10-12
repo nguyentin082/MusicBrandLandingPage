@@ -1,6 +1,7 @@
 title: Preamp la gi
-status: review
+status: rewrite
 keywordVi: Bộ tiền khuếch đại
-source: human
-aiLog: "2026-10-12: đã viết preamp-la-gi bằng gemini-3.5-flash-lite."
+feedback: noi tap trung vao cac loai mau sac pre-amp
 postSlug: preamp-la-gi
+source: human
+aiLog: '2026-10-12: đã viết preamp-la-gi bằng gemini-3.5-flash-lite.'
