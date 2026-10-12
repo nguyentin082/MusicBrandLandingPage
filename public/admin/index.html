@@ -1,0 +1,451 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="robots" content="noindex" />
+        <title>2lab CMS</title>
+        <style>
+            /* Field labels: Sveltia renders them at 13px in a muted grey. Make them
+               larger, uppercase and full-contrast so each field is easy to find. The extra
+               `body` keeps these rules ahead of Sveltia's scoped styles, which are
+               injected later. Check after upgrading Sveltia. */
+            body section[data-field-type] > header {
+                height: auto;
+                min-height: var(--sui-button-small-height);
+            }
+            body section[data-field-type] > header > h4 {
+                margin-block: 0;
+                font-size: var(--sui-font-size-large);
+                font-weight: var(--sui-font-weight-bold);
+                color: var(--sui-primary-foreground-color);
+                text-transform: uppercase;
+                letter-spacing: 0.02em;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            /* Gemini goes through our server (app/api/cms/gemini), so the API key never
+               reaches the browser. Must run before Sveltia loads:
+               - Store a placeholder Gemini key so Sveltia's translator does not ask for one.
+                 It matches Sveltia's `AIza…` format check; the proxy ignores it.
+               - Rewrite every fetch to generativelanguage.googleapis.com to the proxy and
+                 send the CMS user's GitHub token, which the proxy checks for push access.
+               Relies on Sveltia internals (`sveltia-cms.prefs`, `sveltia-cms.user`, the
+               `google-ai` service id). Check after upgrading Sveltia. */
+            (() => {
+                const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/';
+                const PROXY_BASE = '/api/cms/gemini/';
+                const PLACEHOLDER_KEY = 'AIza' + '0'.repeat(35);
+
+                const readJSON = (key) => {
+                    try {
+                        return JSON.parse(localStorage.getItem(key) || '{}') ?? {};
+                    } catch {
+                        return {};
+                    }
+                };
+
+                const prefs = readJSON('sveltia-cms.prefs');
+                if (prefs.apiKeys?.['google-ai'] !== PLACEHOLDER_KEY) {
+                    prefs.apiKeys = { ...prefs.apiKeys, 'google-ai': PLACEHOLDER_KEY };
+                    try {
+                        localStorage.setItem('sveltia-cms.prefs', JSON.stringify(prefs));
+                    } catch {}
+                }
+
+                const nativeFetch = window.fetch.bind(window);
+                window.fetch = (input, init = {}) => {
+                    const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+                    if (!url.startsWith(GEMINI_BASE)) return nativeFetch(input, init);
+
+                    const target = new URL(PROXY_BASE + url.slice(GEMINI_BASE.length), location.origin);
+                    target.searchParams.delete('key');
+                    const headers = new Headers(init.headers ?? (input instanceof Request ? input.headers : undefined));
+                    headers.delete('x-goog-api-key');
+                    const { token } = readJSON('sveltia-cms.user');
+                    if (token) headers.set('Authorization', `Bearer ${token}`);
+                    return nativeFetch(target, { ...init, headers });
+                };
+            })();
+        </script>
+        <script>
+            /* Images go to R2, never into the repo, however they are added.
+               Pasting or dropping an image onto an image field or into the editor makes
+               Sveltia save it under public/uploads/ and write /uploads/<name> in the post;
+               Sveltia has no option to send those to a cloud library, and its
+               public_folder cannot be a URL. So at save time (one GraphQL
+               createCommitOnBranch call) this script:
+                 1. takes every public/uploads/ file out of the commit,
+                 2. uploads it to R2 as blog/<name> through app/api/cms/upload,
+                 3. rewrites /uploads/<name> in the posts to the full R2 URL,
+                 4. sends the commit with only the text files.
+               If an upload fails, nothing is committed and the edits stay in the editor.
+
+               Sveltia keeps a copy of the repo in IndexedDB and would keep showing the
+               old /uploads/ paths it wrote. After such a save the page reloads, and on load
+               (before Sveltia reads it) the cached copy of the rewritten files and the
+               cached commit hash are dropped, so Sveltia fetches them again from GitHub.
+               The site still maps any leftover /uploads/ path to R2 (lib/media.ts).
+               Relies on Sveltia internals (commit request, `github:<owner>/<repo>` cache
+               database). Check after upgrading Sveltia. */
+            (() => {
+                const GRAPHQL = 'https://api.github.com/graphql';
+                const UPLOADS = 'public/uploads/';
+                const TEXT_FILE = /\.(mdx?|ya?ml|json)$/;
+                const UPLOAD_REF = /(^|[\s("'=:])\/uploads\/([^\s)"'<>]+)/gm;
+                const PENDING_KEY = '2lab-cms.refresh-after-r2';
+                const TYPES = {
+                    png: 'image/png',
+                    jpg: 'image/jpeg',
+                    jpeg: 'image/jpeg',
+                    webp: 'image/webp',
+                    gif: 'image/gif',
+                    avif: 'image/avif',
+                    svg: 'image/svg+xml',
+                };
+
+                /* --- On load: drop Sveltia's cached copy of files rewritten by the last save. */
+                const dropCachedFiles = async ({ database, paths }) => {
+                    if (!(await indexedDB.databases?.())?.some((d) => d.name === database)) return;
+                    const db = await new Promise((resolve, reject) => {
+                        const open = indexedDB.open(database);
+                        open.onsuccess = () => resolve(open.result);
+                        open.onerror = () => reject(open.error);
+                    });
+                    const stores = ['meta', 'file-cache'].filter((n) => db.objectStoreNames.contains(n));
+                    if (stores.length) {
+                        await new Promise((resolve) => {
+                            const tx = db.transaction(stores, 'readwrite');
+                            if (stores.includes('meta')) tx.objectStore('meta').delete('last_commit_hash');
+                            if (stores.includes('file-cache'))
+                                paths.forEach((p) => tx.objectStore('file-cache').delete(p));
+                            tx.oncomplete = tx.onerror = tx.onabort = () => resolve();
+                        });
+                    }
+                    db.close();
+                };
+                try {
+                    const pending = JSON.parse(localStorage.getItem(PENDING_KEY) || 'null');
+                    if (pending) {
+                        localStorage.removeItem(PENDING_KEY);
+                        dropCachedFiles(pending).catch((err) => console.warn('Cache cleanup failed', err));
+                    }
+                } catch {}
+
+                const token = () => {
+                    try {
+                        return JSON.parse(localStorage.getItem('sveltia-cms.user') || '{}')?.token;
+                    } catch {
+                        return undefined;
+                    }
+                };
+
+                const toast = (text) => {
+                    let el = document.getElementById('r2-upload-toast');
+                    if (!text) return el?.remove();
+                    if (!el) {
+                        el = document.createElement('div');
+                        el.id = 'r2-upload-toast';
+                        el.style.cssText =
+                            'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:2147483647;' +
+                            'background:#111;color:#fff;font:500 13px/1.4 system-ui,sans-serif;padding:8px 14px;' +
+                            'border-radius:8px;box-shadow:0 4px 12px rgb(0 0 0 / 0.3);pointer-events:none';
+                        document.body.append(el);
+                    }
+                    el.textContent = text;
+                };
+
+                const fromBase64 = (b64) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+                const toBase64 = (bytes) => {
+                    let binary = '';
+                    for (let i = 0; i < bytes.length; i += 0x8000)
+                        binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+                    return btoa(binary);
+                };
+
+                const uploadApi = (fetchImpl, init = {}) =>
+                    fetchImpl('/api/cms/upload', {
+                        ...init,
+                        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
+                    }).then(async (res) => {
+                        const data = await res.json().catch(() => ({}));
+                        if (!res.ok) throw new Error(data.error?.message || `Upload API ${res.status}`);
+                        return data;
+                    });
+
+                const uploadToR2 = async (fetchImpl, { path, contents }) => {
+                    const name = path.slice(UPLOADS.length);
+                    const type = TYPES[name.split('.').pop().toLowerCase()];
+                    if (name.includes('/') || !type) throw new Error(`File không hỗ trợ: ${name}`);
+
+                    const bytes = fromBase64(contents);
+                    const slot = await uploadApi(fetchImpl, {
+                        method: 'POST',
+                        body: JSON.stringify({ name, type, size: bytes.length }),
+                    });
+                    if (slot.exists) return;
+
+                    const put = await fetchImpl(slot.uploadUrl, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': type },
+                        body: new Blob([bytes], { type }),
+                    });
+                    if (!put.ok) throw new Error(`R2 PUT ${put.status} (${name})`);
+                };
+
+                /** Rewrites /uploads/<name> to the R2 URL in text files. Returns the changed paths. */
+                const rewriteUploadRefs = (additions, publicBase) => {
+                    const changed = [];
+                    for (const addition of additions) {
+                        if (!TEXT_FILE.test(addition.path)) continue;
+                        const text = new TextDecoder().decode(fromBase64(addition.contents));
+                        UPLOAD_REF.lastIndex = 0;
+                        if (!UPLOAD_REF.test(text)) continue;
+                        const next = text.replace(UPLOAD_REF, (_, lead, name) => `${lead}${publicBase}${name}`);
+                        addition.contents = toBase64(new TextEncoder().encode(next));
+                        changed.push(addition.path);
+                    }
+                    return changed;
+                };
+
+                const fail = (message) => {
+                    const text =
+                        `Không tải được ảnh lên R2, chưa lưu gì cả. Nội dung vẫn còn trong khung soạn thảo.\n\n${message}\n\n` +
+                        'Could not upload the image to R2; nothing was saved.';
+                    window.alert(text);
+                    return new Response(JSON.stringify({ errors: [{ message: text }] }), {
+                        status: 200,
+                        headers: { 'Content-Type': 'application/json' },
+                    });
+                };
+
+                let publicBase;
+                const previousFetch = window.fetch;
+                window.fetch = async (input, init = {}) => {
+                    const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+                    if (
+                        url !== GRAPHQL ||
+                        typeof init.body !== 'string' ||
+                        !init.body.includes('createCommitOnBranch')
+                    )
+                        return previousFetch(input, init);
+
+                    let request;
+                    try {
+                        request = JSON.parse(init.body);
+                    } catch {
+                        return previousFetch(input, init);
+                    }
+                    const commitInput = request?.variables?.input;
+                    const changes = commitInput?.fileChanges;
+                    if (!changes) return previousFetch(input, init);
+                    const images = (changes.additions ?? []).filter((a) => a.path.startsWith(UPLOADS));
+
+                    try {
+                        for (const [i, image] of images.entries()) {
+                            toast(`Đang tải ảnh lên R2 (${i + 1}/${images.length})…`);
+                            await uploadToR2(previousFetch, image);
+                        }
+                    } catch (err) {
+                        return fail(err.message);
+                    } finally {
+                        toast();
+                    }
+
+                    changes.additions = (changes.additions ?? []).filter((a) => !a.path.startsWith(UPLOADS));
+                    // Nothing under public/uploads exists in the repo, so deleting it would fail.
+                    changes.deletions = (changes.deletions ?? []).filter((d) => !d.path.startsWith(UPLOADS));
+                    // The mutation also asks for each added file's blob id, as
+                    // `file_N: file(path: "public/uploads/…") { oid }`. Those files are no
+                    // longer in the commit, so GitHub would answer with an error and Sveltia
+                    // would report a failed save although the commit went through.
+                    request.query = request.query.replace(
+                        /file_\d+: file\(path: "public\/uploads\/(?:[^"\\]|\\.)*"\) \{ oid \}/g,
+                        '',
+                    );
+
+                    // Store the full R2 URL in the post. Without the base URL, keep /uploads/:
+                    // the site maps it anyway.
+                    let rewritten = [];
+                    try {
+                        publicBase ??= (await uploadApi(previousFetch)).publicBase;
+                        rewritten = rewriteUploadRefs(changes.additions, publicBase);
+                    } catch (err) {
+                        console.warn('Kept /uploads/ paths:', err);
+                    }
+                    if (!images.length && !rewritten.length) return previousFetch(input, init);
+
+                    const response = await previousFetch(input, { ...init, body: JSON.stringify(request) });
+                    if (rewritten.length) {
+                        const result = await response
+                            .clone()
+                            .json()
+                            .catch(() => null);
+                        if (response.ok && result && !result.errors) {
+                            const repo = commitInput.branch?.repositoryNameWithOwner;
+                            localStorage.setItem(
+                                PENDING_KEY,
+                                JSON.stringify({ database: `github:${repo}`, paths: rewritten }),
+                            );
+                            toast('Đã lưu. Ảnh đã ở trên R2, đang tải lại CMS…');
+                            setTimeout(() => location.reload(), 1500);
+                        }
+                    }
+                    return response;
+                };
+            })();
+        </script>
+        <!-- Pinned on purpose: Sveltia CMS is still in beta. Read the release notes before bumping. -->
+        <script src="https://unpkg.com/@sveltia/cms@0.227.3/dist/sveltia-cms.js"></script>
+        <script>
+            /* `gemini-model` field: a dropdown filled from Google's ListModels API, so new
+               Gemini models show up without editing config.yml. The request goes through
+               the Gemini proxy set up above. */
+            (() => {
+                const { React } = window.CMS;
+                const h = React.createElement;
+                const MODELS_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
+                // generateContent models that do not return text.
+                const NON_TEXT = /(tts|image|embedding|native-audio)/i;
+
+                const fetchModels = async () => {
+                    const models = [];
+                    let pageToken = '';
+                    do {
+                        const params = new URLSearchParams({ pageSize: '1000' });
+                        if (pageToken) params.set('pageToken', pageToken);
+                        const res = await fetch(`${MODELS_URL}?${params}`);
+                        const data = await res.json();
+                        if (!res.ok) throw new Error(data.error?.message || `HTTP ${res.status}`);
+                        models.push(...(data.models ?? []));
+                        pageToken = data.nextPageToken ?? '';
+                    } while (pageToken);
+
+                    return models
+                        .filter(
+                            (m) =>
+                                m.supportedGenerationMethods?.includes('generateContent') &&
+                                !NON_TEXT.test(m.name),
+                        )
+                        .map((m) => ({
+                            id: m.name.replace(/^models\//, ''),
+                            label: m.displayName || m.name,
+                        }))
+                        .sort((a, b) => a.id.localeCompare(b.id));
+                };
+
+                const GeminiModelControl = ({ value, onChange, forID, classNameWrapper }) => {
+                    const [state, setState] = React.useState({ status: 'loading', models: [] });
+
+                    const load = React.useCallback(() => {
+                        setState((s) => ({ ...s, status: 'loading' }));
+                        fetchModels().then(
+                            (models) => setState({ status: 'ready', models }),
+                            (error) => setState({ status: 'error', models: [], error: error.message }),
+                        );
+                    }, []);
+
+                    React.useEffect(load, [load]);
+
+                    const current = value ?? '';
+                    const { status, models } = state;
+                    const options = [h('option', { key: '', value: '' }, '— Chọn model · Choose a model —')];
+                    if (current && !models.some((m) => m.id === current)) {
+                        options.push(h('option', { key: current, value: current }, current));
+                    }
+                    models.forEach((m) =>
+                        options.push(h('option', { key: m.id, value: m.id }, `${m.label} (${m.id})`)),
+                    );
+
+                    const message = {
+                        loading: 'Đang tải danh sách model… · Loading models…',
+                        error: `Không tải được danh sách model · Could not load models: ${state.error}`,
+                        ready: `${models.length} model.`,
+                    }[status];
+
+                    // Native controls render small by default; match Sveltia's field size.
+                    const controlStyle = {
+                        width: '100%',
+                        minHeight: '44px',
+                        padding: '8px 12px',
+                        fontSize: 'var(--sui-font-size-large)',
+                    };
+
+                    const field =
+                        status === 'ready'
+                            ? h(
+                                  'select',
+                                  {
+                                      id: forID,
+                                      className: classNameWrapper,
+                                      style: controlStyle,
+                                      value: current,
+                                      onChange: (e) => onChange(e.target.value),
+                                  },
+                                  options,
+                              )
+                            : h('input', {
+                                  id: forID,
+                                  className: classNameWrapper,
+                                  style: controlStyle,
+                                  type: 'text',
+                                  value: current,
+                                  placeholder: 'vd / e.g. gemini-2.5-flash',
+                                  onChange: (e) => onChange(e.target.value),
+                              });
+
+                    return h(
+                        'div',
+                        { style: { display: 'grid', gap: '8px' } },
+                        field,
+                        h(
+                            'div',
+                            { style: { display: 'flex', gap: '8px', alignItems: 'center', fontSize: '13px' } },
+                            h('span', { style: { flex: 1, opacity: 0.8 } }, message),
+                            h('button', { type: 'button', onClick: load, disabled: status === 'loading' }, 'Tải lại · Reload'),
+                        ),
+                    );
+                };
+
+                window.CMS.registerFieldType('gemini-model', GeminiModelControl);
+            })();
+        </script>
+        <script>
+            /* Same idea as components/common/environment-badge.tsx: mark every CMS that
+               is not production, so nobody edits staging thinking it is the live site.
+               This page is static, so it goes by hostname instead of VERCEL_ENV. */
+            (() => {
+                const host = location.hostname;
+                if (host === '2lab.vn' || host === 'www.2lab.vn') return;
+
+                const label = host.startsWith('staging.')
+                    ? 'STAGING'
+                    : host === 'localhost' || host === '127.0.0.1'
+                      ? 'LOCAL'
+                      : 'PREVIEW';
+                document.title = `[${label}] ${document.title}`;
+
+                const badge = document.createElement('div');
+                badge.textContent = label;
+                badge.style.cssText = [
+                    'position:fixed',
+                    'top:0',
+                    'left:50%',
+                    'transform:translateX(-50%)',
+                    'z-index:2147483647',
+                    'pointer-events:none',
+                    'background:#fbbf24',
+                    'color:#000',
+                    'font:700 11px/1.6 system-ui,sans-serif',
+                    'letter-spacing:0.18em',
+                    'padding:1px 12px',
+                    'border-radius:0 0 6px 6px',
+                    'border-top:4px solid #fbbf24',
+                    'box-shadow:0 4px 12px rgb(0 0 0 / 0.3)',
+                ].join(';');
+                document.body.append(badge);
+            })();
+        </script>
+    </body>
+</html>

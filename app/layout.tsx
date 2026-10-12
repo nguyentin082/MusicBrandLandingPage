@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from 'next';
 import { Be_Vietnam_Pro, IBM_Plex_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
+import { EnvironmentBadge } from '@/components/common/environment-badge';
 import { ThemeProvider } from '@/components/theme-provider';
+import { getDeployLabel } from '@/lib/deploy-env';
 import { siteConfig } from '@/lib/site';
 import './globals.css';
 
@@ -45,10 +47,15 @@ export const viewport: Viewport = {
     themeColor: '#1A1614',
 };
 
+// "[STAGING] 2lab" in the browser tab, so staging and production tabs are easy
+// to tell apart. Empty on production.
+const deployLabel = getDeployLabel();
+const titlePrefix = deployLabel ? `[${deployLabel}] ` : '';
+
 export const metadata: Metadata = {
     title: {
-        default: siteConfig.name,
-        template: `%s | ${siteConfig.name}`,
+        default: `${titlePrefix}${siteConfig.name}`,
+        template: `${titlePrefix}%s | ${siteConfig.name}`,
     },
     description: siteConfig.description,
     metadataBase: new URL(siteConfig.url),
@@ -175,6 +182,7 @@ export default async function RootLayout({
                     enableSystem={false}
                 >
                     {children}
+                    <EnvironmentBadge />
                     <Analytics />
                 </ThemeProvider>
             </body>

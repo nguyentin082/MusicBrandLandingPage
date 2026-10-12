@@ -1,0 +1,85 @@
+# AI writes a draft post when a topic is set to "Chờ viết" (queued) or
+# "Cần viết lại" (rewrite) in the CMS. See scripts/content/write-post.mjs.
+#
+# Secrets: GEMINI_API_KEY (required), TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (optional).
+# Variables: GEMINI_MODEL (optional, overrides content/settings/ai.yml), SITE_URL (optional,
+# production URL; runs on the `staging` branch always link to https://staging.2lab.vn).
+
+name: AI write post
+
+on:
+    push:
+        paths:
+            - 'content/topics/**'
+    workflow_dispatch:
+        inputs:
+            topic:
+                description: Slug của chủ đề (tên file trong content/topics, bỏ .yml). Để trống để viết mọi chủ đề đang chờ.
+                required: false
+
+permissions:
+    contents: write
+
+# One writer per branch at a time; a second save waits instead of racing.
+concurrency:
+    group: write-post-${{ github.ref }}
+    cancel-in-progress: false
+
+jobs:
+    write:
+        # Commits pushed with GITHUB_TOKEN do not trigger workflows, but guard anyway.
+        if: github.actor != 'github-actions[bot]'
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+
+            - run: npm ci --ignore-scripts --no-audit --no-fund
+
+            # The script pushes the "writing" status as soon as it starts a topic.
+            - name: Git identity
+              run: |
+                  git config user.name "2lab AI writer"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            - name: Write drafts
+              id: write
+              run: node scripts/content/write-post.mjs
+              env:
+                  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+                  GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+                  # Links in the Telegram message point at the site this branch deploys to.
+                  SITE_URL: ${{ github.ref_name == 'staging' && 'https://staging.2lab.vn' || vars.SITE_URL }}
+                  TOPIC_SLUG: ${{ inputs.topic }}
+                  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+                  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
+            # A crash, timeout or cancel would leave a topic stuck in "AI đang viết".
+            - name: Recover stuck topics
+              id: recover
+              if: failure() || cancelled()
+              run: node scripts/content/write-post.mjs --recover
+
+            - name: Commit
+              if: always()
+              env:
+                  MESSAGE: ${{ steps.recover.outputs.commit_message || steps.write.outputs.commit_message }}
+              run: |
+                  MESSAGE="${MESSAGE:-content(ai): update topics}"
+                  git add content/blog content/topics
+                  if git diff --cached --quiet; then
+                      echo "Nothing to commit"
+                      exit 0
+                  fi
+                  git commit -m "$MESSAGE"
+                  # An editor may have saved in the CMS while the AI was writing.
+                  for attempt in 1 2 3; do
+                      git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0
+                      sleep 5
+                  done
+                  exit 1

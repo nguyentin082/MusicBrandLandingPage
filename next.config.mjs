@@ -29,6 +29,11 @@ const baseConfig = {
         ignoreBuildErrors: false,
     },
     compress: true,
+    // The draft preview reads posts from disk at request time.
+    outputFileTracingIncludes: {
+        '/[lang]/blog/preview/[slug]': ['./content/blog/**/*'],
+        '/api/cms/config': ['./cms/config.yml'],
+    },
     // Enable React Server Components streaming
     reactStrictMode: true,
     images: {
@@ -82,8 +87,55 @@ const baseConfig = {
     // duplicate header key. The extension rule below matches .woff2 files under
     // /_next/static/media too, so it has to come first — otherwise it downgrades
     // content-hashed, immutable build output to a 24 hour cache.
+    // Sveltia CMS is a static page in public/admin. Without this, /admin would
+    // fall through to the /[lang] route and 404.
+    async rewrites() {
+        return [
+            { source: '/admin', destination: '/admin/index.html' },
+            // The config is generated so the branch can come from the environment.
+            { source: '/admin/config.yml', destination: '/api/cms/config' },
+        ];
+    },
+    // CMS-pasted images are stored as /uploads/<name> but live on R2 (lib/media.ts
+    // maps them when rendering). This covers anything that loads the path directly,
+    // such as the CMS preview.
+    async redirects() {
+        return assetBaseUrl
+            ? [
+                  {
+                      source: '/uploads/:path*',
+                      destination: `${assetBaseUrl.replace(/\/$/, '')}/blog/:path*`,
+                      permanent: false,
+                  },
+              ]
+            : [];
+    },
     async headers() {
         return [
+            // staging.2lab.vn and other non-production deployments: keep every page
+            // out of search results (robots.txt alone does not stop indexing).
+            ...(process.env.VERCEL_ENV === 'production'
+                ? []
+                : [
+                      {
+                          source: '/:path*',
+                          headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+                      },
+                  ]),
+            {
+                source: '/admin/:path*',
+                headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+            },
+            {
+                // Draft preview: the token is in the URL, so keep it out of caches,
+                // search engines and Referer headers sent to other sites.
+                source: '/:lang/blog/preview/:path*',
+                headers: [
+                    { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+                    { key: 'Cache-Control', value: 'private, no-store' },
+                    { key: 'Referrer-Policy', value: 'no-referrer' },
+                ],
+            },
             {
                 source: '/(.*)\\.(ico|png|svg|jpg|jpeg|webp|avif|woff|woff2)',
                 headers: [

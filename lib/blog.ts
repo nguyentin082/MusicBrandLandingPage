@@ -4,6 +4,8 @@ import { cache } from 'react';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
+import { getCategoryLabel } from '@/lib/blog-i18n';
+import { resolveContentImage } from '@/lib/media';
 
 export const BLOG_LOCALES = ['en', 'vi'] as const;
 export type BlogLocale = (typeof BLOG_LOCALES)[number];
@@ -23,6 +25,7 @@ export type BlogPostMeta = {
 };
 
 export type BlogPost = BlogPostMeta & {
+    draft: boolean;
     content: string;
 };
 
@@ -78,7 +81,7 @@ async function getLocaleFileNames(locale: BlogLocale) {
     }
 }
 
-async function readPostFile(locale: BlogLocale, slug: string) {
+async function readPostFile(locale: BlogLocale, slug: string, { includeDrafts = false } = {}) {
     const filePath = path.join(getLocaleDir(locale), `${slug}.mdx`);
     let source: string;
     try {
@@ -90,7 +93,7 @@ async function readPostFile(locale: BlogLocale, slug: string) {
     const { data, content } = matter(source);
     const frontmatter = data as Frontmatter;
 
-    if (frontmatter.draft) {
+    if (frontmatter.draft && !includeDrafts) {
         return null;
     }
 
@@ -113,10 +116,11 @@ async function readPostFile(locale: BlogLocale, slug: string) {
         publishedAt,
         updatedAt,
         tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
-        category: frontmatter.category,
-        coverImage: frontmatter.coverImage ?? frontmatter.image,
+        category: getCategoryLabel(frontmatter.category, locale),
+        coverImage: resolveContentImage(frontmatter.coverImage ?? frontmatter.image),
         readingTimeMinutes: estimateReadingTimeMinutes(content),
         wordCount: content.trim().split(/\s+/).filter(Boolean).length,
+        draft: frontmatter.draft === true,
         content,
     } satisfies BlogPost;
 }
@@ -135,7 +139,7 @@ export const getAllPosts = cache(async (locale: BlogLocale): Promise<BlogPostMet
             const post = await readPostFile(locale, normalizeSlug(fileName));
             if (!post) return null;
 
-            const { content: _content, ...meta } = post;
+            const { content: _content, draft: _draft, ...meta } = post;
             return meta;
         }),
     );
@@ -153,6 +157,11 @@ export const getAllPosts = cache(async (locale: BlogLocale): Promise<BlogPostMet
 export const getPost = cache(async (locale: BlogLocale, slug: string): Promise<BlogPost | null> => {
     return readPostFile(locale, slug);
 });
+
+/** Reads a post even when it is still a draft. Only for the token-protected preview route. */
+export async function getPostForPreview(locale: BlogLocale, slug: string) {
+    return readPostFile(locale, slug, { includeDrafts: true });
+}
 
 export async function hasPost(locale: BlogLocale, slug: string) {
     return (await readPostFile(locale, slug)) !== null;

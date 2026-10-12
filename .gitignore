@@ -21,3 +21,6 @@ node_modules
 .env.development
 .env.test
 .env.production
+# Images pasted into the CMS go to R2 (public/admin/index.html). In "Work with
+# Local Repository" mode Sveltia writes them here instead; never commit them.
+public/uploads/

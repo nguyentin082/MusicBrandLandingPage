@@ -1,14 +1,8 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
-import { BlogPostHeader } from '@/components/blog/blog-post-header';
-import { Header } from '@/components/common/header';
-import { Footer } from '@/components/common/footer';
-import { BlogToc } from '@/components/blog/blog-toc';
+import { BlogPostView } from '@/components/blog/blog-post-view';
 import { getAllPostParams, getPost, hasPost, toBlogLocale } from '@/lib/blog';
-import { getBlogPostCopy } from '@/lib/blog-i18n';
-import { renderBlogPostContent } from '@/lib/blog-renderer';
 import { createBlogPostSchema } from '@/lib/blog-schema';
 import { siteConfig } from '@/lib/site';
 
@@ -83,8 +77,6 @@ export default async function BlogPostPage({
     const post = await getPost(locale, slug);
     if (!post) notFound();
 
-    const { contentHtml, tocItems } = await renderBlogPostContent(post.content);
-    const t = getBlogPostCopy(locale);
     const blogSchema = createBlogPostSchema(locale, post);
 
     const breadcrumbSchema = {
@@ -117,52 +109,5 @@ export default async function BlogPostPage({
         '@graph': [blogSchema, breadcrumbSchema],
     };
 
-    return (
-        <div className="min-h-screen bg-off-white dark:bg-dark-umber text-dark-umber dark:text-off-white">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
-            />
-
-            <Header />
-
-            <main className="pt-28 pb-16 px-6 sm:px-10 lg:px-16">
-                <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_17.5rem] lg:items-start">
-                    <article className="min-w-0 max-w-3xl">
-                        <BlogPostHeader
-                            post={post}
-                            labels={{
-                                published: t.published,
-                                updated: t.updated,
-                                minutes: t.minutes,
-                            }}
-                            locale={locale}
-                        />
-
-                        <div
-                            className="mt-10 mdx-content mdx-html"
-                            dangerouslySetInnerHTML={{ __html: contentHtml }}
-                        />
-
-                        <div className="mt-10">
-                            <Link
-                                href={`/${locale}/blog`}
-                                className="inline-flex rounded-full border border-dark-umber/20 px-4 py-2 text-sm font-semibold hover:border-brick-red hover:text-brick-red transition"
-                            >
-                                {t.back}
-                            </Link>
-                        </div>
-                    </article>
-
-                    {tocItems.length ? (
-                        <aside className="lg:sticky lg:top-28 lg:self-start">
-                            <BlogToc title={t.toc} items={tocItems} />
-                        </aside>
-                    ) : null}
-                </div>
-            </main>
-
-            <Footer />
-        </div>
-    );
+    return <BlogPostView post={post} locale={locale} jsonLd={combinedSchema} />;
 }

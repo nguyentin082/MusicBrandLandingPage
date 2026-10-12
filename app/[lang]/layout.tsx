@@ -4,6 +4,7 @@ import { getTranslations, getMessages, setRequestLocale } from 'next-intl/server
 import { NextIntlClientProvider } from 'next-intl';
 import { ReactNode } from 'react';
 import { StickyContactFab } from '@/components/common/sticky-contact-fab';
+import { getDeployLabel } from '@/lib/deploy-env';
 import { siteConfig } from '@/lib/site';
 
 const locales = ['en', 'vi'];
@@ -19,10 +20,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const { lang } = await params;
     const t = await getTranslations({ locale: lang, namespace: 'metadata' });
+    const deployLabel = getDeployLabel();
 
     return {
         title: {
-            absolute: t('title'),
+            absolute: deployLabel ? `[${deployLabel}] ${t('title')}` : t('title'),
         },
         description: t('description'),
         alternates: {
