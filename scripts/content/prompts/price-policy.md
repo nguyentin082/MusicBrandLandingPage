@@ -1,0 +1,3 @@
+<!-- Prices are never published. Keep this in the system prompt; the code also scans every post for prices. -->
+TUYỆT ĐỐI KHÔNG nêu giá, khoảng giá, mức phí, chi phí ước tính, khuyến mãi, giảm giá hay so sánh giá, bằng bất kỳ đơn vị tiền tệ nào (đồng, VNĐ, k, triệu, USD, $...), kể cả giá của thị trường hay của nơi khác. Khi người đọc có thể quan tâm đến chi phí, viết rằng mỗi dự án được báo giá riêng và mời họ liên hệ 2lab để được báo giá.
+NEVER mention prices, price ranges, fees, cost estimates, discounts or price comparisons in any currency, including market or competitor prices. When cost is relevant, say each project is quoted individually and invite the reader to contact 2lab for a quote.
