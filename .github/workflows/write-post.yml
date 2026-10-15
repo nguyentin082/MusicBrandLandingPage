@@ -1,7 +1,10 @@
 # AI writes a draft post when a topic is set to "Chờ viết" (queued) or
 # "Cần viết lại" (rewrite) in the CMS. See scripts/content/write-post.mjs.
+# Telegram: a card per topic as soon as the run starts, updated at each step, and
+# a reply once the drafts are pushed (scripts/content/writer/telegram.mjs).
 #
-# Secrets: GEMINI_API_KEY (required), TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (optional).
+# Secrets: GEMINI_API_KEY (required), TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID + PREVIEW_TOKEN
+# (optional, per environment: content-staging, content-production).
 # Variables: GEMINI_MODEL (optional, overrides content/settings/ai.yml), SITE_URL (optional,
 # production URL; runs on the `staging` branch always link to https://staging.2lab.vn).
 
@@ -29,10 +32,27 @@ jobs:
     write:
         # Commits pushed with GITHUB_TOKEN do not trigger workflows, but guard anyway.
         if: github.actor != 'github-actions[bot]'
+        # Environment secrets (e.g. TELEGRAM_BOT_TOKEN) override repo secrets of the same
+        # name, so staging and production can notify through different bots.
+        environment: ${{ github.ref_name == 'main' && 'content-production' || 'content-staging' }}
         runs-on: ubuntu-latest
         timeout-minutes: 30
+        env:
+            # Links in Telegram point at the site this branch deploys to.
+            SITE_URL: ${{ github.ref_name == 'staging' && 'https://staging.2lab.vn' || vars.SITE_URL }}
+            TOPIC_SLUG: ${{ inputs.topic }}
+            TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+            TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+            # Same value as PREVIEW_TOKEN on the site this branch deploys to.
+            PREVIEW_TOKEN: ${{ secrets.PREVIEW_TOKEN }}
         steps:
             - uses: actions/checkout@v4
+
+            # Before `npm ci`, so editors hear back seconds after saving. The
+            # runner's own Node is enough: the script has no dependencies.
+            - name: Announce on Telegram
+              continue-on-error: true
+              run: node scripts/content/writer/telegram.mjs announce
 
             - uses: actions/setup-node@v4
               with:
@@ -53,11 +73,6 @@ jobs:
               env:
                   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
                   GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
-                  # Links in the Telegram message point at the site this branch deploys to.
-                  SITE_URL: ${{ github.ref_name == 'staging' && 'https://staging.2lab.vn' || vars.SITE_URL }}
-                  TOPIC_SLUG: ${{ inputs.topic }}
-                  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-                  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
             # A crash, timeout or cancel would leave a topic stuck in "AI đang viết".
             - name: Recover stuck topics
@@ -66,6 +81,7 @@ jobs:
               run: node scripts/content/write-post.mjs --recover
 
             - name: Commit
+              id: commit
               if: always()
               env:
                   MESSAGE: ${{ steps.recover.outputs.commit_message || steps.write.outputs.commit_message }}
@@ -83,3 +99,10 @@ jobs:
                       sleep 5
                   done
                   exit 1
+
+            - name: Report on Telegram
+              if: always()
+              continue-on-error: true
+              run: node scripts/content/writer/telegram.mjs deliver
+              env:
+                  COMMIT_OUTCOME: ${{ steps.commit.outcome }}

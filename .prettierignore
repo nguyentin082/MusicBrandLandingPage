@@ -16,3 +16,7 @@ content/blog
 
 # Sveltia CMS config (was under public/, never formatted by Prettier)
 cms/config.yml
+
+# AI prompts are sent to Gemini as written (scripts/content/prompts/README.md).
+scripts/content/prompts/*.md
+!scripts/content/prompts/README.md
