@@ -9,8 +9,9 @@ import { SCHEMAS } from './schemas.mjs';
 /**
  * Returns `{ vi, en, social, flags }`, where vi and en are
  * `{ title, description, tags, body }`. `existing` is the post being rewritten.
+ * `progress` is the topic's Telegram card (./telegram.mjs).
  */
-export async function draftPost({ model, settings, topic, slug, existing }) {
+export async function draftPost({ model, settings, topic, slug, existing, progress }) {
     const sysVi = systemPrompt(settings, 'vi');
     const sysEn = systemPrompt(settings, 'en');
     const request = template('request', {
@@ -21,7 +22,6 @@ export async function draftPost({ model, settings, topic, slug, existing }) {
 
     // Before writing: what does the topic ask us to claim that the facts do not
     // back? The writer is told not to claim it, and the reviewer gets a flag.
-    console.log(`  scope`);
     const scope = await gemini({
         model,
         system: sysVi,
@@ -36,7 +36,7 @@ export async function draftPost({ model, settings, topic, slug, existing }) {
             ? template('rewrite', { feedback: topic.feedback, oldBody: existing.vi.content })
             : '';
 
-    console.log(`  outline`);
+    progress.step('outline');
     const outline = await gemini({
         model,
         system: sysVi,
@@ -44,7 +44,7 @@ export async function draftPost({ model, settings, topic, slug, existing }) {
         schema: SCHEMAS.outline,
     });
 
-    console.log(`  write vi`);
+    progress.step('writeVi');
     const draft = await gemini({
         model,
         system: sysVi,
@@ -52,7 +52,7 @@ export async function draftPost({ model, settings, topic, slug, existing }) {
         schema: SCHEMAS.write,
     });
 
-    console.log(`  review vi`);
+    progress.step('reviewVi');
     const reviewed = await gemini({
         model,
         system: sysVi,
@@ -61,7 +61,7 @@ export async function draftPost({ model, settings, topic, slug, existing }) {
         schema: SCHEMAS.review,
     });
 
-    console.log(`  write en`);
+    progress.step('writeEn');
     const en = await gemini({
         model,
         system: sysEn,
@@ -74,7 +74,7 @@ export async function draftPost({ model, settings, topic, slug, existing }) {
         schema: SCHEMAS.english,
     });
 
-    console.log(`  social`);
+    progress.step('social');
     const social = await gemini({
         model,
         system: sysVi,

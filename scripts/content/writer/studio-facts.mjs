@@ -29,11 +29,11 @@ async function unsupportedClaims({ model, settings, post }) {
 }
 
 /** Checks the post against the studio facts, fixes once, and flags what is left. */
-export async function enforceStudioFacts({ model, settings, post }) {
+export async function enforceStudioFacts({ model, settings, post, progress }) {
     let claims = await unsupportedClaims({ model, settings, post });
     if (!claims.length) return;
 
-    console.log(`  removing ${claims.length} claim(s) not in the studio facts`);
+    progress.note(`Sửa ${claims.length} chỗ chưa khớp Thông tin studio`);
     await fixFields({
         model,
         settings,

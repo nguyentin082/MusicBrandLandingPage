@@ -1,5 +1,4 @@
-// GitHub Actions and Telegram: progress commits, the final commit message and
-// the notification.
+// GitHub Actions: progress commits and the final commit message.
 
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs/promises';
@@ -38,19 +37,4 @@ export async function setCommitMessage(message) {
     if (process.env.GITHUB_OUTPUT)
         await fs.appendFile(process.env.GITHUB_OUTPUT, `commit_message=${message}\n`);
     console.log(message);
-}
-
-export async function notify(lines) {
-    const { TELEGRAM_BOT_TOKEN: token, TELEGRAM_CHAT_ID: chatId } = process.env;
-    if (!token || !chatId || !lines.length) return;
-    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: lines.join('\n\n'),
-            disable_web_page_preview: true,
-        }),
-    });
-    if (!res.ok) console.warn(`Telegram: ${res.status} ${await res.text()}`);
 }

@@ -1,5 +1,11 @@
 // Gemini generateContent call with a JSON response schema.
 
+let onWait = () => {};
+/** Called with a message while a request waits to retry, and with '' once it succeeds. */
+export const setWaitListener = (fn) => {
+    onWait = fn;
+};
+
 export async function gemini({ model, system, prompt, schema, temperature = 0.7 }) {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
     const body = {
@@ -22,6 +28,7 @@ export async function gemini({ model, system, prompt, schema, temperature = 0.7 
             body: JSON.stringify(body),
         });
         if (res.ok) {
+            if (attempt > 1) onWait('');
             const data = await res.json();
             const text =
                 data.candidates?.[0]?.content?.parts?.map((p) => p.text ?? '').join('') ?? '';
@@ -33,6 +40,9 @@ export async function gemini({ model, system, prompt, schema, temperature = 0.7 
         }
         // Free tier: 429 when over the per-minute limit. Wait and retry.
         if ((res.status === 429 || res.status >= 500) && attempt < 5) {
+            onWait(
+                `Gemini đang ${res.status === 429 ? 'giới hạn lượt gọi' : 'quá tải'}, thử lại sau ${15 * attempt} giây (lần ${attempt + 1}/5)`,
+            );
             await new Promise((r) => setTimeout(r, 15_000 * attempt));
             continue;
         }

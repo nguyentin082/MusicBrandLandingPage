@@ -46,11 +46,11 @@ function priceHits(post) {
 }
 
 /** Asks the model once to remove prices; throws if any are left. */
-export async function enforceNoPrices({ model, settings, post }) {
+export async function enforceNoPrices({ model, settings, post, progress }) {
     let hits = priceHits(post);
     if (!hits.length) return;
 
-    console.log(`  removing prices from ${hits.map((h) => h.field).join(', ')}`);
+    progress.note(`Xóa giá khỏi ${hits.map((h) => h.field).join(', ')}`);
     await fixFields({
         model,
         settings,
